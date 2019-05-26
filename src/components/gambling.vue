@@ -54,12 +54,18 @@
           text-color="#ebcb80"
           active-text-color="#f6e9c7">
 
-          <el-menu-item v-for="(item,index) in bocaiTypeList" :key="index" :index="item.bocaiName"  @click="getOdds(item,index)" v-if="index*1 < 8">{{item.bocaiName}}</el-menu-item>
-          <el-submenu v-if="bocaiTypeList.length*1 > 8" key="submenu" index="submenu">
+          <el-submenu key="submenu" index="submenu">
             <template slot="title">{{submenu}}</template>
-            <el-menu-item v-for="(item,index) in bocaiTypeList" :key="index" :index="item.bocaiName"  @click="getOdds(item,index)" v-if="index*1 > 7">{{item.bocaiName}}</el-menu-item>
+            <el-menu-item v-for="(item,index) in bocaiTypeList" :key="index" :index="item.bocaiName"  @click="getOdds(item,index)">{{item.bocaiName}}</el-menu-item>
           </el-submenu>
-
+          <el-menu-item index="2" @click="goRightMenu('personalinfo')">信用资料</el-menu-item>
+          <el-menu-item index="3" @click="goRightMenu('caiwumanager')" v-if="userInfo.cashCredit == 0">帐务查询</el-menu-item>
+          <el-menu-item index="4" @click="goRightMenu('instantorder')">下注明细</el-menu-item>
+          <el-menu-item index="5" @click="goRightMenu('bettingHistory')">结算报表</el-menu-item>
+          <el-menu-item index="6" @click="goRightMenu('lotteryResults')">历史开奖</el-menu-item>
+          <el-menu-item index="7" @click="goRightMenu('gameRule')">规则</el-menu-item>
+          <el-menu-item index="8" @click="$router.push({name:''})">修改密码</el-menu-item>
+          <el-menu-item index="9" @click="$router.push({name:''})">退出</el-menu-item>
       </el-menu>
     </div>
     
@@ -541,12 +547,7 @@ export default {
 
         this.getnotice();
 
-        if(index*1 > 7) {
-         // console.log(item); 
-          this.submenu = item.bocaiName;
-        } else {
-          this.submenu = '更多';
-        }
+        this.submenu = item.bocaiName;
 
         let path = '';
           switch (item.bocaiName) {
