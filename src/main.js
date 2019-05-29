@@ -7,7 +7,7 @@ import $ from 'jquery'
 import _ from './assets/js/lodash.js';
 import axios from 'axios';
 
-import '../theme/index.css';
+//import '../theme/index.css';
 import '../theme/animate.css';
 import ElementUI from 'element-ui';
 Vue.use(ElementUI);

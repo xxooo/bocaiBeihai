@@ -1,11 +1,58 @@
 <template>
   <div id="loginDiv">
 
-  <section id="login" data-htmltype="pc" class="section-wrap scroll-section-0" section_index="0">
+    <form name="form1" id="form1">
+        <table width="100%" height="600px" border="0" cellspacing="0" cellpadding="0" background="../../static/img/login_mbbg.jpg">
+          <tbody>
+            <tr>    
+                <td valign="top">
+                    <table width="969px" align="center" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td height="228px" background="../../static/img/login_1.jpg">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="113" background="../../static/img/login_2.jpg">
+                                    <div style="position:relative; width:969px; height:113px;">
+                                        <div style="position:absolute; left:515px;">
+                                            <input  v-model="ruleForm.username" name="txt_U_name" id="txt_U_name" tabindex="1" style="border: 1px rgb(128, 128, 128) solid; width: 170px; height: 25px; color: rgb(0,0,0); font-size: 18px; font-weight: bold; background-color: rgb(255, 255, 255);" type="text">
+                                        </div>
+                                        <div style="position:absolute; left:515px; top:30px;">
+                                            <input  v-model="ruleForm.password" name="txt_U_Password" id="txt_U_Password" tabindex="2" style="border: 1px rgb(128, 128, 128) solid; width: 170px; height: 25px; color: rgb(0,0,0); font-size: 18px; font-weight: bold; background-color: rgb(255, 255, 255);" type="password">
+                                        </div>
+                                        <div style="position:absolute; left:515px; top:60px;">
+                                            <input v-model="ruleForm.yanzhengma" name="txt_validate" id="txt_validate" tabindex="3" style="border: 1px rgb(128, 128, 128) solid; width: 60px; height: 25px; color: rgb(0,0,0); font-size: 18px; font-weight: bold; background-color: rgb(255, 255, 255);" type="text" maxlength="5">
+                                        </div>
+                                        <div style="position:absolute; left:585px; top:62px;">
+                                          <img class="yanzhengimg"  @click="getyanzheng" :src="'data:image/png;base64,'+tupian">
+                                            <!-- <img id="imgCheckNum" style="cursor: pointer;" alt="点击更新校验码" onclick="ChangeValidate();" src="checknum.aspx?ts=1559136809236"> -->
+                                        </div>
+                                        <div style="position:absolute; left:515px; top:90px;">
+                                            <input @click="login()" id="longinbtn" tabindex="4" class="btn" onmouseover="this.className='btn_m'" onmouseout="this.className='btn'" type="button" >
+                                        </div>
+                                        <div style="position:absolute; left:580px; top:90px;">
+                                            <input type="checkbox" name="ismobile" id="ismobile" value="1" style="cursor:pointer"><a id="a_ismobile" style="display: inline-block; height: 25px; line-height: 20px; font-size: 12px; cursor:pointer;">手机登入</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="259" background="../../static/img/login_3.jpg">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+    </form>
+
+
+  <!-- <section id="login" data-htmltype="pc" class="section-wrap scroll-section-0" section_index="0">
 
     <div class="section dis_txt_high" name="scroll-section-0">
         <div class="login-main" id="login-content">
-          <div class="fenghuang">北海</div>
+          <div class="fenghuang">凤凰</div>
             <div id="login_form" name="section-content" class="dis_txt_high login-form animated animate-bounceInDown">
                 <div class="login-form-bg rel">
                     <div class="input-area dis_txt_high">
@@ -33,7 +80,7 @@
             </div>
         </div>
     </div>
-</section>
+  </section> -->
 
   </div>
 </template>
@@ -86,7 +133,7 @@ export default {
     if (window.ENV == 'dev') {
       //console.log('研发自动登录');
 
-      this.logindev();
+      //this.logindev();
 
     } else {
       //普通用户登录
@@ -107,11 +154,8 @@ export default {
                 // username: 'a4m28dhy',
                 // password: 'a123'
 
-                // username: 'a4m3huiyuan1',
-                // password: 'a123'
-
-                username: 'dxuhuiiyuan1',
-                password: 'a111111'
+                username: 'a4m3huiyuan1',
+                password: 'a123'
 
                 // username: 'xianjinzs2',
                 // password: '123456'
@@ -136,14 +180,21 @@ export default {
         this.yanzhengma = res.yanzhengma;
       }
     },
-    async login(formName) {
+    async login() {
       let that = this; 
 
-          this.$refs[formName].validate(async (valid) => {
+      console.log('this.yanzhengma');
 
-          if (valid) {
-
-               let obj = {
+      if(this.ruleForm.username == '') {
+        alert('密码不能为空，请输入');
+      } else if(this.ruleForm.password == '') {    
+        alert('密码不能为空，请输入');
+      } else if(this.yanzhengma != this.ruleForm.yanzhengma) {
+        alert('验证码不正确，请重新输入');
+      } else if(this.ruleForm.yanzhengma == '') {
+        alert('校验码不能为空，请正确输入');
+      } else {
+        let obj = {
                 username: this.ruleForm.username,
                 password: this.ruleForm.password
               };
@@ -153,12 +204,10 @@ export default {
                 cookieParser.setCookie("accesstoken", ret.token);
                 this.$router.push({name: 'userAgreement'});
               }
+      }
 
-          } else {
+              
 
-            return false;
-          }
-        });
 
     }
   }
@@ -166,133 +215,9 @@ export default {
 </script>
 
 <style scoped>
-.fenghuang {
-  top: 100px;
-  left: 200px;
-  font-family: SourceHanSansSC-Medium;
-  font-size: 80px;
-  color: #ebcb80;
-  letter-spacing: 0;
-  text-align: center;
-  position: absolute;
-}
-#loginDiv {
 
-    background: url(../../static/img/loginBg.jpg) 50% no-repeat fixed;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-size: 100% 100%;
-}
-#login {
-    min-width: 1100px;
-    position: relative;
-    height: 100%;
-    width: 100%;
-    overflow: visible;
-}
-.section {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-.login-main {
-    height: 100%;
-    min-height: 700px;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.login-main .login-form {
-    position: relative;
-    margin: 0 auto;
-    padding-top: 10%;
-    width: 584px;
-    min-height: 590px;
-    text-align: left;
-    white-space: normal;
-    position: relative;
-    z-index: 2;
-}
-.rel {
-    position: relative;
-}
-.login-main .login-form .login-form-bg {
-    width: 584px;
-    height: 390px;
-    padding-top: 20%;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 4px;
-    background: url(../../static/img/middlebg.png) center no-repeat;
-}
-.login-main .login-form .input-area {
-    width: 358px;
-    height: 260px;
-    border-radius: 6px;
-    margin: 0 auto;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    background: #80664b;
-}
-.title {
-    height: 36px;
-    line-height: 36px;
-    font-size: 14px;
-    font-weight: 700;
-    position: relative;
-    text-align: center;
-    overflow: hidden;
-    background: hsla(0,0%,100%,.2);
-}
-.info {
-    background-size: 100% 100%;
-    padding: 15px 5px;
-    font-size: 13px;
-    overflow-x: hidden;
-    word-break: break-all;
-    text-align: center;
-}
 
-.yanzhengimg {
-  height: 26px;
-  top: 8px;
-  position: absolute;
-  cursor: pointer;
-}
-/*#login_box {
-    z-index: 3;
-    width: 320px;
-    position: absolute;
-    top: 50%;
-    left: 56%;
-    margin: -180px 0 0 -250px;
-    box-shadow: 0 0px 10px 0 rgba(12, 12, 12, 0.63);
-    border-radius: 7px;
-}
-#login_box .box {
-    width: 250px;
-    margin: 24px auto;
-}
-#login_box .box input {
-}*/
 </style>
 <style lang="less">
-#login {
-  .el-form-item__label {
-     color: #EBCB80 !important;
-  }
-  .el-form-item {
-    padding: 0px 20px 0px 0px;
-    margin-bottom: 10px;
-  }
-  .el-form-item__content {
-    margin-left: 0px; 
-  }
-}
 </style>
 
