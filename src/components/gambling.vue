@@ -1,6 +1,8 @@
 <template>
   <div id="main">
-    <div id="header">
+
+
+    <!-- <div id="header">
       <el-header height="216">
         <div class="headerFather">
           <div class="fenghuangimg"></div>
@@ -13,9 +15,6 @@
               <div class="headLabel" :class="'headLabel'+preResult.length">
                 <div class="activeIndex"><h3>{{activeIndex}}</h3></div>
                 <div class="preResult">
-                  <!-- <ul v-if="hasResult" class="result-list">
-                    <li v-for="(item,index) in preResult" :class="'loadanimot'+index" class="bjpk-ran bjpk-ranNo-5 orangeShishiC bounce animated"></li>
-                  </ul> -->
                   <ul class="result-list">
                     <li v-for="(item,index) in preResult" :class="['loadanimot'+index,'sizeNum'+preResult.length]" class="bjpk-ran bjpk-ranNo-5 orangeShishiC"></li>
                   </ul>
@@ -95,7 +94,9 @@
       </div>
     </el-footer>
 
-    <message-dialog></message-dialog>
+    <message-dialog></message-dialog> -->
+
+
 
   </div>
 </template>
