@@ -215,6 +215,61 @@ export default {
 </script>
 
 <style scoped>
+body {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    background-repeat: repeat-x;
+}
+
+form {
+    margin-block-end: 1em;
+}
+
+table {
+    white-space: normal;
+    line-height: normal;
+    font-weight: normal;
+    font-size: medium;
+    font-style: normal;
+    color: -internal-quirk-inherit;
+    text-align: start;
+    font-variant: normal;
+}
+
+.yanzhengimg {
+    cursor: pointer;
+    width: 70px;
+    height: 30px;
+}
+
+.btn, .btn_m {
+    width: 60px;
+    height: 26px;
+    border: 0px solid #FF9224;
+    background-color: #FFFFFF;
+    background-image: url(../../static/img/Login_butmb.jpg);
+    cursor: pointer;
+    background-position: 0px 0;
+}
+
+.btn {
+    background-position: 0px 0;
+}
+
+
+input:not([type="image" i]) {
+    box-sizing: border-box;
+}
+
+
+.btn_m {
+            cursor:pointer;
+            background-position: 60px 0;
+        }
 
 
 </style>

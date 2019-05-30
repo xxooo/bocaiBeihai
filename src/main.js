@@ -1,14 +1,18 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router.js';
-//import store from './vuex/store';
+import store from './vuex/store';
 import $ from 'jquery'
 //import _ from 'lodash';
 import _ from './assets/js/lodash.js';
 import axios from 'axios';
 
-//import '../theme/index.css';
+
+import '../theme/index.css';
+
 import '../theme/animate.css';
+
+
 import ElementUI from 'element-ui';
 Vue.use(ElementUI);
 
@@ -26,7 +30,7 @@ import 'nprogress/nprogress.css';
 Vue.config.productionTip = false;
 
 window.router = router;
-// window.store = store;
+window.store = store;
 window.axios = axios;
 window._ = _;
 window._g = _g;
@@ -41,7 +45,7 @@ window.bus = bus;
     window.getVue = new Vue({
       el: '#app',
       router,
-      //store,
+      store,
       components: { App },
       template: '<App/>'
     });
