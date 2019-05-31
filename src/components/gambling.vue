@@ -1,7 +1,237 @@
 <template>
   <div id="main">
 
+    <div id="maintop" style="">
+        <div id="logo" style="display:none;"></div>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody><tr>
+                <td valign="top" width="10%">
+                    <table width="100%" border="0">
+                        <tbody><tr>
+                            <td style="background-image:url(../images/TopLogo_225.jpg);width:231px;height:79px;">
+                                 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,22,0" width="231" height="79" id="T"><param name="wmode" value="transparent"><param name="movie" value="../images/lx.swf"><param name="FlashVars" value="page" id="0"><param name="quality" value="high"><param name="menu" value="false"><embed src="../images/lx.swf" name="T" quality="high" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?p1_prod_version=shockwaveflash" width="231" height="79"></object>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img alt="" src="../images/TopMenu_Top2.jpg" width="231" height="29"></td>
+                        </tr>
+                    </tbody></table>
+                </td>
+                <td width="90%" style="background-image: url(../images/TopMenu_Top.jpg);">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tbody><tr>
+                            <td height="43">
+                                <div id="odds_marquee"><p id="oc_left" style="width: 1633px;"><a href="javascript:void(0)" id="oddsshow" style="top: 0px;"></a></p><span id="oc_right"><a href="javascript:void(0)" class="odds-c oc-up" title="點擊向上顯示最新變化的賠率" id="oddsup">&nbsp;</a><a href="javascript:void(0)" class="odds-c oc-down" title="點擊向下顯示最新變化的賠率" id="oddsdown">&nbsp;</a></span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="36">
+                                <table border="0" cellpadding="0" cellspacing="0" width="1070">
+                                    <tbody><tr>
+                                        <td width="19" height="36">
+                                            <img alt="" src="../images/TopMenu_2Left.jpg" width="19" height="36"></td>
+                                        <td style="width:150px;">
+                                           <ul class="navOne-new clearfix">
+                                                <li id="bankLi" class="czBtn">
+                                                    <span id="currentType">北京赛车</span></li>
+                                            </ul>
+                                        </td>
+                                        <td> 
+                                            <div id="div_title">
+                                                <center>
+                                                    
+                                                    <div id="div_title_xyzl" class="bST_1" onclick="ShowWin('memberinfo.aspx',0);showDivTile(this);">信用资料</div>
+                                                    
+                                                        <div id="div_title_zwcx" class="bST_1" onclick="ShowWin('account_inquiry.aspx',0);showDivTile(this);">帐务查询</div>
+                                                    
+                                                    <div id="div_title_xzmx" class="bST_1" onclick="ShowWin('memberstake.aspx',0);showDivTile(this);">下注明细</div>
+                                                    <div id="div_title_jsbb" class="bST_1" onclick="ShowWin('ProfitLoss.aspx',0);showDivTile(this);">结算报表</div>
+                                                    <div id="div_title_kjls" class="bST_1" onclick="ShowWin('historyreport.aspx',0);showDivTile(this);">历史开奖</div>
+                                                    <div id="div_title_gz" class="bST_1" onclick="ShowWin('rules.aspx',0);showDivTile(this);">规则</div>
+                                                    <div id="div_title_xgma" class="bST_1" onclick="ShowWin('mypassword.aspx',0);showDivTile(this);">修改密码</div>
+                                                    
+                                                    <div id="div_title_tc" class="bST_1" onclick="WinOut();showDivTile(this);">退出</div>
+                                                </center>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="29">
+                                <div id="menuLv03">
+                                    <div id="div_menu_group_1" style="display: none;">
+                                        <a onclick="ShowWin('ggno1/tm.aspx',1);">特码</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/tmanimal.aspx',1);">特生肖色波</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/bwav.aspx',1);">半波</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/hx.aspx',1);">特合肖</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/znumber.aspx',1);">正码</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/zmtnumber.aspx',1);">正码特</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/z16number.aspx',1);">正码1-6</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/lnumber.aspx',1);">连码</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/qbz.aspx',1);">全不中</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/zmgg.aspx',1);">正码过关</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/endnumber.aspx',1);">一肖尾数</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/lanimal.aspx',1);">连肖</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno1/lws.aspx',1);">连尾</a>&nbsp;
+                                    </div>
+                                    <div id="div_menu_group_2" style="display:none">
+                                        
+                                        <a onclick="ShowWin('ggno2/n_ftc_zps.aspx',2);">主盘势</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno2/n_ftc_oneps.aspx',2);">一字盘势</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno2/n_ftc_twodw.aspx',2);">二字定位</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno2/n_ftc_twozh.aspx',2);">二字组合</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno2/n_ftc_twohs.aspx',2);">二字和数</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno2/n_ftc_threedw.aspx',2);">三字定位</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno2/n_ftc_threezh.aspx',2);">三字组合</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno2/n_ftc_threehs.aspx',2);">三字和数</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno2/n_ftc_threezx.aspx',2);">组选三</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno2/n_ftc_sixzx.aspx',2);">组选六</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno2/n_ftc_kd.aspx',2);">跨度</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno2/n_ftc_qt.aspx',2);">其他</a>&nbsp;
+                                    </div>
+                                    <div id="div_menu_group_3" style="display: none;">
+                                        
+                                        <a onclick="ShowWin('cqssc_twosides.aspx',3);">两面盘</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno3/n_ssc_zhenghe.aspx',3);">整合</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('cqssc_15.aspx',3);">单球1~5</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('cqssc_1.aspx',3);">第一球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('cqssc_2.aspx',3);">第二球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('cqssc_3.aspx',3);">第三球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('cqssc_4.aspx',3);">第四球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('cqssc_5.aspx',3);">第五球</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno3_nnsh.aspx',3)">牛牛、梭哈</a>|
+                                        <a onclick="ShowWin('cqssc_sd.aspx',3)">合數雙面</a> 
+                                        
+                                    </div>
+                                    <div id="div_menu_group_4" style="display: none;">
+                                        <a onclick="ShowWin('gdvh_twosides.aspx',4);">两面盘</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('gdvh_18.aspx',4);">单球1~8</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('gdvh_1.aspx',4);">第一球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('gdvh_2.aspx',4);">第二球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('gdvh_3.aspx',4);">第三球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('gdvh_4.aspx',4);">第四球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('gdvh_5.aspx',4);">第五球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('gdvh_6.aspx',4);">第六球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('gdvh_7.aspx',4);">第七球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('gdvh_8.aspx',4);">第八球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('gdvh_sum.aspx',4);">总和、龙虎</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('gdvh_withcode.aspx',4);">连码</a>
+                                    </div>
+                                    <div id="div_menu_group_5" style="display: none;">
+                                        <a onclick="ShowWin('ggno5/gxvh_twosides.aspx',5);">两面</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno5/gxvh_15.aspx',5);">单号1~5</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno5/gxvh_1.aspx',5);">第一球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno5/gxvh_2.aspx',5);">第二球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno5/gxvh_3.aspx',5);">第三球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno5/gxvh_4.aspx',5);">第四球</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno5/gxvh_5.aspx',5);">第五球</a>&nbsp;&nbsp;
+                                    </div>
+                                    <div id="div_menu_group_6" style="">
+                                        <a onclick="ShowWin('bjsc_twosides.aspx',6);" style="color: rgb(255, 0, 0);">两面盘</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('bjsc_110.aspx',6);">排名1~10</a>&nbsp;|&nbsp;
+                                        
+                                        <a onclick="ShowWin('bjsc_1.aspx',6);">冠、亚军 组合</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('bjsc_2.aspx',6);">三、四、五、六名</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('bjsc_3.aspx',6);">七、八、九、十名</a>
+                                        
+                                    </div>
+                                    <div id="div_menu_group_7" style="display: none;">
+                                        <a onclick="ShowWin('js_all.aspx',7);">大小骰寶</a> 
+                                    </div>
+                                    <div id="div_menu_group_8" style="display: none;">
+                                        <a onclick="ShowWin('ggno8/ball_1.aspx',8);">总项盘口</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno8/ball_2.aspx',8);">正码</a>
+                                    </div>
+                                    <div id="div_menu_group_9" style="display: none;">
+                                        <a onclick="ShowWin('ggno9/11x5_twosides.aspx',9);">两面</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno9/11x5_oddnumbers.aspx',9);">单号</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno9/11x5_withcode.aspx',9);">连码</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno9/11x5_choose.aspx',9);">直选</a>
+                                    </div>
+                                    <div id="div_menu_group_10" style="display: none;">
+                                        <a onclick="ShowWin('ggno10/zps.aspx',10);">主势盘</a>&nbsp;&nbsp;&nbsp;
+                                        <a onclick="ShowWin('ggno10/tmbs.aspx',10);">特码包三</a>
+                                    </div>
+                                    <div id="div_menu_group_11" style="display: none;">
+                                        <a onclick="ShowWin('ggno11/kx_1.aspx',11);">快选</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno11/kx_2.aspx',11);">快选2</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno11/kt.aspx',11);">快填</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno11/kd.aspx',11);">快打</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno11/ball_twosides.aspx',11);">双面</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno11/ball_dw1.aspx',11);">一定位</a>&nbsp;|
+                                        <a onclick="ShowWin('ggno11/ball_dw2.aspx',11);">二定位</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_dw3.aspx',11);">三定位</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_dw4.aspx',11);">四定位</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_zx1.aspx',11);">一字现</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_zx2.aspx',11);">二字现</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_zx3.aspx',11);">三字现</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_zx4.aspx',11);">四字现</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_LongHu.aspx',11);">龙虎</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_GuoGuan.aspx',11);">过关</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_KuaDu.aspx',11);">跨度</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_HeShu.aspx',11);">和数</a>&nbsp;|&nbsp;<br>
+                                        <a onclick="ShowWin('ggno11/ball_DuoXuanZhongYi.aspx',11);">多选中一</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_BuZhong.aspx',11);">不中</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_ZuXuan6.aspx',11);">组选六</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_ZuXung3.aspx',11);">组选三</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_ZhongFaBai.aspx',11);">中发白</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_7Ma.aspx',11);">七码</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_WuXing.aspx',11);">五行</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_HaoMaLiang.aspx',11);">号码量</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_ShuBei.aspx',11);">数倍</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_567ZhiXuan.aspx',11);">五六七球直选</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_Other.aspx',11);">其它</a>&nbsp;|&nbsp;
+                                        <a onclick="ShowWin('ggno11/ball_2MaZongCheng.aspx',11);">二码总成</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
 
+    <div style=" width:100%;">
+      <table width="100%" border="0" cellpadding="0" cellspacing="1">
+      <tbody><tr>
+          <td id="tduser" valign="top" style="width:245px; text-align:left; vertical-align:top;">
+          <iframe frameborder="0" scrolling="yes" style="height: 313px; width: 245px;" src="left.aspx" name="left" id="left" height="600"></iframe>
+          </td>
+          <td id="tdbody" valign="top">
+          <iframe frameborder="0" height="622" width="100%" style="margin-top: 10px; height: 303px;" src="bjsc_twosides.aspx?gameno=11" name="mainbody" id="mainbody"></iframe>
+          </td>
+       </tr>
+       </tbody></table>
+    </div>
+
+    <div style=" width:100%;">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody><tr>
+                <td width="100%" background="../images/Down_B.jpg" style="line-height: 26px;">
+                    <marquee style="position: relative; top: 1px;color:#5d5d5d; left: 0px;" id="showMynews" scrollamount="9" scrolldelay="160" onmouseover="this.stop()" onmouseout="this.start()" whdth="100%">尊敬的各级代理（会员）：本公司于3/14日新推出pc蛋蛋.澳洲幸运5.澳洲幸运10.三大彩种，请各级代理（会员）相互告知，欢迎各位广大客户踊跃参与！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;【★消息公告】本网推出EPS赛马,EPS赛马180,EPS赛马300,超级快5,超级快5_3min,超级快5_5min ,等新游戏!每2-5分钟一盘，会员可洽上级代理开放权限!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于近日北京赛车官网出现严重系统漏洞，导致部分期数开奖号码多次重新公告，为避免交收困扰，自即刻起若当日收盘前，所有遊戲官网开奖结果一经修改异动，该期注单不论盈亏一律作废。若官网系于次日才修改前一日开奖结果，前一日已经过账的报表将不再重新结账，盈亏以报表为准！(例如官网于7/9修改7/8的开奖结果，报表依7/8收盘结算的金额为准，7/9不再重新调整)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当日收盘时(例如重庆时时彩于02:00时)所有未开奖期数之注单一律作废，即使次日官方公布开奖结果，系统将不再重新结算，损益以收盘当时报表为准！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为维护系统安全未以正当网址登入之帐号系统将自动停用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于近日官网开奖信息异常，以致更正开奖号码重新结算后，偶尔发生会员亏损金额超过额度之情形，即日起结算交收皆以报表金额为准，会员不得异议！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自即日起连续14天未登入之账号系统将自动涷结，连续45天未登入之账号系统将自动删除，请自行备份相关帐务数据！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本系统于每个月八号删除上个月帐务，如有需要，请自行备份，谢谢。删除帐务期间「今日」之前的报表数据可能会发生变化，属正常现象。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</marquee> 
+                </td>
+            </tr>
+        </tbody></table> 
+     </div>
+
+     <div id="ShowDIV" style="display: none; text-align: left; position: absolute; width: 290px; height: 190px; z-index: 21474; bottom: 0px; right: 0px; overflow: hidden; background-image: url(&quot;../images/pic_bg.gif&quot;); top: 418px;">
+      <div style="font: bold 12px simsun;position: absolute;top: 5px; padding-left:10px;"><span style="color: #F62C35;">即时讯息</span>
+      <a onclick="CloseDIV();"><img alt="关闭" style="position: absolute;top: 3px;left: 265px; cursor:pointer;" src="../images/pic_close.gif"></a></div>
+      <div style=" height:24px;"></div> 
+      <div id="im_popupWindow_miniMsgContent" style=" margin-left:3px;  height: 140px;overflow: hidden;text-align:center; width: 280px;font-size: 9pt;  background-color:White;">
+        <div id="im2009" style="left: 0px; top: 0px; height: 140px; position:relative; width:280px;  background-color:#FEF9F5; overflow:hidden;">
+         <marquee scrollamount="3" direction="up" onmouseover="this.stop()" onmouseout="this.start()" width="275px" id="new_content" style="word-break:break-all;"></marquee>
+        </div>
+      </div>
+      <div style=" height:24px;"></div> 
+     </div>
+
+
+     <div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable" aria-describedby="dialog_win" aria-labelledby="ui-id-1" style="position: absolute; height: auto; width: 720px; top: 118px; left: 596px; display: block; z-index: 101;"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">信息</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"> </span>Close</button><a href="#" class="ui-dialog-titlebar-max ui-corner-all" role="button" style="display: none;"><span class="ui-icon ui-icon-newwin"></span></a></div><div id="dialog_win" style="margin: 0px; padding: 0px; width: auto; min-height: 0px; max-height: none; height: 245px;" class="ui-dialog-content ui-widget-content"><iframe src="" frameborder="0" height="100%" width="100%" id="f_msg_win" style="display: none;"></iframe><div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px"><div style="background-image: url(../images/tb_bg.jpg); line-height: 24px; font-weight:bold; color:#4a1a04; height:24px; width:680px; border:1px solid #e9a884; margin:2px auto 0px;"></div><div style="width:680px; border-color:#e9a884; border-style:solid; border-width:0px 1px 1px; height:210px; overflow:auto; margin:0px auto;"><div style="width:600px; margin:5px auto 0px; word-break:break-all; word-wrap:break-word; padding-left:20px;"><p style="text-indent:-20px; line-height:24px; color:#4a1a04;"><span style="display:inline-block; width:20px; text-align:center; color:#4a1a04;">1.</span>【★消息公告】本网推出EPS赛马,EPS赛马180,EPS赛马300,超级快5,超级快5_3min,超级快5_5min ,等新游戏!每2-5分钟一盘，会员可洽上级代理开放权限!</p></div></div></div></div></div>
+     
     <!-- <div id="header">
       <el-header height="216">
         <div class="headerFather">
