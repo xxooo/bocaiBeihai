@@ -1,40 +1,61 @@
 <template>
   <div id="main">
 
-    <div id="maintop" style="">
-        <div id="logo" style="display:none;"></div>
+    <div id="maintop" style="height: 108px">
+        <!-- <div id="logo" style="display:none;"></div> -->
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tbody><tr>
                 <td valign="top" width="10%">
                     <table width="100%" border="0">
-                        <tbody><tr>
-                            <td style="background-image:url(../images/TopLogo_225.jpg);width:231px;height:79px;">
-                                 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,22,0" width="231" height="79" id="T"><param name="wmode" value="transparent"><param name="movie" value="../images/lx.swf"><param name="FlashVars" value="page" id="0"><param name="quality" value="high"><param name="menu" value="false"><embed src="../images/lx.swf" name="T" quality="high" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?p1_prod_version=shockwaveflash" width="231" height="79"></object>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img alt="" src="../images/TopMenu_Top2.jpg" width="231" height="29"></td>
-                        </tr>
-                    </tbody></table>
+                        <tbody>
+                            <tr>
+                            <td style="background-image:url(../../static/img/TopLogo_225.jpg);width:231px;height:79px;">
+                                 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,22,0" width="231" height="76" id="T"><param name="wmode" value="transparent"><param name="movie" value="../../static/img/lx.swf"><param name="FlashVars" value="page" id="0"><param name="quality" value="high"><param name="menu" value="false"><embed src="../../static/img/lx.swf" name="T" quality="high" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?p1_prod_version=shockwaveflash" width="231" height="76"></object>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img alt="" src="../../static/img/TopMenu_Top2.jpg" width="231" height="29"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </td>
-                <td width="90%" style="background-image: url(../images/TopMenu_Top.jpg);">
+                <td width="90%" style="background-image: url(../../static/img/TopMenu_Top.jpg);">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                        <tbody><tr>
-                            <td height="43">
-                                <div id="odds_marquee"><p id="oc_left" style="width: 1633px;"><a href="javascript:void(0)" id="oddsshow" style="top: 0px;"></a></p><span id="oc_right"><a href="javascript:void(0)" class="odds-c oc-up" title="點擊向上顯示最新變化的賠率" id="oddsup">&nbsp;</a><a href="javascript:void(0)" class="odds-c oc-down" title="點擊向下顯示最新變化的賠率" id="oddsdown">&nbsp;</a></span></div>
-                            </td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td height="43">
+                                    <div id="odds_marquee"><p id="oc_left" style="width: 1135px;"><a href="javascript:void(0)" id="oddsshow" style="top: 0px;"></a></p><span id="oc_right"><a href="javascript:void(0)" class="odds-c oc-up" title="點擊向上顯示最新變化的賠率" id="oddsup">&nbsp;</a><a href="javascript:void(0)" class="odds-c oc-down" title="點擊向下顯示最新變化的賠率" id="oddsdown">&nbsp;</a></span></div>
+                                </td>
+                            </tr>
                         <tr>
-                            <td height="36">
+                            <td height="33">
                                 <table border="0" cellpadding="0" cellspacing="0" width="1070">
-                                    <tbody><tr>
-                                        <td width="19" height="36">
-                                            <img alt="" src="../images/TopMenu_2Left.jpg" width="19" height="36"></td>
-                                        <td style="width:150px;">
-                                           <ul class="navOne-new clearfix">
-                                                <li id="bankLi" class="czBtn">
-                                                    <span id="currentType">北京赛车</span></li>
-                                            </ul>
+                                    <tbody>
+                                        <tr>
+                                        <td width="19" height="33">
+                                            <img alt="" src="../../static/img/TopMenu_2Left.jpg" width="19" height="36">
+                                        </td>
+                                        <td style="width:120px;">
+                                            <!-- <el-select v-model="value" placeholder="请选择" size="mini">
+                                                <el-option
+                                                  v-for="(item,index) in bocaiTypeList"
+                                                  :key="item.bocaiId"
+                                                  :label="item.bocaiName"
+                                                  :value="item.bocaiId">
+                                                </el-option>
+                                            </el-select> -->
+                                            <el-menu
+                                              :default-active="activeIndex"
+                                              class="el-menu-demo navOne-new clearfix"
+                                              mode="horizontal"
+                                              @select="handleSelect"
+                                              >
+
+                                              <el-submenu key="submenu" id="bankLi" index="submenu" class="czBtn">
+                                                <template slot="title">{{submenu}}</template>
+                                                <el-menu-item v-for="(item,index) in bocaiTypeList" :key="index" :index="item.bocaiName"  @click="getOdds(item,index)">{{item.bocaiName}}</el-menu-item>
+                                              </el-submenu>
+                                            </el-menu>
                                         </td>
                                         <td> 
                                             <div id="div_title">
@@ -55,7 +76,8 @@
                                             </div>
                                         </td>
                                     </tr>
-                                </tbody></table>
+                                </tbody>
+                            </table>
                             </td>
                         </tr>
                         <tr>
@@ -188,7 +210,8 @@
                                 </div>
                             </td>
                         </tr>
-                    </tbody></table>
+                        </tbody>
+                    </table>
                 </td>
             </tr>
         </tbody></table>
@@ -198,16 +221,16 @@
       <table width="100%" border="0" cellpadding="0" cellspacing="1">
       <tbody><tr>
           <td id="tduser" valign="top" style="width:245px; text-align:left; vertical-align:top;">
-          <iframe frameborder="0" scrolling="yes" style="height: 313px; width: 245px;" src="left.aspx" name="left" id="left" height="600"></iframe>
+          <!-- <iframe frameborder="0" scrolling="yes" style="height: 313px; width: 245px;" src="left.aspx" name="left" id="left" height="600"></iframe> -->
           </td>
           <td id="tdbody" valign="top">
-          <iframe frameborder="0" height="622" width="100%" style="margin-top: 10px; height: 303px;" src="bjsc_twosides.aspx?gameno=11" name="mainbody" id="mainbody"></iframe>
+          <!-- <iframe frameborder="0" height="622" width="100%" style="margin-top: 10px; height: 303px;" src="bjsc_twosides.aspx?gameno=11" name="mainbody" id="mainbody"></iframe> -->
           </td>
        </tr>
        </tbody></table>
     </div>
 
-    <div style=" width:100%;">
+    <!-- <div style=" width:100%;">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tbody><tr>
                 <td width="100%" background="../images/Down_B.jpg" style="line-height: 26px;">
@@ -215,9 +238,9 @@
                 </td>
             </tr>
         </tbody></table> 
-     </div>
+     </div> -->
 
-     <div id="ShowDIV" style="display: none; text-align: left; position: absolute; width: 290px; height: 190px; z-index: 21474; bottom: 0px; right: 0px; overflow: hidden; background-image: url(&quot;../images/pic_bg.gif&quot;); top: 418px;">
+     <!-- <div id="ShowDIV" style="display: none; text-align: left; position: absolute; width: 290px; height: 190px; z-index: 21474; bottom: 0px; right: 0px; overflow: hidden; background-image: url(&quot;../images/pic_bg.gif&quot;); top: 418px;">
       <div style="font: bold 12px simsun;position: absolute;top: 5px; padding-left:10px;"><span style="color: #F62C35;">即时讯息</span>
       <a onclick="CloseDIV();"><img alt="关闭" style="position: absolute;top: 3px;left: 265px; cursor:pointer;" src="../images/pic_close.gif"></a></div>
       <div style=" height:24px;"></div> 
@@ -227,11 +250,11 @@
         </div>
       </div>
       <div style=" height:24px;"></div> 
-     </div>
+     </div> -->
 
 
-     <div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable" aria-describedby="dialog_win" aria-labelledby="ui-id-1" style="position: absolute; height: auto; width: 720px; top: 118px; left: 596px; display: block; z-index: 101;"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">信息</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"> </span>Close</button><a href="#" class="ui-dialog-titlebar-max ui-corner-all" role="button" style="display: none;"><span class="ui-icon ui-icon-newwin"></span></a></div><div id="dialog_win" style="margin: 0px; padding: 0px; width: auto; min-height: 0px; max-height: none; height: 245px;" class="ui-dialog-content ui-widget-content"><iframe src="" frameborder="0" height="100%" width="100%" id="f_msg_win" style="display: none;"></iframe><div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px"><div style="background-image: url(../images/tb_bg.jpg); line-height: 24px; font-weight:bold; color:#4a1a04; height:24px; width:680px; border:1px solid #e9a884; margin:2px auto 0px;"></div><div style="width:680px; border-color:#e9a884; border-style:solid; border-width:0px 1px 1px; height:210px; overflow:auto; margin:0px auto;"><div style="width:600px; margin:5px auto 0px; word-break:break-all; word-wrap:break-word; padding-left:20px;"><p style="text-indent:-20px; line-height:24px; color:#4a1a04;"><span style="display:inline-block; width:20px; text-align:center; color:#4a1a04;">1.</span>【★消息公告】本网推出EPS赛马,EPS赛马180,EPS赛马300,超级快5,超级快5_3min,超级快5_5min ,等新游戏!每2-5分钟一盘，会员可洽上级代理开放权限!</p></div></div></div></div></div>
-     
+     <!-- <div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable" aria-describedby="dialog_win" aria-labelledby="ui-id-1" style="position: absolute; height: auto; width: 720px; top: 118px; left: 596px; display: block; z-index: 101;"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">信息</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"> </span>Close</button><a href="#" class="ui-dialog-titlebar-max ui-corner-all" role="button" style="display: none;"><span class="ui-icon ui-icon-newwin"></span></a></div><div id="dialog_win" style="margin: 0px; padding: 0px; width: auto; min-height: 0px; max-height: none; height: 245px;" class="ui-dialog-content ui-widget-content"><iframe src="" frameborder="0" height="100%" width="100%" id="f_msg_win" style="display: none;"></iframe><div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px"><div style="background-image: url(../images/tb_bg.jpg); line-height: 24px; font-weight:bold; color:#4a1a04; height:24px; width:680px; border:1px solid #e9a884; margin:2px auto 0px;"></div><div style="width:680px; border-color:#e9a884; border-style:solid; border-width:0px 1px 1px; height:210px; overflow:auto; margin:0px auto;"><div style="width:600px; margin:5px auto 0px; word-break:break-all; word-wrap:break-word; padding-left:20px;"><p style="text-indent:-20px; line-height:24px; color:#4a1a04;"><span style="display:inline-block; width:20px; text-align:center; color:#4a1a04;">1.</span>【★消息公告】本网推出EPS赛马,EPS赛马180,EPS赛马300,超级快5,超级快5_3min,超级快5_5min ,等新游戏!每2-5分钟一盘，会员可洽上级代理开放权限!</p></div></div></div></div></div>
+      -->
     <!-- <div id="header">
       <el-header height="216">
         <div class="headerFather">
@@ -864,271 +887,205 @@ export default {
 
 
 </script>
-<style scoped>
-  #content {
-    width: 1100px;
+<style scoped lang="less">
+#main {
+    font-family: Verdana,"宋体",Arial,Sans;
+    font-size: 12px;
     margin: 0 auto;
-    position: relative;
-    background-color: #6c3092;
-  }
-  #routerMain {
-    height: 100%;
-  }
-
-  .centerDiv >div {
-    float: left;
-    height: 136px;
-  }
-  .headLabel {
-    color: #fff;
-    width: 380px;
-  }
-  .headLabel.headLabel10 {
-    width: 300px;
-    margin: 0px 20px;
-  }
-  .headLabel h3 {
-    color: #805933;
-  }
-  .headLabel .activeIndex,.headLabel .preBocaiPeriods {
-    margin: 10px 0px 10px -20px;
-  }
-  .headLabel .preResult {
-    margin: 20px 0;
-  }
-
-  .headLabel.headLabel10 .preResult {
-    margin: 0;
-  }
-
-  .head-div {
-    height: 140px;
-    width: 800px;
-    padding-top: 1.1%;
-    margin: 0 auto;
-    background: url(../../static/img/caibaobg.png) center no-repeat;
-    background-size: 100% 100%;
-    display:inline-block;
-  }
-  .centerDiv {
-    height: 140px;
-    width: 700px;
-    margin: 0 auto;
-    position: relative;
-    background: url(../../static/img/kaijiangbg.png) center no-repeat;
-    background-size: 100% 100%;
-  }
-  .history_num {
-    width: 160px;
     text-align: left;
-  }
-  .history_num li {
-    color: #ff9800;
-  }
-  .history_num li span {
-    color: #805933;
-    padding: 0 10px;
-  }
-  .history_num .btn-group {
-    text-align: left;
-    color: #805933;
-    margin: 10px 5px 2px;
-  }
-  .fenghuangimg {
-    height: 155px;
-    width: 210px;
-    position: absolute;
-    margin-left: 2%;
-    background: url(../../static/img/logo.png) center no-repeat;
-    background-size: 100% 100%;
-  }
-  .rightMenu {
-    background: #3d270d;
-    border: 1px solid #8f541b;
-    border-radius: 6px;
-    margin-top: 5px;
-    margin-left: 50px;
-    float: right;
-    height: 144px;
-    width: 80px;
-    display: inline-block;
-    position: absolute;
-  }
-  .rightMenu li {
-    margin: 2.7px;
-  }
-  .rightMenu li:hover {
-    color: #f6e9c7;
-  }
-  .headImg >img {
-    height: 70px;
-    margin-top: 25px;
-  }
-  .headImg {
-    margin-left: 10px;
-    width: 146px;
-  }
-  .game-result ul {
-    margin: 10px 10px 0;
-  }
-  /*.bjpk-ran {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    margin: 0px 3px;
-  }*/
-  .bjpk-ran.sizeNum5 {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    margin: 0px 3px;
-  }
-  .bjpk-ran.sizeNum10 {
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    margin: 0px 3px;
-  }
-  .bjpk-ran.sizeNum3 {
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    margin: 0px 3px;
-  }
-  .bjpk-ran.sizeNum20 {
-    width: 26px;
-    height: 26px;
-    line-height: 26px;
-    margin: 0px 3px;
-    font-size: 16px !important;
-  }
-  .bjpk-ran.sizeNum21 {
-    width: 26px;
-    height: 26px;
-    line-height: 26px;
-    margin: 0px 3px;
-    font-size: 16px !important;
-  }
-  .bjpk-ran, .bjpk-ran-s {
-    display: inline-block;
-    color: #fff;
-    border-radius: 50px;
-    font-family: Microsoft YaHei,Verdana,SimSun,Arial,Helvetica,sans-serif;
-    font-size: 28px;
-  }
-  .bjpk-ranNo-1 {
-    background-color: #ffd64c;
-  }
-  .orangeShishiC {
-    background: url(../../static/img/num_bg.png) center no-repeat;
-  }
-  .game-result li {
-    width: 24px;
-    height: 26px;
-    color: #fff;
-    font-weight: 700;
-    text-align: center;
-    margin-left: 8px;
-    display: inline-block;
-    vertical-align: middle;
-  }
-  .preBocaiPeriods .qicip {
-    color: #80664b;
-  }
-  .preBocaiPeriods .qicip span {
-    color: #ff9800;
-  }
-  .headerFather {
-    width: 1200px;
+    overflow: hidden;
+
+    #logo {
+        background-image: url(../../static/img/logo.jpg);
+        height: 80px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 250px;
+        z-index: 2;
+    }
+
+    img, table {
+        border: 0 none;
+        border-collapse: collapse;
+    }
+
+    td {
+        cursor: default;
+    }
+
+    img, table {
+        border: 0 none;
+        border-collapse: collapse;
+    }
+
+    a {
+        color: #4f260d;
+        text-decoration: none;
+    }
+
+    a {
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    #odds_marquee {
+        height: 20px;
+        line-height: 20px;
+    }
+
+    #oc_left {
+        height: 20px;
+        overflow: hidden;
+        position: relative;
+        width: 640px;
+    }
+
+    #oc_right {
+        display: block;
+        float: right;
+        margin: -16px 10px 0 0;
+        padding-left: 10px;
+    }
+
+    .odds-c {
+        background: #aaa url(../../static/img/odds.png) repeat scroll 0 0;
+        display: inline-block;
+        height: 13px;
+        line-height: 13px;
+        width: 13px;
+    }
+
+    .oc-down {
+        background-position: 0 -13px;
+    }
+
+    .bST_1, .bST_1_s {
+        border: 0px solid #FF9224;
+        background-color: #B3C5EF;
+        background-image: url(../../static/img/But1.jpg);
+        width: 95px;
+        height: 33px;
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    .bST_1 {
+        background-position: 0px;
+        color: #fff5d7;
+        cursor: pointer;
+    }
+    #div_title div {
+        float: left;
+        font-family: Verdana,"宋体",Arial,Sans;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 33px;
+        text-align: center;
+    }
+
+    .navOne-new {
+        display: inline;
+        float: right;
+    }
+
+    .clearfix {
+        overflow: hidden;
+    }
+
+    .navOne-new .czBtnOn {
+        background: url(../../static/img/TopBg.png) no-repeat scroll 0 0;
+        color: #fff5d7;
+        cursor: pointer;
+        display: block;
+        float: left;
+        font-size: 14px;
+        font-weight: bold;
+        height: 33px;
+        line-height: 33px;
+        margin-right: 10px;
+        padding-right: 10px;
+        text-align: center;
+        text-decoration: none;
+        width: 130px;
+    }
+
+    .navOne-new {
+        border: 0px solid #FF9224;
+        background-image: url(../../static/img/But1.jpg);
+        height: 36px;
+        font-weight: bold;
+        width: 120px;
+    }
+
+    .navOne-new .czBtn, .navOne-new .czBtnOn {
+        color: #fff5d7;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 36px;
+        text-align: center;
+    }
+
+    #currentType {
+        color: #fff5d7;
+        height: 33px;
+        line-height: 33px;
+        display: inline-block;
+    }
+
+    #menuLv03 div {
+        color: #fed7ad;
+    }
+
+    #menuLv03 div a {
+        color: #4f260d;
+        cursor: pointer;
+    }
+
+}
+
+body {
+    font-family: Verdana,"宋体",Arial,Sans;
+    font-size: 12px;
     margin: 0 auto;
-  }
+    text-align: left;
+}
+
 </style>
 <style lang="less">
 #main {
-    width: 100%;
-    height: 100%;
-    position: relative;
+    .el-menu.el-menu--horizontal {
+        border-bottom: solid 0px #e6e6e6;
+        margin-bottom: 3px;
+    }
 
-  #header {
-    border-bottom: solid 2px #ffd04b;
-
-    .el-menu--horizontal {
-      background-color: rgb(60, 37, 109);
-      font-size: 14px;
-      width: 1100px;
-      margin: 0 auto;
-      border-bottom: solid 0px #ffd04b;
+    .el-submenu__title {
+        color: #fff5d7;
+        height: 36px;
+        line-height: 36px;
+        display: inline-block;
     }
 
     .el-menu--horizontal>.el-submenu.is-active .el-submenu__title {
-      border-bottom: 0px solid #6C3092;
-      font-size: 18px;
+        border-bottom: 0px solid #FCEFC2;
     }
 
-    .el-menu-item.is-active {
-      background-size: 100% 100%;
-      color: #ffea00;
-      cursor: point;
-      border-bottom: 0px solid #6c3092;
+    .el-submenu__title {
+        float: left;
+        font-family: Verdana, "\5B8B\4F53", Arial, Sans;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 36px;
+        text-align: center;
+
+        cursor: pointer;
+        -webkit-transition: border-color .3s,background-color .3s,color .3s;
+        transition: border-color .3s,background-color .3s,color .3s;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
     }
-
-    .el-menu-item:hover {
-      color: #f6e9c7 !important;
-    }
-
-    .el-menu-item {
-      padding: 0 18px;
-      font-family: SourceHanSansSC-Medium;
-      font-size: 18px;
-      letter-spacing: 0;
-    }
-
-  }
-
-  .el-menu--horizontal>.el-menu-item {
-    border-bottom: 0px solid transparent;
-  }
-      
-    header {
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 156px;
-        background: url(../../static/img/header.png) center no-repeat;
-        background-size: 100% 100%;
-    }
-
-    .el-header {
-      padding: 0px;
-    }
-
-
-  footer {
-    color: #fff;
-    font-size: 12px;
-    padding-bottom: 10px;
-  }
-  footer div {
-      width: 1100px;
-      text-align: center;
-      margin: 0 auto;
-      padding-top: 20px;
-  }
-  footer p {
-      height: 24px;
-      line-height: 24px;
-      padding-bottom: 5px;
-  }
-  footer p a {
-      color: #fff;
-      padding: 0 10px;
-      font-size: 13px;
-  }
-
-  .el-main {
-    padding: 0px;
-  }
-
 }
 
 </style>
