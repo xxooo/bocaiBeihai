@@ -9,8 +9,8 @@
                     <table width="100%" border="0">
                         <tbody>
                             <tr>
-                            <td style="background-image:url(../../static/img/TopLogo_225.jpg);width:231px;height:79px;">
-                                 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,22,0" width="231" height="76" id="T"><param name="wmode" value="transparent"><param name="movie" value="../../static/img/lx.swf"><param name="FlashVars" value="page" id="0"><param name="quality" value="high"><param name="menu" value="false"><embed src="../../static/img/lx.swf" name="T" quality="high" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?p1_prod_version=shockwaveflash" width="231" height="76"></object>
+                            <td class="TopLogo_225">
+                                 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,22,0" width="231" height="76" id="T"><param name="wmode" value="transparent"><param name="movie" value="./static/img/lx.swf"><param name="FlashVars" value="page" id="0"><param name="quality" value="high"><param name="menu" value="false"><embed src="./static/img/lx.swf" name="T" quality="high" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?p1_prod_version=shockwaveflash" width="231" height="76"></object>
                                 </td>
                             </tr>
                             <tr>
@@ -19,7 +19,7 @@
                         </tbody>
                     </table>
                 </td>
-                <td width="90%" style="background-image: url(../../static/img/TopMenu_Top.jpg);">
+                <td width="90%" style="background-image: url(./static/img/TopMenu_Top.jpg);">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tbody>
                             <tr>
@@ -224,7 +224,7 @@
             <left-panel></left-panel>
           </td>
           <td id="tdbody" valign="top">
-            <!-- <router-view></router-view> -->
+            <router-view></router-view>
           </td>
        </tr>
        </tbody></table>
@@ -233,7 +233,7 @@
     <div style=" width:100%;" id="footer">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tbody><tr>
-                <td width="100%" background="../../static/img/Down_B.jpg" style="line-height: 26px;">
+                <td width="100%" background="./static/img/Down_B.jpg" style="line-height: 26px;">
                     <marquee style="position: relative; top: 1px;color:#5d5d5d; left: 0px;" id="showMynews" scrollamount="9" scrolldelay="160" onmouseover="this.stop()" onmouseout="this.start()" whdth="100%">尊敬的各级代理（会员）：本公司于3/14日新推出pc蛋蛋.澳洲幸运5.澳洲幸运10.三大彩种，请各级代理（会员）相互告知，欢迎各位广大客户踊跃参与！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;【★消息公告】本网推出EPS赛马,EPS赛马180,EPS赛马300,超级快5,超级快5_3min,超级快5_5min ,等新游戏!每2-5分钟一盘，会员可洽上级代理开放权限!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于近日北京赛车官网出现严重系统漏洞，导致部分期数开奖号码多次重新公告，为避免交收困扰，自即刻起若当日收盘前，所有遊戲官网开奖结果一经修改异动，该期注单不论盈亏一律作废。若官网系于次日才修改前一日开奖结果，前一日已经过账的报表将不再重新结账，盈亏以报表为准！(例如官网于7/9修改7/8的开奖结果，报表依7/8收盘结算的金额为准，7/9不再重新调整)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当日收盘时(例如重庆时时彩于02:00时)所有未开奖期数之注单一律作废，即使次日官方公布开奖结果，系统将不再重新结算，损益以收盘当时报表为准！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为维护系统安全未以正当网址登入之帐号系统将自动停用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于近日官网开奖信息异常，以致更正开奖号码重新结算后，偶尔发生会员亏损金额超过额度之情形，即日起结算交收皆以报表金额为准，会员不得异议！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自即日起连续14天未登入之账号系统将自动涷结，连续45天未登入之账号系统将自动删除，请自行备份相关帐务数据！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本系统于每个月八号删除上个月帐务，如有需要，请自行备份，谢谢。删除帐务期间「今日」之前的报表数据可能会发生变化，属正常现象。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</marquee> 
                 </td>
             </tr>
@@ -1053,6 +1053,13 @@ body, div, span, p, b, textarea, input, select, form, table, tr, td {
         color: #4f260d;
         cursor: pointer;
     }
+
+    .TopLogo_225 {
+        background-image: url(../../static/img/TopLogo_225.jpg);
+        width:231px;
+        height:79px
+    }
+
 
 }
 

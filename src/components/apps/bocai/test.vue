@@ -7,10 +7,10 @@
           <td valign="top">
             <div style="  margin-right:10px;">
               <div id="round_content" style="display: block;">
-                <!-- <table border="0" cellpadding="0" cellspacing="0" width="700">
+                <table border="0" cellpadding="0" cellspacing="0" width="700">
                   <tbody><tr>
                      <td height="24" width="45%" style="font-weight: bold;"><b class="b_title">重庆时时彩</b>
-                      　<span style="font-size: 10pt; font-family: Arial; color: red; position: relative;height: 10px">今天输赢：</span><span class="font_r" id="UserResult"><span style="color:#000000">0</span></span></td>
+                      　<span style="font-size: 10pt; font-family: Arial; color: red; position: relative; filter: blur(add=1, direction=45, strength=3); height: 10px">今天输赢：</span><span class="font_r" id="UserResult"><span style="color:#000000">0</span></span></td>
                            <td width="55%" colspan="1" align="right">
                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                    <tbody><tr>
@@ -26,33 +26,33 @@
 
                 <table border="0" cellpadding="0" cellspacing="0" width="700">
                      <tbody><tr>
-                         <td height="24" width="28%"><b id="t_LID" style="color: green;">20190602036</b>期　<b style="font-weight: bold; color: #2836f4;">两面盘222</b></td>
+                         <td height="24" width="28%"><b id="t_LID" style="color: green;">20190602036</b>期　<b style="font-weight: bold; color: #2836f4;">两面盘</b></td>
                          <td align="right" width="25%"><span id="hClockTime_C">距离封盘：<b>13</b>:<b>53</b></span></td>
                          <td align="right" width="25%"><span id="hClockTime_O">距离开奖：<b style="color:Red;">15</b>:<b style="color:Red;">33</b></span></td>
                          <td align="right" width="22%"><span id="Update_Time"></span></td>
                      </tr>
                   </tbody>
-                </table> -->
+                </table>
 
-                 <!-- <div class="btnDivArea" id="btnDivArea11">  
+                 <div class="btnDivArea" id="btnDivArea11">  
                   <input id="chk_qcstake" type="checkbox" onclick="QCheckShow(this)"><span onmouseover="javascript:this.style.color='#FF0D0D';" onmouseout="javascript:this.style.color='#299A26';" style="display:inline-block; color:#299A26; font-weight:bold;">快捷下注</span>
                   <span id="sp_qcstake" style=" display:none;">金额：<input id="txtqcstake" type="text" style="width:60px;"><span onclick="QCExplain()" style="color:#FF0D0D; display:inline-block; width:60px; cursor:pointer; text-align:left;">说明</span></span>
                   <input type="reset" value="重 填" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="SetOrderOddsString();"> 
                   <input id="btn_order2" type="button" value="下 注" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1">
-                 </div>  -->
+                 </div> 
 
 
-                 <!-- <div class="btnDivArea" id="btnDivArea22" style="display:none;">  
+                 <div class="btnDivArea" id="btnDivArea22" style="display:none;">  
                   <span style="color:red">下注中,请等待。。。</span>
-                 </div> --> 
+                 </div> 
               </div>
 
 
             <div id="errormsg" style=" display:none;"></div>
 
           <div id="mainPageData" style="display: block;">
-
-            <!-- <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" id="tblNowBet01" style="margin-top:0px;">
+            
+            <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" id="tblNowBet01" style="margin-top:0px;">
             <thead>
             <tr class="DtrTitle" style="font-weight: bold;">
             <td colspan="12" class="td_caption_1" align="center">第一球</td>
@@ -69,7 +69,7 @@
               <td id="td_r215_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('215,,2,,1.9879,215_2',this)" class="betRateNum" id="oid_215_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_215_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_215_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r215_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_215_2">封盘</span></td> 
               </tr> 
             </tbody>
-            </table>  -->
+            </table> 
 
             <!-- <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" id="tblNowBet02" style=" margin-top:2px;">
             <thead>
@@ -184,7 +184,7 @@
            <span style="color:red">下注中,请等待。。。</span>
           </div>  -->
 
-    <!-- <div id="lotteryno">
+    <div id="lotteryno">
 
       <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700" id="BallList" style="display: block;">
       <tbody>
@@ -208,20 +208,20 @@
       </table>
 
  
-      </div> -->
+      </div>
 
     </div>
 
   </div>
 </td>
 
-    <!-- <td valign="top">
+    <td valign="top">
       <div id="maintwssides" style="display: block;">
         <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="150" id="tbtwssides" style="display: block;">
         <tbody id="TwoSides"><tr><td class="td_caption_1" colspan="2" style="width:150px;">两面长龙排行</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第五球 - 双</td><td class="TDb_R">&nbsp;5 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第二球 - 大</td><td class="TDb_R">&nbsp;3 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第四球 - 双</td><td class="TDb_R">&nbsp;3 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">总和 - 大</td><td class="TDb_R">&nbsp;3 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第一球 - 小</td><td class="TDb_R">&nbsp;2 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第三球 - 大</td><td class="TDb_R">&nbsp;2 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第四球 - 大</td><td class="TDb_R">&nbsp;2 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第一球 - 单</td><td class="TDb_R">&nbsp;2 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第二球 - 单</td><td class="TDb_R">&nbsp;2 期&nbsp;</td></tr></tbody>
         </table>
       </div>
-    </td> -->
+    </td>
 
 </tr>
 </tbody>

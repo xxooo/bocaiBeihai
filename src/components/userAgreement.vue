@@ -3,7 +3,7 @@
     
 
     <center style="margin: 0;padding: 0;">
-      <table width="980" height="795" border="0" cellpadding="0" cellspacing="0" background="../../static/img/L1.jpg">
+      <table width="980" height="795" border="0" cellpadding="0" cellspacing="0" background="./static/img/L1.jpg">
         <tbody><tr>
           <td height="103">&nbsp;</td>
         </tr>
@@ -35,7 +35,7 @@
           </tbody></table></td>
         </tr>
         <tr>  
-          <td height="161" style="background-image:url(../../static/img/L2.jpg);" valign="top"> 
+          <td height="161" style="background-image:url(./static/img/L2.jpg);" valign="top"> 
               <table border="0" cellpadding="0" cellspacing="0" width="100%" style="  margin-top:13px; height:41px;">
                       <tbody><tr style="text-align:center; height:35px;"><td style=" width:357px; ">&nbsp;</td>
                       <td style=" width:110px; cursor:pointer;" @click="$router.push({name: 'login'})"></td><td style=" width:45px; ">&nbsp;</td>

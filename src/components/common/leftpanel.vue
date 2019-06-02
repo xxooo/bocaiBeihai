@@ -3,7 +3,7 @@
 
     <div align="left" style="overflow: hidden;" id="div_commond">
         <table width="100%" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top: 0px; display: block;" bgcolor="white" id="tb_memberinfo">
-            <tbody><tr style="height: 33px; text-align: left; background: url(../../static/img/tb_bg.jpg); color: Black; font-size: 14px;">
+            <tbody><tr style="height: 33px; text-align: left; background: url(./static/img/tb_bg.jpg); color: Black; font-size: 14px;">
                 <td colspan="2" style="width: 230px;" align="center"><span style="font-size: 14px; font-weight: bold;">请核对您的帐户</span></td>
             </tr>
             <tr>

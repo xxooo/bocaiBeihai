@@ -2,17 +2,17 @@
   <div id="loginDiv">
 
     <form name="form1" id="form1">
-        <table width="100%" height="600px" border="0" cellspacing="0" cellpadding="0" background="../../static/img/login_mbbg.jpg">
+        <table width="100%" height="600px" border="0" cellspacing="0" cellpadding="0" class="login_mbbg">
           <tbody>
             <tr>    
                 <td valign="top">
                     <table width="969px" align="center" border="0" cellspacing="0" cellpadding="0">
                         <tbody>
                             <tr>
-                                <td height="228px" background="../../static/img/login_1.jpg">&nbsp;</td>
+                                <td height="228px" class="login_1">&nbsp;</td>
                             </tr>
                             <tr>
-                                <td height="113" background="../../static/img/login_2.jpg">
+                                <td height="113" class="login_2">
                                     <div style="position:relative; width:969px; height:113px;">
                                         <div style="position:absolute; left:515px;">
                                             <input  v-model="ruleForm.username" name="txt_U_name" id="txt_U_name" tabindex="1" style="border: 1px rgb(128, 128, 128) solid; width: 170px; height: 25px; color: rgb(0,0,0); font-size: 18px; font-weight: bold; background-color: rgb(255, 255, 255);" type="text">
@@ -37,7 +37,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td height="259" background="../../static/img/login_3.jpg">&nbsp;</td>
+                                <td height="259"  class="login_3" >&nbsp;</td>
                             </tr>
                         </tbody>
                     </table>
@@ -149,13 +149,13 @@ export default {
                 // password: 'a111111'
                 // username: 'aaa88',
                 // password: 'aaa888'
-                // username: 'aydwhuiyuan1',
-                // password: 'a111111'
+                username: 'aydwhuiyuan1',
+                password: 'a111111'
                 // username: 'a4m28dhy',
                 // password: 'a123'
 
-                username: 'a4m3huiyuan1',
-                password: 'a123'
+                // username: 'a4m3huiyuan1',
+                // password: 'a123'
 
                 // username: 'xianjinzs2',
                 // password: '123456'
@@ -272,6 +272,20 @@ input:not([type="image" i]) {
         }
 
 
+.login_3 {
+  background-image: url(../../static/img/login_3.jpg);
+}
+
+.login_2 {
+  background-image: url(../../static/img/login_2.jpg);
+}
+
+.login_1 {
+  background-image: url(../../static/img/login_1.jpg);
+}
+.login_mbbg {
+  background-image: url(../../static/img/login_mbbg.jpg);
+}
 </style>
 <style lang="less">
 </style>
