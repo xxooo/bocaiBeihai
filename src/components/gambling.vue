@@ -221,24 +221,24 @@
       <table width="100%" border="0" cellpadding="0" cellspacing="1">
       <tbody><tr>
           <td id="tduser" valign="top" style="width:245px; text-align:left; vertical-align:top;">
-          <!-- <iframe frameborder="0" scrolling="yes" style="height: 313px; width: 245px;" src="left.aspx" name="left" id="left" height="600"></iframe> -->
+            <left-panel></left-panel>
           </td>
           <td id="tdbody" valign="top">
-          <!-- <iframe frameborder="0" height="622" width="100%" style="margin-top: 10px; height: 303px;" src="bjsc_twosides.aspx?gameno=11" name="mainbody" id="mainbody"></iframe> -->
+            <!-- <router-view></router-view> -->
           </td>
        </tr>
        </tbody></table>
     </div>
 
-    <!-- <div style=" width:100%;">
+    <div style=" width:100%;" id="footer">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tbody><tr>
-                <td width="100%" background="../images/Down_B.jpg" style="line-height: 26px;">
+                <td width="100%" background="../../static/img/Down_B.jpg" style="line-height: 26px;">
                     <marquee style="position: relative; top: 1px;color:#5d5d5d; left: 0px;" id="showMynews" scrollamount="9" scrolldelay="160" onmouseover="this.stop()" onmouseout="this.start()" whdth="100%">尊敬的各级代理（会员）：本公司于3/14日新推出pc蛋蛋.澳洲幸运5.澳洲幸运10.三大彩种，请各级代理（会员）相互告知，欢迎各位广大客户踊跃参与！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;【★消息公告】本网推出EPS赛马,EPS赛马180,EPS赛马300,超级快5,超级快5_3min,超级快5_5min ,等新游戏!每2-5分钟一盘，会员可洽上级代理开放权限!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于近日北京赛车官网出现严重系统漏洞，导致部分期数开奖号码多次重新公告，为避免交收困扰，自即刻起若当日收盘前，所有遊戲官网开奖结果一经修改异动，该期注单不论盈亏一律作废。若官网系于次日才修改前一日开奖结果，前一日已经过账的报表将不再重新结账，盈亏以报表为准！(例如官网于7/9修改7/8的开奖结果，报表依7/8收盘结算的金额为准，7/9不再重新调整)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当日收盘时(例如重庆时时彩于02:00时)所有未开奖期数之注单一律作废，即使次日官方公布开奖结果，系统将不再重新结算，损益以收盘当时报表为准！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为维护系统安全未以正当网址登入之帐号系统将自动停用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于近日官网开奖信息异常，以致更正开奖号码重新结算后，偶尔发生会员亏损金额超过额度之情形，即日起结算交收皆以报表金额为准，会员不得异议！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自即日起连续14天未登入之账号系统将自动涷结，连续45天未登入之账号系统将自动删除，请自行备份相关帐务数据！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本系统于每个月八号删除上个月帐务，如有需要，请自行备份，谢谢。删除帐务期间「今日」之前的报表数据可能会发生变化，属正常现象。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</marquee> 
                 </td>
             </tr>
         </tbody></table> 
-     </div> -->
+     </div>
 
      <!-- <div id="ShowDIV" style="display: none; text-align: left; position: absolute; width: 290px; height: 190px; z-index: 21474; bottom: 0px; right: 0px; overflow: hidden; background-image: url(&quot;../images/pic_bg.gif&quot;); top: 418px;">
       <div style="font: bold 12px simsun;position: absolute;top: 5px; padding-left:10px;"><span style="color: #F62C35;">即时讯息</span>
@@ -888,6 +888,16 @@ export default {
 
 </script>
 <style scoped lang="less">
+
+body, div, span, p, b, textarea, input, select, form, table, tr, td {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-size: 12px;
+    z-index: auto;
+    color: #511e02;
+}
+
 #main {
     font-family: Verdana,"宋体",Arial,Sans;
     font-size: 12px;
@@ -1053,6 +1063,16 @@ body {
     text-align: left;
 }
 
+#footer {
+            position: fixed;
+            left: 0px;
+            bottom: 0px;
+            width: 100%;
+            height: 26px;
+            background-color: #eee;
+            z-index: 9999;
+
+        }
 </style>
 <style lang="less">
 #main {

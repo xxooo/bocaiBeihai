@@ -1,6 +1,159 @@
 <template>
   <div id="leftpanel" class="betQuick">
-    <div class="leftList">
+
+    <div align="left" style="overflow: hidden;" id="div_commond">
+        <table width="100%" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top: 0px; display: block;" bgcolor="white" id="tb_memberinfo">
+            <tbody><tr style="height: 33px; text-align: left; background: url(../../static/img/tb_bg.jpg); color: Black; font-size: 14px;">
+                <td colspan="2" style="width: 230px;" align="center"><span style="font-size: 14px; font-weight: bold;">请核对您的帐户</span></td>
+            </tr>
+            <tr>
+                <td width="70px" align="left" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td>
+                <td align="left"><span style="margin-left: 5px;" id="left_memberno">nj5m22d(A盘)</span><input id="hid_wagerroundno" type="hidden" value="A"></td>
+            </tr>
+            <tr style="height: 22px;" id="tr_cashremaining">
+                <td align="right" class="t_td_caption_1">帐户余额 </td>
+                <td align="left"><span id="con_cashremaining" style="font-size: 13px; margin-left: 5px;">0</span></td>
+            </tr>
+            <tr style="height: 22px; display: none;" id="tr_creditquota">
+                <td align="left" class="t_td_caption_1">信用额度 </td>
+                <td align="left"><span id="sp_creditquota" style="font-size: 13px; margin-left: 5px;">0</span></td>
+            </tr>
+            <tr id="tr_allowcreditquota">
+                <td align="left" class="t_td_caption_1">可用金额</td>
+                <td align="left"><span id="sp_allowcreditquota" style="font-size: 13px; margin-left: 5px;">0</span></td>
+            </tr>
+            <tr id="tr_8" style="">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com/ui-02/detail.aspx?g=8','廣東快樂十分','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“广东快乐十分”开奖网</span></a>&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_6" style="">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com/ui-02/detail.aspx?g=6','重慶時時彩','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“重庆时时彩”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_11" style="">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com/ui-02/detail.aspx?g=11','北京賽車','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“北京赛车(PK10)”官方网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_12" style="">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com/ui-02/detail.aspx?g=12','江苏骰寶','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“江苏骰寶(快3)”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_13" style="">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com/ui-02/detail.aspx?g=13','快乐8','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“北京快乐8”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_20" style="">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com/ui-02/detail.aspx?g=20','幸运农场','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“幸运农场”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_21" style="">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com/ui-02/detail.aspx?g=21','幸运飞艇','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“幸运飞艇”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_10" style="display:none">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com/ui-02/detail.aspx?g=10','新疆时时彩','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“新疆时时彩”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_14" style="display:none">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com/ui-02/detail.aspx?g=14','天津时时彩','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“天津时时彩”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_22" style="">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://speedylottos.com/speedy10-result.php','极速赛车','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“极速赛车”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_18" style="display:none">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://www.gdlottery.cn/odata/zst11xuan5.jspx','广东11选五','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“广东11选五”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_26" style="">
+                <td class="t_list_caption" colspan="2">
+                    <span style="color: #4a1a04;">“EPS赛马”</span>&nbsp;&nbsp;
+                    <a href="javascript:void(0);" onclick="window.open('http://www.epsbet.com','EPS赛马')"><span style="color: #4a1a04;">网址1</span></a>
+                    <a href="javascript:void(0);" onclick="window.open('http://www.cvk66.com','EPS赛马')"><span style="color: #4a1a04;">网址2</span></a>
+                    <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com','EPS赛马')"><span style="color: #4a1a04;">网址3</span></a>
+                </td>
+            </tr>
+            <tr id="tr_27" style="">
+                <td class="t_list_caption" colspan="2">
+                    <span style="color: #4a1a04;">“超级快5”</span>&nbsp;&nbsp;
+                    <a href="javascript:void(0);" onclick="window.open('http://www.super-pick5.com','超级快5')"><span style="color: #4a1a04;">网址1</span></a>
+                    <a href="javascript:void(0);" onclick="window.open('http://www.cvk66.com','超级快5')"><span style="color: #4a1a04;">网址2</span></a>
+                    <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com','超级快5')"><span style="color: #4a1a04;">网址3</span></a>
+                </td>
+            </tr> 
+             <tr id="tr_38" style="">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://auluckylottery.com/results/lucky-ball-5','澳洲幸运5','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“澳洲幸运5”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+             <tr id="tr_39" style="display:none">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://auluckylottery.com/results/lucky-ball-8','澳洲幸运8','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“澳洲幸运8”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_40" style="">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://auluckylottery.com/results/lucky-ball-10','澳洲幸运10','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“澳洲幸运10”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_41" style="display:none">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://auluckylottery.com/results/lucky-ball-20','澳洲幸运20','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“澳洲幸运20”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr id="tr_41" style="display:none">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://auluckylottery.com/results/lucky-ball-20','澳洲幸运20','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“澳洲幸运20”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>  
+            <tr id="tr_41" style="display:none">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://auluckylottery.com/results/lucky-ball-20','澳洲幸运20','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“澳洲幸运20”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>  
+            <tr id="tr_41" style="display:none">
+                <td class="t_list_caption" colspan="2">
+                    <a href="javascript:void(0);" onclick="window.open('http://auluckylottery.com/results/lucky-ball-20','澳洲幸运20','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“澳洲幸运20”开奖网</span></a>&nbsp;&nbsp;
+                </td>
+            </tr>  
+
+        </tbody></table>
+
+        <table width="100%" cellpadding="0" cellspacing="0" id="tb_xd" style="display: none;">
+            <tbody><tr>
+                <td id="mtranlist"></td>
+            </tr>
+        </tbody></table>
+
+        <table width="100%" cellpadding="0" cellspacing="0" id="tb_xd_single" style="display: none;">
+            <tbody><tr>
+                <td id="td_mtransingle"></td>
+            </tr>
+        </tbody></table>
+
+        <table width="100%" cellpadding="0" cellspacing="0" id="tb_xd_single_lianma" style="display: none;">
+            <tbody><tr>
+                <td id="td_mtransingle_lianma"></td>
+            </tr>
+
+        </tbody></table>
+    </div>
+
+
+
+    <!-- <div class="leftList">
       <div id="userInfo" class="userInfo">
         <p class="title">
           账户信息
@@ -37,9 +190,6 @@
         <div class="tabmenuPa  active">
           <a>长龙排行榜</a>
         </div>
-        <!-- <div class="tabmenu">
-          <a>最近注单</a>
-        </div> -->
         <div @click="openPrize" class="tabmenu openPrize active">
           <a>连续开奖</a>
         </div>
@@ -67,9 +217,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <el-dialog
+    <!-- <el-dialog
       title="修改密码"
       :visible.sync="orderOddsVisible"
       center>
@@ -96,7 +246,7 @@
           </div>
         </div> 
 
-    </el-dialog>
+    </el-dialog> -->
 
   </div>
 </template>
@@ -338,283 +488,71 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style scoped lang="less">
 
 #leftpanel {
-    background-size: 100% auto;
-    width: 240px;
-    float: left;
-    margin-top: 40px;
-    margin-left: 10px;
-}
+    font-size: 12px;
+    line-height: 20px;
+    font-family: Verdana, 宋体, 細明體, 微軟正黑體, Arial, Sans;
+    color: #511e02;
+    text-align: left;
+    margin: 0 auto;
+    font-size: 12px;
+    scrollbar-face-color: #9ad4fc;
+    scrollbar-shadow-color: #006699;
+    scrollbar-base-color: #ffffff;
+    scrollbar-highlight-color: #006699;
+    scrollbar-3dlight-color: #ffffff;
+    scrollbar-darkshadow-color: #ffffff;
+    scrollbar-track-color: #f8f8f8;
+    scrollbar-arrow-color: #006699;
 
-#leftpanel .leftList .long-dragon {
-    background-color: #f8f8f8;
-}
-.long-dragon, .quick-bet {
-    margin-top: 10px;
-}
-
-#leftpanel .leftList .title {
-    position: relative;
-    text-align: center;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.2);
-}
-
-#userInfo {
-  background: #80664b;
-}
-
-#leftpanel .leftList .userInfo .title {
-    height: 36px;
-    line-height: 36px;
-    font-size: 14px;
-    font-weight: 700;
-    position: relative;
-}
-
-#leftpanel .leftList .userInfo .info {
-    background-size: 100% 100%;
-    padding: 15px 5px;
-    font-size: 13px;
+    width: 228px;
+    background-image: url(../../../static/img/l_backdrop.jpg);
+    background-repeat: repeat-y;
     overflow-x: hidden;
-    word-break: break-all;
-    text-align: center;
-}
-
-#leftpanel .leftList .userInfo .info .info-box {
-    width: 94%;
-    text-align: left;
-    margin: 0 auto 10px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 5px;
-    font-weight: 700;
-    padding: 5px 0;
-}
-
-#leftpanel .leftList .userInfo .info .info-box p {
-    line-height: 30px;
-}
-
-#leftpanel .leftList .userInfo .info .info-box p label {
-    display: inline-block;
-    width: 6em;
-    text-align: right;
-    line-height: 24px;
-}
-
-#leftpanel .leftList .long-dragon .cont {
-    width: 240px;
-}
-
-.gonggaocont {
-  height: 100px;
-  background-color: #f6e9c7;
-  color: #805933;
-  padding: 10px;
-}
-
-.tabmenu {
-  display: inline-block;
-  float: left;
-  color: #805933;
-  width: 120px;
-  height: 32px;
-  background-color: #d3b281;
-  cursor: pointer;
-}
-
-.tabmenu:hover {
-  background-color: #fcefc2;
-}
-.tabmenu.active {
-  background-color: #fcefc2;
-}
-
-.tabmenu a {
-  width: 100%;
-  height: 32px;
-  line-height: 32px;
-}
-
-.tabmenuPa {
-    color: #ebcb80;
-    height: 32px;
-    line-height: 32px;
-    background-color: #80664b;
-}
-
-#leftpanel .leftList .long-dragon .cont .table {
-    background: #f8f8f8;
-    margin: 8px 0;
-    padding-bottom: 1px;
-}
-
-#leftpanel .leftList .long-dragon .cont .table table {
-    width: 100%;
-    line-height: 26px;
-}
-
-#leftpanel .leftList .long-dragon .cont .table table tr {
-    border-top: 1px solid #eee;
-}
-
-#leftpanel.leftList .long-dragon .cont .table table tr td {
-    padding: 1px 0;
-    font-size: 13px;
-}
-
-#leftpanel .leftList .long-dragon .cont .table table tr td.type {
-    width: 6px;
-}
-
-#leftpanel .leftList .long-dragon .cont .table table tr td.name {
-    width: 130px;
-    padding-left: 6px;
-}
-
-#leftpanel .leftList .long-dragon .cont .table table tr td.name a {
-    color: #694909;
-    text-decoration: none;
     float: left;
+    margin: 0px;
+
+    .DTable {
+      margin-top: 5px;
+      text-align: center;
+      font-size: 12px;
+      background-color: #e9a884;
+    }
+
+    .DTable tr {
+      height: 25px;
+      background-color: White;
+    }
+
+    .t_td_caption_1 {
+      HEIGHT: 25px;
+      TEXT-ALIGN: center;
+      LINE-HEIGHT: 17px;
+      BACKGROUND-COLOR: #fdf8f2;
+  }
+
+  .t_list_caption {
+    BACKGROUND-IMAGE: url(../../../static/img/tb_bg.jpg);
+    FONT-WEIGHT: bold;
+    COLOR: #000000;
+    TEXT-ALIGN: center;
+    LINE-HEIGHT: 33px;
+  }
+
+  a {
+    color: #5E5E5E;
+    text-decoration: none;
+  }
+
+
 }
 
-#leftpanel .leftList .long-dragon .cont .table table tr td.period {
-    width: 80px;
-    padding-right: 12px;
-    text-align: right;
-    color: #f42222;
-}
 
-.login-out div {
-  width: 80px;
-  margin: 0px 0px 5px 5px;
-  color: #805933;
-}
 
-.login-out .el-button--primary {
-    color: #805933;
-}
-.login-out .loginoutbtn {
-  width: 80px;
-}
-.login-out .changepassbtn {
-  background: rgba(255, 255, 255, 0.2);
-  border: 0px solid rgba(255, 255, 255, 0.5);
-}
-.login-out .changepassbtn:hover {
-  background-color: #FCEFC2;
-  border-color: #FCEFC2;
-}
-.jinbibg {
-    height: 140px;
-    width: 110px;
-    top: 170px;
-    position: absolute;
-    left: 130px;
-    background: url(../../../static/img/jinbibg.png) center no-repeat;
-    background-size: 100% 100%;
-}
-.gonggaotab {
-  width: 100%;
-  height: 32px;
-  line-height: 32px;
-  background-color: #d3b281;
-  color: #805933;
-}
-.popup-body {
-    overflow-y: auto;
-}
-.default-list {
-    padding: 8px 60px;
-}
-.default-list table {
-    margin-top: 5px;
-    width: 100%;
-}
-.default-list table tr {
-    line-height: 30px;
-    border-bottom: 1px solid #cecece;
-}
-.default-list table tr th {
-    color: #f2f1f0;
-}
-.default-list .table table th {
-    text-align: right;
-    background-color: #e8bd84;
-    color: #450400;
-    padding: 0 10px;
-    font-size: 13px;
-    line-height: 30px;
-    font-weight: 600;
-}
-.default-list table td.tar, .default-list table th.tar {
-    text-align: right;
-}
-.default-list table td, .default-list table th {
-    text-align: center;
-    line-height: 30px;
-    border: 1px solid #b89268;
-}
-.default-list .table table tr td {
-    padding: 3px 8px;
-    text-align: left;
-}
-.default-list .table table tr input {
-    height: 20px;
-    padding-left: 3px;
-}
 </style>
 <style lang="less">
 
-.betQuick {
-  .el-input {
-    width: 120px;
-    margin-right: 20px;
-  }
-
-  .el-radio.is-bordered.is-checked {
-    background-color: #805933;
-  }
-
-  .betRTop.onlybet {
-    margin-top: 20px;
-  }
-
-  .el-dialog__header {
-    padding: 20px 20px 10px;
-    background-color: #80664b;
-    border-radius: 5px 5px 0 0;
-  }
-  .el-dialog.el-dialog--center {
-    width: 500px;
-    color: #450400 !important;
-    background-color: #fcfcfa;
-    box-shadow: 0 2px 8px rgba(0,0,0,.33);
-    font-family: Helvetica,Arial,sans-serif;
-    border-radius: 5px;
-  }
-  .el-dialog--center .el-dialog__body {
-    text-align: center;
-    padding: 0px;
-  }
-  .betRTop button {
-    height: 28px;
-  }
-
-  .el-button--primary.is-plain {
-    color: #805933;
-  }
-
-  .el-form-item {
-    margin-bottom: 0px;
-  }
-
-  .el-form-item__content {
-    margin-left: 0px !important; 
-  }
-}
 
 </style>
