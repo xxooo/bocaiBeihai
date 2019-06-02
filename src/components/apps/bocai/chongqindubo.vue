@@ -1,40 +1,72 @@
 <template>
   <div id="chongqindubo" class="content-main duboBodyClass">
 
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table class="table000">
       <tbody>
         <tr>
-          <td valign="top">
-            <div style="  margin-right:10px;">
-              <div id="round_content" style="display: block;">
-                <!-- <table border="0" cellpadding="0" cellspacing="0" width="700">
-                  <tbody><tr>
-                     <td height="24" width="45%" style="font-weight: bold;"><b class="b_title">重庆时时彩</b>
-                      　<span style="font-size: 10pt; font-family: Arial; color: red; position: relative;height: 10px">今天输赢：</span><span class="font_r" id="UserResult"><span style="color:#000000">0</span></span></td>
-                           <td width="55%" colspan="1" align="right">
-                               <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                   <tbody><tr>
-                                       <td height="27">
-                                           <div class="head_f2" id="div_betno"><div style="float:right;width:145px;"><span style="float:left;"> </span><span style="float:left;"><div class="CQNo_03" style="height:27px; width:27px; margin-top:1px;"> </div></span><span style="float:left;"><div class="CQNo_07" style="height:27px; width:27px; margin-top:1px;"> </div></span><span style="float:left;"><div class="CQNo_06" style="height:27px; width:27px; margin-top:1px;"> </div></span><span style="float:left;"><div class="CQNo_06" style="height:27px; width:27px; margin-top:1px;"> </div></span><span style="float:left;"><div class="CQNo_08" style="height:27px; width:27px; margin-top:1px;"> </div></span></div><span style="height:25px;float:right;color:#511e02;font-weight: bold; "><span id="span_roundno">20190602035</span>期开奖&nbsp;</span></div>
-                                       </td>
-                                   </tr>
-                               </tbody></table>
-                           </td>
-                       </tr>
+          <td class="vertical-t">
+            <div class="margin-r10">
+              <div id="round_content">
+                <table class="table000 width700">
+                  <tbody>
+                    <tr>
+                      <td class="bocaiNameTd">
+                        <b class="b_title">重庆时时彩</b>
+                        <span class="todayWinSpan">今天输赢：</span>
+                        <span class="font_r" id="UserResult">
+                          <span class="black">0</span>
+                        </span>
+                      </td>
+                      <td width="55%" colspan="1" class="vertical-r">
+                        <table width="100%" class="table000">
+                          <tbody>
+                            <tr>
+                              <td class="height27">
+                                <div class="head_f2" id="div_betno">
+                                  <div class="versionKJDiv">
+                                    <span class="floatL"></span>
+                                    <span class="floatL"><div class="CQNo_03 CQREDiv"></div></span>
+                                    <span class="floatL"><div class="CQNo_07 CQREDiv"></div></span>
+                                    <span class="floatL"><div class="CQNo_06 CQREDiv"></div></span>
+                                    <span class="floatL"><div class="CQNo_06 CQREDiv"></div></span>
+                                    <span class="floatL"><div class="CQNo_08 CQREDiv"></div></span>
+                                  </div>
+                                    <span class="versionKJSpan"><span id="span_roundno">20190602035</span>期开奖&nbsp;</span>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
 
-                <table border="0" cellpadding="0" cellspacing="0" width="700">
-                     <tbody><tr>
-                         <td height="24" width="28%"><b id="t_LID" style="color: green;">20190602036</b>期　<b style="font-weight: bold; color: #2836f4;">两面盘222</b></td>
-                         <td align="right" width="25%"><span id="hClockTime_C">距离封盘：<b>13</b>:<b>53</b></span></td>
-                         <td align="right" width="25%"><span id="hClockTime_O">距离开奖：<b style="color:Red;">15</b>:<b style="color:Red;">33</b></span></td>
-                         <td align="right" width="22%"><span id="Update_Time"></span></td>
+                <table class="table000 width700">
+                  <tbody>
+                    <tr>
+                      <td class="h24w28">
+                        <b id="t_LID" class="green">20190602036</b>期　<b class="bocaiSubName">两面盘</b>
+                      </td>
+                      <td class="alrwd25"><span id="hClockTime_C">距离封盘：<b>13</b>:<b>53</b></span></td>
+                      <td class="alrwd25"><span id="hClockTime_O">距离开奖：<b class="red">15</b>:<b class="red">33</b></span></td>
+                      <td class="vertical-r" width="22%"><span id="Update_Time"></span></td>
                      </tr>
                   </tbody>
-                </table> -->
+                </table>
 
-                 <!-- <div class="btnDivArea" id="btnDivArea11">  
+                <div class="btnDivArea" id="btnDivArea11">  
+                  <input id="chk_qcstake" type="checkbox">
+                  <span class="kuaijieSpan" @click="QCheckShow()">快捷下注</span>
+                  <span id="sp_qcstake" class="yibanSpan" v-if="normalPay">金额：
+                    <input id="txtqcstake" type="text" class="wid60">
+                    <span @click="QCExplain()" class="shuomiSpan">说明</span>
+                  </span>
+                  <input type="reset" value="重 填" class="button_bg1" onclick="SetOrderOddsString();"> 
+                  <input id="btn_order2" type="button" value="下 注" class="button_bg1">
+                </div> 
+
+                 <!-- 上面原画<div class="btnDivArea" id="btnDivArea11">  
                   <input id="chk_qcstake" type="checkbox" onclick="QCheckShow(this)"><span onmouseover="javascript:this.style.color='#FF0D0D';" onmouseout="javascript:this.style.color='#299A26';" style="display:inline-block; color:#299A26; font-weight:bold;">快捷下注</span>
                   <span id="sp_qcstake" style=" display:none;">金额：<input id="txtqcstake" type="text" style="width:60px;"><span onclick="QCExplain()" style="color:#FF0D0D; display:inline-block; width:60px; cursor:pointer; text-align:left;">说明</span></span>
                   <input type="reset" value="重 填" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="SetOrderOddsString();"> 
@@ -511,6 +543,15 @@ export default {
       });
   },
   methods: {
+    QCheckShow() {
+
+    },
+    QCExplain() {
+
+    },
+
+
+
     kuaixuanOdd(item,type) {
       this.qingkong();
       let list = this.shishiZiDatas.list;
