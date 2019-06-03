@@ -129,113 +129,15 @@
               </tbody>
             </table> 
 
-            <!-- <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" id="tblNowBet02" style=" margin-top:2px;">
-            <thead>
-            <tr class="DtrTitle" style="font-weight: bold;">
-            <td colspan="12" class="td_caption_1" align="center">第二球</td>
-            </tr> 
-            </thead> 
-             
-              <tbody><tr class="Dbgco1">
-              <td class="betnum" id="thnum_r211_1" align="center">大</td>
-              <td id="td_r211_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('211,,1,,1.9879,211_1',this)" class="betRateNum" id="oid_211_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_211_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_211_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r211_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_211_1">封盘</span></td> 
-              <td class="betnum" id="thnum_r211_2" align="center">小</td>
-              <td id="td_r211_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('211,,2,,1.9879,211_2',this)" class="betRateNum" id="oid_211_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_211_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_211_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r211_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_211_2">封盘</span></td>
-              <td class="betnum" id="thnum_r216_1" align="center">单</td>
-              <td id="td_r216_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('216,,1,,1.9879,216_1',this)" class="betRateNum" id="oid_216_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_216_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_216_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r216_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_216_1">封盘</span></td>
-              <td class="betnum" id="thnum_r216_2" align="center">双</td>
-              <td id="td_r216_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('216,,2,,1.9879,216_2',this)" class="betRateNum" id="oid_216_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_216_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_216_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r216_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_216_2">封盘</span></td> 
-              </tr> 
-            </tbody>
-            </table>  -->
-
-            <!-- <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" id="tblNowBet03" style=" margin-top:2px;">
-            <thead>
-            <tr class="DtrTitle" style="font-weight: bold;">
-            <td colspan="12" class="td_caption_1" align="center">第三球</td>
-            </tr> 
-            </thead> 
-              <tbody><tr class="Dbgco1">
-              <td class="betnum" id="thnum_r212_1" align="center">大</td>
-              <td id="td_r212_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('212,,1,,1.9879,212_1',this)" class="betRateNum" id="oid_212_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_212_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_212_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r212_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_212_1">封盘</span></td> 
-              <td class="betnum" id="thnum_r212_2" align="center">小</td>
-              <td id="td_r212_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('212,,2,,1.9879,212_2',this)" class="betRateNum" id="oid_212_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_212_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_212_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r212_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_212_2">封盘</span></td>
-              <td class="betnum" id="thnum_r217_1" align="center">单</td>
-              <td id="td_r217_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('217,,1,,1.9879,217_1',this)" class="betRateNum" id="oid_217_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_217_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_217_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r217_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_217_1">封盘</span></td>
-              <td class="betnum" id="thnum_r217_2" align="center">双</td>
-              <td id="td_r217_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('217,,2,,1.9879,217_2',this)" class="betRateNum" id="oid_217_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_217_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_217_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r217_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_217_2">封盘</span></td> 
-              </tr>
-            </tbody>
-            </table> --> 
-
-            <!-- <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" id="tblNowBet04" style=" margin-top:2px;">
-            <thead>
-            <tr class="DtrTitle" style="font-weight: bold;">
-            <td colspan="12" class="td_caption_1" align="center">第四球</td>
-            </tr> 
-            </thead>  
-              <tbody><tr class="Dbgco1">
-              <td class="betnum" id="thnum_r213_1" align="center">大</td>
-              <td id="td_r213_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('213,,1,,1.9879,213_1',this)" class="betRateNum" id="oid_213_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_213_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_213_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r213_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_213_1">封盘</span></td> 
-              <td class="betnum" id="thnum_r213_2" align="center">小</td>
-              <td id="td_r213_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('213,,2,,1.9879,213_2',this)" class="betRateNum" id="oid_213_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_213_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_213_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r213_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_213_2">封盘</span></td>
-              <td class="betnum" id="thnum_r218_1" align="center">单</td>
-              <td id="td_r218_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('218,,1,,1.9879,218_1',this)" class="betRateNum" id="oid_218_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_218_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_218_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r218_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_218_1">封盘</span></td>
-              <td class="betnum" id="thnum_r218_2" align="center">双</td>
-              <td id="td_r218_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('218,,2,,1.9879,218_2',this)" class="betRateNum" id="oid_218_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_218_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_218_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r218_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_218_2">封盘</span></td> 
-              </tr>
-            </tbody>
-            </table>  -->
-
-            <!-- <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" id="tblNowBet05" style=" margin-top:2px;">
-            <thead>
-            <tr class="DtrTitle" style="font-weight: bold;">
-            <td colspan="12" class="td_caption_1" align="center">第五球</td>
-            </tr> 
-            </thead>  
-              <tbody><tr class="Dbgco1">
-              <td class="betnum" id="thnum_r214_1" align="center">大</td>
-              <td id="td_r214_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('214,,1,,1.9879,214_1',this)" class="betRateNum" id="oid_214_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_214_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_214_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r214_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_214_1">封盘</span></td> 
-              <td class="betnum" id="thnum_r214_2" align="center">小</td>
-              <td id="td_r214_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('214,,2,,1.9879,214_2',this)" class="betRateNum" id="oid_214_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_214_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_214_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r214_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_214_2">封盘</span></td>
-              <td class="betnum" id="thnum_r219_1" align="center">单</td>
-              <td id="td_r219_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('219,,1,,1.9879,219_1',this)" class="betRateNum" id="oid_219_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_219_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_219_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r219_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_219_1">封盘</span></td>
-              <td class="betnum" id="thnum_r219_2" align="center">双</td>
-              <td id="td_r219_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('219,,2,,1.9879,219_2',this)" class="betRateNum" id="oid_219_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_219_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_219_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r219_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_219_2">封盘</span></td> 
-              </tr> 
-            </tbody>
-            </table> --> 
-
-            <!-- <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" id="tblNowBet06">
-              <tbody><tr class="Dbgco1">
-              <td class="betnum" id="thnum_r346_1" align="center">总和大</td>
-              <td id="td_r346_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('346,,1,,1.9879,346_1',this)" class="betRateNum" id="oid_346_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_346_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_346_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r346_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_346_1">封盘</span></td> 
-              <td class="betnum" id="thnum_r346_2" align="center">总和小</td>
-              <td id="td_r346_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('346,,2,,1.9879,346_2',this)" class="betRateNum" id="oid_346_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_346_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_346_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r346_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_346_2">封盘</span></td> 
-              <td class="betnum" id="thnum_r345_1" align="center">总和单</td>
-              <td id="td_r345_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('345,,1,,1.9879,345_1',this)" class="betRateNum" id="oid_345_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_345_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_345_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r345_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_345_1">封盘</span></td> 
-              <td class="betnum" id="thnum_r345_2" align="center">总和双</td>
-              <td id="td_r345_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('345,,2,,1.9879,345_2',this)" class="betRateNum" id="oid_345_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_345_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_345_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r345_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_345_2">封盘</span></td> 
-              </tr>
-              <tr>
-              <td class="betnum" id="thnum_r347_1" align="center">龙</td>
-              <td id="td_r347_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('347,,1,,1.9879,347_1',this)" class="betRateNum" id="oid_347_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_347_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_347_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r347_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_347_1">封盘</span></td> 
-              <td class="betnum" id="thnum_r347_2" align="center">虎</td>
-              <td id="td_r347_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('347,,2,,1.9879,347_2',this)" class="betRateNum" id="oid_347_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_347_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_347_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r347_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_347_2">封盘</span></td> 
-              <td class="betnum" id="thnum_r347_3" align="center">和</td>
-              <td id="td_r347_3"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('347,,3,,8.8,347_3',this)" class="betRateNum" id="oid_347_3"><span class="betRateNum">8.8</span></a><input type="hidden" name="odds_347_3" value="8.8"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_347_3">&nbsp;-&nbsp;</span></td><td><input type="text" name="r347_3" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_347_3">封盘</span></td> 
-              <td colspan="3"></td>
-              </tr>
-            </tbody>
-            </table> -->
 
 
-            <!-- <div class="btnDivArea" id="btnDivArea">  
-              <input id="chk_qcstake_fu" type="checkbox" onclick="QCheckShow_fu(this)"><span onmouseover="javascript:this.style.color='#FF0D0D';" onmouseout="javascript:this.style.color='#299A26';" style="display:inline-block; color:#299A26; font-weight:bold;">快捷下注</span>
+            <div class="btnDivArea" id="btnDivArea">  
+              <input id="chk_qcstake_fu" type="checkbox" @click="QCheckShow_fu()">
+              <span class="kuaijieOdd">快捷下注</span>
               <span id="sp_qcstake_fu" style=" display:none;">金额：<input id="txtqcstake_fu" type="text" style="width:60px;"><span onclick="QCExplain()" style="color:#FF0D0D; display:inline-block; width:60px; cursor:pointer; text-align:left;">说明</span></span>
               <input type="reset" value="重 填" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="SetOrderOddsString();"> 
               <input id="btn_order" type="button" value="下 注" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1">
-            </div>  -->
+            </div> 
 
 
           <!-- <div class="btnDivArea" id="btnDivArea2" style="display:none;">  
@@ -569,6 +471,9 @@ export default {
       });
   },
   methods: {
+    QCheckShow_fu() {
+
+    },
     IntoMtran() {
 
     },
