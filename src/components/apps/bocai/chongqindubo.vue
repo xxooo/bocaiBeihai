@@ -66,42 +66,68 @@
                   <input id="btn_order2" type="button" value="下 注" class="button_bg1">
                 </div> 
 
-                 <!-- 上面原画<div class="btnDivArea" id="btnDivArea11">  
-                  <input id="chk_qcstake" type="checkbox" onclick="QCheckShow(this)"><span onmouseover="javascript:this.style.color='#FF0D0D';" onmouseout="javascript:this.style.color='#299A26';" style="display:inline-block; color:#299A26; font-weight:bold;">快捷下注</span>
-                  <span id="sp_qcstake" style=" display:none;">金额：<input id="txtqcstake" type="text" style="width:60px;"><span onclick="QCExplain()" style="color:#FF0D0D; display:inline-block; width:60px; cursor:pointer; text-align:left;">说明</span></span>
-                  <input type="reset" value="重 填" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="SetOrderOddsString();"> 
-                  <input id="btn_order2" type="button" value="下 注" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1">
-                 </div>  -->
 
-
-                 <div class="btnDivArea" id="btnDivArea22" style="display:none;">  
+                <div class="btnDivArea" id="btnDivArea22" style="display:none;">  
                   <span style="color:red">下注中,请等待。。。</span>
-                 </div> 
+                </div> 
               </div>
 
 
             <div id="errormsg" style=" display:none;"></div>
 
-          <div id="mainPageData" style="display: block;">
+          <div id="mainPageData">
 
-            <!-- <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" id="tblNowBet01" style="margin-top:0px;">
-            <thead>
-            <tr class="DtrTitle" style="font-weight: bold;">
-            <td colspan="12" class="td_caption_1" align="center">第一球</td>
-            </tr>
-            </thead>  
-              <tbody><tr class="Dbgco1">
-              <td class="betnum" id="thnum_r210_1" align="center">大</td>
-              <td id="td_r210_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('210,,1,,1.9879,210_1',this)" class="betRateNum" id="oid_210_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_210_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_210_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r210_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_210_1">封盘</span></td> 
-              <td class="betnum" id="thnum_r210_2" align="center">小</td>
-              <td id="td_r210_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('210,,2,,1.9879,210_2',this)" class="betRateNum" id="oid_210_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_210_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_210_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r210_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_210_2">封盘</span></td>
-              <td class="betnum" id="thnum_r215_1" align="center">单</td>
-              <td id="td_r215_1"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('215,,1,,1.9879,215_1',this)" class="betRateNum" id="oid_215_1"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_215_1" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_215_1">&nbsp;-&nbsp;</span></td><td><input type="text" name="r215_1" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_215_1">封盘</span></td>
-              <td class="betnum" id="thnum_r215_2" align="center">双</td>
-              <td id="td_r215_2"><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('215,,2,,1.9879,215_2',this)" class="betRateNum" id="oid_215_2"><span class="betRateNum">1.9879</span></a><input type="hidden" name="odds_215_2" value="1.9879"><span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_215_2">&nbsp;-&nbsp;</span></td><td><input type="text" name="r215_2" size="3" class="inp1" onfocus="this.className='inp1m'" onblur="this.className='inp1';"><span style="width:60px; display:none;" id="fenpan_215_2">封盘</span></td> 
-              </tr> 
-            </tbody>
-            </table>  -->
+            <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" id="tblNowBet01" style="margin-top:0px;">
+              <thead>
+                <tr class="DtrTitle" style="font-weight: bold;">
+                  <td colspan="12" class="td_caption_1" align="center">第一球</td>
+                </tr>
+              </thead>  
+              <tbody>
+                <tr class="Dbgco1">
+                  <td class="betnum" id="thnum_r210_1" align="center">大</td>
+                  <td id="td_r210_1">
+                    <a title="按此下注" @click="IntoMtran()" class="betRateNum" id="oid_210_1"><span class="betRateNum">1.9879</span></a>
+                    <input type="hidden" name="odds_210_1" value="1.9879">
+                    <span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_210_1">&nbsp;-&nbsp;</span>
+                  </td>
+                  <td>
+                    <input type="text" name="r210_1" size="3" class="inp1">
+                    <span style="width:60px;" id="fenpan_210_1" v-if="!isOpenOdds">封盘</span>
+                  </td> 
+                  <td class="betnum" id="thnum_r210_2" align="center">小</td>
+                  <td id="td_r210_2">
+                    <a title="按此下注" @click="IntoMtran()" class="betRateNum" id="oid_210_2"><span class="betRateNum">1.9879</span></a>
+                    <input type="hidden" name="odds_210_2" value="1.9879">
+                    <span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_210_2">&nbsp;-&nbsp;</span>
+                  </td>
+                  <td>
+                    <input type="text" name="r210_2" size="3" class="inp1">
+                    <span style="width:60px;" id="fenpan_210_2" v-if="!isOpenOdds">封盘</span>
+                  </td>
+                  <td class="betnum" id="thnum_r210_1" align="center">单</td>
+                  <td id="td_r210_1">
+                    <a title="按此下注" @click="IntoMtran()" class="betRateNum" id="oid_210_1"><span class="betRateNum">1.9879</span></a>
+                    <input type="hidden" name="odds_210_1" value="1.9879">
+                    <span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_210_1">&nbsp;-&nbsp;</span>
+                  </td>
+                  <td>
+                    <input type="text" name="r210_1" size="3" class="inp1">
+                    <span style="width:60px;" id="fenpan_210_1" v-if="!isOpenOdds">封盘</span>
+                  </td> 
+                  <td class="betnum" id="thnum_r210_2" align="center">双</td>
+                  <td id="td_r210_2">
+                    <a title="按此下注" @click="IntoMtran()" class="betRateNum" id="oid_210_2"><span class="betRateNum">1.9879</span></a>
+                    <input type="hidden" name="odds_210_2" value="1.9879">
+                    <span style="width:41px;color:red;font-weight:bold;display:none" id="hengan_210_2">&nbsp;-&nbsp;</span>
+                  </td>
+                  <td>
+                    <input type="text" name="r210_2" size="3" class="inp1">
+                    <span style="width:60px;" id="fenpan_210_2" v-if="!isOpenOdds">封盘</span>
+                  </td> 
+                </tr> 
+              </tbody>
+            </table> 
 
             <!-- <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" id="tblNowBet02" style=" margin-top:2px;">
             <thead>
@@ -543,6 +569,9 @@ export default {
       });
   },
   methods: {
+    IntoMtran() {
+
+    },
     QCheckShow() {
 
     },
