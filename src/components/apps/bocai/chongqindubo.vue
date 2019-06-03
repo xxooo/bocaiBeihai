@@ -74,9 +74,9 @@
                  </div>  -->
 
 
-                 <!-- <div class="btnDivArea" id="btnDivArea22" style="display:none;">  
+                 <div class="btnDivArea" id="btnDivArea22" style="display:none;">  
                   <span style="color:red">下注中,请等待。。。</span>
-                 </div> --> 
+                 </div> 
               </div>
 
 
