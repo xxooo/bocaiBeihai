@@ -217,7 +217,7 @@
         </tbody></table>
     </div>
 
-    <div style=" width:100%;">
+    <div class="middleContent" style=" width:100%;    position: fixed;">
       <table width="100%" border="0" cellpadding="0" cellspacing="1">
       <tbody><tr>
           <td id="tduser" valign="top" style="width:245px; text-align:left; vertical-align:top;">
@@ -889,16 +889,19 @@ export default {
 </script>
 <style scoped lang="less">
 
-body, div, span, p, b, textarea, input, select, form, table, tr, td {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    font-size: 12px;
-    z-index: auto;
-    color: #511e02;
-}
+
 
 #main {
+
+    body, div, span, p, b, textarea, input, select, form, table, tr, td {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        font-size: 12px;
+        z-index: auto;
+        color: #511e02;
+    }
+
     font-family: Verdana,"宋体",Arial,Sans;
     font-size: 12px;
     margin: 0 auto;
@@ -1112,6 +1115,20 @@ body {
         transition: border-color .3s,background-color .3s,color .3s;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
+    }
+
+    .middleContent {
+        width: 100%;
+        position: fixed;
+        width: 100%;
+        width: 100%;
+        overflow: auto;
+        bottom: 26px;
+        top: 108px;
+        _height: 100%;
+        _border-top: 50px solid #eee;
+        _border-bottom: 50px solid #eee;
+        _top: 0px;
     }
 }
 

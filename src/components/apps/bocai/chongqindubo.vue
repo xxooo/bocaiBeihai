@@ -131,57 +131,180 @@
 
 
 
-            <div class="btnDivArea" id="btnDivArea">  
-              <input id="chk_qcstake_fu" type="checkbox" @click="QCheckShow_fu()">
-              <span class="kuaijieOdd">快捷下注</span>
-              <span id="sp_qcstake_fu" style=" display:none;">金额：<input id="txtqcstake_fu" type="text" style="width:60px;"><span onclick="QCExplain()" style="color:#FF0D0D; display:inline-block; width:60px; cursor:pointer; text-align:left;">说明</span></span>
-              <input type="reset" value="重 填" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="SetOrderOddsString();"> 
-              <input id="btn_order" type="button" value="下 注" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1">
+            <div class="btnDivArea" id="btnDivArea11">  
+              <input id="chk_qcstake" type="checkbox">
+              <span class="kuaijieSpan" @click="QCheckShow_fu()">快捷下注</span>
+              <span id="sp_qcstake" class="yibanSpan" v-if="normalPay">金额：
+                <input id="txtqcstake" type="text" class="wid60">
+                <span @click="QCExplain()" class="shuomiSpan">说明</span>
+              </span>
+              <input type="reset" value="重 填" class="button_bg1" onclick="SetOrderOddsString();"> 
+              <input id="btn_order2" type="button" value="下 注" class="button_bg1">
             </div> 
 
 
-          <!-- <div class="btnDivArea" id="btnDivArea2" style="display:none;">  
-           <span style="color:red">下注中,请等待。。。</span>
-          </div>  -->
 
-    <!-- <div id="lotteryno">
+          <div class="btnDivArea" id="btnDivArea2" style="display:none;">  
+            <span style="color:red">下注中,请等待。。。</span>
+          </div> 
 
-      <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700" id="BallList" style="display: block;">
-      <tbody>
-      <tr>
-      <td id="sRB_1" class="td_caption_1 td_caption_2"><a href="javascript:Read_Ballimg(1)">总和大小</a></td>
-      <td id="sRB_2" class="td_caption_1"><a href="javascript:Read_Ballimg(2)">总和单双</a></td>
-      <td id="sRB_3" class="td_caption_1"><a href="javascript:Read_Ballimg(3)">龙虎和</a></td>    
-      </tr>
-      <tr class="Ball_tr_H">
-      <td colspan="3">
-      <table class="Ball_List" border="0" cellspacing="0" cellpadding="0" width="698">
-      <tbody>
-      <tr class="Ball_tr_H" valign="top" id="lotteryno_tr1" style="display: block; height: auto; min-height: 25px;"><td width="28"></td><td width="28" class="Jut_caption_1">小</td><td width="28">大</td><td width="28" class="Jut_caption_1">小<br>小</td><td width="28">大<br>大</td><td width="28" class="Jut_caption_1">小<br>小</td><td width="28">大<br>大</td><td width="28" class="Jut_caption_1">小<br>小</td><td width="28">大</td><td width="28" class="Jut_caption_1">小</td><td width="28">大<br>大</td><td width="28" class="Jut_caption_1">小<br>小</td><td width="28">大<br>大<br>大</td><td width="28" class="Jut_caption_1">小<br>小<br>小</td><td width="28">大<br>大<br>大</td><td width="28" class="Jut_caption_1">小<br>小<br>小</td><td width="28">大</td><td width="28" class="Jut_caption_1">小</td><td width="28">大<br>大</td><td width="28" class="Jut_caption_1">小<br>小<br>小</td><td width="28">大</td><td width="28" class="Jut_caption_1">小</td><td width="28">大<br>大</td><td width="28" class="Jut_caption_1">小<br>小<br>小<br>小<br>小<br>小</td><td width="28" style="min-height: 25px;">大<br>大<br>大</td></tr>
-      <tr class="Ball_tr_H" valign="top" id="lotteryno_tr2" style=" display:none;height:auto;min-height:25px;"><td width="28">双</td><td width="28" class="Jut_caption_1">单</td><td width="28">双</td><td width="28" class="Jut_caption_1">单</td><td width="28">双<br>双<br>双<br>双</td><td width="28" class="Jut_caption_1">单<br>单</td><td width="28">双</td><td width="28" class="Jut_caption_1">单</td><td width="28">双</td><td width="28" class="Jut_caption_1">单</td><td width="28">双<br>双<br>双</td><td width="28" class="Jut_caption_1">单</td><td width="28">双<br>双</td><td width="28" class="Jut_caption_1">单<br>单<br>单</td><td width="28">双<br>双</td><td width="28" class="Jut_caption_1">单<br>单</td><td width="28">双<br>双</td><td width="28" class="Jut_caption_1">单</td><td width="28">双<br>双<br>双<br>双<br>双</td><td width="28" class="Jut_caption_1">单</td><td width="28">双<br>双</td><td width="28" class="Jut_caption_1">单</td><td width="28">双<br>双<br>双<br>双</td><td width="28" class="Jut_caption_1">单</td><td width="28" style="min-height: 25px;">双</td></tr>
-      <tr class="Ball_tr_H" valign="top" id="lotteryno_tr3" style=" display:none;height:auto;min-height:25px;"><td width="28">龙</td><td width="28" class="Jut_caption_1">虎<br>虎</td><td width="28">和</td><td width="28" class="Jut_caption_1">龙</td><td width="28">虎</td><td width="28" class="Jut_caption_1">龙<br>龙<br>龙</td><td width="28">虎</td><td width="28" class="Jut_caption_1">龙</td><td width="28">虎</td><td width="28" class="Jut_caption_1">和</td><td width="28">虎<br>虎<br>虎<br>虎<br>虎</td><td width="28" class="Jut_caption_1">龙<br>龙</td><td width="28">和</td><td width="28" class="Jut_caption_1">虎<br>虎<br>虎<br>虎<br>虎<br>虎<br>虎</td><td width="28">龙</td><td width="28" class="Jut_caption_1">虎</td><td width="28">龙</td><td width="28" class="Jut_caption_1">虎<br>虎</td><td width="28">龙<br>龙</td><td width="28" class="Jut_caption_1">虎</td><td width="28">龙</td><td width="28" class="Jut_caption_1">虎<br>虎<br>虎<br>虎</td><td width="28">和</td><td width="28" class="Jut_caption_1">龙</td><td width="28" style="min-height: 25px;">虎</td></tr>   
-      </tbody>
-      </table>
-      </td>
-      </tr>
-      </tbody>
-      </table>
+          <div id="lotteryno">
 
- 
-      </div> -->
+            <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700" id="BallList">
+              <tbody>
+                <tr>
+                  <td id="sRB_1" class="td_caption_1 td_caption_2"><a>总和大小</a></td>
+                  <td id="sRB_2" class="td_caption_1"><a>总和单双</a></td>
+                  <td id="sRB_3" class="td_caption_1"><a>龙虎和</a></td>    
+                </tr>
+              <tr class="Ball_tr_H">
+                <td colspan="3">
+                  <table class="Ball_List" border="0" cellspacing="0" cellpadding="0" width="698">
+                    <tbody>
+                    <tr class="Ball_tr_H" valign="top" id="lotteryno_tr1" style="display: block; height: auto; min-height: 25px;">
+                      <td width="28"></td>
+                      <td width="28" class="Jut_caption_1">小</td>
+                      <td width="28">大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小</td>
+                      <td width="28">大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小</td>
+                      <td width="28">大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小</td>
+                      <td width="28">大</td>
+                      <td width="28" class="Jut_caption_1">小</td>
+                      <td width="28">大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小</td>
+                      <td width="28">大<br>大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
+                      <td width="28">大<br>大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
+                      <td width="28">大</td>
+                      <td width="28" class="Jut_caption_1">小</td>
+                      <td width="28">大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
+                      <td width="28">大</td>
+                      <td width="28" class="Jut_caption_1">小</td>
+                      <td width="28">大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小<br>小<br>小<br>小<br>小</td>
+                      <td width="28" style="min-height: 25px;">大<br>大<br>大</td>
+                    </tr>
 
-    </div>
+                    <tr class="Ball_tr_H" valign="top" id="lotteryno_tr2" style=" display:none;height:auto;min-height:25px;">
+                      <td width="28">双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双<br>双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单<br>单</td>
+                      <td width="28">双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单<br>单<br>单</td>
+                      <td width="28">双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单<br>单</td>
+                      <td width="28">双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双<br>双<br>双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双<br>双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28" style="min-height: 25px;">双</td>
+                    </tr>
+                    <tr class="Ball_tr_H" valign="top" id="lotteryno_tr3" style=" display:none;height:auto;min-height:25px;">
+                      <td width="28">龙</td>
+                      <td width="28" class="Jut_caption_1">虎<br>虎</td>
+                      <td width="28">和</td>
+                      <td width="28" class="Jut_caption_1">龙</td>
+                      <td width="28">虎</td>
+                      <td width="28" class="Jut_caption_1">龙<br>龙<br>龙</td>
+                      <td width="28">虎</td>
+                      <td width="28" class="Jut_caption_1">龙</td>
+                      <td width="28">虎</td>
+                      <td width="28" class="Jut_caption_1">和</td>
+                      <td width="28">虎<br>虎<br>虎<br>虎<br>虎</td>
+                      <td width="28" class="Jut_caption_1">龙<br>龙</td>
+                      <td width="28">和</td>
+                      <td width="28" class="Jut_caption_1">虎<br>虎<br>虎<br>虎<br>虎<br>虎<br>虎</td>
+                      <td width="28">龙</td>
+                      <td width="28" class="Jut_caption_1">虎</td>
+                      <td width="28">龙</td>
+                      <td width="28" class="Jut_caption_1">虎<br>虎</td>
+                      <td width="28">龙<br>龙</td>
+                      <td width="28" class="Jut_caption_1">虎</td>
+                      <td width="28">龙</td>
+                      <td width="28" class="Jut_caption_1">虎<br>虎<br>虎<br>虎</td>
+                      <td width="28">和</td>
+                      <td width="28" class="Jut_caption_1">龙</td>
+                      <td width="28" style="min-height: 25px;">虎</td>
+                    </tr>   
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+       
+            </div>
+
+          </div>
 
   </div>
 </td>
 
-    <!-- <td valign="top">
+    <td valign="top">
       <div id="maintwssides" style="display: block;">
-        <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="150" id="tbtwssides" style="display: block;">
-        <tbody id="TwoSides"><tr><td class="td_caption_1" colspan="2" style="width:150px;">两面长龙排行</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第五球 - 双</td><td class="TDb_R">&nbsp;5 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第二球 - 大</td><td class="TDb_R">&nbsp;3 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第四球 - 双</td><td class="TDb_R">&nbsp;3 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">总和 - 大</td><td class="TDb_R">&nbsp;3 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第一球 - 小</td><td class="TDb_R">&nbsp;2 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第三球 - 大</td><td class="TDb_R">&nbsp;2 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第四球 - 大</td><td class="TDb_R">&nbsp;2 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第一球 - 单</td><td class="TDb_R">&nbsp;2 期&nbsp;</td></tr> <tr class="t_list_tr_0"><td class="f_left TDb_B">第二球 - 单</td><td class="TDb_R">&nbsp;2 期&nbsp;</td></tr></tbody>
+        <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="150" id="tbtwssides">
+          <tbody id="TwoSides">
+            <tr>
+              <td class="td_caption_1" colspan="2" style="width:150px;">两面长龙排行</td>
+            </tr> 
+            <tr class="t_list_tr_0">
+              <td class="f_left TDb_B">第五球 - 双</td>
+              <td class="TDb_R">&nbsp;5 期&nbsp;</td>
+            </tr> 
+            <tr class="t_list_tr_0">
+              <td class="f_left TDb_B">第二球 - 大</td>
+              <td class="TDb_R">&nbsp;3 期&nbsp;</td>
+            </tr> 
+            <tr class="t_list_tr_0">
+              <td class="f_left TDb_B">第四球 - 双</td>
+              <td class="TDb_R">&nbsp;3 期&nbsp;</td>
+            </tr> 
+            <tr class="t_list_tr_0">
+              <td class="f_left TDb_B">总和 - 大</td>
+              <td class="TDb_R">&nbsp;3 期&nbsp;</td>
+            </tr> 
+            <tr class="t_list_tr_0">
+              <td class="f_left TDb_B">第一球 - 小</td>
+              <td class="TDb_R">&nbsp;2 期&nbsp;</td>
+            </tr> 
+            <tr class="t_list_tr_0">
+              <td class="f_left TDb_B">第三球 - 大</td>
+              <td class="TDb_R">&nbsp;2 期&nbsp;</td>
+            </tr> 
+            <tr class="t_list_tr_0">
+              <td class="f_left TDb_B">第四球 - 大</td>
+              <td class="TDb_R">&nbsp;2 期&nbsp;</td>
+            </tr> 
+            <tr class="t_list_tr_0">
+              <td class="f_left TDb_B">第一球 - 单</td>
+              <td class="TDb_R">&nbsp;2 期&nbsp;</td>
+            </tr> 
+            <tr class="t_list_tr_0">
+              <td class="f_left TDb_B">第二球 - 单</td>
+              <td class="TDb_R">&nbsp;2 期&nbsp;</td>
+            </tr>
+          </tbody>
         </table>
       </div>
-    </td> -->
+    </td>
 
 </tr>
 </tbody>
