@@ -72,8 +72,8 @@
                             <td height="29">
                                 <div id="menuLv03">
                                     <div id="div_menu_group_1">  
-                                        <template v-if="(item,index) in bocaiCategoryList">
-                                            <a class="" @click="getOddsCategory(item,index)">{{item.name}}</a>&nbsp;|&nbsp;
+                                        <template v-for="(item,index) in bocaiCategoryList">
+                                            <a :class="'OddsCategory'+index" @click="getOddsCategory(item,index)">{{item.name}}</a>&nbsp;{{(index+1) == bocaiCategoryList.length*1 ? '' : '|&nbsp;'}}
                                         </template>
                                     </div>
                                 </div>
@@ -563,6 +563,8 @@ export default {
 
           if(res.code===200){
             this.bocaiTypeList = res.bocaiTypeList;
+
+            this.getOddsInfo(res.bocaiTypeList[0])
           }
     },
     async getPrizeResult() { 
@@ -712,13 +714,15 @@ export default {
                 background: 'rgba(0, 0, 0, 0.7)'
               });
 
-          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+item.id).then((res) => {
+          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+item.bocaiId).then((res) => {
             that.$handelResponse(res, (result) => {
 
               loading.close();
               if(result.code===200){
 
                 that.bocaiCategoryList = result.bocaiCategoryList;
+
+                console.log('this.bocaiCategoryList',this.bocaiCategoryList);
 
                 bus.$emit('getbocaiCategoryId', result.bocaiCategoryList[0].id);
 
@@ -733,7 +737,7 @@ export default {
 
                 //that.shuaiXuanDatas(result.oddsList);
 
-                bus.$emit('getbocaiTypeId', id); 
+                bus.$emit('getbocaiTypeId', item.bocaiId); 
                 bus.$emit('getbocaiTypeName', item.bocaiName); 
 
                 bus.$emit('getOddsInfo', result); 

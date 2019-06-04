@@ -144,6 +144,8 @@ export default {
     _border-top: 50px solid #eee;
     _border-bottom: 50px solid #eee;
     _top: 0px;
+    bottom: 1px;
+    top: 1px;
 }
 
 * {
