@@ -12,71 +12,44 @@
             <tbody><tr>
               <td height="531" style="width: 21%">&nbsp;</td>
               <td width="58%"> <br><br><br><br><br><br>
-                    <table border="0" cellpadding="0" cellspacing="0" style="font-size:12px;text-align:left;">
+                <table border="0" cellpadding="0" cellspacing="0" style="font-size:12px;text-align:left;">
                  <tbody><tr style="color:black;vertical-align:top;height:30px">
-                 <td>1，使用本公司網站的客戶，請留意閣下所在的國家或居住地的相關法律規定，如有疑問應就相關問題，尋求當地法律意見。<br>
-      2、若發生遭駭客入侵破壞行為或不可抗拒之災害導致網站故障或資料損壞、資料丟失等情況，我們將以本公司之後備資料為最後處理依據；為確保各方利益，請各會員投注後列印資料。本公司不會接受沒有列印資料的投訴。<br>
-      3、為避免糾紛，各會員在投注之後，務必進入下注狀況檢查及列印資料。若發現任何異常，請立即與代理商聯繫查證，一切投注將以本公司資料庫的資料為准，不得異議。如出现特殊网络情况或线路不稳定导致不能下注或下注失败。本公司概不负责。<br>
-      4、單一注單最高派彩上限為一百萬。<br>
-      5、開獎結果以官方公佈的結果為准。<br>
-      6、我們將竭力提供準確而可靠的開獎統計等資料，但並不保證資料絕對無誤，統計資料只供參考，並非是對客戶行為的指引，本公司也不接受關於統計數據產生錯誤而引起的相關投訴。<br>
-      7,本公司擁有一切判決及註消任何涉嫌以非正常方式下註之權利，在進行更深入調查期間將停止發放與其有關之任何彩金。客戶有責任確保自己的帳戶及密碼保密，如果客戶懷疑自己的資料被盜用，應立即通知本公司，並須更改其個人詳細資料。所有被盜用帳號之損失將由客戶自行負責。在某種特殊情況下，客人之信用額可能會出現透支。<br><br></td></tr>
-      <tr style="color:black;vertical-align:top;height:30px;margin-left:30px"><td style="text-align: center;">我瞭解以及同意下註列明的協定和規則。<br><br></td>
-                 </tr>
-                 
-            
+                   <td>1，使用本公司網站的客戶，請留意閣下所在的國家或居住地的相關法律規定，如有疑問應就相關問題，尋求當地法律意見。<br>
+                    2、若發生遭駭客入侵破壞行為或不可抗拒之災害導致網站故障或資料損壞、資料丟失等情況，我們將以本公司之後備資料為最後處理依據；為確保各方利益，請各會員投注後列印資料。本公司不會接受沒有列印資料的投訴。<br>
+                    3、為避免糾紛，各會員在投注之後，務必進入下注狀況檢查及列印資料。若發現任何異常，請立即與代理商聯繫查證，一切投注將以本公司資料庫的資料為准，不得異議。如出现特殊网络情况或线路不稳定导致不能下注或下注失败。本公司概不负责。<br>
+                    4、單一注單最高派彩上限為一百萬。<br>
+                    5、開獎結果以官方公佈的結果為准。<br>
+                    6、我們將竭力提供準確而可靠的開獎統計等資料，但並不保證資料絕對無誤，統計資料只供參考，並非是對客戶行為的指引，本公司也不接受關於統計數據產生錯誤而引起的相關投訴。<br>
+                    7,本公司擁有一切判決及註消任何涉嫌以非正常方式下註之權利，在進行更深入調查期間將停止發放與其有關之任何彩金。客戶有責任確保自己的帳戶及密碼保密，如果客戶懷疑自己的資料被盜用，應立即通知本公司，並須更改其個人詳細資料。所有被盜用帳號之損失將由客戶自行負責。在某種特殊情況下，客人之信用額可能會出現透支。<br><br></td></tr>
+                    <tr style="color:black;vertical-align:top;height:30px;margin-left:30px"><td style="text-align: center;">我瞭解以及同意下註列明的協定和規則。<br><br></td>
+                    </tr>
+                    
+                    
 
 
 
-                 </tbody></table>
+                  </tbody></table>
                 </td>
-              <td width="21%">&nbsp;</td>
-            </tr>
-          </tbody></table></td>
-        </tr>
-        <tr>  
-          <td height="161" style="background-image:url(./static/img/L2.jpg);" valign="top"> 
+                <td width="21%">&nbsp;</td>
+              </tr>
+            </tbody></table></td>
+          </tr>
+          <tr>  
+            <td height="161" style="background-image:url(./static/img/L2.jpg);" valign="top"> 
               <table border="0" cellpadding="0" cellspacing="0" width="100%" style="  margin-top:13px; height:41px;">
-                      <tbody><tr style="text-align:center; height:35px;"><td style=" width:357px; ">&nbsp;</td>
-                      <td style=" width:110px; cursor:pointer;" @click="$router.push({name: 'login'})"></td><td style=" width:45px; ">&nbsp;</td>
-                      <td style=" width:110px;cursor:pointer;" @click="gotobocai()"></td><td style=" width:357px; ">&nbsp;</td>
-                      </tr>
-                  </tbody></table> 
-          </td>
-        </tr>
-      </tbody></table>
-        </center>
+                <tbody><tr style="text-align:center; height:35px;"><td style=" width:357px; ">&nbsp;</td>
+                  <td style=" width:110px; cursor:pointer;" @click="$router.push({name: 'login'})"></td><td style=" width:45px; ">&nbsp;</td>
+                  <td style=" width:110px;cursor:pointer;" @click="gotobocai()"></td><td style=" width:357px; ">&nbsp;</td>
+                </tr>
+              </tbody></table> 
+            </td>
+          </tr>
+        </tbody></table>
+      </center>
 
 
 
 
-
-
-
-    <!-- <div class="box">
-      <div class="win_title">
-        <p>用户协议</p>
-      </div>
-      <div class="win_info">
-        <ul>
-          <li>● 01. 使用本公司网站的客户，请留意阁下所在的国家或居住地的相关法律规定，如有疑问应就相关问题，寻求当地法律意见。</li>
-          <li>● 02. 若发生遭黑客入侵破坏行为或不可抗拒之灾害导致网站故障或资料损坏、资料丢失等情况，我们将以本公司之后备资料为最后处理依据；为确保各方利益，请各会员投注后打印资料。本公司不会接受没有打印资料的投诉。</li>
-          <li>● 03. 为避免纠纷，各会员在投注之后，务必进入下注明细检查。若发现任何异常，请立即与代理商联系查证，一切投注将以本公司资料库的资料为准，不得异议。如出现特殊网络情况或线路不稳定导致不能下注或下注失败。本公司概不负责。</li>
-          <li>● 04. 开奖结果以官方公布的结果为准。</li>
-          <li>● 05. 如遇到官方停止销售或者开奖结果不确定的情况，本公司将对相关注单进行无效处理，并且返还下注本金。</li>
-          <li>● 06. 我们将竭力提供准确而可靠的开奖统计等资料，但并不保证资料绝对无误，统计资料只供参考，并非是对客户行为的指引，本公司也不接受关于统计数据产生错误而引起的相关投诉。</li>
-          <li>● 07. 本公司拥有一切判决及注消任何涉嫌以非正常方式下注之权利，在进行更深入调查期间将停止发放与其有关之任何彩金。客户有责任确保自己的帐户及密码保密，如果客户怀疑自己的资料被盗用，应立即通知本公司，并须更改其个人详细资料。所有被盗用帐号之损失将由客户自行负责。</li>
-          <li>管理层 敬啟</li>
-          <li>我了解以及同意下注列明的协定和规则。</li>
-          <li class="user_winbu">
-            <div>
-              <el-button type="primary" size="mini" @click="gotobocai()">同  意</el-button>
-              <el-button type="primary" size="mini" @click="$router.push({name: 'login'})">不同意</el-button>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -163,6 +136,14 @@ export default {
     font-weight: normal;
     line-height: 20px;
     font-family: 宋体, arial, sans-serif;
+
+    position: fixed;
+    width: 100%;
+    overflow: auto;
+    _height: 100%;
+    _border-top: 50px solid #eee;
+    _border-bottom: 50px solid #eee;
+    _top: 0px;
 }
 
 * {

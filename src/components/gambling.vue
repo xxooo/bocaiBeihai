@@ -60,18 +60,14 @@
                                         <td> 
                                             <div id="div_title">
                                                 <center>
-                                                    
-                                                    <div id="div_title_xyzl" class="bST_1" onclick="ShowWin('memberinfo.aspx',0);showDivTile(this);">信用资料</div>
-                                                    
-                                                        <div id="div_title_zwcx" class="bST_1" onclick="ShowWin('account_inquiry.aspx',0);showDivTile(this);">帐务查询</div>
-                                                    
-                                                    <div id="div_title_xzmx" class="bST_1" onclick="ShowWin('memberstake.aspx',0);showDivTile(this);">下注明细</div>
-                                                    <div id="div_title_jsbb" class="bST_1" onclick="ShowWin('ProfitLoss.aspx',0);showDivTile(this);">结算报表</div>
-                                                    <div id="div_title_kjls" class="bST_1" onclick="ShowWin('historyreport.aspx',0);showDivTile(this);">历史开奖</div>
-                                                    <div id="div_title_gz" class="bST_1" onclick="ShowWin('rules.aspx',0);showDivTile(this);">规则</div>
-                                                    <div id="div_title_xgma" class="bST_1" onclick="ShowWin('mypassword.aspx',0);showDivTile(this);">修改密码</div>
-                                                    
-                                                    <div id="div_title_tc" class="bST_1" onclick="WinOut();showDivTile(this);">退出</div>
+                                                    <div id="div_title_xyzl" class="bST_1" @click="goRightMenu('personalinfo')">信用资料</div>
+                                                    <div id="div_title_zwcx" class="bST_1" @click="goRightMenu('caiwumanager')">帐务查询</div>
+                                                    <div id="div_title_xzmx" class="bST_1" @click="goRightMenu('instantorder')">下注明细</div>
+                                                    <div id="div_title_jsbb" class="bST_1" @click="goRightMenu('bettingHistory')">结算报表</div>
+                                                    <div id="div_title_kjls" class="bST_1" @click="goRightMenu('lotteryResults')">历史开奖</div>
+                                                    <div id="div_title_gz" class="bST_1" @click="goRightMenu('gameRule')">规则</div>
+                                                    <div id="div_title_xgma" class="bST_1" @click="goRightMenu('')">修改密码</div>
+                                                    <div id="div_title_tc" class="bST_1" @click="exit()">退出</div>
                                                 </center>
                                             </div>
                                         </td>
@@ -83,129 +79,10 @@
                         <tr>
                             <td height="29">
                                 <div id="menuLv03">
-                                    <div id="div_menu_group_1" style="display: none;">
-                                        <a onclick="ShowWin('ggno1/tm.aspx',1);">特码</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/tmanimal.aspx',1);">特生肖色波</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/bwav.aspx',1);">半波</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/hx.aspx',1);">特合肖</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/znumber.aspx',1);">正码</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/zmtnumber.aspx',1);">正码特</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/z16number.aspx',1);">正码1-6</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/lnumber.aspx',1);">连码</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/qbz.aspx',1);">全不中</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/zmgg.aspx',1);">正码过关</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/endnumber.aspx',1);">一肖尾数</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/lanimal.aspx',1);">连肖</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno1/lws.aspx',1);">连尾</a>&nbsp;
-                                    </div>
-                                    <div id="div_menu_group_2" style="display:none">
-                                        
-                                        <a onclick="ShowWin('ggno2/n_ftc_zps.aspx',2);">主盘势</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno2/n_ftc_oneps.aspx',2);">一字盘势</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno2/n_ftc_twodw.aspx',2);">二字定位</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno2/n_ftc_twozh.aspx',2);">二字组合</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno2/n_ftc_twohs.aspx',2);">二字和数</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno2/n_ftc_threedw.aspx',2);">三字定位</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno2/n_ftc_threezh.aspx',2);">三字组合</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno2/n_ftc_threehs.aspx',2);">三字和数</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno2/n_ftc_threezx.aspx',2);">组选三</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno2/n_ftc_sixzx.aspx',2);">组选六</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno2/n_ftc_kd.aspx',2);">跨度</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno2/n_ftc_qt.aspx',2);">其他</a>&nbsp;
-                                    </div>
-                                    <div id="div_menu_group_3" style="display: none;">
-                                        
-                                        <a onclick="ShowWin('cqssc_twosides.aspx',3);">两面盘</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno3/n_ssc_zhenghe.aspx',3);">整合</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('cqssc_15.aspx',3);">单球1~5</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('cqssc_1.aspx',3);">第一球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('cqssc_2.aspx',3);">第二球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('cqssc_3.aspx',3);">第三球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('cqssc_4.aspx',3);">第四球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('cqssc_5.aspx',3);">第五球</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno3_nnsh.aspx',3)">牛牛、梭哈</a>|
-                                        <a onclick="ShowWin('cqssc_sd.aspx',3)">合數雙面</a> 
-                                        
-                                    </div>
-                                    <div id="div_menu_group_4" style="display: none;">
-                                        <a onclick="ShowWin('gdvh_twosides.aspx',4);">两面盘</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('gdvh_18.aspx',4);">单球1~8</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('gdvh_1.aspx',4);">第一球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('gdvh_2.aspx',4);">第二球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('gdvh_3.aspx',4);">第三球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('gdvh_4.aspx',4);">第四球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('gdvh_5.aspx',4);">第五球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('gdvh_6.aspx',4);">第六球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('gdvh_7.aspx',4);">第七球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('gdvh_8.aspx',4);">第八球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('gdvh_sum.aspx',4);">总和、龙虎</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('gdvh_withcode.aspx',4);">连码</a>
-                                    </div>
-                                    <div id="div_menu_group_5" style="display: none;">
-                                        <a onclick="ShowWin('ggno5/gxvh_twosides.aspx',5);">两面</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno5/gxvh_15.aspx',5);">单号1~5</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno5/gxvh_1.aspx',5);">第一球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno5/gxvh_2.aspx',5);">第二球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno5/gxvh_3.aspx',5);">第三球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno5/gxvh_4.aspx',5);">第四球</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno5/gxvh_5.aspx',5);">第五球</a>&nbsp;&nbsp;
-                                    </div>
-                                    <div id="div_menu_group_6" style="">
-                                        <a onclick="ShowWin('bjsc_twosides.aspx',6);" style="color: rgb(255, 0, 0);">两面盘</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('bjsc_110.aspx',6);">排名1~10</a>&nbsp;|&nbsp;
-                                        
-                                        <a onclick="ShowWin('bjsc_1.aspx',6);">冠、亚军 组合</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('bjsc_2.aspx',6);">三、四、五、六名</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('bjsc_3.aspx',6);">七、八、九、十名</a>
-                                        
-                                    </div>
-                                    <div id="div_menu_group_7" style="display: none;">
-                                        <a onclick="ShowWin('js_all.aspx',7);">大小骰寶</a> 
-                                    </div>
-                                    <div id="div_menu_group_8" style="display: none;">
-                                        <a onclick="ShowWin('ggno8/ball_1.aspx',8);">总项盘口</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno8/ball_2.aspx',8);">正码</a>
-                                    </div>
-                                    <div id="div_menu_group_9" style="display: none;">
-                                        <a onclick="ShowWin('ggno9/11x5_twosides.aspx',9);">两面</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno9/11x5_oddnumbers.aspx',9);">单号</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno9/11x5_withcode.aspx',9);">连码</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno9/11x5_choose.aspx',9);">直选</a>
-                                    </div>
-                                    <div id="div_menu_group_10" style="display: none;">
-                                        <a onclick="ShowWin('ggno10/zps.aspx',10);">主势盘</a>&nbsp;&nbsp;&nbsp;
-                                        <a onclick="ShowWin('ggno10/tmbs.aspx',10);">特码包三</a>
-                                    </div>
-                                    <div id="div_menu_group_11" style="display: none;">
-                                        <a onclick="ShowWin('ggno11/kx_1.aspx',11);">快选</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno11/kx_2.aspx',11);">快选2</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno11/kt.aspx',11);">快填</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno11/kd.aspx',11);">快打</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno11/ball_twosides.aspx',11);">双面</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno11/ball_dw1.aspx',11);">一定位</a>&nbsp;|
-                                        <a onclick="ShowWin('ggno11/ball_dw2.aspx',11);">二定位</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_dw3.aspx',11);">三定位</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_dw4.aspx',11);">四定位</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_zx1.aspx',11);">一字现</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_zx2.aspx',11);">二字现</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_zx3.aspx',11);">三字现</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_zx4.aspx',11);">四字现</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_LongHu.aspx',11);">龙虎</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_GuoGuan.aspx',11);">过关</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_KuaDu.aspx',11);">跨度</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_HeShu.aspx',11);">和数</a>&nbsp;|&nbsp;<br>
-                                        <a onclick="ShowWin('ggno11/ball_DuoXuanZhongYi.aspx',11);">多选中一</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_BuZhong.aspx',11);">不中</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_ZuXuan6.aspx',11);">组选六</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_ZuXung3.aspx',11);">组选三</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_ZhongFaBai.aspx',11);">中发白</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_7Ma.aspx',11);">七码</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_WuXing.aspx',11);">五行</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_HaoMaLiang.aspx',11);">号码量</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_ShuBei.aspx',11);">数倍</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_567ZhiXuan.aspx',11);">五六七球直选</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_Other.aspx',11);">其它</a>&nbsp;|&nbsp;
-                                        <a onclick="ShowWin('ggno11/ball_2MaZongCheng.aspx',11);">二码总成</a>
+                                    <div id="div_menu_group_1">  
+                                        <template v-if="(item,index) in bocaiCategoryList">
+                                            <a class="" @click="getOddsCategory(item,index)">{{item.name}}</a>&nbsp;|&nbsp;
+                                        </template>
                                     </div>
                                 </div>
                             </td>
@@ -398,7 +275,8 @@ export default {
           ],
       messageinfo: '',
       centerDialogVisible: false,
-      userInfo: {}
+      userInfo: {},
+      bocaiCategoryList: []
 
     }
   },
@@ -426,6 +304,16 @@ export default {
       this.clearTime();
   },
   methods: {
+    async exit() {
+
+      let ret = await this.$get(`${window.url}/api/exitLogin`);
+              if(ret.code===200) {
+                    this.$success('退出登录!');
+                    
+                  } else {
+              }
+      this.$router.push({name: 'login'});
+    },
     clearTime() {
       if (this.t1) {
         clearTimeout(this.t1)
@@ -790,6 +678,48 @@ export default {
           }
 
     },
+    async getOddsInfo(item) {
+
+      let that = this;
+
+          const loading = this.$loading({
+                lock: true,
+                text: 'Loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+              });
+
+          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+item.id).then((res) => {
+            that.$handelResponse(res, (result) => {
+
+              loading.close();
+              if(result.code===200){
+
+                that.bocaiCategoryList = result.bocaiCategoryList;
+
+                bus.$emit('getbocaiCategoryId', result.bocaiCategoryList[0].id);
+
+                // that.oddsList = result.oddsList;
+                // that.showOdds = result.bocaiCategoryList[0].name;
+                // that.bocaiCategory = result.bocaiCategoryList[0];
+
+                
+
+                //that.activeIndex = that.bocaiCategoryList[0].name;
+
+
+                //that.shuaiXuanDatas(result.oddsList);
+
+                bus.$emit('getbocaiTypeId', id); 
+                bus.$emit('getbocaiTypeName', item.bocaiName); 
+
+                bus.$emit('getOddsInfo', result); 
+
+                //store.commit('updateoddresult',result);
+              }
+            })
+          });
+
+    },
     async getOdds(item,index) {
 
       //console.log('item---getnotice',item);
@@ -857,7 +787,7 @@ export default {
 
         this.$router.push({name: path});
 
-        //this.getPrizeResult();
+        this.getOddsInfo(item);
 
         bus.$emit('getcUserInfo', '');
 
@@ -869,15 +799,9 @@ export default {
     }
   },
   mounted() {
-    // bus.$on('getRefreshTime', (data) => {
-    //     this.getRefreshTime();
-    // });
     bus.$on('getRefreshTimeFast', (data) => {
         //console.log('getRefreshTimeFast');
         this.getRefreshTimeFast();
-    });
-    bus.$on('curactiveIndex', (data) => {
-        this.activeIndex = data;
     });
 
   },

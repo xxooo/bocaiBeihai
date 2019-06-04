@@ -558,7 +558,6 @@ export default {
       curactiveIndex: '重庆时时彩',
       bocaiCategoryList: [],
       oddsList: [],
-      activeIndex: '',
       showOdds: '',
       submenu: '更多',
       isOpenOdds: true,
@@ -581,7 +580,7 @@ export default {
   computed: {
   },
   created() {
-    this.getOdds(this.curBocaiTypeId);
+    //this.getOdds(this.curBocaiTypeId);
   },
   mounted(){
       bus.$on('isOpenOdds', (data) => {
@@ -591,6 +590,9 @@ export default {
         this.normalPay = false;
         this.oddsList = data;
         this.shuaiXuanDatas(data);
+      });
+      bus.$on('getOddsInfo', (data) => {
+        this.getOdds(data);
       });
   },
   methods: {
@@ -914,37 +916,14 @@ export default {
       this.resetOddsCategory(item);
 
     },
-    async getOdds(id) {
+    async getOdds(result) {
 
-      let that = this;
-
-          const loading = this.$loading({
-                lock: true,
-                text: 'Loading',
-                background: 'rgba(0, 0, 0, 0.7)'
-              });
-
-          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+id).then((res) => {
-            that.$handelResponse(res, (result) => {
-
-              loading.close();
-              if(result.code===200){
-                bus.$emit('curactiveIndex', this.curactiveIndex);
-                that.bocaiCategoryList = result.bocaiCategoryList;
-                that.oddsList = result.oddsList;
-                that.showOdds = result.bocaiCategoryList[0].name;
-                that.bocaiCategory = result.bocaiCategoryList[0];
-
-                bus.$emit('getbocaiCategoryId', result.bocaiCategoryList[0].id);
-                that.activeIndex = that.bocaiCategoryList[0].name;
-                that.shuaiXuanDatas(result.oddsList);
-
-                bus.$emit('getbocaiTypeId', that.curBocaiTypeId); 
-                bus.$emit('getbocaiTypeName', that.curactiveIndex); 
-
-              }
-            })
-          });
+      if(result.code===200){
+        that.oddsList = result.oddsList;
+        that.showOdds = result.bocaiCategoryList[0].name;
+        that.bocaiCategory = result.bocaiCategoryList[0];
+        that.shuaiXuanDatas(result.oddsList);
+      }
 
     },
     shuaiXuanDatas(dataList) {

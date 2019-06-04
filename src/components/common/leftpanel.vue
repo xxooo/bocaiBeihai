@@ -8,11 +8,11 @@
             </tr>
             <tr>
                 <td width="70px" align="left" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td>
-                <td align="left"><span style="margin-left: 5px;" id="left_memberno">nj5m22d(A盘)</span><input id="hid_wagerroundno" type="hidden" value="A"></td>
+                <td align="left"><span style="margin-left: 5px;" id="left_memberno">{{userInfo.username}}({{userInfo.handicap}}盘)</span><input id="hid_wagerroundno" type="hidden" value="A"></td>
             </tr>
             <tr style="height: 22px;" id="tr_cashremaining">
                 <td align="right" class="t_td_caption_1">帐户余额 </td>
-                <td align="left"><span id="con_cashremaining" style="font-size: 13px; margin-left: 5px;">0</span></td>
+                <td align="left"><span id="con_cashremaining" style="font-size: 13px; margin-left: 5px;">{{userInfo.cashBalance}}</span></td>
             </tr>
             <tr style="height: 22px; display: none;" id="tr_creditquota">
                 <td align="left" class="t_td_caption_1">信用额度 </td>
@@ -22,6 +22,12 @@
                 <td align="left" class="t_td_caption_1">可用金额</td>
                 <td align="left"><span id="sp_allowcreditquota" style="font-size: 13px; margin-left: 5px;">0</span></td>
             </tr>
+
+            <!-- <p><label>现金余额：</label>{{userInfo.cashBalance}}</p> 
+            <p><label>锁定金额：</label><span style="color: #f42222;">{{userInfo.lockBalance}}</span></p> 
+            <p><label>已下金额：</label><span style="color: #f42222;">{{userInfo.alreadyBalance}}</span></p> -->
+
+
             <tr id="tr_8" style="">
                 <td class="t_list_caption" colspan="2">
                     <a href="javascript:void(0);" onclick="window.open('http://yun.ngk77.com/ui-02/detail.aspx?g=8','廣東快樂十分','width=687,height=464,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no,toolbar=no,location=no');"><span style="color: #4a1a04;">“广东快乐十分”开奖网</span></a>&nbsp;
@@ -333,16 +339,6 @@ export default {
       });
   },
   methods: {
-    async exit() {
-
-      let ret = await this.$get(`${window.url}/api/exitLogin`);
-              if(ret.code===200) {
-                    this.$success('退出登录!');
-                    
-                  } else {
-              }
-      this.$router.push({name: 'login'});
-    },
     openPrize() {
       this.showOpen = true;
       $('.openPrize').addClass('active').siblings().removeClass('active');
