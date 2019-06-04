@@ -36,14 +36,6 @@
                                             <img alt="" src="../../static/img/TopMenu_2Left.jpg" width="19" height="36">
                                         </td>
                                         <td style="width:120px;">
-                                            <!-- <el-select v-model="value" placeholder="请选择" size="mini">
-                                                <el-option
-                                                  v-for="(item,index) in bocaiTypeList"
-                                                  :key="item.bocaiId"
-                                                  :label="item.bocaiName"
-                                                  :value="item.bocaiId">
-                                                </el-option>
-                                            </el-select> -->
                                             <el-menu
                                               :default-active="activeIndex"
                                               class="el-menu-demo navOne-new clearfix"
@@ -66,7 +58,7 @@
                                                     <div id="div_title_jsbb" class="bST_1" @click="goRightMenu('bettingHistory')">结算报表</div>
                                                     <div id="div_title_kjls" class="bST_1" @click="goRightMenu('lotteryResults')">历史开奖</div>
                                                     <div id="div_title_gz" class="bST_1" @click="goRightMenu('gameRule')">规则</div>
-                                                    <div id="div_title_xgma" class="bST_1" @click="goRightMenu('')">修改密码</div>
+                                                    <div id="div_title_xgma" class="bST_1" @click="goRightMenu('changePassword')">修改密码</div>
                                                     <div id="div_title_tc" class="bST_1" @click="exit()">退出</div>
                                                 </center>
                                             </div>
@@ -94,7 +86,7 @@
         </tbody></table>
     </div>
 
-    <div class="middleContent" style=" width:100%;    position: fixed;">
+    <div class="middleContent" style=" width:100%; position: fixed;">
       <table width="100%" border="0" cellpadding="0" cellspacing="1">
       <tbody><tr>
           <td id="tduser" valign="top" style="width:245px; text-align:left; vertical-align:top;">
@@ -678,6 +670,38 @@ export default {
           }
 
     },
+    async getOddsCategory(item,index) {
+
+      bus.$emit('getbocaiCategoryId', item.id);
+
+
+      this.resetOddsCategory(item);
+
+    },
+    async resetOddsCategory(item) {
+
+      let that = this;
+
+      store.commit('updatebocaiCategory',item);
+
+      const loading = this.$loading({
+                lock: true,
+                text: 'Loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+              });
+
+          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.curBocaiTypeId+`&bocaiCategoryId=`+item.id).then((res) => {
+            that.$handelResponse(res, (result) => {
+              loading.close();
+
+              if(result.code===200){
+
+                bus.$emit('getresetOddsCategory', result);
+
+              }
+            })
+          });
+    },
     async getOddsInfo(item) {
 
       let that = this;
@@ -723,7 +747,7 @@ export default {
     async getOdds(item,index) {
 
       //console.log('item---getnotice',item);
-      //console.log('item---index',index);
+      //console.log('item---index',index);    给active类
 
       if(['重庆时时彩','幸运飞艇','北京PK拾','山东11选5','广东11选5','江西11选5','PC蛋蛋','江苏快3','北京快乐8','极速赛车','极速时时彩'].findIndex((n) => n==item.bocaiName)>-1) {
 

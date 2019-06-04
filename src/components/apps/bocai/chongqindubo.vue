@@ -594,6 +594,9 @@ export default {
       bus.$on('getOddsInfo', (data) => {
         this.getOdds(data);
       });
+      bus.$on('getresetOddsCategory', (data) => {
+        this.resetOddsCategory(data);
+      });
   },
   methods: {
     QCheckShow_fu() {
@@ -863,33 +866,18 @@ export default {
     handleSelect(key, keyPath) {
         //console.log(key, keyPath);
     },
-    async resetOddsCategory(item) {
-
+    async resetOddsCategory(result) {
       let that = this;
 
-      const loading = this.$loading({
-                lock: true,
-                text: 'Loading',
-                background: 'rgba(0, 0, 0, 0.7)'
-              });
+      if(result.code===200){
+        that.oddsList = result.oddsList;
 
-          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.curBocaiTypeId+`&bocaiCategoryId=`+item.id).then((res) => {
-            that.$handelResponse(res, (result) => {
-              loading.close();
-              that.showOdds = item.name;
-              that.bocaiCategory = item;
-              if(result.code===200){
-                that.oddsList = result.oddsList;
-                
-                that.orderDataList = [];
-                that.normalPay = false;
-                bus.$emit('getnormalPay', false); 
+        that.orderDataList = [];
+        that.normalPay = false;
+        bus.$emit('getnormalPay', false); 
 
-                that.shuaiXuanDatas(result.oddsList);
-
-              }
-            })
-          });
+        that.shuaiXuanDatas(result.oddsList);
+      }
     },
     async getnotice() {
       let res = await this.$get(`${window.url}/api/notice`);
@@ -905,19 +893,20 @@ export default {
 
       bus.$emit('getbocaiCategoryId', item.id);
 
-      this.getnotice();
+      //this.getnotice();
 
-      if(index*1 > 9) {
-        this.submenu = item.name;
-      } else {
-        this.submenu = '更多';
-      }
+      // if(index*1 > 9) {
+      //   this.submenu = item.name;
+      // } else {
+      //   this.submenu = '更多';
+      // }
 
       this.resetOddsCategory(item);
 
     },
     async getOdds(result) {
-
+      let that = this;
+      
       if(result.code===200){
         that.oddsList = result.oddsList;
         that.showOdds = result.bocaiCategoryList[0].name;

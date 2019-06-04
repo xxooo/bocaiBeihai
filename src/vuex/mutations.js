@@ -4,6 +4,9 @@ const mutations = {
   },
   updateoddresult(state,v) {
   	state.oddresult = v;
+  },
+  updatebocaiCategory(state,v) {
+  	state.bocaiCategory = v;
   }
 }
 
