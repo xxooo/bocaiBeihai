@@ -3,7 +3,8 @@
 
     <div align="left" style="overflow: hidden;" id="div_commond">
         <table width="100%" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top: 0px; display: block;" bgcolor="white" id="tb_memberinfo">
-            <tbody><tr style="height: 33px; text-align: left; background: url(./static/img/tb_bg.jpg); color: Black; font-size: 14px;">
+          <tbody>
+            <tr style="height: 33px; text-align: left; background: url(./static/img/tb_bg.jpg); color: Black; font-size: 14px;">
                 <td colspan="2" style="width: 230px;" align="center"><span style="font-size: 14px; font-weight: bold;">请核对您的帐户</span></td>
             </tr>
             <tr>
@@ -135,7 +136,8 @@
                 </td>
             </tr>  
 
-        </tbody></table>
+          </tbody>
+        </table>
 
         <table width="100%" cellpadding="0" cellspacing="0" id="tb_xd" style="display: none;">
             <tbody><tr>
@@ -143,9 +145,9 @@
             </tr>
         </tbody></table>
 
-        <table width="100%" cellpadding="0" cellspacing="0" id="tb_xd_single" style="display: none;">
+        <table width="100%" cellpadding="0" cellspacing="0" id="tb_xd_single" style="display: block;">
             <tbody><tr>
-                <td id="td_mtransingle"></td>
+                <td id="td_mtransingle"><table width="100%" cellpadding="0" cellspacing="1" class="DTable" align="center" id="tb_mtranlist" border="0" style="min-width:228px;margin-top: 0px; word-break: break-all; word-wrap: break-word"><tbody><tr style="height: 33px; text-align: left; background: url(../images/tb_bg.jpg); color: Black; font-size: 14px;"><td colspan="2" nowrap="" align="center" id="td_mtranList_title"><span style="font-size: 12px; font-weight: bold;">总和大小 - 下注</span></td></tr><tr><td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td><td align="left">nj5m22d(A)盘</td></tr><tr><td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">可用金额</td><td align="left"><span name="allowprice">0</span></td></tr></tbody><tbody id="tbodd_Normal"><tr><td colspan="2"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="min-width:228px; word-break: break-all; word-wrap: break-word;"><tbody><tr style="height:16px;line-height:16px;"><td colspan="2" align="center" style="height:16px;line-height:16px;color:green;font-weight:bolder;">20190605-23 期</td></tr> <tr><td colspan="2" class="tdredbold"><font color="blue">总和大小 大 </font><font color="black">@</font> 1.9877</td></tr></tbody></table></td></tr><tr><td class="t_td_caption_1">下注金额：</td><td align="left" style="padding-left:5px"><input id="txtprice" style="width: 87px" type="text" onkeyup="value=value.replace(/[^\d]/g,'');winchange(1.9877,-1);"></td></tr><tr><td class="t_td_caption_1">可赢金额：</td><td align="left" style="padding-left:5px"><span id="winprice" style="color:red"></span>&nbsp;</td></tr><tr><td class="t_td_caption_1">最高派彩：</td><td align="left" style="padding-left:5px">5000000</td></tr><tr id="tr_xdbtn" align="center" style="height: 33px; text-align: center; background: url(../images/td_but.jpg);"><td colspan="2"><input id="btn_cacel" type="button" value="取消下注" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="cancel_xd()">  <input id="btn_conform" name="btn_conform" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" type="button" value="确定下单" onclick="click_conformT(8,'A','458,总和大小,1,大,1.9877','458:1',1,0)"></td></tr><tr id="tr_xdzhong" align="center" style="display:none;height: 33px; text-align: center; background: url(../images/td_but.jpg);"><td colspan="2"><span style="color:red">下注中,请等待。。。</span></td><td></td></tr></tbody><tbody id="tbodd_N0Normal" style="display:none;"><tr style="height:20px;line-height:20px;"><td colspan="2" align="center" style="font-size: 12px;height:20px;line-height:20px;color:red; font-weight: bold;">下注被返回,请再次确认！</td></tr><tr style="height:16px;line-height:16px;"><td colspan="2" align="center" style="font-size: 12px;height:20px;line-height:20px;color:#000; font-weight: bold;">20190605-23期</td></tr><tr><td colspan="2" align="center"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="color:#000;font-family:Verdana,'宋体',Arial,Sans;height:20px;min-width:228px; word-break: break-all; word-wrap: break-word;"> <tbody><tr><td colspan="2" class="tdredbold"><font color="blue">总和大小 大 </font><font color="black">@</font> 1.9877</td></tr><tr style="height:16px;line-height:16px;"><td style="height:16px;line-height:16px;width:73px;" align="right">下注金额：</td><td align="left" style="height:16px;line-height:16px;" id="Normal_stake"></td></tr><tr style="height:16px;line-height:16px;"><td style="height:16px;line-height:16px;width:73px;" align="right">可赢金额：</td><td align="left" style="height:16px;line-height:16px;" id="Normal_winningstake"></td></tr><tr><td align="center" colspan="2"><div style="background-color:red;color:#fff;text-align:center;width:200px;">已封盘</div></td></tr><tr id="tr_xdbtn" align="center" style="height: 33px; text-align: center; background: url(../images/td_but.jpg);"><td colspan="2"><input id="btn_cacel" type="button" value="取消下注" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="cancel_xd()">  <input id="btn_conform" name="btn_conform" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" type="button" value="确定下单" disabled=""></td></tr></tbody></table></td></tr></tbody><tbody></tbody></table></td>
             </tr>
         </tbody></table>
 
@@ -156,6 +158,10 @@
 
         </tbody></table>
     </div>
+
+
+    <tbody id="tbodd_Normal"><tr><td colspan="2"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="min-width:228px; word-break: break-all; word-wrap: break-word;"><tbody><tr style="height:16px;line-height:16px;"><td colspan="2" align="center" style="height:16px;line-height:16px;color:green;font-weight:bolder;">20190605-037 期</td></tr> <tr><td colspan="2" class="tdredbold"><font color="blue">第一球大小 大 </font><font color="black">@</font> 1.9879</td></tr></tbody></table></td></tr><tr><td class="t_td_caption_1">下注金额：</td><td align="left" style="padding-left:5px"><input id="txtprice" style="width: 87px" type="text" onkeyup="value=value.replace(/[^\d]/g,'');winchange(1.9879,-1);"></td></tr><tr><td class="t_td_caption_1">可赢金额：</td><td align="left" style="padding-left:5px"><span id="winprice" style="color:red"></span>&nbsp;</td></tr><tr><td class="t_td_caption_1">最高派彩：</td><td align="left" style="padding-left:5px">5000000</td></tr><tr id="tr_xdbtn" align="center" style="height: 33px; text-align: center; background: url(../images/td_but.jpg);"><td colspan="2"><input id="btn_cacel" type="button" value="取消下注" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="cancel_xd()">  <input id="btn_conform" name="btn_conform" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" type="button" value="确定下单" onclick="click_conformT(6,'A','210,第一球大小,1,大,1.9879','210:1',1,0)"></td></tr><tr id="tr_xdzhong" align="center" style="display:none;height: 33px; text-align: center; background: url(../images/td_but.jpg);"><td colspan="2"><span style="color:red">下注中,请等待。。。</span></td><td></td></tr></tbody>
+
 
 
 
