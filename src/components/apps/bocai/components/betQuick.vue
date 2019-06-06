@@ -2,9 +2,9 @@
 
   <div class="btnDivArea" id="btnDivArea11">  
     <template v-if="!oddIng"> 
-      <input id="chk_qcstake" type="checkbox">
-      <span class="kuaijieSpan" @click="changePay()">快捷下注</span>
-      <span id="sp_qcstake" class="yibanSpan" v-if="!normalPay">金额：
+      <input id="chk_qcstake" type="checkbox" v-model="normalPay" @click="changePay()">
+      <span class="kuaijieSpan">快捷下注</span>
+      <span id="sp_qcstake" class="yibanSpan" v-if="normalPay">金额：
         <input id="txtqcstake" type="text" class="wid60">
         <span @click="QCExplain()" class="shuomiSpan">说明</span>
       </span>
@@ -115,7 +115,7 @@
         bocaiTypeName: '',
         cuserId: '',
         bocaiInfoData: {},
-        normalPay: true,
+        normalPay: false,
         isOpenOdds: true,
         canOrder: true,
         disableBtn: true,
@@ -203,8 +203,8 @@
           this.cashBalance = res.data.cashBalance;
         }
       },
-      changePay(data) {
-        this.$emit('childByChangePay', data);
+      changePay() {
+        this.$emit('childByChangePay', this.normalPay);
         this.moneyOrder = '';
       },
       reset() {

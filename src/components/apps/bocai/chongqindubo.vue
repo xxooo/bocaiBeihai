@@ -5,7 +5,7 @@
       <tbody>
         <tr>
           <td class="vertical-t">
-            <div class="margin-r10">
+            <div class="margin-r10 bet_box">
               <div id="round_content">
                 <table class="table000 width700">
                   <tbody>
@@ -63,7 +63,7 @@
 
             <div id="errormsg" style=" display:none;"></div>
 
-          <div id="mainPageData" v-if="showOdds == '两面盘'">
+          <div id="mainPageData" class="orders" v-if="showOdds == '两面盘'">
 
             <template v-for="(itemPa,index) in yiwuqiu_lmp"> 
               <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" style="margin-top:2px;">     
@@ -745,7 +745,8 @@ export default {
 
     },
     childByChangePay(data) {
-      if(this.normalPay != data) {
+
+      if(data == false) {
         this.orderDataList = [];
         $('.bet_box .orders td').removeClass('selected');
         this.allQingkong();
