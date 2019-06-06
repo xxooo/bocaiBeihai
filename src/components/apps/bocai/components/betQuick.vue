@@ -1,5 +1,23 @@
 <template>
-	<div class="betQuick">
+
+  <div class="btnDivArea" id="btnDivArea11">  
+    <template v-if="!oddIng"> 
+      <input id="chk_qcstake" type="checkbox">
+      <span class="kuaijieSpan" @click="changePay()">快捷下注</span>
+      <span id="sp_qcstake" class="yibanSpan" v-if="!normalPay">金额：
+        <input id="txtqcstake" type="text" class="wid60">
+        <span @click="QCExplain()" class="shuomiSpan">说明</span>
+      </span>
+      <input type="reset" value="重 填" class="button_bg1" @click="reset()"> 
+      <input type="button" value="下 注" class="button_bg1" @click="orderOdds()">
+    </template>
+
+    <span v-else style="color:red">下注中,请等待。。。</span>
+    
+  </div> 
+
+
+	<!-- <div class="betQuick">
     <div class="beishu">
       <div class="beishuBtn beishuBtn10" @click="orderMul(10)"><a>10</a></div>
       <div class="beishuBtn beishuBtn50" @click="orderMul(50)"><a>50</a></div>
@@ -59,7 +77,7 @@
     </el-dialog>
 
 
-  </div>
+  </div> -->
 </template>
 
 
@@ -97,7 +115,7 @@
         bocaiTypeName: '',
         cuserId: '',
         bocaiInfoData: {},
-        normalPay: false,
+        normalPay: true,
         isOpenOdds: true,
         canOrder: true,
         disableBtn: true,
@@ -112,7 +130,8 @@
           orderBetMoneySum:0,//投注总和
           cuserId:'',//当前登录ID
           list:[]
-        }
+        },
+        oddIng: false
 			}
 		},
     components: {
@@ -165,6 +184,18 @@
       });
     },
 		methods: {
+      QCheckShow_fu() {
+
+      },
+      IntoMtran() {
+
+      },
+      QCheckShow() {
+
+      },
+      QCExplain() {
+
+      },
       async getcashmoney() {
         let res = await this.$get(`${window.url}/api/cUserInfo`);
 
@@ -288,6 +319,9 @@
 
 
       orderOddsTo() {
+
+
+        console.log('this.orderDataList',this.orderDataList);
 
         let reg = /^[\u2E80-\u9FFF]+$/;
         if(reg.test(this.moneyOrder)){
