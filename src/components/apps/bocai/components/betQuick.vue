@@ -18,7 +18,7 @@
 
 
 
-    <div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons"  style="position: absolute; height: auto; width: 400px; top: 88px; left: 479px; display: block; z-index: 101;">
+    <div tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons"  style="position: absolute; height: auto; width: 400px; top: 88px; left: 479px; z-index: 101;" v-if="orderOddsVisible">
       <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
         <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span>
         <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close">
@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="ui-widget-overlay ui-front" style="z-index: 100;"></div>
+    <div class="ui-widget-overlay ui-front" style="z-index: 100;" v-if="orderOddsVisible"></div>
 
   <!--   <div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons" aria-describedby="dialog_win" aria-labelledby="ui-id-1" style="position: absolute; height: auto; width: 400px; top: 139px; left: 479px; display: block; z-index: 101;"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">&nbsp;</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"> </span>Close</button><a href="#" class="ui-dialog-titlebar-max ui-corner-all" role="button" style="display: none;"><span class="ui-icon ui-icon-newwin"></span></a></div><div id="dialog_win" style="margin: 0px; padding: 0px; width: auto; min-height: 79px; max-height: none; height: auto;" class="ui-dialog-content ui-widget-content"><iframe src="" frameborder="0" height="100%" width="100%" id="f_msg_win" style="display: none;"></iframe><div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px"><div style="font-size:14px; text-align:center; color:#000; line-height:30px;">下注明细如下， 是否确定？</div><table border="0" cellpadding="0" cellspacing="0" width="100%" class="tbline" style="text-align:center;"><tbody><tr class="trH"><td colspan="2">下注内容</td><td>赔率</td><td>金额</td></tr><tr class="trH"><td>共1笔</td><td>&nbsp;</td><td>&nbsp;</td><td>4</td></tr><tr><td style="text-align:left;" class="pop_title">冠军大小</td><td>大</td><td>1.94</td><td>4</td></tr></tbody></table></div></div><div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix"><div class="ui-dialog-buttonset"><button type="button" class="ui-button ui-corner-all ui-widget">确定</button><button type="button" class="ui-button ui-corner-all ui-widget">取消</button></div></div></div> -->
 
