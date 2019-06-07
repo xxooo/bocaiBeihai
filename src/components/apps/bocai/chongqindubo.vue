@@ -78,14 +78,14 @@
 
                       <td class="betnum" :class="'yiwuqiu_lmp'+item.oddsId">{{item.oddsName}}</td>
                       <td class="oddsTdMin" :class="'yiwuqiu_lmp'+item.oddsId" @click="orderTd(itemPa,item,'yiwuqiu_lmp')" @mouseenter="overShow(item,'yiwuqiu_lmp')" @mouseleave="outHide(item,'yiwuqiu_lmp')">
-                        <a v-if="isOpenOdds" title="按此下注" @click.stop="normalPay ? IntoMtran(item) : ''" class="betRateNum" :class="'yiwuqiu_lmp'+item.oddsId+'a'">
+                        <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item) : ''" class="betRateNum" :class="'yiwuqiu_lmp'+item.oddsId+'a'">
                           <span class="betRateNum">{{item.odds}}</span>
                         </a>
                         <span v-else style="width:41px;color:red;font-weight:bold;">&nbsp;-&nbsp;</span>
                         <input type="hidden" value="1.9874">
                       </td>
-                      <td v-if="normalPay">
-                        <input v-if="isOpenOdds" v-model="item.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(yiwuqiu_lmp,item,'yiwuqiu_lmp',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                      <td v-if="!kuaijiePay">
+                        <input v-if="isOpenOdds" v-model="item.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(itemPa,item,'yiwuqiu_lmp',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
                         <span v-else style="width:60px;">封盘</span>
                       </td>
 
@@ -108,13 +108,13 @@
 
                     <td class="betnum" :class="'longhuhe_lmp'+item.oddsId">{{item.oddsName}}</td>
                     <td class="oddsTdMin" :class="'longhuhe_lmp'+item.oddsId" @click="orderTd(longhuhe_lmp,item,'longhuhe_lmp')" @mouseenter="overShow(item,'longhuhe_lmp')" @mouseleave="outHide(item,'longhuhe_lmp')">
-                      <a v-if="isOpenOdds" title="按此下注" @click.stop="normalPay ? IntoMtran(item) : ''" class="betRateNum" :class="'longhuhe_lmp'+item.oddsId+'a'">
+                      <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item) : ''" class="betRateNum" :class="'longhuhe_lmp'+item.oddsId+'a'">
                         <span class="betRateNum">{{item.odds}}</span>
                       </a>
                       <span v-else style="width:41px;color:red;font-weight:bold;">&nbsp;-&nbsp;</span>
                       <input type="hidden" value="1.9874">
                     </td>
-                    <td v-if="normalPay">
+                    <td v-if="!kuaijiePay">
                       <input v-if="isOpenOdds" v-model="item.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(longhuhe_lmp,item,'longhuhe_lmp',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
                       <span v-else style="width:60px;">封盘</span>
                     </td>
@@ -126,13 +126,13 @@
 
                     <td class="betnum" :class="'longhuhe_lmp'+item.oddsId">{{item.oddsName}}</td>
                     <td class="oddsTdMin" :class="'longhuhe_lmp'+item.oddsId" @click="orderTd(longhuhe_lmp,item,'longhuhe_lmp')" @mouseenter="overShow(item,'longhuhe_lmp')" @mouseleave="outHide(item,'longhuhe_lmp')">
-                      <a v-if="isOpenOdds" title="按此下注" @click.stop="normalPay ? IntoMtran(item) : ''" class="betRateNum" :class="'longhuhe_lmp'+item.oddsId+'a'">
+                      <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item) : ''" class="betRateNum" :class="'longhuhe_lmp'+item.oddsId+'a'">
                         <span class="betRateNum">{{item.odds}}</span>
                       </a>
                       <span v-else style="width:41px;color:red;font-weight:bold;">&nbsp;-&nbsp;</span>
                       <input type="hidden" value="1.9874">
                     </td>
-                    <td v-if="normalPay">
+                    <td v-if="!kuaijiePay">
                       <input v-if="isOpenOdds" v-model="item.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(longhuhe_lmp,item,'longhuhe_lmp',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
                       <span v-else style="width:60px;">封盘</span>
                     </td>
@@ -565,7 +565,7 @@ export default {
       yiwuqiu_lmp: [],
       qianhousan_lmp: [],
       orderDataList: [],
-      normalPay: true,
+      kuaijiePay: false,
       bocaiCategory: {},
       kuaixuanList: ['0','1','2','3','4','5','6','7','8','9'],
       shishiZiDatas: {},
@@ -587,7 +587,7 @@ export default {
         this.isOpenOdds = data;
       });
       bus.$on('setNewOddsList', (data) => {
-        this.normalPay = false;
+        this.kuaijiePay = false;
         this.oddsList = data;
         this.shuaiXuanDatas(data);
       });
@@ -701,7 +701,7 @@ export default {
 
       let oddsObj = this.shishiZiDatas;
 
-      if(!this.normalPay) {
+      if(!this.kuaijiePay) {
         for(let n in this.selectedZiTd ) {
           this.orderTd(oddsObj,this.selectedZiTd[n],'item_yizi');
         }
@@ -751,7 +751,7 @@ export default {
         $('.bet_box .orders td').removeClass('selected');
         this.allQingkong();
       }
-      this.normalPay = data;
+      this.kuaijiePay = data;
     },
     childByReset(data) {
       this.resetOddsCategory(this.bocaiCategory);
@@ -770,11 +770,13 @@ export default {
     },
     inputFunc(oddsObj,item,ids,pay) {
 
+      console.log('oddsObj',oddsObj,'item',item,'ids',ids,'pay',pay);
+
       let reg = /^[\u2E80-\u9FFF]+$/;
       if(reg.test(this.moneyOrder)){
         this.$alertMessage('请确认注单!', '温馨提示');
       } else {
-        if(this.normalPay) {
+        if(!this.kuaijiePay) {
           if(pay == '') {
             $('.'+ids+item.oddsId).removeClass('selected');
             _.remove(this.orderDataList, function(n) {
@@ -794,12 +796,14 @@ export default {
                       bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
                       bocaiValue:"",//投注内容,六合彩连肖/连尾
                       normalMoney: item.normalMoney,//10000,//一般模式下，选择的金额
-                      orderNormal: this.normalPay,   //是快捷，还是一般投注
+                      orderNormal: !this.kuaijiePay,   //是快捷，还是一般投注
                       bocaiOdds: item.odds, //1.90//赔率
                       dewaterId: item.dewaterId
                     };
 
                     this.orderDataList[n] = obj;
+
+
                   }
                 }
 
@@ -811,12 +815,14 @@ export default {
                     bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
                     bocaiValue:"",//投注内容,六合彩连肖/连尾
                     normalMoney: item.normalMoney,//10000,//一般模式下，选择的金额
-                    orderNormal: this.normalPay,   //是快捷，还是一般投注
+                    orderNormal: !this.kuaijiePay,   //是快捷，还是一般投注
                     bocaiOdds: item.odds, //1.90//赔率
                     dewaterId: item.dewaterId
                   };
 
                   this.orderDataList.push(obj);
+
+                  console.log('没有，新增',obj);
                 }
           }
         }
@@ -834,7 +840,7 @@ export default {
 
       if(this.isOpenOdds) {
 
-        if(!this.normalPay) {
+        if(this.kuaijiePay) {
           if($('.'+ids+item.oddsId).hasClass('selected')){
 
               $('.'+ids+item.oddsId).removeClass('selected');
@@ -852,7 +858,7 @@ export default {
               bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
               bocaiValue:"",//投注内容,六合彩连肖/连尾
               normalMoney: item.normalMoney,//10000,//一般模式下，选择的金额
-              orderNormal: this.normalPay,   //是快捷，还是一般投注
+              orderNormal: this.kuaijiePay,   //是快捷，还是一般投注
               bocaiOdds: item.odds, //1.90//赔率
               dewaterId: item.dewaterId
             };
@@ -874,8 +880,8 @@ export default {
         that.oddsList = result.oddsList;
 
         that.orderDataList = [];
-        that.normalPay = false;
-        bus.$emit('getnormalPay', false); 
+        that.kuaijiePay = false;
+        bus.$emit('getkuaijiePay', false); 
 
         that.shuaiXuanDatas(result.oddsList);
       }

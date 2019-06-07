@@ -24,7 +24,7 @@
                         <tbody>
                             <tr>
                                 <td height="43">
-                                    <div id="odds_marquee"><p id="oc_left" style="width: 1135px;"><a href="javascript:void(0)" id="oddsshow" style="top: 0px;"></a></p><span id="oc_right"><a href="javascript:void(0)" class="odds-c oc-up" title="點擊向上顯示最新變化的賠率" id="oddsup">&nbsp;</a><a href="javascript:void(0)" class="odds-c oc-down" title="點擊向下顯示最新變化的賠率" id="oddsdown">&nbsp;</a></span></div>
+                                    <div id="odds_marquee"><p id="oc_left" style="width: 1135px;"><a href="javascript:void(0)" id="oddsshow" style="top: 0px;"></a></p><span id="oc_right"><a href="javascript:void(0)" class="odds-c oc-up" title="點擊向上顯示最新變化的賠率" id="oddsup">&nbsp;</a><a  class="odds-c oc-down" title="點擊向下顯示最新變化的賠率" id="oddsdown">&nbsp;</a></span></div>
                                 </td>
                             </tr>
                         <tr>
@@ -722,7 +722,7 @@ export default {
 
                 that.bocaiCategoryList = result.bocaiCategoryList;
 
-                console.log('this.bocaiCategoryList',this.bocaiCategoryList);
+                //console.log('this.bocaiCategoryList',this.bocaiCategoryList);
 
                 bus.$emit('getbocaiCategoryId', result.bocaiCategoryList[0].id);
 
