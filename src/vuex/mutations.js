@@ -7,6 +7,9 @@ const mutations = {
   },
   updatebocaiCategory(state,v) {
   	state.bocaiCategory = v;
+  },
+  updatebocaiInfoData(state,v) {
+  	state.bocaiInfoData = v;
   }
 }
 

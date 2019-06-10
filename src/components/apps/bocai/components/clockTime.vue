@@ -17,8 +17,8 @@
                 <tr>
                   <td class="height27">
                     <div class="head_f2" id="div_betno">
-                      <div class="versionKJDiv">
-                        <span class="floatL"></span>
+                      <div class="versionKJDiv" v-if="">
+                        <span class="floatL">&nbsp;</span>
                         <span class="floatL"><div class="CQNo_03 CQREDiv"></div></span>
                         <span class="floatL"><div class="CQNo_07 CQREDiv"></div></span>
                         <span class="floatL"><div class="CQNo_06 CQREDiv"></div></span>
@@ -447,6 +447,15 @@ button.btn-delete {
   height: 42px;
   line-height: 42px;
 }
+
+#div_betno {
+    float: right;
+}
+
+.CQNo_00, .CQNo_01, .CQNo_02, .CQNo_03, .CQNo_04, .CQNo_05, .CQNo_06, .CQNo_07, .CQNo_08, .CQNo_09 {
+    height:27px; width:27px; margin-top:1px;
+}
+
 </style>
 
 <style lang="less">

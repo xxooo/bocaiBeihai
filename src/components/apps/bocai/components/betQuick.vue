@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="btnDivArea" id="btnDivArea11">  
+    <div class="btnDivArea " id="btnDivArea11">  
       <template v-if="!orderOddsVisible"> 
         <input id="chk_qcstake" type="checkbox" v-model="kuaijiePay" @click="changePay()">
         <span class="kuaijieSpan">快捷下注</span>

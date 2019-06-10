@@ -1,7 +1,8 @@
 const state = {
   bocaiTypeList: [],
   oddresult: {},
-  bocaiCategory: {}
+  bocaiCategory: {},
+  bocaiInfoData: {}
 }
 
 export default state
