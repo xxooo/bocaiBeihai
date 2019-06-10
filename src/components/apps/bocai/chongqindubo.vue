@@ -7,56 +7,10 @@
           <td class="vertical-t">
             <div class="margin-r10 bet_box">
               <div id="round_content">
-                <table class="table000 width700">
-                  <tbody>
-                    <tr>
-                      <td class="bocaiNameTd">
-                        <b class="b_title">重庆时时彩</b>
-                        <span class="todayWinSpan">今天输赢：</span>
-                        <span class="font_r" id="UserResult">
-                          <span class="black">0</span>
-                        </span>
-                      </td>
-                      <td width="55%" colspan="1" class="vertical-r">
-                        <table width="100%" class="table000">
-                          <tbody>
-                            <tr>
-                              <td class="height27">
-                                <div class="head_f2" id="div_betno">
-                                  <div class="versionKJDiv">
-                                    <span class="floatL"></span>
-                                    <span class="floatL"><div class="CQNo_03 CQREDiv"></div></span>
-                                    <span class="floatL"><div class="CQNo_07 CQREDiv"></div></span>
-                                    <span class="floatL"><div class="CQNo_06 CQREDiv"></div></span>
-                                    <span class="floatL"><div class="CQNo_06 CQREDiv"></div></span>
-                                    <span class="floatL"><div class="CQNo_08 CQREDiv"></div></span>
-                                  </div>
-                                    <span class="versionKJSpan"><span id="span_roundno">20190602035</span>期开奖&nbsp;</span>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
 
-                <table class="table000 width700">
-                  <tbody>
-                    <tr>
-                      <td class="h24w28">
-                        <b id="t_LID" class="green">20190602036</b>期　<b class="bocaiSubName">两面盘</b>
-                      </td>
-                      <td class="alrwd25"><span id="hClockTime_C">距离封盘：<b>13</b>:<b>53</b></span></td>
-                      <td class="alrwd25"><span id="hClockTime_O">距离开奖：<b class="red">15</b>:<b class="red">33</b></span></td>
-                      <td class="vertical-r" width="22%"><span id="Update_Time"></span></td>
-                     </tr>
-                  </tbody>
-                </table>
+                <clock-time></clock-time>
 
                 <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" :bocaiCategory="bocaiCategory" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
-
 
               </div>
 

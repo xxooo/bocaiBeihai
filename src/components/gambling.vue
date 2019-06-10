@@ -742,6 +742,9 @@ export default {
 
                 bus.$emit('getOddsInfo', result); 
 
+
+                this.bocaiInfo();
+
                 //store.commit('updateoddresult',result);
               }
             })

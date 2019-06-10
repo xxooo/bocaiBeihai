@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="btnDivArea" id="btnDivArea11">  
-      <template v-if="!oddIng"> 
+      <template v-if="!orderOddsVisible"> 
         <input id="chk_qcstake" type="checkbox" v-model="kuaijiePay" @click="changePay()">
         <span class="kuaijieSpan">快捷下注</span>
         <span id="sp_qcstake" class="yibanSpan" v-if="kuaijiePay">金额：
@@ -15,104 +15,72 @@
       <span v-else style="color:red">下注中,请等待。。。</span>
       
 
-
-
-
-      
-
-    <!--   <div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons" aria-describedby="dialog_win" aria-labelledby="ui-id-1" style="position: absolute; height: auto; width: 400px; top: 139px; left: 479px; display: block; z-index: 101;"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">&nbsp;</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"> </span>Close</button><a href="#" class="ui-dialog-titlebar-max ui-corner-all" role="button" style="display: none;"><span class="ui-icon ui-icon-newwin"></span></a></div><div id="dialog_win" style="margin: 0px; padding: 0px; width: auto; min-height: 79px; max-height: none; height: auto;" class="ui-dialog-content ui-widget-content"><iframe src="" frameborder="0" height="100%" width="100%" id="f_msg_win" style="display: none;"></iframe><div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px"><div style="font-size:14px; text-align:center; color:#000; line-height:30px;">下注明细如下， 是否确定？</div><table border="0" cellpadding="0" cellspacing="0" width="100%" class="tbline" style="text-align:center;"><tbody><tr class="trH"><td colspan="2">下注内容</td><td>赔率</td><td>金额</td></tr><tr class="trH"><td>共1笔</td><td>&nbsp;</td><td>&nbsp;</td><td>4</td></tr><tr><td style="text-align:left;" class="pop_title">冠军大小</td><td>大</td><td>1.94</td><td>4</td></tr></tbody></table></div></div><div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix"><div class="ui-dialog-buttonset"><button type="button" class="ui-button ui-corner-all ui-widget">确定</button><button type="button" class="ui-button ui-corner-all ui-widget">取消</button></div></div></div> -->
-
-
     </div> 
 
 
-  	<!-- <div class="betQuick">
-      <div class="beishu">
-        <div class="beishuBtn beishuBtn10" @click="orderMul(10)"><a>10</a></div>
-        <div class="beishuBtn beishuBtn50" @click="orderMul(50)"><a>50</a></div>
-        <div class="beishuBtn beishuBtn100" @click="orderMul(100)"><a>100</a></div>
-        <div class="beishuBtn beishuBtn500" @click="orderMul(500)"><a>500</a></div>
-        <div class="beishuBtn beishuBtn1000" @click="orderMul(1000)"><a>1000</a></div>
-        <div class="beishuBtn beishuBtn5000" @click="orderMul(5000)"><a>5000</a></div>
-      </div>
-      <div class="betRight">
-        <div class="betRTop">
-          <el-input v-model.number="moneyOrder" :disabled="!disableBtn" size="mini" placeholder="请输入金额" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></el-input>
-          <el-button type="primary"size="mini" plain @click="orderOdds()" :disabled="!isOpenOdds">下 注</el-button>
-          <el-button type="danger" size="mini" @click="reset()">重 置</el-button>
-        </div>
-        <div class="betRBottom">
-          <label>投注类型:</label>
-          <el-radio-group v-model="kuaijiePay" size="mini" @change="changePay">
-            <el-radio :label="false" border>快捷</el-radio>
-            <el-radio :label="true" border>一般</el-radio>
-          </el-radio-group>
-        </div>
+    <div tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons"  style="position: absolute; height: auto; width: 400px;  z-index: 101;" v-if="orderOddsVisible" id="ui-dialog">
+      <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
+        <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span>
+        <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close" @click="orderOddsVisible = false">
+          <span class="ui-button-icon ui-icon ui-icon-closethick"></span>
+          <span class="ui-button-icon-space"> </span>
+          Close
+        </button>
+        <a href="#" class="ui-dialog-titlebar-max ui-corner-all" role="button" style="display: none;">
+          <span class="ui-icon ui-icon-newwin"></span>
+        </a>
       </div>
 
+      <div id="dialog_win" style="margin: 0px; padding: 0px; width: auto; min-height: 79px; max-height: none; height: auto;" class="ui-dialog-content ui-widget-content">
+        <div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px">
 
-      <el-dialog
-        title="下注明细(请确认注单)"
-        :visible.sync="orderOddsVisible"
-        center>
-
-        <div class="popup-body" style="max-height: 300px;">
-          <div class="default-list">
-            <table>
-              <thead>
-                <th>号码</th> 
-                <th width="20%">赔率</th> 
-                <th width="20%">金额</th> 
-                <th width="15%">操作</th>
-              </thead> 
-              <tr v-for="(item,index) in orderList">
-                <td class="combine-td"><p>{{item.oddNames}}</p></td> 
-                <td class="odds-font">{{item.bocaiOdds}}</td> 
-                <td><input type="text" class="betValue" v-model="item.betsMoney"></td> 
-                <td><button class="btn-delete" @click="deleteOdd(index)">删除</button></td>
-              </tr>
-              <tr class="tab-footer">
-                <td>组数：<span>{{orderList.length}}</span></td> 
-                <td colspan="3">总金额：<span>{{totalMoney}}</span></td>
-              </tr>
+          <template v-if="hasError">
+            超过您的额度,无法下注,请联系上级代理
+          </template>
+          <template v-else>
+            <div style="font-size:14px; text-align:center; color:#000; line-height:30px;">下注明细如下， 是否确定？</div>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="tbline" style="text-align:center;">
+              <tbody>
+                <tr class="trH">
+                  <td colspan="2">下注内容</td>
+                  <td>赔率</td>
+                  <td>金额</td>
+                </tr>
+                <tr class="trH">
+                  <td>共{{orderList.length}}笔</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>{{totalMoney}}</td>
+                </tr>
+                <tr v-for="(item,index) in orderList">
+                  <td style="text-align:left;" class="pop_title">{{item.bocaiCategory2Name}}</td>
+                  <td>{{item.bocaiOddName}}</td>
+                  <td>{{item.bocaiOdds}}</td>
+                  <td>{{item.betsMoney}}</td>
+                </tr>
+              </tbody>
             </table>
-          </div>
-        </div> 
-
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="orderOddsVisible = false" size="medium">取 消</el-button>
-          <el-button type="primary" @click="orderSub()" size="medium">确 定</el-button>
-        </span>
-      </el-dialog>
-
-
-    </div> -->
-
-      <div tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons"  style="position: absolute; height: auto; width: 400px; top: 88px; left: 479px; z-index: 101;" v-if="orderOddsVisible">
-        <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
-          <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span>
-          <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close">
-            <span class="ui-button-icon ui-icon ui-icon-closethick"></span>
-            <span class="ui-button-icon-space"> </span>
-            Close
-          </button>
-          <a href="#" class="ui-dialog-titlebar-max ui-corner-all" role="button" style="display: none;">
-            <span class="ui-icon ui-icon-newwin"></span>
-          </a>
-        </div>
-        <div id="dialog_win" style="margin: 0px; padding: 0px; width: auto; min-height: 79px; max-height: none; height: auto;" class="ui-dialog-content ui-widget-content">
-          <iframe src="" frameborder="0" height="100%" width="100%" id="f_msg_win" style="display: none;"></iframe>
-          <div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px">                            超过您的额度,无法下注,请联系上级代理
-          </div>
-        </div>
-        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-          <div class="ui-dialog-buttonset">
-            <button type="button" class="ui-button ui-corner-all ui-widget">关闭</button>
-          </div>
+          </template>
         </div>
       </div>
 
-      <div class="ui-widget-overlay ui-front" style="z-index: 100;" v-if="orderOddsVisible"></div>
+      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <div class="ui-dialog-buttonset">
+
+          <template v-if="hasError">
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderOddsVisible = false">关闭</button>
+          </template>
+          <template v-else>
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderSub()">确定</button>
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderOddsVisible = false">取消</button>
+          </template>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="ui-widget-overlay ui-front" style="z-index: 100;" v-if="orderOddsVisible"></div>
 
   </div>
 </template>
@@ -121,15 +89,6 @@
 <script>
   //import { mapGetters } from 'vuex';
 
-  $(document).ready(function(){
-    $(".beishuBtn").mousedown(function(){
-      $(this).addClass('addPayChouMa');
-
-    });
-    $(".beishuBtn").mouseup(function(){
-      $(this).removeClass('addPayChouMa');
-    });
-  });
 
 	export default {
 		props: {
@@ -142,6 +101,7 @@
 		},
 		data() {
 			return {
+        hasError:false,
         moneyOrder: '',
         radio10: '1',
         orderOddsVisible: false,
@@ -261,6 +221,8 @@
 
           console.log('this.bocaiTypeName',this.bocaiTypeName);
 
+          console.log('this.bocaiInfoData',this.bocaiInfoData);
+
           this.orderDatas.list = [];
 
           this.orderDatas.periodsId = this.bocaiInfoData.bocaiPeriodsId;
@@ -278,7 +240,7 @@
               bocaiOddId: this.orderDataList[n].bocaiOddId,//5543,//投注博彩赔率ID
               bocaiOddName: this.orderDataList[n].bocaiOddName,//"大",//投注博彩赔率名称
               bocaiValue: this.orderDataList[n].bocaiValue,//投注内容,六合彩连肖/连尾
-              betsMoney: this.orderList[n].betsMoney,//10000,//一般模式下，选择的金额
+              betsMoney: +this.orderList[n].betsMoney,//10000,//一般模式下，选择的金额
               bocaiOdds: this.orderDataList[n].bocaiOdds,//1.90//赔率
               dewaterId: this.orderDataList[n].dewaterId //退水ID
             }
@@ -325,7 +287,7 @@
 
               if(result.code===200){
 
-                bus.$emit('setNewOddsList', result.oddsList);
+                bus.$emit('setNewOddsList', result.oddsList); //要不要下注时，更新最新赔率 
 
 
                 for(let n in this.orderDataList) {
@@ -378,11 +340,17 @@
                 let obj = {};
 
                 if(this.orderDataList[n].bocaiValue == '') {
-                    obj.oddNames = this.orderDataList[n].bocaiCategory2Name + '  ' + this.orderDataList[n].bocaiOddName,
+                    // obj.oddNames = this.orderDataList[n].bocaiCategory2Name + '  ' + this.orderDataList[n].bocaiOddName,
+                    obj.bocaiCategory2Name = this.orderDataList[n].bocaiCategory2Name;
+                    obj.bocaiOddName = this.orderDataList[n].bocaiOddName;
+
                     obj.bocaiOdds = this.orderDataList[n].bocaiOdds,
                     obj.betsMoney = this.orderDataList[n].normalMoney
                 } else {
-                    obj.oddNames = this.orderDataList[n].bocaiOddName + '  ' + this.orderDataList[n].bocaiValue,
+                    // obj.oddNames = this.orderDataList[n].bocaiOddName + '  ' + this.orderDataList[n].bocaiValue,
+                    obj.bocaiValue = this.orderDataList[n].bocaiValue;
+                    obj.bocaiOddName = this.orderDataList[n].bocaiOddName;
+
                     obj.bocaiOdds = this.orderDataList[n].bocaiOdds,
                     obj.betsMoney = this.orderDataList[n].normalMoney
                 }
@@ -413,11 +381,16 @@
                 let obj = {};
 
                 if(this.orderDataList[n].bocaiValue == '') {
-                    obj.oddNames = this.orderDataList[n].bocaiCategory2Name + '  ' + this.orderDataList[n].bocaiOddName,
+                    // obj.oddNames = this.orderDataList[n].bocaiCategory2Name + '  ' + this.orderDataList[n].bocaiOddName,
+                    obj.bocaiCategory2Name = this.orderDataList[n].bocaiCategory2Name;
+                    obj.bocaiOddName = this.orderDataList[n].bocaiOddName;
+
                     obj.bocaiOdds = this.orderDataList[n].bocaiOdds,
-                    obj.betsMoney = this.moneyOrder
+                    obj.betsMoney = this.orderDataList[n].normalMoney
                 } else {
-                    obj.oddNames = this.orderDataList[n].bocaiOddName + '  ' + this.orderDataList[n].bocaiValue,
+                    // obj.oddNames = this.orderDataList[n].bocaiOddName + '  ' + this.orderDataList[n].bocaiValue,
+                    obj.bocaiValue = this.orderDataList[n].bocaiValue;
+                    obj.bocaiOddName = this.orderDataList[n].bocaiOddName;
                     obj.bocaiOdds = this.orderDataList[n].bocaiOdds,
                     obj.betsMoney = this.moneyOrder
                 }
