@@ -288,7 +288,7 @@ export default {
 
   },
   computed: {
-    bocaiName: function() {
+    bocaiPathName: function() {
       return this.$route.name
     }
   },
@@ -531,6 +531,8 @@ export default {
 
               bus.$emit('getbocaiInfoData', res.data);
 
+              store.commit('updatebocaiInfoData',res.data);
+
               if(res.data.preResult == '') {
 
                 if([8555,8806,9057].findIndex((n) => n==this.bocaiTypeId)>-1) {
@@ -565,6 +567,8 @@ export default {
             this.bocaiTypeList = res.bocaiTypeList;
 
             this.getOddsInfo(res.bocaiTypeList[0])
+
+
           }
     },
     async getPrizeResult() { 
@@ -596,7 +600,7 @@ export default {
     getbocaoName() {
 
       let path = '';
-        switch (this.bocaiName) {
+        switch (this.bocaiPathName) {
           case 'chongqindubo':
             this.bocaiTypeId = '1';
             this.imgUrl = 0;
@@ -653,6 +657,8 @@ export default {
             this.submenu = '极速时时彩';
             break;
         }
+
+        store.commit('updatebocaiName',this.submenu);
 
 
         //this.getPrizeResult();
@@ -725,6 +731,9 @@ export default {
                 //console.log('this.bocaiCategoryList',this.bocaiCategoryList);
 
                 bus.$emit('getbocaiCategoryId', result.bocaiCategoryList[0].id);
+
+
+                store.commit('updatebocaiCategoryName',result.bocaiCategoryList[0].name);
 
                 // that.oddsList = result.oddsList;
                 // that.showOdds = result.bocaiCategoryList[0].name;

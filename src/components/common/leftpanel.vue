@@ -13,7 +13,7 @@
             </tr>
             <tr style="height: 22px;" id="tr_cashremaining">
                 <td align="right" class="t_td_caption_1">帐户余额 </td>
-                <td align="left"><span id="con_cashremaining" style="font-size: 13px; margin-left: 5px;">{{userInfo.cashBalance}}</span></td>
+                <td align="left"><span id="con_cashremaining" style="font-size: 13px; margin-left: 5px;">{{keyongBalance}}</span></td>
             </tr>
             <tr style="height: 22px; display: none;" id="tr_creditquota">
                 <td align="left" class="t_td_caption_1">信用额度 </td>
@@ -21,7 +21,7 @@
             </tr>
             <tr id="tr_allowcreditquota">
                 <td align="left" class="t_td_caption_1">可用金额</td>
-                <td align="left"><span id="sp_allowcreditquota" style="font-size: 13px; margin-left: 5px;">0</span></td>
+                <td align="left"><span id="sp_allowcreditquota" style="font-size: 13px; margin-left: 5px;">{{userInfo.cashBalance}}</span></td>
             </tr>
 
             <!-- <p><label>现金余额：</label>{{userInfo.cashBalance}}</p> 
@@ -331,6 +331,10 @@ export default {
   computed: {
     // ...mapGetters({
     // })
+    keyongBalance() {
+        return this.userInfo ? (this.userInfo.cashBalance*1 + this.userInfo.alreadyBalance*1).toFixed(4) : 0;
+    }
+
   },
   async created() {
     this.getcUserInfo();

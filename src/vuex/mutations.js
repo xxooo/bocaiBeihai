@@ -10,6 +10,12 @@ const mutations = {
   },
   updatebocaiInfoData(state,v) {
   	state.bocaiInfoData = v;
+  },
+  updatebocaiName(state,v) {
+    state.bocaiName = v;
+  },
+  updatebocaiCategoryName(state,v) {
+    state.bocaiCategoryName = v;
   }
 }
 

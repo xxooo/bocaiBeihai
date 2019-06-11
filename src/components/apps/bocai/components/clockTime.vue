@@ -5,10 +5,10 @@
       <tbody>
         <tr>
           <td class="bocaiNameTd">
-            <b class="b_title">重庆时时彩</b>
+            <b class="b_title">{{bocaiName}}</b>
             <span class="todayWinSpan">今天输赢：</span>
             <span class="font_r" id="UserResult">
-              <span class="black">0</span>
+              <span class="black">{{bocaiInfoData.winnerMoneySum}}</span>
             </span>
           </td>
           <td width="55%" colspan="1" class="vertical-r">
@@ -17,15 +17,13 @@
                 <tr>
                   <td class="height27">
                     <div class="head_f2" id="div_betno">
-                      <div class="versionKJDiv" v-if="">
+                      <div class="versionKJDiv" v-if="bocaiName == '重庆时时彩'">
                         <span class="floatL">&nbsp;</span>
-                        <span class="floatL"><div class="CQNo_03 CQREDiv"></div></span>
-                        <span class="floatL"><div class="CQNo_07 CQREDiv"></div></span>
-                        <span class="floatL"><div class="CQNo_06 CQREDiv"></div></span>
-                        <span class="floatL"><div class="CQNo_06 CQREDiv"></div></span>
-                        <span class="floatL"><div class="CQNo_08 CQREDiv"></div></span>
+                        <span class="floatL" v-for="(item,index) in preResult">
+                          <div class="CQNo_03 CQREDiv" :class="'CQNo_'+item"></div>
+                        </span>
                       </div>
-                      <span class="versionKJSpan"><span id="span_roundno">20190602035</span>期开奖&nbsp;</span>
+                      <span class="versionKJSpan"><span id="span_roundno">{{bocaiInfoData.preBocaiPeriods}}</span>期开奖&nbsp;</span>
                     </div>
                   </td>
                 </tr>
@@ -40,10 +38,13 @@
       <tbody>
         <tr>
           <td class="h24w28">
-            <b id="t_LID" class="green">20190602036</b>期　<b class="bocaiSubName">两面盘</b>
+            <b id="t_LID" class="green">{{bocaiInfoData.bocaiPeriods}}</b>期　<b class="bocaiSubName">{{bocaiCategoryName}}</b>
           </td>
-          <td class="alrwd25"><span id="hClockTime_C">距离封盘：<b>13</b>:<b>53</b></span></td>
-          <td class="alrwd25"><span id="hClockTime_O">距离开奖：<b class="red">15</b>:<b class="red">33</b></span></td>
+          <td class="alrwd25">
+            <span id="hClockTime_C" v-if="juliFengOrKai">距离封盘：<b>{{fengTimeM}}</b>:<b>{{fengTimeS}}</b></span>
+            <span id="hClockTime_C" v-if="!juliFengOrKai">距离开盘：<b>{{timeLeftM}}</b>:<b>{{timeLeftS}}</b></span>
+          </td>
+          <td class="alrwd25"><span id="hClockTime_O">距离开奖：<b class="red">{{openPrizeTimeM}}</b>:<b class="red">{{openPrizeTimeS}}</b></span></td>
           <td class="vertical-r" width="22%"><span id="Update_Time"></span></td>
         </tr>
       </tbody>
@@ -75,7 +76,7 @@
 
 
 <script>
-  //import { mapGetters } from 'vuex';
+  import { mapGetters } from 'vuex';
 
 	export default {
 		props: {
@@ -88,15 +89,21 @@
 		},
 		data() {
 			return {
+        openPrizeTimeM: '',
+        openPrizeTimeS: '',
+        openTimeM: '',
+        openTimeS: '',
+        fengTimeM: '',
+        fengTimeS: '',
         timeLeft:'',
+        timeLeftM: '',
+        timeLeftS: '',
         t: null, //轮询
-        bocaiInfoData: {},
-        openPrizeTime: 0,
         closeTimeSet: 0,
         //hasFast: false,
-        differTime: 0,
         temdata: {},
-        noneResult: false
+        noneResult: false,
+        juliFengOrKai: true
 			}
 		},
     components: {
@@ -104,21 +111,76 @@
 		created() {
       //this.refreshBocaiInfo();
       this.gettimeLeft();
+
     },
     computed:{
+      ...mapGetters({
+        bocaiInfoData: 'getbocaiInfoData',
+        bocaiName: 'getbocaiName',
+        bocaiCategoryName: 'getbocaiCategoryName'
+      }),
       totalMoney() {
         let totalMoney = 0;
         for(let n in this.orderList) {
           totalMoney += this.orderList[n].betsMoney*1;
         }
         return totalMoney;
+      },
+      preResult() {
+        return this.bocaiInfoData.preResult ? this.bocaiInfoData.preResult.split(',') : [];
+      },
+      differTime() {
+        let now = new Date();
+        return this.bocaiInfoData.nowTime ? now.getTime() - this.bocaiInfoData.nowTime*1000 : 0;
+      },
+      differFengOrKai() {
+        let path = 0;
+
+          switch (this.bocaiName) {
+            case '重庆时时彩':
+              path = 100000;
+              break;
+            case '幸运飞艇':
+              path = 16;
+              break;
+            case '北京PK拾':
+              path = 16;
+              break;
+            case '山东11选5':
+              path = 16;
+              break;
+            case '广东11选5':
+              path = 16;
+              break;
+            case '江西11选5':
+              path = 16;
+              break;
+            case 'PC蛋蛋':
+              path = 16;
+              break;
+            case '江苏快3':
+              path = 16;
+              break;
+            case '北京快乐8':
+              path = 16;
+              break;
+            case '极速赛车':
+              path = 16;
+              break;
+            case '极速时时彩':
+              path = 16000;
+              break;
+          }
+
+          return path;
       }
+
     },
     mounted(){
       bus.$on('getbocaiInfoData', (data) => {
-        this.bocaiInfoData = data;
-        this.openPrizeTime = data.openPrizeTime;
-        this.closeTimeSet = data.closeTimeSet;
+        //this.bocaiInfoData = data;
+        //this.openPrizeTime = data.openPrizeTime;
+        //this.closeTimeSet = data.closeTimeSet;
 
 
         // console.log('getbocaiInfoData--获取传来博彩数据',data,
@@ -128,12 +190,11 @@
         //   '服务器时间:'+this.timestampToTime(data.nowTime*1000));
         // console.log('new Date()',new Date());
 
-        let now = new Date();
+        //let now = new Date();
 
-        this.differTime = now.getTime() - data.nowTime*1000;
+        //this.differTime = now.getTime() - data.nowTime*1000;
 
-        this.temdata = data;
-
+        //this.temdata = data;
 
         //this.gettimeLeft();
       });
@@ -159,12 +220,29 @@
         //console.log('this.getServerDate()',this.getServerDate());
         //console.log('new Date()',new Date());
         //console.log('this.differTime',this.differTime);
-        var now = new Date();
-        var leftTime = this.openPrizeTime - now.getTime() + this.differTime;
-        //console.log('leftTime',leftTime);
-        var closeTime = leftTime - this.closeTimeSet*1000;
+        let now = new Date();
+        let leftTime = this.bocaiInfoData.openPrizeTime - now.getTime() + this.differTime;
 
-        var closeTimeSet = this.openPrizeTime - this.closeTimeSet*1000;
+        let openPrizeTime = this.bocaiInfoData.openPrizeTime - now.getTime() + this.differTime;
+
+
+        let fengTime = this.bocaiInfoData.openPrizeTime - now.getTime() + this.differTime - this.differFengOrKai;
+
+        let kaipangTime = this.bocaiInfoData.openPrizeTime - now.getTime() + this.differTime - this.differFengOrKai;
+
+        console.log('getbocaiInfoData--获取传来博彩数据',this.bocaiInfoData,
+          '当前菠菜相差时间：'+this.differFengOrKai,
+          '当前时间：'+new Date(),
+          '当期开奖时间：'+this.timestampToTime(this.bocaiInfoData.openPrizeTime),
+          '当期开盘时间：'+this.timestampToTime(this.bocaiInfoData.openTime),
+          '当期封盘时间：'+this.timestampToTime(this.bocaiInfoData.closetime),
+          '提前多少秒封盘:'+this.bocaiInfoData.closeTimeSet,
+          '服务器时间:'+this.timestampToTime(this.bocaiInfoData.nowTime*1000));
+
+        //console.log('leftTime',leftTime);
+        let closeTime = leftTime - this.bocaiInfoData.closeTimeSet*1000;
+
+        let closeTimeSet = this.openPrizeTime - this.bocaiInfoData.closeTimeSet*1000;
 
 
         //console.log('当前时间',this.timestampToTime(now.getTime()));
@@ -195,14 +273,20 @@
           if(this.noneResult) {
 
             console.log('this.noneResult');
-            this.timeLeft = '--' + ":" + '--' + ":" + '--';
+            this.timeLeft = '--' + ":" + '--';
+
+            this.timeLeftM = '--';
+            this.timeLeftS = '--';
 
             bus.$emit('isOpenOdds', false);
 
             $('#clock').addClass('gray');
           } else {
             console.log('!!!!this.noneResult');
-            this.timeLeft = '00' + ":" + '00' + ":" + '00';
+            this.timeLeft = '00' + ":" + '00';
+
+            this.timeLeftM = '00';
+            this.timeLeftS = '00';
 
             bus.$emit('isOpenOdds', false);
 
@@ -243,7 +327,10 @@
           var m = Math.floor(leftTime / 60 % 60);
           var s = leftTime % 60;
 
-          this.timeLeft = (o*1> 9 ? o : '0'+ o) + ":" + (m*1> 9 ? m : '0'+ m) + ":" + (s*1 > 9 ? s : '0'+ s);
+          this.timeLeft = (m*1> 9 ? m : '0'+ m) + ":" + (s*1 > 9 ? s : '0'+ s);
+
+          this.timeLeftM = m*1> 9 ? m : '0'+ m;
+          this.timeLeftS = s*1 > 9 ? s : '0'+ s;
           //console.log('未开盘',this.timestampToTime(this.openPrizeTime));
           //console.log('this.bocaiInfoData.openPrizeTime',this.bocaiInfoData.openPrizeTime);
           bus.$emit('isOpenOdds', false);
@@ -264,7 +351,9 @@
           var m = Math.floor(leftTime / 60 % 60);
           var s = leftTime % 60;
 
-          this.timeLeft = (o*1> 9 ? o : '0'+ o) + ":" + (m*1> 9 ? m : '0'+ m) + ":" + (s*1 > 9 ? s : '0'+ s);
+          this.timeLeft = (m*1> 9 ? m : '0'+ m) + ":" + (s*1 > 9 ? s : '0'+ s);
+          this.timeLeftM = m*1> 9 ? m : '0'+ m;
+          this.timeLeftS = s*1 > 9 ? s : '0'+ s;
           //console.log('开盘时间',this.timestampToTime(this.openPrizeTime));
           //console.log('this.bocaiInfoData.openPrizeTime',this.bocaiInfoData.openPrizeTime);
           bus.$emit('isOpenOdds', true);
@@ -276,6 +365,64 @@
 
         //bus.$emit('getRefreshTimeFast', '');
 
+
+        //this.getopenPrizeTime(openPrizeTime);
+        //this.getfengTime(fengTime);
+
+
+         console.log('openPrizeTime',openPrizeTime);
+         console.log('fengTime',fengTime);
+
+        let msOpen = parseInt(openPrizeTime % 1000).toString();
+        openPrizeTime = parseInt(openPrizeTime / 1000); 
+        let oOpen = Math.floor(openPrizeTime / 3600);
+        let dOpen = Math.floor(oOpen / 24);
+        let mOpen = Math.floor(openPrizeTime / 60 % 60);
+        let sOpen = openPrizeTime % 60;
+
+        this.openPrizeTimeM = mOpen*1> 9 ? mOpen : '0'+ mOpen;
+        this.openPrizeTimeS = sOpen*1 > 9 ? sOpen : '0'+ sOpen;
+
+
+        if(fengTime > 0) {
+          let msfeng = parseInt(fengTime % 1000).toString();
+          fengTime = parseInt(fengTime / 1000); 
+          let ofeng = Math.floor(fengTime / 3600);
+          let dfeng = Math.floor(ofeng / 24);
+          let mfeng = Math.floor(fengTime / 60 % 60);
+          let sfeng = fengTime % 60;
+
+          this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
+          this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
+        } else {
+          let msfeng = parseInt(fengTime % 1000).toString();
+          fengTime = parseInt(fengTime / 1000); 
+          let ofeng = Math.floor(fengTime / 3600);
+          let dfeng = Math.floor(ofeng / 24);
+          let mfeng = Math.floor(fengTime / 60 % 60);
+          let sfeng = fengTime % 60;
+
+          this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
+          this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
+        }
+
+        // let msfeng = parseInt(fengTime % 1000).toString();
+        // fengTime = parseInt(fengTime / 1000); 
+        // let ofeng = Math.floor(fengTime / 3600);
+        // let dfeng = Math.floor(ofeng / 24);
+        // let mfeng = Math.floor(fengTime / 60 % 60);
+        // let sfeng = fengTime % 60;
+
+        // this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
+        // this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
+
+
+
+         console.log('openPrizeTimeM',this.openPrizeTimeM,this.openPrizeTimeS);
+         console.log('fengTimeM',this.fengTimeM,this.fengTimeS);
+
+
+
         this.t = setTimeout(this.gettimeLeft, 1000);
 
         //console.log('new Date()',new Date());
@@ -286,6 +433,35 @@
           // '提前多少秒封盘:'+this.temdata.closeTimeSet);
 
       },
+      // getopenPrizeTime(openPrizeTime) {
+      //   let openPrizeTime2 = openPrizeTime;
+      //   console.log('openPrizeTime',openPrizeTime);
+
+      //   let msOpen = parseInt(openPrizeTime % 1000).toString();
+      //   openPrizeTime2 = parseInt(openPrizeTime / 1000); 
+      //   console.log('openPrizeTime2',openPrizeTime2);
+      //   let oOpen = Math.floor(openPrizeTime / 3600);
+      //   let dOpen = Math.floor(oOpen / 24);
+      //   let mOpen = Math.floor(openPrizeTime / 60 % 60);
+      //   let sOpen = openPrizeTime % 60;
+
+      //   this.openPrizeTimeM = mOpen*1> 9 ? mOpen : '0'+ mOpen;
+      //   this.openPrizeTimeS = sOpen*1 > 9 ? sOpen : '0'+ sOpen;
+      // },
+      // getfengTime(fengTime) {
+      //   let fengTime2 = fengTime;
+      //   console.log('fengTime',fengTime);
+      //   let msfeng = parseInt(fengTime % 1000).toString();
+      //   fengTime2 = parseInt(fengTime / 1000); 
+      //   console.log('fengTime2',fengTime2);
+      //   let ofeng = Math.floor(fengTime / 3600);
+      //   let dfeng = Math.floor(ofeng / 24);
+      //   let mfeng = Math.floor(fengTime / 60 % 60);
+      //   let sfeng = fengTime % 60;
+
+      //   this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
+      //   this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
+      // },
       timestampToTime(timestamp) {
         var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
         var Y = date.getFullYear() + '-';
@@ -452,7 +628,7 @@ button.btn-delete {
     float: right;
 }
 
-.CQNo_00, .CQNo_01, .CQNo_02, .CQNo_03, .CQNo_04, .CQNo_05, .CQNo_06, .CQNo_07, .CQNo_08, .CQNo_09 {
+.CQNo_0, .CQNo_1, .CQNo_2, .CQNo_3, .CQNo_4, .CQNo_5, .CQNo_6, .CQNo_7, .CQNo_8, .CQNo_9 {
     height:27px; width:27px; margin-top:1px;
 }
 
