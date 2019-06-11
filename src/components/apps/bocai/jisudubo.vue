@@ -1,7 +1,270 @@
 <template>
   <div id="chongqindubo" class="content-main duboBodyClass">
+
+    <table class="table000">
+      <tbody>
+        <tr>
+          <td class="vertical-t">
+            <div class="margin-r10 bet_box">
+              <div id="round_content">
+
+                <clock-time></clock-time>
+
+                <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" :bocaiCategory="bocaiCategory" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
+
+              </div>
+
+
+              <div id="errormsg" style=" display:none;"></div>
+
+              <div id="mainPageData" class="orders" v-if="showOdds == '两面盘'">
+
+                <template v-for="(itemPa,index) in yiwuqiu_lmp"> 
+                  <table class="DTable kuaijie" cellpadding="0" cellspacing="1" width="700" style="margin-top:2px;">     
+                    <thead>
+                      <tr class="DtrTitle" style="font-weight: bold;">
+                        <td colspan="12" class="td_caption_1" align="center">{{itemPa.name}}</td>
+                      </tr>
+                    </thead>  
+                    <tbody>    
+                      <tr class="Dbgco1">
+                        <template v-for="(item,index) in itemPa.list" v-if="['大','小','单','双'].findIndex((n) => n==item.oddsName)>-1"> 
+
+                          <td class="betnum" :class="'yiwuqiu_lmp'+item.oddsId">{{item.oddsName}}</td>
+                          <td class="oddsTdMin" :class="'yiwuqiu_lmp'+item.oddsId" @click="orderTd(itemPa,item,'yiwuqiu_lmp')" @mouseenter="overShow(item,'yiwuqiu_lmp')" @mouseleave="outHide(item,'yiwuqiu_lmp')">
+                            <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item) : ''" class="betRateNum" :class="'yiwuqiu_lmp'+item.oddsId+'a'">
+                              <span class="betRateNum">{{item.odds}}</span>
+                            </a>
+                            <span v-else style="width:41px;color:red;font-weight:bold;">&nbsp;-&nbsp;</span>
+                            <input type="hidden" value="1.9874">
+                          </td>
+                          <td v-if="!kuaijiePay">
+                            <input v-if="isOpenOdds" v-model="item.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(itemPa,item,'yiwuqiu_lmp',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                            <span v-else style="width:60px;">封盘</span>
+                          </td>
+
+                        </template>
+                      </tr> 
+                    </tbody>
+                  </table>
+                </template>
+
+                <!-- 总和龙虎 -->
+                <table class="DTable kuaijie" cellpadding="0" cellspacing="1" border="0" width="700" style="margin-top: 2px;">
+              <!-- <thead>
+                <tr class="DtrTitle">
+                  <td colspan="12" class="td_caption_1" style="font-weight: bold;">{{longhuhe_lmp.name}}</td>
+                </tr>
+              </thead> -->
+              <tbody>
+                <tr class="Dbgco1">
+                  <template v-for="(item,index) in longhuhe_lmp.list" v-if="index*1 < 4">
+
+                    <td class="betnum" :class="'longhuhe_lmp'+item.oddsId">{{item.oddsName}}</td>
+                    <td class="oddsTdMin" :class="'longhuhe_lmp'+item.oddsId" @click="orderTd(longhuhe_lmp,item,'longhuhe_lmp')" @mouseenter="overShow(item,'longhuhe_lmp')" @mouseleave="outHide(item,'longhuhe_lmp')">
+                      <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item) : ''" class="betRateNum" :class="'longhuhe_lmp'+item.oddsId+'a'">
+                        <span class="betRateNum">{{item.odds}}</span>
+                      </a>
+                      <span v-else style="width:41px;color:red;font-weight:bold;">&nbsp;-&nbsp;</span>
+                      <input type="hidden" value="1.9874">
+                    </td>
+                    <td v-if="!kuaijiePay">
+                      <input v-if="isOpenOdds" v-model="item.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(longhuhe_lmp,item,'longhuhe_lmp',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                      <span v-else style="width:60px;">封盘</span>
+                    </td>
+
+                  </template>
+                </tr>
+                <tr>
+                  <template v-for="(item,index) in longhuhe_lmp.list" v-if="index*1 > 3">
+
+                    <td class="betnum" :class="'longhuhe_lmp'+item.oddsId">{{item.oddsName}}</td>
+                    <td class="oddsTdMin" :class="'longhuhe_lmp'+item.oddsId" @click="orderTd(longhuhe_lmp,item,'longhuhe_lmp')" @mouseenter="overShow(item,'longhuhe_lmp')" @mouseleave="outHide(item,'longhuhe_lmp')">
+                      <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item) : ''" class="betRateNum" :class="'longhuhe_lmp'+item.oddsId+'a'">
+                        <span class="betRateNum">{{item.odds}}</span>
+                      </a>
+                      <span v-else style="width:41px;color:red;font-weight:bold;">&nbsp;-&nbsp;</span>
+                      <input type="hidden" value="1.9874">
+                    </td>
+                    <td v-if="!kuaijiePay">
+                      <input v-if="isOpenOdds" v-model="item.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(longhuhe_lmp,item,'longhuhe_lmp',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                      <span v-else style="width:60px;">封盘</span>
+                    </td>
+
+                  </template>
+                  <td colspan="3"></td>
+                </tr>
+              </tbody>
+            </table>
+
+
+
+
+            <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" :bocaiCategory="bocaiCategory" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
+
+            <div id="lotteryno">
+
+              <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700" id="BallList">
+                <tbody>
+                  <tr>
+                    <td id="sRB_1" class="td_caption_1 td_caption_2"><a>总和大小</a></td>
+                    <td id="sRB_2" class="td_caption_1"><a>总和单双</a></td>
+                    <td id="sRB_3" class="td_caption_1"><a>龙虎和</a></td>    
+                  </tr>
+                  <tr class="Ball_tr_H">
+                    <td colspan="3">
+                      <table class="Ball_List" border="0" cellspacing="0" cellpadding="0" width="698">
+                        <tbody>
+                          <tr class="Ball_tr_H" valign="top" id="lotteryno_tr1" style="display: block; height: auto; min-height: 25px;">
+                            <td width="28"></td>
+                            <td width="28" class="Jut_caption_1">小</td>
+                            <td width="28">大</td>
+                            <td width="28" class="Jut_caption_1">小<br>小</td>
+                            <td width="28">大<br>大</td>
+                            <td width="28" class="Jut_caption_1">小<br>小</td>
+                            <td width="28">大<br>大</td>
+                            <td width="28" class="Jut_caption_1">小<br>小</td>
+                            <td width="28">大</td>
+                            <td width="28" class="Jut_caption_1">小</td>
+                            <td width="28">大<br>大</td>
+                            <td width="28" class="Jut_caption_1">小<br>小</td>
+                            <td width="28">大<br>大<br>大</td>
+                            <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
+                            <td width="28">大<br>大<br>大</td>
+                            <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
+                            <td width="28">大</td>
+                            <td width="28" class="Jut_caption_1">小</td>
+                            <td width="28">大<br>大</td>
+                            <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
+                            <td width="28">大</td>
+                            <td width="28" class="Jut_caption_1">小</td>
+                            <td width="28">大<br>大</td>
+                            <td width="28" class="Jut_caption_1">小<br>小<br>小<br>小<br>小<br>小</td>
+                            <td width="28" style="min-height: 25px;">大<br>大<br>大</td>
+                          </tr>
+
+                          <tr class="Ball_tr_H" valign="top" id="lotteryno_tr2" style=" display:none;height:auto;min-height:25px;">
+                            <td width="28">双</td>
+                            <td width="28" class="Jut_caption_1">单</td>
+                            <td width="28">双</td>
+                            <td width="28" class="Jut_caption_1">单</td>
+                            <td width="28">双<br>双<br>双<br>双</td>
+                            <td width="28" class="Jut_caption_1">单<br>单</td>
+                            <td width="28">双</td>
+                            <td width="28" class="Jut_caption_1">单</td>
+                            <td width="28">双</td>
+                            <td width="28" class="Jut_caption_1">单</td>
+                            <td width="28">双<br>双<br>双</td>
+                            <td width="28" class="Jut_caption_1">单</td>
+                            <td width="28">双<br>双</td>
+                            <td width="28" class="Jut_caption_1">单<br>单<br>单</td>
+                            <td width="28">双<br>双</td>
+                            <td width="28" class="Jut_caption_1">单<br>单</td>
+                            <td width="28">双<br>双</td>
+                            <td width="28" class="Jut_caption_1">单</td>
+                            <td width="28">双<br>双<br>双<br>双<br>双</td>
+                            <td width="28" class="Jut_caption_1">单</td>
+                            <td width="28">双<br>双</td>
+                            <td width="28" class="Jut_caption_1">单</td>
+                            <td width="28">双<br>双<br>双<br>双</td>
+                            <td width="28" class="Jut_caption_1">单</td>
+                            <td width="28" style="min-height: 25px;">双</td>
+                          </tr>
+                          <tr class="Ball_tr_H" valign="top" id="lotteryno_tr3" style=" display:none;height:auto;min-height:25px;">
+                            <td width="28">龙</td>
+                            <td width="28" class="Jut_caption_1">虎<br>虎</td>
+                            <td width="28">和</td>
+                            <td width="28" class="Jut_caption_1">龙</td>
+                            <td width="28">虎</td>
+                            <td width="28" class="Jut_caption_1">龙<br>龙<br>龙</td>
+                            <td width="28">虎</td>
+                            <td width="28" class="Jut_caption_1">龙</td>
+                            <td width="28">虎</td>
+                            <td width="28" class="Jut_caption_1">和</td>
+                            <td width="28">虎<br>虎<br>虎<br>虎<br>虎</td>
+                            <td width="28" class="Jut_caption_1">龙<br>龙</td>
+                            <td width="28">和</td>
+                            <td width="28" class="Jut_caption_1">虎<br>虎<br>虎<br>虎<br>虎<br>虎<br>虎</td>
+                            <td width="28">龙</td>
+                            <td width="28" class="Jut_caption_1">虎</td>
+                            <td width="28">龙</td>
+                            <td width="28" class="Jut_caption_1">虎<br>虎</td>
+                            <td width="28">龙<br>龙</td>
+                            <td width="28" class="Jut_caption_1">虎</td>
+                            <td width="28">龙</td>
+                            <td width="28" class="Jut_caption_1">虎<br>虎<br>虎<br>虎</td>
+                            <td width="28">和</td>
+                            <td width="28" class="Jut_caption_1">龙</td>
+                            <td width="28" style="min-height: 25px;">虎</td>
+                          </tr>   
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+
+            </div>
+
+          </div>
+
+        </div>
+      </td>
+
+      <td valign="top">
+        <div id="maintwssides" style="display: block;">
+          <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="150" id="tbtwssides">
+            <tbody id="TwoSides">
+              <tr>
+                <td class="td_caption_1" colspan="2" style="width:150px;">两面长龙排行</td>
+              </tr> 
+              <tr class="t_list_tr_0">
+                <td class="f_left TDb_B">第五球 - 双</td>
+                <td class="TDb_R">&nbsp;5 期&nbsp;</td>
+              </tr> 
+              <tr class="t_list_tr_0">
+                <td class="f_left TDb_B">第二球 - 大</td>
+                <td class="TDb_R">&nbsp;3 期&nbsp;</td>
+              </tr> 
+              <tr class="t_list_tr_0">
+                <td class="f_left TDb_B">第四球 - 双</td>
+                <td class="TDb_R">&nbsp;3 期&nbsp;</td>
+              </tr> 
+              <tr class="t_list_tr_0">
+                <td class="f_left TDb_B">总和 - 大</td>
+                <td class="TDb_R">&nbsp;3 期&nbsp;</td>
+              </tr> 
+              <tr class="t_list_tr_0">
+                <td class="f_left TDb_B">第一球 - 小</td>
+                <td class="TDb_R">&nbsp;2 期&nbsp;</td>
+              </tr> 
+              <tr class="t_list_tr_0">
+                <td class="f_left TDb_B">第三球 - 大</td>
+                <td class="TDb_R">&nbsp;2 期&nbsp;</td>
+              </tr> 
+              <tr class="t_list_tr_0">
+                <td class="f_left TDb_B">第四球 - 大</td>
+                <td class="TDb_R">&nbsp;2 期&nbsp;</td>
+              </tr> 
+              <tr class="t_list_tr_0">
+                <td class="f_left TDb_B">第一球 - 单</td>
+                <td class="TDb_R">&nbsp;2 期&nbsp;</td>
+              </tr> 
+              <tr class="t_list_tr_0">
+                <td class="f_left TDb_B">第二球 - 单</td>
+                <td class="TDb_R">&nbsp;2 期&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </td>
+
+    </tr>
+  </tbody>
+</table>
     
-    <div class="right">
+    <!-- <div class="right">
       <div>
         <div>
           <div id="submenu">
@@ -226,7 +489,7 @@
         </div>
       </div>
     </div>
-    <p style="clear: both;"></p>
+    <p style="clear: both;"></p> -->
   </div>
 </template>
 
@@ -283,6 +546,20 @@ export default {
       });
   },
   methods: {
+    QCheckShow_fu() {
+
+    },
+    IntoMtran() {
+
+    },
+    QCheckShow() {
+
+    },
+    QCExplain() {
+
+    },
+
+    
     kuaixuanOdd(item,type) {
       this.qingkong();
       let list = this.shishiZiDatas.list;
