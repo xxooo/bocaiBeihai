@@ -276,7 +276,7 @@ export default {
     this.getBocai();
     this.openPrizeTime = this.$timestampToTimeRi(new Date());
 
-    this.getPrizeResult();
+    //this.getPrizeResult();
 
     this.myTimer();
 
@@ -359,7 +359,7 @@ export default {
 
               //if("companyIsOpenSet": "",//该会员上级公司对该期博彩的封盘状态。状态：0删除，1封盘，2开盘。只有开盘才能投注。)
                //if("isOpenSet": "",//管理员对于当期博彩的开关设置) 
-
+               store.commit('updatebocaiInfoData',res.data);
               bus.$emit('getbocaiInfoData', res.data);
 
               if(res.data.preResult == '') {
@@ -398,7 +398,7 @@ export default {
 
               //if("companyIsOpenSet": "",//该会员上级公司对该期博彩的封盘状态。状态：0删除，1封盘，2开盘。只有开盘才能投注。)
                //if("isOpenSet": "",//管理员对于当期博彩的开关设置) 
-
+               store.commit('updatebocaiInfoData',res.data);
               bus.$emit('getbocaiInfoData', res.data);
 
               //res.data.preResult == '';
@@ -439,7 +439,7 @@ export default {
 
               //if("companyIsOpenSet": "",//该会员上级公司对该期博彩的封盘状态。状态：0删除，1封盘，2开盘。只有开盘才能投注。)
                //if("isOpenSet": "",//管理员对于当期博彩的开关设置) 
-
+               store.commit('updatebocaiInfoData',res.data);
               bus.$emit('getbocaiInfoData', res.data);
 
               if(res.data.preResult == '') {
@@ -485,7 +485,7 @@ export default {
                //if("isOpenSet": "",//管理员对于当期博彩的开关设置) 
 
               bus.$emit('getbocaiInfoData', res.data);
-
+              store.commit('updatebocaiInfoData',res.data);
               //res.data.preResult == '';
 
               if(res.data.preResult == '') {
@@ -581,17 +581,29 @@ export default {
 
       // if(!this.hasResult) {
 
+        let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
+
+            if(res.code===200){
+
+              //if("companyIsOpenSet": "",//该会员上级公司对该期博彩的封盘状态。状态：0删除，1封盘，2开盘。只有开盘才能投注。)
+               //if("isOpenSet": "",//管理员对于当期博彩的开关设置) 
+
+              bus.$emit('getbocaiInfoData', res.data);
+
+              store.commit('updatebocaiInfoData',res.data);
+            }
+
 
        // console.log('!!!!!this.hasResult',!this.hasResult);
-        let res = await this.$get(`${window.url}/api/openPrizeResult?bocaiTypeId=`+this.bocaiTypeId+`&currentPage=1&pageSize=5&dayStr=`+this.openPrizeTime);
-          if(res.code===200){
-            this.resultList = res.list.slice(0,5);
-            for(let n in this.resultList) {
-              if(this.resultList[n].result) {
-                this.resultList[n].result = this.resultList[n].result.replace(/,/g,'');   
-              }
-            }
-          }
+        // let res = await this.$get(`${window.url}/api/openPrizeResult?bocaiTypeId=`+this.bocaiTypeId+`&currentPage=1&pageSize=5&dayStr=`+this.openPrizeTime);
+        //   if(res.code===200){
+        //     this.resultList = res.list.slice(0,5);
+        //     for(let n in this.resultList) {
+        //       if(this.resultList[n].result) {
+        //         this.resultList[n].result = this.resultList[n].result.replace(/,/g,'');   
+        //       }
+        //     }
+        //   }
 
       // }
 
@@ -843,6 +855,11 @@ export default {
         //console.log('getRefreshTimeFast');
         this.getRefreshTimeFast();
     });
+    bus.$on('getbocaiInfo', (data) => {
+        //console.log('getRefreshTimeFast');
+        this.bocaiInfo();
+    });
+
 
   },
   updated() {

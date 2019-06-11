@@ -42,7 +42,7 @@
           </td>
           <td class="alrwd25">
             <span id="hClockTime_C" v-if="juliFengOrKai">距离封盘：<b>{{fengTimeM}}</b>:<b>{{fengTimeS}}</b></span>
-            <span id="hClockTime_C" v-if="!juliFengOrKai">距离开盘：<b>{{timeLeftM}}</b>:<b>{{timeLeftS}}</b></span>
+            <span id="hClockTime_C" v-if="!juliFengOrKai">距离开盘：<b>{{openPrizeTimeM}}</b>:<b>{{openPrizeTimeS}}</b></span>
           </td>
           <td class="alrwd25"><span id="hClockTime_O">距离开奖：<b class="red">{{openPrizeTimeM}}</b>:<b class="red">{{openPrizeTimeS}}</b></span></td>
           <td class="vertical-r" width="22%"><span id="Update_Time"></span></td>
@@ -226,9 +226,9 @@
         let openPrizeTime = this.bocaiInfoData.openPrizeTime - now.getTime() + this.differTime;
 
 
-        let fengTime = this.bocaiInfoData.openPrizeTime - now.getTime() + this.differTime - this.differFengOrKai;
+        let fengTime = this.bocaiInfoData.openPrizeTime - now.getTime() + this.differTime - this.bocaiInfoData.closeTimeSet*1000;
 
-        let kaipangTime = this.bocaiInfoData.openPrizeTime - now.getTime() + this.differTime - this.differFengOrKai;
+        let kaipangTime = this.bocaiInfoData.closeTimeSet*1000 - now.getTime() + this.differTime;
 
         console.log('getbocaiInfoData--获取传来博彩数据',this.bocaiInfoData,
           '当前菠菜相差时间：'+this.differFengOrKai,
@@ -251,116 +251,48 @@
         //console.log('封盘时间',this.timestampToTime(closeTimeSet));
 
         if(closeTime<=0 && leftTime<=0) {
+          //当期结束，开下一期
 
-          // this.$alert('这是一段内容', '标题名称', {
-          //   confirmButtonText: '确定',
-          //   callback: action => {
-          //     this.$message({
-          //       type: 'info',
-          //       message: `action: ${ action }`
-          //     });
-          //   }
-          // });
+          //bus.$emit('getRefreshTimeFast', '');
 
-          //this.$alert('closeTime<=0 && leftTime<=0'+'closeTime:'+this.timestampToTime(closeTime)+'leftTime:'+this.timestampToTime(leftTime));
-
-          //console.log('closeTime111',closeTime);
-          //console.log('leftTime111',this.timestampToTime(leftTime));
-
-          //console.log('未开盘',this.timestampToTime(this.openPrizeTime));
-          //console.log('this.bocaiInfoData.openPrizeTime',this.bocaiInfoData.openPrizeTime);
-
-          if(this.noneResult) {
-
-            console.log('this.noneResult');
-            this.timeLeft = '--' + ":" + '--';
-
-            this.timeLeftM = '--';
-            this.timeLeftS = '--';
-
-            bus.$emit('isOpenOdds', false);
-
-            $('#clock').addClass('gray');
-          } else {
-            console.log('!!!!this.noneResult');
-            this.timeLeft = '00' + ":" + '00';
-
-            this.timeLeftM = '00';
-            this.timeLeftS = '00';
-
-            bus.$emit('isOpenOdds', false);
-
-            $('#clock').addClass('red');
-
-            bus.$emit('getRefreshTimeFast', '');
-          }
-
-          // this.timeLeft = '00' + ":" + '00' + ":" + '00';
-
-          // bus.$emit('isOpenOdds', false);
-
-          // $('#clock').addClass('red');
-
-          //$('.bet_box .orders td').removeClass('selected');
-
-          //if(!this.hasFast) {
-            
-
-            //bus.$emit('getRefreshTimeFast', '');
-
-
-          //}
-
+          bus.$emit('getbocaiInfo', '');
         } 
 
         if(closeTime<=0 && leftTime>0) {
+          //封盘未开盘
 
-          //this.$alert('closeTime<=0 && leftTime>0'+'closeTime:'+this.timestampToTime(closeTime)+'leftTime:'+this.timestampToTime(leftTime));
+          let msfeng = parseInt(kaipangTime % 1000).toString();
+          kaipangTime = parseInt(kaipangTime / 1000); 
+          let ofeng = Math.floor(kaipangTime / 3600);
+          let dfeng = Math.floor(ofeng / 24);
+          let mfeng = Math.floor(kaipangTime / 60 % 60);
+          let sfeng = kaipangTime % 60;
 
-          //console.log('closeTime2222',closeTime);
-          //console.log('leftTime2222',this.timestampToTime(leftTime));
+          this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
+          this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
 
-          var ms = parseInt(leftTime % 1000).toString();
-          leftTime = parseInt(leftTime / 1000); 
-          var o = Math.floor(leftTime / 3600);
-          var d = Math.floor(o / 24);
-          var m = Math.floor(leftTime / 60 % 60);
-          var s = leftTime % 60;
+          this.juliFengOrKai = false;
 
-          this.timeLeft = (m*1> 9 ? m : '0'+ m) + ":" + (s*1 > 9 ? s : '0'+ s);
-
-          this.timeLeftM = m*1> 9 ? m : '0'+ m;
-          this.timeLeftS = s*1 > 9 ? s : '0'+ s;
-          //console.log('未开盘',this.timestampToTime(this.openPrizeTime));
-          //console.log('this.bocaiInfoData.openPrizeTime',this.bocaiInfoData.openPrizeTime);
           bus.$emit('isOpenOdds', false);
 
-          $('#clock').addClass('red');
         }
         if(closeTime>0) {
+          //距离封盘
 
-          //console.log('closeTime3333',closeTime);
-          //console.log('leftTime333',this.timestampToTime(leftTime));
+          let msfeng = parseInt(fengTime % 1000).toString();
+          fengTime = parseInt(fengTime / 1000); 
+          let ofeng = Math.floor(fengTime / 3600);
+          let dfeng = Math.floor(ofeng / 24);
+          let mfeng = Math.floor(fengTime / 60 % 60);
+          let sfeng = fengTime % 60;
 
-          //this.$alert('closeTime>0'+'closeTime:'+this.timestampToTime(closeTime));
+          this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
+          this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
 
-          var ms = parseInt(leftTime % 1000).toString();
-          leftTime = parseInt(leftTime / 1000); 
-          var o = Math.floor(leftTime / 3600);
-          var d = Math.floor(o / 24);
-          var m = Math.floor(leftTime / 60 % 60);
-          var s = leftTime % 60;
+          this.juliFengOrKai = true;
 
-          this.timeLeft = (m*1> 9 ? m : '0'+ m) + ":" + (s*1 > 9 ? s : '0'+ s);
-          this.timeLeftM = m*1> 9 ? m : '0'+ m;
-          this.timeLeftS = s*1 > 9 ? s : '0'+ s;
-          //console.log('开盘时间',this.timestampToTime(this.openPrizeTime));
-          //console.log('this.bocaiInfoData.openPrizeTime',this.bocaiInfoData.openPrizeTime);
           bus.$emit('isOpenOdds', true);
 
-          $('#clock').removeClass('red');
-
-          //alert('closeTime>0');
         }
 
         //bus.$emit('getRefreshTimeFast', '');
@@ -384,27 +316,27 @@
         this.openPrizeTimeS = sOpen*1 > 9 ? sOpen : '0'+ sOpen;
 
 
-        if(fengTime > 0) {
-          let msfeng = parseInt(fengTime % 1000).toString();
-          fengTime = parseInt(fengTime / 1000); 
-          let ofeng = Math.floor(fengTime / 3600);
-          let dfeng = Math.floor(ofeng / 24);
-          let mfeng = Math.floor(fengTime / 60 % 60);
-          let sfeng = fengTime % 60;
+        // if(fengTime > 0) {
+        //   let msfeng = parseInt(fengTime % 1000).toString();
+        //   fengTime = parseInt(fengTime / 1000); 
+        //   let ofeng = Math.floor(fengTime / 3600);
+        //   let dfeng = Math.floor(ofeng / 24);
+        //   let mfeng = Math.floor(fengTime / 60 % 60);
+        //   let sfeng = fengTime % 60;
 
-          this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
-          this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
-        } else {
-          let msfeng = parseInt(fengTime % 1000).toString();
-          fengTime = parseInt(fengTime / 1000); 
-          let ofeng = Math.floor(fengTime / 3600);
-          let dfeng = Math.floor(ofeng / 24);
-          let mfeng = Math.floor(fengTime / 60 % 60);
-          let sfeng = fengTime % 60;
+        //   this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
+        //   this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
+        // } else {
+        //   let msfeng = parseInt(fengTime % 1000).toString();
+        //   fengTime = parseInt(fengTime / 1000); 
+        //   let ofeng = Math.floor(fengTime / 3600);
+        //   let dfeng = Math.floor(ofeng / 24);
+        //   let mfeng = Math.floor(fengTime / 60 % 60);
+        //   let sfeng = fengTime % 60;
 
-          this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
-          this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
-        }
+        //   this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
+        //   this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
+        // }
 
         // let msfeng = parseInt(fengTime % 1000).toString();
         // fengTime = parseInt(fengTime / 1000); 

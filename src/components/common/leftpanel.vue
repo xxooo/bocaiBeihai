@@ -332,7 +332,7 @@ export default {
     // ...mapGetters({
     // })
     keyongBalance() {
-        return this.userInfo ? (this.userInfo.cashBalance*1 + this.userInfo.alreadyBalance*1).toFixed(4) : 0;
+        return this.userInfo ? (this.userInfo.cashBalance*1 + this.userInfo.alreadyBalance*1).toFixed(3) : 0;
     }
 
   },

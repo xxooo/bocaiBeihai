@@ -519,6 +519,7 @@ export default {
       qianhousan_lmp: [],
       orderDataList: [],
       normalPay: false,
+      kuaijiePay: false,
       bocaiCategory: {},
       kuaixuanList: ['0','1','2','3','4','5','6','7','8','9'],
       shishiZiDatas: {},
