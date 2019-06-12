@@ -7,7 +7,7 @@
 
           <tbody>
             <tr style="height: 33px; text-align: left; background: url(./static/img/tb_bg.jpg); color: Black; font-size: 14px;">
-                <td colspan="2" style="width: 230px;" align="center"><span style="font-size: 14px; font-weight: bold;">请核对您的帐户</span></td>
+                <td colspan="2" style="width: 228px;" align="center"><span style="font-size: 14px; font-weight: bold;">请核对您的帐户</span></td>
             </tr>
             <tr>
                 <td width="70px" align="left" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td>
@@ -140,6 +140,73 @@
 
         </table>
 
+
+        <table v-if="showNumpage == 3" width="100%" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top: 0px;" bgcolor="white" id="tb_memberinfo">
+            <tbody>
+                                <tr style="height: 33px; text-align: left; background: url(./static/img/tb_bg.jpg); color: Black; font-size: 14px;">
+                                    <td style="width: 227px;" colspan="2" nowrap="" align="center" id="td_mtranList_title">
+                                        <span style="font-size: 12px; font-weight: bold;">冠军大小 - 下注</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td>
+                                    <td align="left">njnj0055(D)盘</td>
+                                </tr>
+                                <tr>
+                                    <td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">可用金额</td>
+                                    <td align="left"><span name="allowprice">102</span></td>
+                                </tr>
+                            </tbody>
+
+
+                            <tbody id="tbodd_Normal3">
+                                                <tr style="height:16px;line-height:16px;">
+                                                    <td colspan="2">
+                                                    <div align="center" style="height:16px;line-height:16px;color:green;font-weight:bolder;">734738 期
+                                                    </div>
+                                                    <div class="tdredbold"><font color="blue">冠军大小 大 </font>
+                                                        <font color="black">@</font> 1.94
+                                                    </div>
+                                                </td>
+                                                </tr>
+
+                                                <tr>
+                                    <td class="t_td_caption_1">下注金额：</td>
+                                    <td align="left" style="padding-left:5px">
+                                        <input id="txtprice" style="width: 87px" type="text" onkeyup="value=value.replace(/[^\d]/g,'');winchange(1.94,-1);">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="t_td_caption_1">可赢金额：</td>
+                                    <td align="left" style="padding-left:5px">
+                                        <span id="winprice" style="color:red"></span>&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="t_td_caption_1">最高派彩：</td>
+                                    <td align="left" style="padding-left:5px">5000000</td>
+                                </tr>
+                                <tr id="tr_xdbtn" align="center" style="height: 33px; text-align: center; background: url(./static/img/td_but.jpg);">
+                                    <td colspan="2">
+                                        <input id="btn_cacel" type="button" value="取消下注" class="button_bg1" @click="cancel_xd()">  
+                                        <input id="btn_conform" name="btn_conform" class="button_bg1" type="button" value="确定下单" onclick="click_conformT(11,'D','621,冠军大小,1,大,1.94','621:1',1,0)">
+                                    </td>
+                                </tr>
+                                <tr id="tr_xdzhong" align="center" style="display:none;height: 33px; text-align: center; background: url(./static/img/td_but.jpg);">
+                                    <td colspan="2"><span style="color:red">下注中,请等待。。。</span></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+
+
+
+
+
+
+
+        </table>
+
+
         <table v-if="showNumpage == 2" width="100%" cellpadding="0" cellspacing="0" id="tb_xd">
             <tbody>
                 <tr>
@@ -210,14 +277,14 @@
         </table>
 
 
-        <table v-if="showNumpage == 3" width="100%" cellpadding="0" cellspacing="0" id="tb_xd_single">
+        <table v-if="showNumpage == 33" width="100%" cellpadding="0" cellspacing="0" id="tb_xd_single">
             <tbody>
                 <tr>
                     <td id="td_mtransingle">
-                        <table width="100%" cellpadding="0" cellspacing="1" class="DTable" align="center" id="tb_mtranlist" border="0" style="min-width:228px;margin-top: 0px; word-break: break-all; word-wrap: break-word">
+                        <table width="100%" cellpadding="0" cellspacing="1" class="DTable" align="center" id="tb_mtranlist" border="0" style="min-width:227px;margin-top: 0px; word-break: break-all; word-wrap: break-word">
                             <tbody>
                                 <tr style="height: 33px; text-align: left; background: url(./static/img/tb_bg.jpg); color: Black; font-size: 14px;">
-                                    <td colspan="2" nowrap="" align="center" id="td_mtranList_title">
+                                    <td colspan="2" style="width: 227px;" nowrap="" align="center" id="td_mtranList_title">
                                         <span style="font-size: 12px; font-weight: bold;">冠军大小 - 下注</span>
                                     </td>
                                 </tr>
@@ -236,7 +303,7 @@
                                         <table width="100%" cellpadding="0" cellspacing="0" border="0" style="min-width:228px; word-break: break-all; word-wrap: break-word;">
                                             <tbody>
                                                 <tr style="height:16px;line-height:16px;">
-                                                    <td colspan="2" align="center" style="height:16px;line-height:16px;color:green;font-weight:bolder;">734738 期</td>
+                                                    <td colspan="2" align="center" style="height:16px;line-height:16px;color:green;font-weight:bolder;width: 227px;">734738 期</td>
                                                 </tr> 
                                                 <tr>
                                                     <td colspan="2" class="tdredbold">
@@ -266,7 +333,7 @@
                                 </tr>
                                 <tr id="tr_xdbtn" align="center" style="height: 33px; text-align: center; background: url(./static/img/td_but.jpg);">
                                     <td colspan="2">
-                                        <input id="btn_cacel" type="button" value="取消下注" class="button_bg1" onclick="cancel_xd()">  
+                                        <input id="btn_cacel" type="button" value="取消下注" class="button_bg1" @click="cancel_xd()">  
                                         <input id="btn_conform" name="btn_conform" class="button_bg1" type="button" value="确定下单" onclick="click_conformT(11,'D','621,冠军大小,1,大,1.94','621:1',1,0)">
                                     </td>
                                 </tr>
@@ -284,7 +351,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="center">
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="color:#000;font-family:Verdana,'宋体',Arial,Sans;height:20px;min-width:228px; word-break: break-all; word-wrap: break-word;"> 
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="color:#000;font-family:Verdana,'宋体',Arial,Sans;height:20px;min-width:227px; word-break: break-all; word-wrap: break-word;"> 
                                             <tbody>
                                                 <tr>
                                                     <td colspan="2" class="tdredbold">
@@ -307,7 +374,7 @@
                                                 </tr>
                                                 <tr id="tr_xdbtn" align="center" style="height: 33px; text-align: center; background: url(./static/img/td_but.jpg);">
                                                     <td colspan="2">
-                                                        <input id="btn_cacel" type="button" value="取消下注" class="button_bg1" onclick="cancel_xd()">  
+                                                        <input id="btn_cacel" type="button" value="取消下注" class="button_bg1" @click="cancel_xd()">  
                                                         <input id="btn_conform" name="btn_conform" class="button_bg1" type="button" value="确定下单" disabled="">
                                                     </td>
                                                 </tr>
@@ -556,7 +623,9 @@ export default {
 
        },
 
-
+    cancel_xd() {
+        this.showNumpage = 1;
+    },
     orderOddsTo() {
 
 
@@ -797,12 +866,15 @@ export default {
     scrollbar-track-color: #f8f8f8;
     scrollbar-arrow-color: #006699;
 
-    width: 228px;
-    background-image: url(../../../static/img/l_backdrop.jpg);
     background-repeat: repeat-y;
     overflow-x: hidden;
     float: left;
     margin: 0px;
+
+    #div_commond {
+        margin: 0;
+        padding: 0;
+    }
 
     .DTable {
       margin-top: 5px;
@@ -835,8 +907,12 @@ export default {
     color: #5E5E5E;
     text-decoration: none;
   }
-
-
+  .tdredbold {
+    color: red;
+    font-weight: bolder;
+    height: 25px;
+    line-height: 25px;
+  }
 }
 
 

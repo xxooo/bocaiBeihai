@@ -89,10 +89,10 @@
     <div class="middleContent" style=" width:100%; position: fixed;">
       <table width="100%" border="0" cellpadding="0" cellspacing="1">
       <tbody><tr>
-          <td id="tduser" valign="top" style="width:245px; text-align:left; vertical-align:top;">
+          <td id="tduser" valign="top" style="width:228px;min-width:228px; text-align:left; vertical-align:top;background: url(./static/img/l_backdrop.jpg);">
             <left-panel></left-panel>
           </td>
-          <td id="tdbody" valign="top">
+          <td id="tdbody" valign="top" style="padding-left: 17px;">
             <router-view></router-view>
           </td>
        </tr>
