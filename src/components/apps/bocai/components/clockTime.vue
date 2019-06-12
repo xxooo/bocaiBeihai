@@ -230,14 +230,14 @@
 
         let kaipangTime = this.bocaiInfoData.closeTimeSet*1000 - now.getTime() + this.differTime;
 
-        console.log('getbocaiInfoData--获取传来博彩数据',this.bocaiInfoData,
-          '当前菠菜相差时间：'+this.differFengOrKai,
-          '当前时间：'+new Date(),
-          '当期开奖时间：'+this.timestampToTime(this.bocaiInfoData.openPrizeTime),
-          '当期开盘时间：'+this.timestampToTime(this.bocaiInfoData.openTime),
-          '当期封盘时间：'+this.timestampToTime(this.bocaiInfoData.closetime),
-          '提前多少秒封盘:'+this.bocaiInfoData.closeTimeSet,
-          '服务器时间:'+this.timestampToTime(this.bocaiInfoData.nowTime*1000));
+        // console.log('getbocaiInfoData--获取传来博彩数据',this.bocaiInfoData,
+        //   '当前菠菜相差时间：'+this.differFengOrKai,
+        //   '当前时间：'+new Date(),
+        //   '当期开奖时间：'+this.timestampToTime(this.bocaiInfoData.openPrizeTime),
+        //   '当期开盘时间：'+this.timestampToTime(this.bocaiInfoData.openTime),
+        //   '当期封盘时间：'+this.timestampToTime(this.bocaiInfoData.closetime),
+        //   '提前多少秒封盘:'+this.bocaiInfoData.closeTimeSet,
+        //   '服务器时间:'+this.timestampToTime(this.bocaiInfoData.nowTime*1000));
 
         //console.log('leftTime',leftTime);
         let closeTime = leftTime - this.bocaiInfoData.closeTimeSet*1000;
@@ -302,9 +302,6 @@
         //this.getfengTime(fengTime);
 
 
-         console.log('openPrizeTime',openPrizeTime);
-         console.log('fengTime',fengTime);
-
         let msOpen = parseInt(openPrizeTime % 1000).toString();
         openPrizeTime = parseInt(openPrizeTime / 1000); 
         let oOpen = Math.floor(openPrizeTime / 3600);
@@ -316,84 +313,10 @@
         this.openPrizeTimeS = sOpen*1 > 9 ? sOpen : '0'+ sOpen;
 
 
-        // if(fengTime > 0) {
-        //   let msfeng = parseInt(fengTime % 1000).toString();
-        //   fengTime = parseInt(fengTime / 1000); 
-        //   let ofeng = Math.floor(fengTime / 3600);
-        //   let dfeng = Math.floor(ofeng / 24);
-        //   let mfeng = Math.floor(fengTime / 60 % 60);
-        //   let sfeng = fengTime % 60;
-
-        //   this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
-        //   this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
-        // } else {
-        //   let msfeng = parseInt(fengTime % 1000).toString();
-        //   fengTime = parseInt(fengTime / 1000); 
-        //   let ofeng = Math.floor(fengTime / 3600);
-        //   let dfeng = Math.floor(ofeng / 24);
-        //   let mfeng = Math.floor(fengTime / 60 % 60);
-        //   let sfeng = fengTime % 60;
-
-        //   this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
-        //   this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
-        // }
-
-        // let msfeng = parseInt(fengTime % 1000).toString();
-        // fengTime = parseInt(fengTime / 1000); 
-        // let ofeng = Math.floor(fengTime / 3600);
-        // let dfeng = Math.floor(ofeng / 24);
-        // let mfeng = Math.floor(fengTime / 60 % 60);
-        // let sfeng = fengTime % 60;
-
-        // this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
-        // this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
-
-
-
-         console.log('openPrizeTimeM',this.openPrizeTimeM,this.openPrizeTimeS);
-         console.log('fengTimeM',this.fengTimeM,this.fengTimeS);
-
-
-
         this.t = setTimeout(this.gettimeLeft, 1000);
 
-        //console.log('new Date()',new Date());
-
-        //console.log(this.temdata,
-          // '当期开奖时间：'+this.timestampToTime(this.temdata.openPrizeTime),
-          // '当期开盘时间：'+this.timestampToTime(this.temdata.openTime),
-          // '提前多少秒封盘:'+this.temdata.closeTimeSet);
 
       },
-      // getopenPrizeTime(openPrizeTime) {
-      //   let openPrizeTime2 = openPrizeTime;
-      //   console.log('openPrizeTime',openPrizeTime);
-
-      //   let msOpen = parseInt(openPrizeTime % 1000).toString();
-      //   openPrizeTime2 = parseInt(openPrizeTime / 1000); 
-      //   console.log('openPrizeTime2',openPrizeTime2);
-      //   let oOpen = Math.floor(openPrizeTime / 3600);
-      //   let dOpen = Math.floor(oOpen / 24);
-      //   let mOpen = Math.floor(openPrizeTime / 60 % 60);
-      //   let sOpen = openPrizeTime % 60;
-
-      //   this.openPrizeTimeM = mOpen*1> 9 ? mOpen : '0'+ mOpen;
-      //   this.openPrizeTimeS = sOpen*1 > 9 ? sOpen : '0'+ sOpen;
-      // },
-      // getfengTime(fengTime) {
-      //   let fengTime2 = fengTime;
-      //   console.log('fengTime',fengTime);
-      //   let msfeng = parseInt(fengTime % 1000).toString();
-      //   fengTime2 = parseInt(fengTime / 1000); 
-      //   console.log('fengTime2',fengTime2);
-      //   let ofeng = Math.floor(fengTime / 3600);
-      //   let dfeng = Math.floor(ofeng / 24);
-      //   let mfeng = Math.floor(fengTime / 60 % 60);
-      //   let sfeng = fengTime % 60;
-
-      //   this.fengTimeM = mfeng*1> 9 ? mfeng : '0'+ mfeng;
-      //   this.fengTimeS = sfeng*1 > 9 ? sfeng : '0'+ sfeng;
-      // },
       timestampToTime(timestamp) {
         var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
         var Y = date.getFullYear() + '-';

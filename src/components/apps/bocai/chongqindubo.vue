@@ -32,7 +32,7 @@
 
                       <td class="betnum" :class="'yiwuqiu_lmp'+item.oddsId">{{item.oddsName}}</td>
                       <td class="oddsTdMin" :class="'yiwuqiu_lmp'+item.oddsId" @click="orderTd(itemPa,item,'yiwuqiu_lmp')" @mouseenter="overShow(item,'yiwuqiu_lmp')" @mouseleave="outHide(item,'yiwuqiu_lmp')">
-                        <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item) : ''" class="betRateNum" :class="'yiwuqiu_lmp'+item.oddsId+'a'">
+                        <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(itemPa,item,'yiwuqiu_lmp') : ''" class="betRateNum" :class="'yiwuqiu_lmp'+item.oddsId+'a'">
                           <span class="betRateNum">{{item.odds}}</span>
                         </a>
                         <span v-else style="width:41px;color:red;font-weight:bold;">&nbsp;-&nbsp;</span>
@@ -51,11 +51,6 @@
 
             <!-- 总和龙虎 -->
             <table class="DTable kuaijie" cellpadding="0" cellspacing="1" border="0" width="700" style="margin-top: 2px;">
-              <!-- <thead>
-                <tr class="DtrTitle">
-                  <td colspan="12" class="td_caption_1" style="font-weight: bold;">{{longhuhe_lmp.name}}</td>
-                </tr>
-              </thead> -->
               <tbody>
                 <tr class="Dbgco1">
                   <template v-for="(item,index) in longhuhe_lmp.list" v-if="index*1 < 4">
@@ -519,7 +514,6 @@ export default {
       yiwuqiu_lmp: [],
       qianhousan_lmp: [],
       orderDataList: [],
-      kuaijiePay: false,
       bocaiCategory: {},
       kuaixuanList: ['0','1','2','3','4','5','6','7','8','9'],
       shishiZiDatas: {},
@@ -528,7 +522,10 @@ export default {
       kuaixuanWeiList:[],
       tempList:[],
       selectedZiTd:[],
-      canOrder: true
+      canOrder: true,
+
+
+      kuaijiePay: false,
     }
   },
   computed: {
@@ -556,7 +553,9 @@ export default {
     QCheckShow_fu() {
 
     },
-    IntoMtran() {
+    IntoMtran(itemPa,item,oddEname) {
+
+      bus.$emit('toLeftOdd', itemPa,item,oddEname); 
 
     },
     QCheckShow() {
@@ -812,7 +811,7 @@ export default {
               bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
               bocaiValue:"",//投注内容,六合彩连肖/连尾
               normalMoney: item.normalMoney,//10000,//一般模式下，选择的金额
-              orderNormal: this.kuaijiePay,   //是快捷，还是一般投注
+              orderNormal: !this.kuaijiePay,   //是快捷，还是一般投注
               bocaiOdds: item.odds, //1.90//赔率
               dewaterId: item.dewaterId
             };

@@ -9,7 +9,7 @@
           <span @click="QCExplain()" class="shuomiSpan">说明</span>
         </span>
         <input type="reset" value="重 填" class="button_bg1" @click="reset()"> 
-        <input type="button" value="下 注" class="button_bg1" @click="orderOdds()">
+        <input type="button" value="下 注" class="button_bg1" @click="orderOddsTo()">
       </template>
 
       <span v-else style="color:red">下注中,请等待。。。</span>
