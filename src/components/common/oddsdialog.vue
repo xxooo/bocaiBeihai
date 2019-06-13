@@ -53,8 +53,8 @@
             <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderOddsVisible = false">关闭</button>
           </template>
           <template v-else>
-            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderSub()">确定</button>
-            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderOddsVisible = false">取消</button>
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderSub2()">确定</button>
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="cancel()">取消</button>
           </template>
         </div>
       </div>
@@ -72,9 +72,19 @@
 
 	export default {
 		props: {
+      orderList: {
+        type: Array
+      },
+      dialogType: {
+        type: String
+      },
+      orderOddsVisible: {
+        type: Boolean
+      }
 		},
 		data() {
 			return {
+        hasError:false,
         centerDialogVisible: false,
         messageinfo: '',
         messageid: ''
@@ -85,6 +95,13 @@
 		created() {
     },
     computed:{
+      totalMoney() {
+        let totalMoney = 0;
+        for(let n in this.orderList) {
+          totalMoney += this.orderList[n].betsMoney*1;
+        }
+        return totalMoney;
+      }
     },
     mounted(){
       bus.$on('getmessage', (data) => {
@@ -97,6 +114,12 @@
     beforeDestroy() {
     },
 		methods: {
+      orderSub2() {
+        bus.$emit('toorderSub','');
+      },
+      cancel() {
+        this.$emit('visibleByChild', false);
+      },
       async closeNotice() {
         let res = await this.$get(`${window.url}/api/closeNotice?id=`+this.messageid);
         this.centerDialogVisible = false;

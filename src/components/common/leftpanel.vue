@@ -278,6 +278,13 @@
         </table>
 
 
+        <!-- <table width="100%" cellpadding="0" cellspacing="0" id="tb_xd" style="display: table;">
+            <tbody><tr>
+                <td id="mtranlist"><table width="100%" cellpadding="0" cellspacing="1" class="DTable" align="center" id="tb_mtranlist" border="0" style="min-width:228px;margin-top: 0px; word-break: break-all; word-wrap: break-word"><tbody><tr style="height: 33px; text-align: left; background: url(../images/tb_bg.jpg); color: Black; font-size: 14px;"><td colspan="2" nowrap="" align="center" id="td_mtranList_title"><span style="font-size: 14px; font-weight: bold;">下注结果反馈</span></td></tr><tr><td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td><td align="left">njnj0055(D)盘</td></tr><tr><td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">可用金额</td><td align="left"><span name="allowprice">100</span></td></tr><tr id="tr_print" style="display: table-row;"><td colspan="2" style="height: 33px; text-align: center; background: url(../images/td_but.jpg);"><input type="button" value="打 印" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="OrderPrint()">&nbsp;<input type="button" value="返 回" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="toback()"></td></tr><tr style="height:20px;line-height:20px;"><td colspan="2" align="center" id="Current_Round" style="font-size: 14px;height:20px;line-height:20px; font-weight: bold;">11070949期</td></tr><tr><td colspan="2" align="center" id="Current_XiaZhu">非交易时间,不允许下注!</td></tr><tr><td align="center">下注笔数</td><td align="left" style="padding-left:5px">2 笔</td></tr><tr><td align="center">合计注额</td><td align="left" style="padding-left:5px">￥ 4</td></tr></tbody></table></td>
+            </tr>
+        </tbody></table> -->
+
+
 
         <table v-if="showNumpage == 4" width="100%" cellpadding="0" cellspacing="0" id="tb_xd_single_lianma">
             <tbody>
@@ -390,6 +397,46 @@
 
     </el-dialog> -->
 
+    <div tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons"  style="position: absolute; height: auto; width: 400px;  z-index: 101;" v-if="orderOddsVisible" id="ui-dialog">
+      <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
+        <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span>
+        <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close" @click="orderOddsVisible = false">
+          <span class="ui-button-icon ui-icon ui-icon-closethick"></span>
+          <span class="ui-button-icon-space"> </span>
+          Close
+        </button>
+        <a href="#" class="ui-dialog-titlebar-max ui-corner-all" role="button" style="display: none;">
+          <span class="ui-icon ui-icon-newwin"></span>
+        </a>
+      </div>
+
+        <div id="dialog_win" style="margin: 0px; padding: 0px; width: auto; min-height: 79px; max-height: none; height: auto;" class="ui-dialog-content ui-widget-content">
+            <div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px">
+
+              <template v-if="hasError">
+                {{dialogMessage}}
+              </template>
+            </div>
+        </div>
+
+      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <div class="ui-dialog-buttonset">
+
+          <template v-if="hasError">
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderOddsVisible = false">关闭</button>
+          </template>
+          <template v-else>
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderSub()">确定</button>
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderOddsVisible = false">取消</button>
+          </template>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="ui-widget-overlay ui-front" style="z-index: 100;" v-if="orderOddsVisible"></div>
+
   </div>
 </template>
 <script>
@@ -399,6 +446,7 @@ export default {
   data() {
     let vm = this;
     return {
+      hasError: true,
       toLeftOdd: false,
       isOpenOdds: true,
       showNumpage: 1,
@@ -418,6 +466,7 @@ export default {
           cuserId:'',//当前登录ID
           list:[]
         },
+      dialogMessage: '',
 
       bocaiTypeId: '',
       showOpen: true,
@@ -535,24 +584,23 @@ export default {
     },
     orderOddsTo() {
 
-        if(reg.test(this.moneyOrder*1)){
-          this.$alertMessage('请确认注单111!', '温馨提示');
+        let reg = /^[\u2E80-\u9FFF]+$/;
+        if(reg.test(this.moneyOrder*1) || this.moneyOrder == ''){
+          this.dialogMessage = '金额值必须是数值型数据';  //超过您的额度,无法下注,请联系上级代理
+          this.orderOddsVisible = true;
         } else {
-            
+            this.orderDataObj.bocaiOddName = this.moneyOrder*1;
+
+            let boon =confirm("确认下注吗？");
+            if(boon==true)
+            {
+                this.orderOddsTo2();
+            }else if(boon==false)
+            {
+                
+            }
+
         }
-
-
-        this.moneyOrder*1
-
-
-        let boon =confirm("确认下注吗？");
-        if(boon==true)
-        {
-            this.orderOddsTo2();
-        }else if(boon==false)
-        {
-            
-        }  金额值必须是数值型数据
 
     },
     orderOddsTo2() {
@@ -562,10 +610,6 @@ export default {
 
         console.log('this.moneyOrder',this.moneyOrder);
 
-        let reg = /^[\u2E80-\u9FFF]+$/;
-        if(reg.test(this.moneyOrder*1)){
-          this.$alertMessage('请确认注单111!', '温馨提示');
-        } else {
           this.orderList = [];
 
           console.log('this.orderDataObj',this.orderDataObj);
@@ -606,7 +650,6 @@ export default {
             console.log('this.orderList',this.orderList);
 
           }
-        }
 
       },
     async orderSub() {

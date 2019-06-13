@@ -103,7 +103,8 @@
         //hasFast: false,
         temdata: {},
         noneResult: false,
-        juliFengOrKai: true
+        juliFengOrKai: true,
+        ifcloseOdds: false
 			}
 		},
     components: {
@@ -251,9 +252,11 @@
         //console.log('封盘时间',this.timestampToTime(closeTimeSet));
 
         if(closeTime<=0 && leftTime<=0) {
-          //当期结束，开下一期
+          //当期结束，开下一期,还没开之前，都是封盘状态
 
           //bus.$emit('getRefreshTimeFast', '');
+
+          bus.$emit('isOpenOdds', false);
 
           bus.$emit('getbocaiInfo', '');
         } 
