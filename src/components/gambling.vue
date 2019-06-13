@@ -759,7 +759,6 @@ export default {
                 //that.shuaiXuanDatas(result.oddsList);
 
                 bus.$emit('getbocaiTypeId', item.bocaiId); 
-                bus.$emit('getbocaiTypeName', item.bocaiName); 
 
                 bus.$emit('getOddsInfo', result); 
 
@@ -836,6 +835,8 @@ export default {
         this.bocaiInfo();
 
         //this.clearTime();
+
+        store.commit('updatebocaiName',item.bocaiName);
 
         this.$router.push({name: path});
 

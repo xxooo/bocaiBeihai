@@ -145,16 +145,17 @@
             <tbody>
                                 <tr style="height: 33px; text-align: left; background: url(./static/img/tb_bg.jpg); color: Black; font-size: 14px;">
                                     <td style="width: 227px;" colspan="2" nowrap="" align="center" id="td_mtranList_title">
-                                        <span style="font-size: 12px; font-weight: bold;">冠军大小 - 下注</span>
+                                        <span style="font-size: 12px; font-weight: bold;">{{orderDataObj.bocaiCategory2Name}} - 下注</span>
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td>
-                                    <td align="left">njnj0055(D)盘</td>
+                                    <td align="left">{{userInfo.username}}({{userInfo.handicap}})盘</td>
                                 </tr>
                                 <tr>
                                     <td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">可用金额</td>
-                                    <td align="left"><span name="allowprice">102</span></td>
+                                    <td align="left"><span name="allowprice">{{userInfo.cashBalance}}</span></td>
                                 </tr>
                             </tbody>
 
@@ -162,10 +163,10 @@
                             <tbody id="tbodd_Normal3">
                                                 <tr style="height:16px;line-height:16px;">
                                                     <td colspan="2">
-                                                    <div align="center" style="height:16px;line-height:16px;color:green;font-weight:bolder;">734738 期
+                                                    <div align="center" style="height:16px;line-height:16px;color:green;font-weight:bolder;">{{bocaiInfoData.bocaiPeriods}} 期
                                                     </div>
-                                                    <div class="tdredbold"><font color="blue">冠军大小 大 </font>
-                                                        <font color="black">@</font> 1.94
+                                                    <div class="tdredbold"><font color="blue">{{orderDataObj.bocaiCategory2Name}}&nbsp;&nbsp;{{orderDataObj.bocaiOddName}} </font>
+                                                        <font color="black">@</font> {{orderDataObj.bocaiOdds}}
                                                     </div>
                                                 </td>
                                                 </tr>
@@ -173,23 +174,23 @@
                                                 <tr>
                                     <td class="t_td_caption_1">下注金额：</td>
                                     <td align="left" style="padding-left:5px">
-                                        <input id="txtprice" style="width: 87px" type="text" onkeyup="value=value.replace(/[^\d]/g,'');winchange(1.94,-1);">
+                                        <input id="txtprice" v-model.number="moneyOrder" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/" style="width: 87px" type="text">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="t_td_caption_1">可赢金额：</td>
                                     <td align="left" style="padding-left:5px">
-                                        <span id="winprice" style="color:red"></span>&nbsp;
+                                        <span id="winprice" style="color:red">{{moneyOrder == '' ? '' : +orderDataObj.bocaiOdds*moneyOrder*1 - moneyOrder*1}}</span>&nbsp;
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="t_td_caption_1">最高派彩：</td>
-                                    <td align="left" style="padding-left:5px">5000000</td>
+                                    <td align="left" style="padding-left:5px">{{maxPaiCai}}</td>
                                 </tr>
                                 <tr id="tr_xdbtn" align="center" style="height: 33px; text-align: center; background: url(./static/img/td_but.jpg);">
                                     <td colspan="2">
                                         <input id="btn_cacel" type="button" value="取消下注" class="button_bg1" @click="cancel_xd()">  
-                                        <input id="btn_conform" name="btn_conform" class="button_bg1" type="button" value="确定下单" onclick="click_conformT(11,'D','621,冠军大小,1,大,1.94','621:1',1,0)">
+                                        <input id="btn_conform" name="btn_conform" class="button_bg1" type="button" value="确定下单" @click="orderOddsTo()">
                                     </td>
                                 </tr>
                                 <tr id="tr_xdzhong" align="center" style="display:none;height: 33px; text-align: center; background: url(./static/img/td_but.jpg);">
@@ -277,119 +278,6 @@
         </table>
 
 
-        <table v-if="showNumpage == 33" width="100%" cellpadding="0" cellspacing="0" id="tb_xd_single">
-            <tbody>
-                <tr>
-                    <td id="td_mtransingle">
-                        <table width="100%" cellpadding="0" cellspacing="1" class="DTable" align="center" id="tb_mtranlist" border="0" style="min-width:227px;margin-top: 0px; word-break: break-all; word-wrap: break-word">
-                            <tbody>
-                                <tr style="height: 33px; text-align: left; background: url(./static/img/tb_bg.jpg); color: Black; font-size: 14px;">
-                                    <td colspan="2" style="width: 227px;" nowrap="" align="center" id="td_mtranList_title">
-                                        <span style="font-size: 12px; font-weight: bold;">冠军大小 - 下注</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td>
-                                    <td align="left">njnj0055(D)盘</td>
-                                </tr>
-                                <tr>
-                                    <td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">可用金额</td>
-                                    <td align="left"><span name="allowprice">102</span></td>
-                                </tr>
-                            </tbody>
-                            <tbody id="tbodd_Normal">
-                                <tr>
-                                    <td colspan="2">
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="min-width:228px; word-break: break-all; word-wrap: break-word;">
-                                            <tbody>
-                                                <tr style="height:16px;line-height:16px;">
-                                                    <td colspan="2" align="center" style="height:16px;line-height:16px;color:green;font-weight:bolder;width: 227px;">734738 期</td>
-                                                </tr> 
-                                                <tr>
-                                                    <td colspan="2" class="tdredbold">
-                                                        <font color="blue">冠军大小 大 </font>
-                                                        <font color="black">@</font> 1.94
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="t_td_caption_1">下注金额：</td>
-                                    <td align="left" style="padding-left:5px">
-                                        <input id="txtprice" style="width: 87px" type="text" onkeyup="value=value.replace(/[^\d]/g,'');winchange(1.94,-1);">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="t_td_caption_1">可赢金额：</td>
-                                    <td align="left" style="padding-left:5px">
-                                        <span id="winprice" style="color:red"></span>&nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="t_td_caption_1">最高派彩：</td>
-                                    <td align="left" style="padding-left:5px">5000000</td>
-                                </tr>
-                                <tr id="tr_xdbtn" align="center" style="height: 33px; text-align: center; background: url(./static/img/td_but.jpg);">
-                                    <td colspan="2">
-                                        <input id="btn_cacel" type="button" value="取消下注" class="button_bg1" @click="cancel_xd()">  
-                                        <input id="btn_conform" name="btn_conform" class="button_bg1" type="button" value="确定下单" onclick="click_conformT(11,'D','621,冠军大小,1,大,1.94','621:1',1,0)">
-                                    </td>
-                                </tr>
-                                <tr id="tr_xdzhong" align="center" style="display:none;height: 33px; text-align: center; background: url(./static/img/td_but.jpg);">
-                                    <td colspan="2"><span style="color:red">下注中,请等待。。。</span></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                            <tbody id="tbodd_N0Normal" style="display:none;">
-                                <tr style="height:20px;line-height:20px;">
-                                    <td colspan="2" align="center" style="font-size: 12px;height:20px;line-height:20px;color:red; font-weight: bold;">下注被返回,请再次确认！</td>
-                                </tr>
-                                <tr style="height:16px;line-height:16px;">
-                                    <td colspan="2" align="center" style="font-size: 12px;height:20px;line-height:20px;color:#000; font-weight: bold;">734738期</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" align="center">
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="color:#000;font-family:Verdana,'宋体',Arial,Sans;height:20px;min-width:227px; word-break: break-all; word-wrap: break-word;"> 
-                                            <tbody>
-                                                <tr>
-                                                    <td colspan="2" class="tdredbold">
-                                                        <font color="blue">冠军大小 大 </font>
-                                                        <font color="black">@</font> 1.94
-                                                    </td>
-                                                </tr>
-                                                <tr style="height:16px;line-height:16px;">
-                                                    <td style="height:16px;line-height:16px;width:73px;" align="right">下注金额：</td>
-                                                    <td align="left" style="height:16px;line-height:16px;" id="Normal_stake"></td>
-                                                </tr>
-                                                <tr style="height:16px;line-height:16px;">
-                                                    <td style="height:16px;line-height:16px;width:73px;" align="right">可赢金额：</td>
-                                                    <td align="left" style="height:16px;line-height:16px;" id="Normal_winningstake"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center" colspan="2">
-                                                        <div style="background-color:red;color:#fff;text-align:center;width:200px;">已封盘</div>
-                                                    </td>
-                                                </tr>
-                                                <tr id="tr_xdbtn" align="center" style="height: 33px; text-align: center; background: url(./static/img/td_but.jpg);">
-                                                    <td colspan="2">
-                                                        <input id="btn_cacel" type="button" value="取消下注" class="button_bg1" @click="cancel_xd()">  
-                                                        <input id="btn_conform" name="btn_conform" class="button_bg1" type="button" value="确定下单" disabled="">
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
 
         <table v-if="showNumpage == 4" width="100%" cellpadding="0" cellspacing="0" id="tb_xd_single_lianma">
             <tbody>
@@ -505,7 +393,7 @@
   </div>
 </template>
 <script>
-//import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -516,6 +404,20 @@ export default {
       showNumpage: 1,
       orderDataList: [],
       kuaijiePay: false,
+      orderList: [],
+      orderDataObj: {},
+      maxPaiCai: 5000000,
+      moneyOrder: '',
+      orderDatas: {
+          periodsId:'',//投注期数ID
+          bocaiTypeId:'',//投注博彩ID
+          bocaiTypeName:'',//投注博彩名称
+          bocaiCategory1Id:'',//投注博彩分类1ID
+          bocaiCategory1Name:'',//投注博彩分类1名称
+          orderBetMoneySum:0,//投注总和
+          cuserId:'',//当前登录ID
+          list:[]
+        },
 
       bocaiTypeId: '',
       showOpen: true,
@@ -577,8 +479,11 @@ export default {
     };
   },
   computed: {
-    // ...mapGetters({
-    // })
+    ...mapGetters({
+        bocaiInfoData: 'getbocaiInfoData',
+        bocaiName: 'getbocaiName',
+        bocaiCategoryName: 'getbocaiCategoryName'
+    }),
     keyongBalance() {
         return this.userInfo ? (this.userInfo.cashBalance*1 + this.userInfo.alreadyBalance*1).toFixed(3) : 0;
     }
@@ -598,9 +503,11 @@ export default {
       bus.$on('isOpenOdds', (data) => {
         this.isOpenOdds = data;
       });
-      bus.$on('toLeftOdd', (itemPa,item,oddEname) => {
+      bus.$on('toLeftOdd', (itemPa,item,ids) => {
         this.showNumpage = 3;
-        this.orderTd(itemPa,item,oddEname);
+
+        this.moneyOrder = '';
+        this.orderTd(itemPa,item,ids);
       });
 
   },
@@ -614,7 +521,7 @@ export default {
            // window.print();
            // document.body.innerHTML =body;//打印完成之后，还原界面
 
-           var newstr = document.getElementById(myDiv).innerHTML;
+          var newstr = document.getElementById(myDiv).innerHTML;
           var oldstr = document.body.innerHTML; 
           document.body.innerHTML = newstr; 
           window.print(); 
@@ -628,13 +535,23 @@ export default {
     },
     orderOddsTo() {
 
+        let boon =confirm("确认下注吗？");
+        if(boon==true)
+        {
+            this.orderOddsTo2();
+        }else if(boon==false)
+        {
+            
+        }
+
+    },
+    orderOddsTo2() {
+
 
         console.log('this.orderDataList',this.orderDataList);
 
         let reg = /^[\u2E80-\u9FFF]+$/;
-        if(reg.test(this.moneyOrder)){
-          this.$alertMessage('请确认注单!', '温馨提示');
-        } else if(!this.disableBtn) {
+        if(reg.test(this.moneyOrder*1)){
           this.$alertMessage('请确认注单!', '温馨提示');
         } else {
           this.orderList = [];
@@ -644,34 +561,32 @@ export default {
           if(!this.kuaijiePay) {
             //console.log('正常');
 
-            for(let n in this.orderDataList) {
-              if(this.orderDataList[n].normalMoney != '') {
+              if(this.orderDataObj.normalMoney != '') {
 
                 let obj = {};
 
-                if(this.orderDataList[n].bocaiValue == '') {
-                    // obj.oddNames = this.orderDataList[n].bocaiCategory2Name + '  ' + this.orderDataList[n].bocaiOddName,
-                    obj.bocaiCategory2Name = this.orderDataList[n].bocaiCategory2Name;
-                    obj.bocaiOddName = this.orderDataList[n].bocaiOddName;
+                if(this.orderDataObj.bocaiValue == '') {
+                    // obj.oddNames = this.orderDataObj.bocaiCategory2Name + '  ' + this.orderDataObj.bocaiOddName,
+                    obj.bocaiCategory2Name = this.orderDataObj.bocaiCategory2Name;
+                    obj.bocaiOddName = this.orderDataObj.bocaiOddName;
 
-                    obj.bocaiOdds = this.orderDataList[n].bocaiOdds,
-                    obj.betsMoney = this.orderDataList[n].normalMoney
+                    obj.bocaiOdds = this.orderDataObj.bocaiOdds,
+                    obj.betsMoney = this.orderDataObj.normalMoney
                 } else {
-                    // obj.oddNames = this.orderDataList[n].bocaiOddName + '  ' + this.orderDataList[n].bocaiValue,
-                    obj.bocaiValue = this.orderDataList[n].bocaiValue;
-                    obj.bocaiOddName = this.orderDataList[n].bocaiOddName;
+                    // obj.oddNames = this.orderDataObj.bocaiOddName + '  ' + this.orderDataObj.bocaiValue,
+                    obj.bocaiValue = this.orderDataObj.bocaiValue;
+                    obj.bocaiOddName = this.orderDataObj.bocaiOddName;
 
-                    obj.bocaiOdds = this.orderDataList[n].bocaiOdds,
-                    obj.betsMoney = this.orderDataList[n].normalMoney
+                    obj.bocaiOdds = this.orderDataObj.bocaiOdds,
+                    obj.betsMoney = this.orderDataObj.normalMoney
                 }
 
                 this.orderList.push(obj);
               }
-            }
             if(this.orderList.length == '0') {
               this.$alertMessage('请确认注单!', '温馨提示');
             } else {
-              this.orderOddsVisible = true;
+              this.orderSub();
             }
 
             console.log('this.orderList',this.orderList);
@@ -680,25 +595,81 @@ export default {
         }
 
       },
+    async orderSub() {
+
+        if(this.totalMoney > this.cashBalance) {
+          this.$alertMessage('您的余额不足!');
+        } else {
+
+          console.log('this.bocaiTypeName',this.bocaiName);
+
+          console.log('this.bocaiInfoData',this.bocaiInfoData);
+
+          this.orderDatas.list = [];
+
+          this.orderDatas.periodsId = this.bocaiInfoData.bocaiPeriodsId;
+          this.orderDatas.bocaiTypeId = this.bocaiTypeId;
+          this.orderDatas.bocaiTypeName = this.bocaiName;
+          this.orderDatas.bocaiCategory1Id = this.bocaiCategory.id;
+          this.orderDatas.bocaiCategory1Name = this.bocaiCategory.name;
+          this.orderDatas.orderBetMoneySum = this.totalMoney;
+          this.orderDatas.cuserId = this.cuserId;
+
+          for(let n in this.orderList) {
+            let obj = {
+              bocaiCategory2Id: this.orderDataList[n].bocaiCategory2Id,//8225,//投注博彩分类2ID
+              bocaiCategory2Name: this.orderDataList[n].bocaiCategory2Name,//"混合",//投注博彩分类2名称
+              bocaiOddId: this.orderDataList[n].bocaiOddId,//5543,//投注博彩赔率ID
+              bocaiOddName: this.orderDataList[n].bocaiOddName,//"大",//投注博彩赔率名称
+              bocaiValue: this.orderDataList[n].bocaiValue,//投注内容,六合彩连肖/连尾
+              betsMoney: +this.orderList[n].betsMoney,//10000,//一般模式下，选择的金额
+              bocaiOdds: this.orderDataList[n].bocaiOdds,//1.90//赔率
+              dewaterId: this.orderDataList[n].dewaterId //退水ID
+            }
+            this.orderDatas.list.push(obj);
+          }
+
+          console.log('this.orderDatas',this.orderDatas);
+
+          this.orderOddsVisible = false;
+          
+          let that = this;
+          const loading = this.$loading({
+                lock: true,
+                text: 'Loading',
+                background: 'rgba(0, 0, 0, 0.7)'
+              });
+          await that.$post(`${window.url}/api/orderSub`,this.orderDatas).then((res) => {
+            that.$handelResponse(res, (result) => {
+            loading.close();
+              if(result.code===200){
+                //更新用户信息
+                bus.$emit('getcUserInfo', ''); 
+                that.orderDatas.list = [];
+                that.$success('下注成功！');
+                that.reset();
+              }
+            })
+          });
+        }
+      },
     orderTd(oddsObj,item,ids) {
+
 
       if(this.isOpenOdds) {
 
-        $('.'+ids+item.oddsId).addClass('selected');
-
-        let obj = {
+        this.orderDataObj = {
               bocaiCategory2Id: oddsObj.id,//8225,//投注博彩分类2ID
               bocaiCategory2Name: oddsObj.name,//"混合",//投注博彩分类2名称
               bocaiOddId: item.oddsId,//5543,//投注博彩赔率ID
               bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
               bocaiValue:"",//投注内容,六合彩连肖/连尾
-              normalMoney: item.normalMoney,//10000,//一般模式下，选择的金额
+              normalMoney: this.moneyOrder*1,//10000,//一般模式下，选择的金额
               orderNormal: !this.kuaijiePay,   //是快捷，还是一般投注
               bocaiOdds: item.odds, //1.90//赔率
               dewaterId: item.dewaterId
           };
-
-          this.orderDataList.push(obj);
+          
         }
         
     },

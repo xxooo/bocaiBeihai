@@ -5,7 +5,7 @@
         <input id="chk_qcstake" type="checkbox" v-model="kuaijiePay" @click="changePay()">
         <span class="kuaijieSpan">快捷下注</span>
         <span id="sp_qcstake" class="yibanSpan" v-if="kuaijiePay">金额：
-          <input id="txtqcstake" type="text" class="wid60">
+          <input id="txtqcstake" type="text" class="wid60" v-model.number="moneyOrder" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
           <span @click="QCExplain()" class="shuomiSpan">说明</span>
         </span>
         <input type="reset" value="重 填" class="button_bg1" @click="reset()"> 
@@ -87,7 +87,7 @@
 
 
 <script>
-  //import { mapGetters } from 'vuex';
+  import { mapGetters } from 'vuex';
 
 
 	export default {
@@ -109,7 +109,6 @@
         hahahaid: '',
         bocaiTypeId: '',
         bocaiCategoryId: '',
-        bocaiTypeName: '',
         cuserId: '',
         bocaiInfoData: {},
         kuaijiePay: false,
@@ -138,6 +137,11 @@
       this.getcashmoney();
     },
     computed:{
+      ...mapGetters({
+        bocaiInfoData: 'getbocaiInfoData',
+        bocaiName: 'getbocaiName',
+        bocaiCategoryName: 'getbocaiCategoryName'
+      }),
       totalMoney() {
         let totalMoney = 0;
         for(let n in this.orderList) {
@@ -152,9 +156,6 @@
       });
       bus.$on('getbocaiCategoryId', (data) => {
         this.bocaiCategoryId = data;
-      });
-      bus.$on('getbocaiTypeName', (data) => {
-        this.bocaiTypeName = data;
       });
       bus.$on('getcuserId', (data) => {
         this.cuserId = data;
@@ -219,7 +220,7 @@
           this.$alertMessage('您的余额不足!', '温馨提示');
         } else {
 
-          console.log('this.bocaiTypeName',this.bocaiTypeName);
+          console.log('this.bocaiName',this.bocaiName);
 
           console.log('this.bocaiInfoData',this.bocaiInfoData);
 
@@ -227,7 +228,7 @@
 
           this.orderDatas.periodsId = this.bocaiInfoData.bocaiPeriodsId;
           this.orderDatas.bocaiTypeId = this.bocaiTypeId;
-          this.orderDatas.bocaiTypeName = this.bocaiTypeName;
+          this.orderDatas.bocaiTypeName = this.bocaiName;
           this.orderDatas.bocaiCategory1Id = this.bocaiCategory.id;
           this.orderDatas.bocaiCategory1Name = this.bocaiCategory.name;
           this.orderDatas.orderBetMoneySum = this.totalMoney;
