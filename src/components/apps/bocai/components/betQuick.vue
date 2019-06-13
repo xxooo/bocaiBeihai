@@ -110,7 +110,7 @@
         bocaiTypeId: '',
         bocaiCategoryId: '',
         cuserId: '',
-        bocaiInfoData: {},
+        //bocaiInfoData: {},
         kuaijiePay: false,
         isOpenOdds: true,
         canOrder: true,
@@ -160,9 +160,9 @@
       bus.$on('getcuserId', (data) => {
         this.cuserId = data;
       });
-      bus.$on('getbocaiInfoData', (data) => {
-        this.bocaiInfoData = data;
-      });
+      // bus.$on('getbocaiInfoData', (data) => {
+      //   this.bocaiInfoData = data;
+      // });
       bus.$on('isOpenOdds', (data) => {
         this.isOpenOdds = data;
       });

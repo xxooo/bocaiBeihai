@@ -535,6 +535,16 @@ export default {
     },
     orderOddsTo() {
 
+        if(reg.test(this.moneyOrder*1)){
+          this.$alertMessage('请确认注单111!', '温馨提示');
+        } else {
+            
+        }
+
+
+        this.moneyOrder*1
+
+
         let boon =confirm("确认下注吗？");
         if(boon==true)
         {
@@ -542,7 +552,7 @@ export default {
         }else if(boon==false)
         {
             
-        }
+        }  金额值必须是数值型数据
 
     },
     orderOddsTo2() {
@@ -550,19 +560,21 @@ export default {
 
         console.log('this.orderDataList',this.orderDataList);
 
+        console.log('this.moneyOrder',this.moneyOrder);
+
         let reg = /^[\u2E80-\u9FFF]+$/;
         if(reg.test(this.moneyOrder*1)){
-          this.$alertMessage('请确认注单!', '温馨提示');
+          this.$alertMessage('请确认注单111!', '温馨提示');
         } else {
           this.orderList = [];
 
-          console.log('this.orderDataListthis.orderDataList',this.orderDataList);
+          console.log('this.orderDataObj',this.orderDataObj);
 
           if(!this.kuaijiePay) {
             //console.log('正常');
 
               if(this.orderDataObj.normalMoney != '') {
-
+                console.log('正常');
                 let obj = {};
 
                 if(this.orderDataObj.bocaiValue == '') {
@@ -583,8 +595,10 @@ export default {
 
                 this.orderList.push(obj);
               }
+
+            console.log('this.orderList',this.orderList);
             if(this.orderList.length == '0') {
-              this.$alertMessage('请确认注单!', '温馨提示');
+              this.$alertMessage('请确认注单222!', '温馨提示');
             } else {
               this.orderSub();
             }
@@ -664,7 +678,7 @@ export default {
               bocaiOddId: item.oddsId,//5543,//投注博彩赔率ID
               bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
               bocaiValue:"",//投注内容,六合彩连肖/连尾
-              normalMoney: this.moneyOrder*1,//10000,//一般模式下，选择的金额
+              normalMoney: "",//10000,//一般模式下，选择的金额
               orderNormal: !this.kuaijiePay,   //是快捷，还是一般投注
               bocaiOdds: item.odds, //1.90//赔率
               dewaterId: item.dewaterId
