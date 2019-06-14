@@ -94,9 +94,6 @@
 		props: {
       orderDataList: {
         type: Array
-      },
-      bocaiCategory: {
-        type: Object
       }
 		},
 		data() {
@@ -107,15 +104,10 @@
         orderOddsVisible: false,
         orderList: [],
         hahahaid: '',
-        bocaiTypeId: '',
-        bocaiCategoryId: '',
-        cuserId: '',
-        //bocaiInfoData: {},
         kuaijiePay: false,
         isOpenOdds: true,
         canOrder: true,
         disableBtn: true,
-        cashBalance: '',
         choumaPay: 0,
         orderDatas: {
           periodsId:'',//投注期数ID
@@ -134,13 +126,14 @@
 		},
 		created() {
 
-      this.getcashmoney();
     },
     computed:{
       ...mapGetters({
         bocaiInfoData: 'getbocaiInfoData',
         bocaiName: 'getbocaiName',
-        bocaiCategoryName: 'getbocaiCategoryName'
+        userInfo: 'getuserInfo',
+        bocaiCategory: 'getbocaiCategory',
+        bocaiTypeId: 'getbocaiTypeId'
       }),
       totalMoney() {
         let totalMoney = 0;
@@ -151,28 +144,11 @@
       }
     },
     mounted(){
-      bus.$on('getbocaiTypeId', (data) => {
-        this.bocaiTypeId = data;
-      });
-      bus.$on('getbocaiCategoryId', (data) => {
-        this.bocaiCategoryId = data;
-      });
-      bus.$on('getcuserId', (data) => {
-        this.cuserId = data;
-      });
-      // bus.$on('getbocaiInfoData', (data) => {
-      //   this.bocaiInfoData = data;
-      // });
       bus.$on('isOpenOdds', (data) => {
         this.isOpenOdds = data;
       });
       bus.$on('getkuaijiePay', (data) => {
         this.kuaijiePay = data;
-      });
-      bus.$on('getcashBalance', (data) => {
-
-        //console.log('getcashBalance',data);
-        this.cashBalance = data;
       });
       bus.$on('getcanOrder', (data) => {
         this.canOrder = data;
@@ -193,13 +169,6 @@
       QCExplain() {
 
       },
-      async getcashmoney() {
-        let res = await this.$get(`${window.url}/api/cUserInfo`);
-
-        if(res.code===200){
-          this.cashBalance = res.data.cashBalance;
-        }
-      },
       changePay() {
         this.$emit('childByChangePay', this.kuaijiePay);
         this.moneyOrder = '';
@@ -216,7 +185,7 @@
       },
       async orderSub() {
 
-        if(this.totalMoney > this.cashBalance) {
+        if(this.totalMoney > this.userInfo.cashBalance) {
           this.$alertMessage('您的余额不足!', '温馨提示');
         } else {
 
@@ -232,7 +201,7 @@
           this.orderDatas.bocaiCategory1Id = this.bocaiCategory.id;
           this.orderDatas.bocaiCategory1Name = this.bocaiCategory.name;
           this.orderDatas.orderBetMoneySum = this.totalMoney;
-          this.orderDatas.cuserId = this.cuserId;
+          this.orderDatas.cuserId = this.userInfo.id;
 
           for(let n in this.orderList) {
             let obj = {
@@ -263,9 +232,9 @@
             loading.close();
               if(result.code===200){
                 //更新用户信息
+                bus.$emit('getorderList', this.orderList,totalMoney); 
                 bus.$emit('getcUserInfo', ''); 
                 that.orderDatas.list = [];
-                that.$success('下注成功！');
                 that.reset();
               }
             })
@@ -282,7 +251,7 @@
                 text: 'Loading',
                 background: 'rgba(0, 0, 0, 0.7)'
               });
-          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.bocaiTypeId+`&bocaiCategoryId=`+this.bocaiCategoryId).then((res) => {
+          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.bocaiTypeId+`&bocaiCategoryId=`+this.bocaiCategory.id).then((res) => {
             that.$handelResponse(res, (result) => {
             loading.close();
 

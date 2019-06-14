@@ -4,7 +4,8 @@ const state = {
   bocaiCategory: {},
   bocaiInfoData: {},
   bocaiName: '',
-  bocaiCategoryName: ''
+  userInfo: {},
+  bocaiTypeId: ''
 }
 
 export default state

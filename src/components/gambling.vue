@@ -87,7 +87,7 @@
     </div>
 
     <div class="middleContent" style=" width:100%; position: fixed;">
-      <table width="100%" border="0" cellpadding="0" cellspacing="1">
+      <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="1">
       <tbody><tr>
           <td id="tduser" valign="top" style="width:228px;min-width:228px; text-align:left; vertical-align:top;background: url(./static/img/l_backdrop.jpg);">
             <left-panel></left-panel>
@@ -228,6 +228,8 @@
 import LeftPanel from '@/components/common/leftpanel';
 import PageFooter from '@/components/common/pagefooter';
 import MessageDialog from '@/components/common/messagedialog';
+import { mapGetters } from 'vuex';
+
 
 export default {
   components: {
@@ -267,7 +269,6 @@ export default {
           ],
       messageinfo: '',
       centerDialogVisible: false,
-      userInfo: {},
       bocaiCategoryList: []
 
     }
@@ -276,18 +277,15 @@ export default {
     this.getBocai();
     this.openPrizeTime = this.$timestampToTimeRi(new Date());
 
-    //this.getPrizeResult();
-
-    this.myTimer();
-
-    //console.log('bocaiName',this.bocaiName);
-
     this.getbocaoName();
 
     this.getcUserInfo();
 
   },
   computed: {
+    ...mapGetters({
+      userInfo: 'getuserInfo'
+    }),
     bocaiPathName: function() {
       return this.$route.name
     }
@@ -324,33 +322,12 @@ export default {
       let res = await this.$get(`${window.url}/api/cUserInfo`);
 
       if(res.code===200){
-        //store.commit('updatecashBalance',res.data.cashBalance);
-        this.userInfo = res.data;
-
+        store.commit('updateuserInfo',res.data);
       }
     },
     goRightMenu(path) {
       this.getnotice();
       this.$router.push({name: path});
-    },
-    myTimer() {
-
-      if(!this.hasResult) {
-        for(let n in this.preResult) {
-          let kk = parseInt(Math.random() * (this.max - this.min + 1) +this. min);
-          $('.loadanimot'+n).html(kk);
-          $('.loadanimot'+n).removeClass('bounce animated');
-        }
-      } else {
-        //这里无限循环，不合适
-
-        for(let n in this.preResult) {
-          let kk = this.preResult[n];
-          $('.loadanimot'+n).html(kk);
-          $('.loadanimot'+n).addClass('bounce animated');
-        }
-      }
-      this.t3 = setTimeout(this.myTimer, 100);
     },
     async getRefreshTime() {
       let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
@@ -484,9 +461,7 @@ export default {
               //if("companyIsOpenSet": "",//该会员上级公司对该期博彩的封盘状态。状态：0删除，1封盘，2开盘。只有开盘才能投注。)
                //if("isOpenSet": "",//管理员对于当期博彩的开关设置) 
 
-              bus.$emit('getbocaiInfoData', res.data);
               store.commit('updatebocaiInfoData',res.data);
-              //res.data.preResult == '';
 
               if(res.data.preResult == '') {
                 if([8555,8806,9057].findIndex((n) => n==this.bocaiTypeId)>-1) {
@@ -671,10 +646,7 @@ export default {
         }
 
         store.commit('updatebocaiName',this.submenu);
-
-
-        //this.getPrizeResult();
-        //this.refreshTime();
+        store.commit('updatebocaiTypeId',this.bocaiTypeId);
 
     },
     async getnotice() {
@@ -694,6 +666,8 @@ export default {
 
       bus.$emit('getbocaiCategoryId', item.id);
 
+      store.commit('updatebocaiCategory',item);
+
 
       this.resetOddsCategory(item);
 
@@ -701,8 +675,6 @@ export default {
     async resetOddsCategory(item) {
 
       let that = this;
-
-      store.commit('updatebocaiCategory',item);
 
       const loading = this.$loading({
                 lock: true,
@@ -745,20 +717,18 @@ export default {
                 bus.$emit('getbocaiCategoryId', result.bocaiCategoryList[0].id);
 
 
-                store.commit('updatebocaiCategoryName',result.bocaiCategoryList[0].name);
-
                 // that.oddsList = result.oddsList;
                 // that.showOdds = result.bocaiCategoryList[0].name;
                 // that.bocaiCategory = result.bocaiCategoryList[0];
 
-                
+                store.commit('updatebocaiCategory',result.bocaiCategoryList[0]);
 
                 //that.activeIndex = that.bocaiCategoryList[0].name;
 
 
                 //that.shuaiXuanDatas(result.oddsList);
 
-                bus.$emit('getbocaiTypeId', item.bocaiId); 
+                store.commit('updatebocaiTypeId', item.bocaiId); 
 
                 bus.$emit('getOddsInfo', result); 
 
@@ -853,15 +823,14 @@ export default {
   },
   mounted() {
     bus.$on('getRefreshTimeFast', (data) => {
-        //console.log('getRefreshTimeFast');
         this.getRefreshTimeFast();
     });
     bus.$on('getbocaiInfo', (data) => {
-        //console.log('getRefreshTimeFast');
         this.bocaiInfo();
     });
-
-
+    bus.$on('getcUserInfo', (data) => {
+        this.getcUserInfo();
+    });
   },
   updated() {
   }

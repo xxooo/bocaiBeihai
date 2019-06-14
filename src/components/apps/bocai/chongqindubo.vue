@@ -10,7 +10,7 @@
 
                 <clock-time></clock-time>
 
-                <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" :bocaiCategory="bocaiCategory" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
+                <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
 
               </div>
 
@@ -95,7 +95,7 @@
 
 
 
-          <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" :bocaiCategory="bocaiCategory" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
+          <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
 
           <div id="lotteryno">
 
@@ -525,6 +525,10 @@ export default {
       canOrder: true,
 
 
+      noOpenPrizeList: [],
+      openPrizeList: [],
+
+
       kuaijiePay: false,
     }
   },
@@ -532,6 +536,8 @@ export default {
   },
   created() {
     //this.getOdds(this.curBocaiTypeId);
+
+    this.getchanglong();
   },
   mounted(){
       bus.$on('isOpenOdds', (data) => {
@@ -566,7 +572,40 @@ export default {
     },
 
 
+    async getchanglong() {
 
+        this.openPrizeList = [];
+        this.noOpenPrizeList = [];
+
+          let that = this;
+          await that.$get(`${window.url}/api/changlong?bocaiTypeId=`+this.curBocaiTypeId+'&showNum=10').then((res) => {
+            that.$handelResponse(res, (result) => {
+              if(result.code===200){
+
+                for(let n in result.openPrizeMap) {
+                  let obj = {};
+                  obj.content = n;
+                  obj.num = result.openPrizeMap[n];
+                  this.openPrizeList.push(obj);
+                }
+
+                for(let n in result.noOpenPrizeMap) {
+                  let obj = {};
+                  obj.content = n;
+                  obj.num = result.noOpenPrizeMap[n];
+                  this.noOpenPrizeList.push(obj);
+                }
+
+                //console.log('this.openPrizeMap',this.openPrizeMap);
+                //更新用户信息
+                // bus.$emit('getcUserInfo', ''); 
+                // that.orderDatas.list = [];
+                // that.$success('下注成功！');
+                // that.reset();
+              }
+            })
+          });
+    },
     kuaixuanOdd(item,type) {
       this.qingkong();
       let list = this.shishiZiDatas.list;
@@ -847,21 +886,6 @@ export default {
             bus.$emit('getmessage', res.data);
           } else {
           }
-
-    },
-    async getOddsCategory(item,index) {
-
-      bus.$emit('getbocaiCategoryId', item.id);
-
-      //this.getnotice();
-
-      // if(index*1 > 9) {
-      //   this.submenu = item.name;
-      // } else {
-      //   this.submenu = '更多';
-      // }
-
-      this.resetOddsCategory(item);
 
     },
     async getOdds(result) {

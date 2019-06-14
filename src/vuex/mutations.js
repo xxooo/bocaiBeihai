@@ -14,8 +14,11 @@ const mutations = {
   updatebocaiName(state,v) {
     state.bocaiName = v;
   },
-  updatebocaiCategoryName(state,v) {
-    state.bocaiCategoryName = v;
+  updateuserInfo(state,v) {
+    state.userInfo = v;
+  },
+  updatebocaiTypeId(state,v) {
+    state.bocaiTypeId = v;
   }
 }
 

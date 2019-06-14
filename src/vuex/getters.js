@@ -4,7 +4,8 @@ const getters = {
   getbocaiCategory: state => state.bocaiCategory,
   getbocaiInfoData: state => state.bocaiInfoData,
   getbocaiName: state => state.bocaiName,
-  getbocaiCategoryName: state => state.bocaiCategoryName
+  getuserInfo: state => state.userInfo,
+  getbocaiTypeId: state => state.bocaiTypeId
 }
 
 export default getters

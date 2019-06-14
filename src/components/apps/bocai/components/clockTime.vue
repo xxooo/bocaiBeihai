@@ -38,7 +38,7 @@
       <tbody>
         <tr>
           <td class="h24w28">
-            <b id="t_LID" class="green">{{bocaiInfoData.bocaiPeriods}}</b>期　<b class="bocaiSubName">{{bocaiCategoryName}}</b>
+            <b id="t_LID" class="green">{{bocaiInfoData.bocaiPeriods}}</b>期　<b class="bocaiSubName">{{bocaiCategory.name}}</b>
           </td>
           <td class="alrwd25">
             <span id="hClockTime_C" v-if="juliFengOrKai">距离封盘：<b>{{fengTimeM}}</b>:<b>{{fengTimeS}}</b></span>
@@ -82,9 +82,6 @@
 		props: {
       orderDataList: {
         type: Array
-      },
-      bocaiCategory: {
-        type: Object
       }
 		},
 		data() {
@@ -113,12 +110,14 @@
       //this.refreshBocaiInfo();
       this.gettimeLeft();
 
+      console.log('bocaiCategory',this.bocaiCategory);
+
     },
     computed:{
       ...mapGetters({
         bocaiInfoData: 'getbocaiInfoData',
         bocaiName: 'getbocaiName',
-        bocaiCategoryName: 'getbocaiCategoryName'
+        bocaiCategory: 'getbocaiCategory'
       }),
       totalMoney() {
         let totalMoney = 0;
@@ -178,27 +177,6 @@
 
     },
     mounted(){
-      bus.$on('getbocaiInfoData', (data) => {
-        //this.bocaiInfoData = data;
-        //this.openPrizeTime = data.openPrizeTime;
-        //this.closeTimeSet = data.closeTimeSet;
-
-
-        // console.log('getbocaiInfoData--获取传来博彩数据',data,
-        //   '当期开奖时间：'+this.timestampToTime(data.openPrizeTime),
-        //   '当期开盘时间：'+this.timestampToTime(data.openTime),
-        //   '提前多少秒封盘:'+data.closeTimeSet,
-        //   '服务器时间:'+this.timestampToTime(data.nowTime*1000));
-        // console.log('new Date()',new Date());
-
-        //let now = new Date();
-
-        //this.differTime = now.getTime() - data.nowTime*1000;
-
-        //this.temdata = data;
-
-        //this.gettimeLeft();
-      });
       bus.$on('hasFast', (data) => {
         this.noneResult = data;
       });
