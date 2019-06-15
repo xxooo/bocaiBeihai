@@ -24,7 +24,19 @@
                         <tbody>
                             <tr>
                                 <td height="43">
-                                    <div id="odds_marquee"><p id="oc_left" style="width: 1135px;"><a href="javascript:void(0)" id="oddsshow" style="top: 0px;"></a></p><span id="oc_right"><a href="javascript:void(0)" class="odds-c oc-up" title="點擊向上顯示最新變化的賠率" id="oddsup">&nbsp;</a><a  class="odds-c oc-down" title="點擊向下顯示最新變化的賠率" id="oddsdown">&nbsp;</a></span></div>
+                                    <div id="odds_marquee">
+                                      <p id="oc_left" style="width: 1135px;">
+                                        <a href="javascript:void(0)" id="oddsshow" style="top: 0px;">
+                                          <span class="oc_red">广东快乐十分：选三前组&nbsp;01</span>
+                                          <span class="oc_blue">-20</span>|
+                                          <span class="oc_red">广东快乐十分：选三前组&nbsp;01</span>
+                                          <span class="oc_blue">-20</span></a>
+                                      </p>
+                                      <span id="oc_right">
+                                        <a href="javascript:void(0)" class="odds-c oc-up" title="點擊向上顯示最新變化的賠率" id="oddsup">&nbsp;</a>
+                                        <a  class="odds-c oc-down" title="點擊向下顯示最新變化的賠率" id="oddsdown">&nbsp;</a>
+                                      </span>
+                                    </div>
                                 </td>
                             </tr>
                         <tr>
@@ -541,8 +553,8 @@ export default {
           if(res.code===200){
             this.bocaiTypeList = res.bocaiTypeList;
 
-            this.getOddsInfo(res.bocaiTypeList[0])
-
+            this.getOddsInfo(res.bocaiTypeList[0]);
+            store.commit('updatebocaiTypeId', res.bocaiTypeList[0].bocaiId); 
 
           }
     },
@@ -664,21 +676,15 @@ export default {
     },
     async getOddsCategory(item,index) {
 
-      bus.$emit('getbocaiCategoryId', item.id);
+      let that = this;
 
       store.commit('updatebocaiCategory',item);
 
+      $('.OddsCategory'+index).addClass('active');
 
-      this.resetOddsCategory(item);
-
-    },
-    async resetOddsCategory(item) {
-
-      let that = this;
 
       const loading = this.$loading({
                 lock: true,
-                text: 'Loading',
                 background: 'rgba(0, 0, 0, 0.7)'
               });
 
@@ -688,7 +694,9 @@ export default {
 
               if(result.code===200){
 
-                bus.$emit('getresetOddsCategory', result);
+                store.commit('updateoddsList',result.oddsList);
+
+                bus.$emit('getresetOddsCategory', item.name);
 
               }
             })
@@ -700,7 +708,6 @@ export default {
 
           const loading = this.$loading({
                 lock: true,
-                text: 'Loading',
                 background: 'rgba(0, 0, 0, 0.7)'
               });
 
@@ -712,30 +719,18 @@ export default {
 
                 that.bocaiCategoryList = result.bocaiCategoryList;
 
-                //console.log('this.bocaiCategoryList',this.bocaiCategoryList);
-
-                bus.$emit('getbocaiCategoryId', result.bocaiCategoryList[0].id);
-
-
-                // that.oddsList = result.oddsList;
-                // that.showOdds = result.bocaiCategoryList[0].name;
-                // that.bocaiCategory = result.bocaiCategoryList[0];
 
                 store.commit('updatebocaiCategory',result.bocaiCategoryList[0]);
+                store.commit('updateoddsList',result.oddsList);
 
-                //that.activeIndex = that.bocaiCategoryList[0].name;
+                $('.OddsCategory0').addClass('active');
 
-
-                //that.shuaiXuanDatas(result.oddsList);
-
-                store.commit('updatebocaiTypeId', item.bocaiId); 
 
                 bus.$emit('getOddsInfo', result); 
 
 
                 this.bocaiInfo();
 
-                //store.commit('updateoddresult',result);
               }
             })
           });
@@ -1081,6 +1076,11 @@ body {
         _border-bottom: 50px solid #eee;
         _top: 0px;
     }
+
+    #oddsshow {
+      color: #aaa;
+      position: absolute;
+  }
 }
 
 </style>

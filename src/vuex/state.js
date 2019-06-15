@@ -5,7 +5,10 @@ const state = {
   bocaiInfoData: {},
   bocaiName: '',
   userInfo: {},
-  bocaiTypeId: ''
+  bocaiTypeId: '',
+  curPeriods: '',
+  isOdding: false,
+  oddsList: []
 }
 
 export default state

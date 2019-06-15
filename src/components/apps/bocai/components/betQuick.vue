@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="btnDivArea " id="btnDivArea11">  
-      <template v-if="!orderOddsVisible"> 
-        <input id="chk_qcstake" type="checkbox" v-model="kuaijiePay" @click="changePay()">
+      <template v-if="!isOdding"> 
+        <input id="chk_qcstake" type="checkbox" v-model="kuaijiePay" @click="reset2()">
         <span class="kuaijieSpan">快捷下注</span>
         <span id="sp_qcstake" class="yibanSpan" v-if="kuaijiePay">金额：
           <input id="txtqcstake" type="text" class="wid60" v-model.number="moneyOrder" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
@@ -35,7 +35,7 @@
         <div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px">
 
           <template v-if="hasError">
-            超过您的额度,无法下注,请联系上级代理
+            {{hasErrorMessage}}
           </template>
           <template v-else>
             <div style="font-size:14px; text-align:center; color:#000; line-height:30px;">下注明细如下， 是否确定？</div>
@@ -98,7 +98,8 @@
 		},
 		data() {
 			return {
-        hasError:false,
+        hasErrorMessage: '',
+        hasError: false,  //0为正常，1 为 超过可用额度，2 低于最小下注金额  超过您的额度,无法下注,请联系上级代理
         moneyOrder: '',
         radio10: '1',
         orderOddsVisible: false,
@@ -106,7 +107,6 @@
         hahahaid: '',
         kuaijiePay: false,
         isOpenOdds: true,
-        canOrder: true,
         disableBtn: true,
         choumaPay: 0,
         orderDatas: {
@@ -133,7 +133,10 @@
         bocaiName: 'getbocaiName',
         userInfo: 'getuserInfo',
         bocaiCategory: 'getbocaiCategory',
-        bocaiTypeId: 'getbocaiTypeId'
+        bocaiTypeId: 'getbocaiTypeId',
+        curPeriods: 'getcurPeriods',
+        isOdding: 'getisOdding',
+        oddsList: 'getoddsList'
       }),
       totalMoney() {
         let totalMoney = 0;
@@ -150,10 +153,8 @@
       bus.$on('getkuaijiePay', (data) => {
         this.kuaijiePay = data;
       });
-      bus.$on('getcanOrder', (data) => {
-        this.canOrder = data;
-
-        //console.log('this.canOrder',this.canOrder);
+      bus.$on('gotoreset', (data) => {
+        this.reset();
       });
     },
 		methods: {
@@ -169,13 +170,23 @@
       QCExplain() {
 
       },
-      changePay() {
-        this.$emit('childByChangePay', this.kuaijiePay);
+      reset2() {
+        console.log('this.kuaijiePay--reset',this.kuaijiePay)
+        store.commit('updateisOdding',false);
         this.moneyOrder = '';
+
+        this.$emit('childByReset',!this.kuaijiePay,this.oddsList);
+
+        this.orderOdds2();
       },
       reset() {
+        console.log('this.kuaijiePay--reset',this.kuaijiePay)
+        store.commit('updateisOdding',false);
         this.moneyOrder = '';
-        this.$emit('childByReset', 'reset');
+
+        this.$emit('childByReset',this.kuaijiePay,this.oddsList);
+
+        this.orderOdds2();
       },
       deleteOdd(index) {
         this.orderList.splice(index,1);
@@ -185,8 +196,13 @@
       },
       async orderSub() {
 
-        if(this.totalMoney > this.userInfo.cashBalance) {
-          this.$alertMessage('您的余额不足!', '温馨提示');
+        console.log('this.curPeriods',this.curPeriods);
+        console.log('this.bocaiInfoData.bocaiPeriodsId',this.bocaiInfoData.bocaiPeriods);
+
+        if(this.curPeriods != this.bocaiInfoData.bocaiPeriods) {
+            bus.$emit('toleftShow',22,'指定期数为非交易状态!');
+        } else if(!this.isOpenOdds) {
+            bus.$emit('toleftShow',22,'非交易时间,不允许下注!');
         } else {
 
           console.log('this.bocaiName',this.bocaiName);
@@ -224,7 +240,7 @@
           let that = this;
           const loading = this.$loading({
                 lock: true,
-                text: 'Loading',
+                //text: 'Loading',
                 background: 'rgba(0, 0, 0, 0.7)'
               });
           await that.$post(`${window.url}/api/orderSub`,this.orderDatas).then((res) => {
@@ -232,7 +248,7 @@
             loading.close();
               if(result.code===200){
                 //更新用户信息
-                bus.$emit('getorderList', this.orderList,totalMoney); 
+                bus.$emit('getorderList', that.orderList,that.totalMoney); 
                 bus.$emit('getcUserInfo', ''); 
                 that.orderDatas.list = [];
                 that.reset();
@@ -248,7 +264,6 @@
 
           const loading = this.$loading({
                 lock: true,
-                text: 'Loading',
                 background: 'rgba(0, 0, 0, 0.7)'
               });
           await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.bocaiTypeId+`&bocaiCategoryId=`+this.bocaiCategory.id).then((res) => {
@@ -275,7 +290,7 @@
                   }
                 }
 
-                bus.$emit('getkuaijiePay', false); 
+                //bus.$emit('getkuaijiePay', false); 
 
                 this.orderOddsTo();
 
@@ -284,29 +299,70 @@
           });
 
       },
+      async orderOdds2() {
 
+        let that = this;
+
+          const loading = this.$loading({
+                lock: true,
+                background: 'rgba(0, 0, 0, 0.7)'
+              });
+          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.bocaiTypeId+`&bocaiCategoryId=`+this.bocaiCategory.id).then((res) => {
+            that.$handelResponse(res, (result) => {
+            loading.close();
+
+              if(result.code===200){
+
+                bus.$emit('setNewOddsList', result.oddsList); //要不要下注时，更新最新赔率 
+
+
+                // for(let n in this.orderDataList) {
+                //   for(let m in result.oddsList) {
+                //     if(this.orderDataList[n].bocaiCategory2Id == result.oddsList[m].id) {
+
+                //       for(let x in result.oddsList[m].list) {
+
+                //         if(this.orderDataList[n].bocaiOddId == result.oddsList[m].list[x].oddsId) {
+
+                //           this.orderDataList[n].bocaiOdds = result.oddsList[m].list[x].odds;
+                //         }
+                //       }
+                //     }
+                //   }
+                // }
+
+                //bus.$emit('getkuaijiePay', false); 
+
+              }
+            })
+          });
+
+      },
 
       orderOddsTo() {
 
-
-        console.log('this.orderDataList',this.orderDataList);
-
-        let reg = /^[\u2E80-\u9FFF]+$/;
-        if(reg.test(this.moneyOrder)){
-          this.$alertMessage('请确认注单!', '温馨提示');
-        } else if(!this.disableBtn) {
-          this.$alertMessage('请确认注单!', '温馨提示');
-        } else {
+          store.commit('updateisOdding',true);
           this.orderList = [];
+
+
+          store.commit('updatecurPeriods', this.bocaiInfoData.bocaiPeriods);  //每次点下注时，记录当时的菠菜期数
 
           console.log('this.orderDataListthis.orderDataList',this.orderDataList);
 
           if(!this.kuaijiePay) {
             //console.log('正常');
-
+            let minpay = true;
+            let str1 = '';
+            let str2 = '';
             for(let n in this.orderDataList) {
-              if(this.orderDataList[n].normalMoney != '') {
+              if(+this.orderDataList[n].normalMoney < 2) {
+                console.log('+this.orderDataList[n].normalMoney < 2',+this.orderDataList[n].normalMoney,+this.orderDataList[n].normalMoney < 2);
 
+                minpay = false;
+                str1 = this.orderDataList[n].bocaiCategory2Name;
+                str2 = this.orderDataList[n].bocaiOddName;
+              }
+              if(this.orderDataList[n].normalMoney != '') {
                 let obj = {};
 
                 if(this.orderDataList[n].bocaiValue == '') {
@@ -328,13 +384,24 @@
                 this.orderList.push(obj);
               }
             }
-            if(this.orderList.length == '0') {
-              this.$alertMessage('请确认注单!', '温馨提示');
+            if(!minpay) {
+              //有超过最小金额的
+              this.hasError = true;
+              this.hasErrorMessage = '【'+str1+'】'+str2 + '&nbsp;&nbsp;' +'最低单注金额2元';
+              this.orderOddsVisible = true;
+            } else if(this.totalMoney > this.userInfo.cashBalance) {
+              this.hasError = true;
+              this.hasErrorMessage = '超过您的额度,无法下注,请联系上级代理';
+              this.orderOddsVisible = true;
+            } else if(this.orderList.length == '0') {
+              this.hasError = true;
+              this.hasErrorMessage = '请填写下注金额!!!';
+              this.orderOddsVisible = true;
             } else {
+              this.hasError = false;
               this.orderOddsVisible = true;
             }
 
-            console.log('this.orderList',this.orderList);
 
           } else {
             //console.log('快捷');
@@ -374,21 +441,10 @@
             //console.log('this.orderList',this.orderList);
 
           }
-        }
-
-      },
-      orderMul(pay) {
-
-        if(this.disableBtn) {
-          this.moneyOrder = pay*1 + this.moneyOrder*1;
-        }
 
       }
 		},
     watch: {
-      canOrder: function(val, oldValue) {
-        this.disableBtn = val;
-      }
     }
 	}
 

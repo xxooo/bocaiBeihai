@@ -10,7 +10,7 @@
 
                 <clock-time></clock-time>
 
-                <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
+                <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" v-on:childByReset="childByReset"></bet-quick>
 
               </div>
 
@@ -31,13 +31,18 @@
                     <template v-for="(item,index) in itemPa.list" v-if="['大','小','单','双'].findIndex((n) => n==item.oddsName)>-1"> 
 
                       <td class="betnum" :class="'yiwuqiu_lmp'+item.oddsId">{{item.oddsName}}</td>
-                      <td class="oddsTdMin" :class="'yiwuqiu_lmp'+item.oddsId" @click="orderTd(itemPa,item,'yiwuqiu_lmp')" @mouseenter="overShow(item,'yiwuqiu_lmp')" @mouseleave="outHide(item,'yiwuqiu_lmp')">
+                      <td class="oddsTdMin" :class="['yiwuqiu_lmp'+item.oddsId,'ggggggg']" @click="orderTd(itemPa,item,'yiwuqiu_lmp')" @mouseenter="overShow(item,'yiwuqiu_lmp')" @mouseleave="outHide(item,'yiwuqiu_lmp')">
                         <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(itemPa,item,'yiwuqiu_lmp') : ''" class="betRateNum" :class="'yiwuqiu_lmp'+item.oddsId+'a'">
                           <span class="betRateNum">{{item.odds}}</span>
                         </a>
                         <span v-else style="width:41px;color:red;font-weight:bold;">&nbsp;-&nbsp;</span>
                         <input type="hidden" value="1.9874">
                       </td>
+
+
+                      <!-- <td id="td_r210_2" class=""><a href="javascript:void(0)" title="按此下注" onclick="IntoMtran('210,,2,,1.9399,210_2',this)" class="betRateNum" id="oid_210_2" style="display: none;"><span class="betRateNum">1.9399</span></a><input type="hidden" name="odds_210_2" value="1.9399"><span style="width: 41px; color: red; font-weight: bold;" id="hengan_210_2">&nbsp;-&nbsp;</span></td> -->
+
+
                       <td v-if="!kuaijiePay">
                         <input v-if="isOpenOdds" v-model="item.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(itemPa,item,'yiwuqiu_lmp',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
                         <span v-else style="width:60px;">封盘</span>
@@ -95,7 +100,7 @@
 
 
 
-          <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
+          <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" v-on:childByReset="childByReset"></bet-quick>
 
           <div id="lotteryno">
 
@@ -285,7 +290,7 @@
         <div class="bet_box">
           <div class="orders oodsBodyDiv">
             <div class="order-info">
-              <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" :bocaiCategory="bocaiCategory" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
+              <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" :bocaiCategory="bocaiCategory" v-on:childByReset="childByReset"></bet-quick>
             </div>
 
             <template v-if="showOdds == '两面盘'">
@@ -475,7 +480,7 @@
             </template>
 
             <div class="order-info">
-              <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" :bocaiCategory="bocaiCategory" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
+              <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" :bocaiCategory="bocaiCategory" v-on:childByReset="childByReset"></bet-quick>
             </div>
 
             <footer-Bocai :curBocaiTypeId="curBocaiTypeId"></footer-Bocai>
@@ -494,6 +499,7 @@
 import BetQuick from '@/components/apps/bocai/components/betQuick';
 import ClockTime from '@/components/apps/bocai/components/clockTime';
 import FooterBocai from '@/components/apps/bocai/components/footerBocai';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -506,7 +512,6 @@ export default {
       curBocaiTypeId: '1',
       curactiveIndex: '重庆时时彩',
       bocaiCategoryList: [],
-      oddsList: [],
       showOdds: '',
       submenu: '更多',
       isOpenOdds: true,
@@ -533,26 +538,40 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+        bocaiInfoData: 'getbocaiInfoData',
+        bocaiName: 'getbocaiName',
+        userInfo: 'getuserInfo',
+        bocaiTypeId: 'getbocaiTypeId',
+        curPeriods: 'getcurPeriods',
+        oddsList: 'getoddsList'
+    }),
   },
   created() {
-    //this.getOdds(this.curBocaiTypeId);
-
     this.getchanglong();
   },
   mounted(){
+      bus.$on('getkuaijiePay', (data) => {
+
+        this.kuaijiePay = data;
+      });
       bus.$on('isOpenOdds', (data) => {
         this.isOpenOdds = data;
       });
       bus.$on('setNewOddsList', (data) => {
-        this.kuaijiePay = false;
-        this.oddsList = data;
+        //this.kuaijiePay = false;
         this.shuaiXuanDatas(data);
       });
+      //第一次登录要显示的菠菜
       bus.$on('getOddsInfo', (data) => {
-        this.getOdds(data);
+        console.log('this.oddsList55555555',this.oddsList);
+        this.showOdds = data.bocaiCategoryList[0].name;
+        this.shuaiXuanDatas(this.oddsList);
       });
+      //切换二级菜单更新菠菜,以及切快捷更新菠菜
       bus.$on('getresetOddsCategory', (data) => {
-        this.resetOddsCategory(data);
+        this.showOdds = data;
+        this.resetOddsCategoryfromgam();
       });
   },
   methods: {
@@ -561,7 +580,8 @@ export default {
     },
     IntoMtran(itemPa,item,oddEname) {
 
-      bus.$emit('toLeftOdd', itemPa,item,oddEname); 
+      store.commit('updatecurPeriods', this.bocaiInfoData.bocaiPeriods);
+      bus.$emit('gettoLeftOdd', itemPa,item,oddEname); 
 
     },
     QCheckShow() {
@@ -736,17 +756,8 @@ export default {
       }
 
     },
-    childByChangePay(data) {
-
-      if(data == false) {
-        this.orderDataList = [];
-        $('.bet_box .orders td').removeClass('selected');
-        this.allQingkong();
-      }
-      this.kuaijiePay = data;
-    },
-    childByReset(data) {
-      this.resetOddsCategory(this.bocaiCategory);
+    childByReset(boon,data) {
+      this.resetOddsCategory(boon,data);
       this.allQingkong();
     },
     outHide(item,ids) {
@@ -865,18 +876,24 @@ export default {
     handleSelect(key, keyPath) {
         //console.log(key, keyPath);
     },
-    async resetOddsCategory(result) {
-      let that = this;
+    //更新菠菜默认非快捷
+    async resetOddsCategoryfromgam() {
+        this.orderDataList = [];
+        this.kuaijiePay = false;
 
-      if(result.code===200){
-        that.oddsList = result.oddsList;
-
-        that.orderDataList = [];
-        that.kuaijiePay = false;
         bus.$emit('getkuaijiePay', false); 
 
-        that.shuaiXuanDatas(result.oddsList);
-      }
+        this.shuaiXuanDatas(this.oddsList);
+    },
+    //切换快捷更新菠菜
+    async resetOddsCategory(boon,data) {
+
+        this.orderDataList = [];
+        this.kuaijiePay = boon;
+
+        bus.$emit('getkuaijiePay', boon); 
+
+        this.shuaiXuanDatas(data);
     },
     async getnotice() {
       let res = await this.$get(`${window.url}/api/notice`);
@@ -886,17 +903,6 @@ export default {
             bus.$emit('getmessage', res.data);
           } else {
           }
-
-    },
-    async getOdds(result) {
-      let that = this;
-      
-      if(result.code===200){
-        that.oddsList = result.oddsList;
-        that.showOdds = result.bocaiCategoryList[0].name;
-        that.bocaiCategory = result.bocaiCategoryList[0];
-        that.shuaiXuanDatas(result.oddsList);
-      }
 
     },
     shuaiXuanDatas(dataList) {

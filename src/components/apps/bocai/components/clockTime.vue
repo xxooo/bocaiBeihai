@@ -107,11 +107,7 @@
     components: {
 		},
 		created() {
-      //this.refreshBocaiInfo();
       this.gettimeLeft();
-
-      console.log('bocaiCategory',this.bocaiCategory);
-
     },
     computed:{
       ...mapGetters({

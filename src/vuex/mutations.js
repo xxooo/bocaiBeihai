@@ -19,6 +19,15 @@ const mutations = {
   },
   updatebocaiTypeId(state,v) {
     state.bocaiTypeId = v;
+  },
+  updatecurPeriods(state,v) {
+    state.curPeriods = v;
+  },
+  updateisOdding(state,v) {
+    state.isOdding = v;
+  },
+  updateoddsList(state,v) {
+    state.oddsList = v;
   }
 }
 
