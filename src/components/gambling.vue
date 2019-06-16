@@ -231,6 +231,38 @@
     <message-dialog></message-dialog> -->
 
 
+    <div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable" style="position: absolute; height: auto; width: 720px; top: 27.5px; left: 319px;z-index: 101;"  v-if="orderOddsVisible">
+      <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
+        <span id="ui-id-1" class="ui-dialog-title">信息</span>
+        
+        <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close" @click="orderOddsVisible = false">
+          <span class="ui-button-icon ui-icon ui-icon-closethick"></span>
+          <span class="ui-button-icon-space"> </span>
+          Close
+        </button>
+
+        <a href="#" class="ui-dialog-titlebar-max ui-corner-all" role="button" style="display: none;">
+          <span class="ui-icon ui-icon-newwin"></span>
+        </a>
+      </div>
+      <div id="dialog_win" style="margin: 0px; padding: 0px; width: auto; min-height: 0px; max-height: none; height: 245px;" class="ui-dialog-content ui-widget-content">
+        <div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px">
+          <div style="background-image: url(./static/img/tb_bg.jpg); line-height: 24px; font-weight:bold; color:#4a1a04; height:24px; width:680px; border:1px solid #e9a884; margin:2px auto 0px;">
+            
+          </div>
+          <div style="width:680px; border-color:#e9a884; border-style:solid; border-width:0px 1px 1px; height:210px; overflow:auto; margin:0px auto;">
+            <div style="width:600px; margin:5px auto 0px; word-break:break-all; word-wrap:break-word; padding-left:20px;">
+              <p style="text-indent:-20px; line-height:24px; color:#4a1a04;">
+                {{dialogMessage}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="ui-widget-overlay ui-front" style="z-index: 100;" v-if="orderOddsVisible"></div>
 
   </div>
 </template>
@@ -251,6 +283,8 @@ export default {
   },
   data() {
     return {
+      orderOddsVisible: false,
+      dialogMessage: '',
       min : 0, //生成的最小的数字，比如200
       max : 9, //生成的最大的数字，比如500
       imgUrl: 0,
@@ -292,6 +326,8 @@ export default {
     this.getbocaoName();
 
     this.getcUserInfo();
+
+    this.getnotice();
 
   },
   computed: {
@@ -338,7 +374,6 @@ export default {
       }
     },
     goRightMenu(path) {
-      this.getnotice();
       this.$router.push({name: path});
     },
     async getRefreshTime() {
@@ -663,13 +698,13 @@ export default {
     },
     async getnotice() {
 
-      //console.log('yy---getnotice');
-
       let res = await this.$get(`${window.url}/api/notice`);
 
           if(res.code===200){
 
-            bus.$emit('getmessage', res.data);
+            this.dialogMessage = res.data.content;
+            this.orderOddsVisible = true;
+
           } else {
           }
 
@@ -738,14 +773,11 @@ export default {
     },
     async getOdds(item,index) {
 
-      //console.log('item---getnotice',item);
       //console.log('item---index',index);    给active类
 
       if(['重庆时时彩','幸运飞艇','北京PK拾','山东11选5','广东11选5','江西11选5','PC蛋蛋','江苏快3','北京快乐8','极速赛车','极速时时彩'].findIndex((n) => n==item.bocaiName)>-1) {
 
         this.activeIndex = item.bocaiName;
-
-        this.getnotice();
 
         this.submenu = item.bocaiName;
 
@@ -835,11 +867,9 @@ export default {
 </script>
 <style scoped lang="less">
 
-
-
 #main {
 
-    body, div, span, p, b, textarea, input, select, form, table, tr, td {
+  body, div, span, p, b, textarea, input, select, form, table, tr, td {
         margin: 0;
         padding: 0;
         list-style-type: none;

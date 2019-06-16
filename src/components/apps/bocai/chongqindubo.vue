@@ -32,7 +32,7 @@
 
                       <td class="betnum" :class="'yiwuqiu_lmp'+item.oddsId">{{item.oddsName}}</td>
                       <td class="oddsTdMin" :class="['yiwuqiu_lmp'+item.oddsId,'ggggggg']" @click="orderTd(itemPa,item,'yiwuqiu_lmp')" @mouseenter="overShow(item,'yiwuqiu_lmp')" @mouseleave="outHide(item,'yiwuqiu_lmp')">
-                        <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(itemPa,item,'yiwuqiu_lmp') : ''" class="betRateNum" :class="'yiwuqiu_lmp'+item.oddsId+'a'">
+                        <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(itemPa,item,'yiwuqiu_lmp') : kuaijieInto(itemPa,item,'yiwuqiu_lmp')" class="betRateNum" :class="'yiwuqiu_lmp'+item.oddsId+'a'"> 
                           <span class="betRateNum">{{item.odds}}</span>
                         </a>
                         <span v-else style="width:41px;color:red;font-weight:bold;">&nbsp;-&nbsp;</span>
@@ -575,8 +575,39 @@ export default {
       });
   },
   methods: {
-    QCheckShow_fu() {
+    orderTd(oddsObj,item,ids) {
 
+      if(this.isOpenOdds) {
+
+        if(!this.normalPay) {
+          if($('.'+ids+item.oddsId).hasClass('selected')){
+
+              $('.'+ids+item.oddsId).removeClass('selected');
+              _.remove(this.orderDataList, function(n) {
+                return n.bocaiOddName == item.oddsName;
+              });
+
+          } else {
+            $('.'+ids+item.oddsId).addClass('selected');
+
+            let obj = {
+              bocaiCategory2Id: oddsObj.id,//8225,//投注博彩分类2ID
+              bocaiCategory2Name: oddsObj.name,//"混合",//投注博彩分类2名称
+              bocaiOddId: item.oddsId,//5543,//投注博彩赔率ID
+              bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
+              bocaiValue:"",//投注内容,六合彩连肖/连尾
+              normalMoney: item.normalMoney,//10000,//一般模式下，选择的金额
+              orderNormal: this.normalPay,   //是快捷，还是一般投注
+              bocaiOdds: item.odds,//1.90//赔率
+              dewaterId: item.dewaterId
+            };
+
+            this.orderDataList.push(obj);
+          }
+        }
+        
+      }
+      
     },
     IntoMtran(itemPa,item,oddEname) {
 
@@ -584,14 +615,38 @@ export default {
       bus.$emit('gettoLeftOdd', itemPa,item,oddEname); 
 
     },
-    QCheckShow() {
+    kuaijieInto(oddsObj,item,ids) {
+      if(this.isOpenOdds) {
 
+        if(!this.normalPay) {
+          if($('.'+ids+item.oddsId).hasClass('selected')){
+
+              $('.'+ids+item.oddsId).removeClass('selected');
+              _.remove(this.orderDataList, function(n) {
+                return n.bocaiOddName == item.oddsName;
+              });
+
+          } else {
+            $('.'+ids+item.oddsId).addClass('selected');
+
+            let obj = {
+              bocaiCategory2Id: oddsObj.id,//8225,//投注博彩分类2ID
+              bocaiCategory2Name: oddsObj.name,//"混合",//投注博彩分类2名称
+              bocaiOddId: item.oddsId,//5543,//投注博彩赔率ID
+              bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
+              bocaiValue:"",//投注内容,六合彩连肖/连尾
+              normalMoney: item.normalMoney,//10000,//一般模式下，选择的金额
+              orderNormal: this.normalPay,   //是快捷，还是一般投注
+              bocaiOdds: item.odds,//1.90//赔率
+              dewaterId: item.dewaterId
+            };
+
+            this.orderDataList.push(obj);
+          }
+        }
+        
+      }
     },
-    QCExplain() {
-
-    },
-
-
     async getchanglong() {
 
         this.openPrizeList = [];

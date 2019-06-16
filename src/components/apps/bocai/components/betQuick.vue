@@ -68,11 +68,11 @@
         <div class="ui-dialog-buttonset">
 
           <template v-if="hasError">
-            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderOddsVisible = false">关闭</button>
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="cancelOdd()">关闭</button>
           </template>
           <template v-else>
             <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderSub()">确定</button>
-            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderOddsVisible = false">取消</button>
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="cancelOdd()">取消</button>
           </template>
         </div>
       </div>
@@ -169,6 +169,10 @@
       },
       QCExplain() {
 
+      },
+      cancelOdd() {
+        this.orderOddsVisible = false;
+        store.commit('updateisOdding', false);
       },
       reset2() {
         console.log('this.kuaijiePay--reset',this.kuaijiePay)
