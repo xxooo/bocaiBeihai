@@ -50,26 +50,6 @@
       </tbody>
     </table>
 
-  	<!-- <div class="title-content">
-      <div class="wanfaBtn">
-        <p class="rule" @click="$router.push({name: 'gameRule'})">玩法规则</p>
-      </div>
-      <div class="winCurrent">
-        <span>当前彩种输赢:</span>
-        <span class="red">{{bocaiInfoData.winnerMoneySum}}</span>
-      </div>
-      <div class="kaipangTime">
-        <div class="qiciDiv">
-          <p>距离下期开盘</p>              
-        </div>
-        <div id="clockTimes">
-          <center>
-            <span id="clock">{{timeLeft}}</span>
-          </center>
-        </div>
-      </div>    
-    </div> -->
-
 
   </div>
 </template>

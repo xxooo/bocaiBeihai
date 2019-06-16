@@ -1,5 +1,111 @@
 <template>
-  <div>
+  <div id="lotteryno" v-if="['两面盘'].findIndex((n) => n==showOdds)>-1">
+
+            <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700" id="BallList">
+              <tbody>
+                <tr>
+                  <td id="sRB_1" class="td_caption_1 td_caption_2"><a>总和大小</a></td>
+                  <td id="sRB_2" class="td_caption_1"><a>总和单双</a></td>
+                  <td id="sRB_3" class="td_caption_1"><a>龙虎和</a></td>    
+                </tr>
+              <tr class="Ball_tr_H">
+                <td colspan="3">
+                  <table class="Ball_List" border="0" cellspacing="0" cellpadding="0" width="698">
+                    <tbody>
+                    <tr class="Ball_tr_H" valign="top" id="lotteryno_tr1" style="display: block; height: auto; min-height: 25px;">
+                      <td width="28"></td>
+                      <td width="28" class="Jut_caption_1">小</td>
+                      <td width="28">大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小</td>
+                      <td width="28">大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小</td>
+                      <td width="28">大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小</td>
+                      <td width="28">大</td>
+                      <td width="28" class="Jut_caption_1">小</td>
+                      <td width="28">大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小</td>
+                      <td width="28">大<br>大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
+                      <td width="28">大<br>大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
+                      <td width="28">大</td>
+                      <td width="28" class="Jut_caption_1">小</td>
+                      <td width="28">大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
+                      <td width="28">大</td>
+                      <td width="28" class="Jut_caption_1">小</td>
+                      <td width="28">大<br>大</td>
+                      <td width="28" class="Jut_caption_1">小<br>小<br>小<br>小<br>小<br>小</td>
+                      <td width="28" style="min-height: 25px;">大<br>大<br>大</td>
+                    </tr>
+
+                    <tr class="Ball_tr_H" valign="top" id="lotteryno_tr2" style=" display:none;height:auto;min-height:25px;">
+                      <td width="28">双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双<br>双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单<br>单</td>
+                      <td width="28">双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单<br>单<br>单</td>
+                      <td width="28">双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单<br>单</td>
+                      <td width="28">双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双<br>双<br>双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28">双<br>双<br>双<br>双</td>
+                      <td width="28" class="Jut_caption_1">单</td>
+                      <td width="28" style="min-height: 25px;">双</td>
+                    </tr>
+                    <tr class="Ball_tr_H" valign="top" id="lotteryno_tr3" style=" display:none;height:auto;min-height:25px;">
+                      <td width="28">龙</td>
+                      <td width="28" class="Jut_caption_1">虎<br>虎</td>
+                      <td width="28">和</td>
+                      <td width="28" class="Jut_caption_1">龙</td>
+                      <td width="28">虎</td>
+                      <td width="28" class="Jut_caption_1">龙<br>龙<br>龙</td>
+                      <td width="28">虎</td>
+                      <td width="28" class="Jut_caption_1">龙</td>
+                      <td width="28">虎</td>
+                      <td width="28" class="Jut_caption_1">和</td>
+                      <td width="28">虎<br>虎<br>虎<br>虎<br>虎</td>
+                      <td width="28" class="Jut_caption_1">龙<br>龙</td>
+                      <td width="28">和</td>
+                      <td width="28" class="Jut_caption_1">虎<br>虎<br>虎<br>虎<br>虎<br>虎<br>虎</td>
+                      <td width="28">龙</td>
+                      <td width="28" class="Jut_caption_1">虎</td>
+                      <td width="28">龙</td>
+                      <td width="28" class="Jut_caption_1">虎<br>虎</td>
+                      <td width="28">龙<br>龙</td>
+                      <td width="28" class="Jut_caption_1">虎</td>
+                      <td width="28">龙</td>
+                      <td width="28" class="Jut_caption_1">虎<br>虎<br>虎<br>虎</td>
+                      <td width="28">和</td>
+                      <td width="28" class="Jut_caption_1">龙</td>
+                      <td width="28" style="min-height: 25px;">虎</td>
+                    </tr>   
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+       
+        </div>
+
+
+
+  <!-- <div>
             <div class="bead-table">
 
               <table class="bead-ball" v-if="curBocaiTypeId != 8266">
@@ -214,9 +320,7 @@
               </table>
             </div>
 
-
-
-          </div>
+  </div> -->
 </template>
 
 
@@ -224,6 +328,9 @@
 	export default {
 		props: {
       curBocaiTypeId: {
+        type: String
+      },
+      showOdds: {
         type: String
       }
 		},
@@ -269,14 +376,8 @@
 		methods: {
       async gettongji(bocaiId) {
         let that = this;
-            // const loading = this.$loading({
-            //     lock: true,
-            //     text: 'Loading',
-            //     background: 'rgba(0, 0, 0, 0.7)'
-            //   });
             await that.$get(`${window.url}/api/tongji?bocaiTypeId=`+bocaiId).then((res) => {
               that.$handelResponse(res, (result) => {
-              //loading.close();
                 if(result.code===200){
 
                   if(result.data.counts) {

@@ -21,7 +21,7 @@
     <div tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons"  style="position: absolute; height: auto; width: 400px;  z-index: 101;" v-if="orderOddsVisible" id="ui-dialog">
       <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
         <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span>
-        <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close" @click="orderOddsVisible = false">
+        <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close" @click="cancelOdd()">
           <span class="ui-button-icon ui-icon ui-icon-closethick"></span>
           <span class="ui-button-icon-space"> </span>
           Close
@@ -296,7 +296,7 @@
 
                 //bus.$emit('getkuaijiePay', false); 
 
-                this.orderOddsTo();
+                //this.orderOddsTo();
 
               }
             })
@@ -410,15 +410,7 @@
           } else {
             //console.log('快捷');
 
-            if(this.orderDataList.length == 0) {
-              this.$alertMessage('请确认注单!', '温馨提示');
-            } else if(this.moneyOrder == ''){
-              this.$alertMessage('请输入金额!', '温馨提示');
-            } else {
-
-              //console.log('this.orderDataList',this.orderDataList);
-              for(let n in this.orderDataList) {
-
+            for(let n in this.orderDataList) {
                 let obj = {};
 
                 if(this.orderDataList[n].bocaiValue == '') {
@@ -427,20 +419,39 @@
                     obj.bocaiOddName = this.orderDataList[n].bocaiOddName;
 
                     obj.bocaiOdds = this.orderDataList[n].bocaiOdds,
-                    obj.betsMoney = this.orderDataList[n].normalMoney
+                    obj.betsMoney = this.moneyOrder
                 } else {
                     // obj.oddNames = this.orderDataList[n].bocaiOddName + '  ' + this.orderDataList[n].bocaiValue,
                     obj.bocaiValue = this.orderDataList[n].bocaiValue;
                     obj.bocaiOddName = this.orderDataList[n].bocaiOddName;
+
                     obj.bocaiOdds = this.orderDataList[n].bocaiOdds,
                     obj.betsMoney = this.moneyOrder
                 }
 
                 this.orderList.push(obj);
-              }
-              //console.log('this.this.orderList',this.orderList);
+            }
+            if(+this.moneyOrder < 2) {
+              //有超过最小金额的
+              this.hasError = true;
+              this.hasErrorMessage = '最低单注金额2元';
+              this.orderOddsVisible = true;
+            } else if(this.totalMoney > this.userInfo.cashBalance) {
+              this.hasError = true;
+              this.hasErrorMessage = '超过您的额度,无法下注,请联系上级代理';
+              this.orderOddsVisible = true;
+            } else if(this.orderList.length == '0') {
+              this.hasError = true;
+              this.hasErrorMessage = '请填写下注金额!!!';
+              this.orderOddsVisible = true;
+            } else {
+              this.hasError = false;
               this.orderOddsVisible = true;
             }
+
+              
+              //console.log('this.this.orderList',this.orderList);
+              this.orderOddsVisible = true;
 
             //console.log('this.orderList',this.orderList);
 
