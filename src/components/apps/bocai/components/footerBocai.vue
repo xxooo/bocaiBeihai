@@ -470,7 +470,7 @@
                       this.daxiaoMapList.push(numMapTemp);
                     }
                     this.daxiaoMapListTemp = this.daxiaoMapList[0];
-                  
+                    
 
                     if(result.data.zonghedaxiao) {
                       let data = result.data.zonghedaxiao.split(","); 
