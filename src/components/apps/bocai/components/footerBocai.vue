@@ -21,7 +21,7 @@
                       <td width="28" class="Jut_caption_1">小<br>小</td>
                       <td width="28">大<br>大</td>
                       <td width="28" class="Jut_caption_1">小<br>小</td>
-                      <td width="28">大</td>
+                      <td width="28">大</td>                               
                       <td width="28" class="Jut_caption_1">小</td>
                       <td width="28">大<br>大</td>
                       <td width="28" class="Jut_caption_1">小<br>小</td>
