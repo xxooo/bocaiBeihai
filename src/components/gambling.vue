@@ -122,148 +122,8 @@
         </tbody></table> 
      </div>
 
-     <!-- <div id="ShowDIV" style="display: none; text-align: left; position: absolute; width: 290px; height: 190px; z-index: 21474; bottom: 0px; right: 0px; overflow: hidden; background-image: url(&quot;../images/pic_bg.gif&quot;); top: 418px;">
-      <div style="font: bold 12px simsun;position: absolute;top: 5px; padding-left:10px;"><span style="color: #F62C35;">即时讯息</span>
-      <a onclick="CloseDIV();"><img alt="关闭" style="position: absolute;top: 3px;left: 265px; cursor:pointer;" src="../images/pic_close.gif"></a></div>
-      <div style=" height:24px;"></div> 
-      <div id="im_popupWindow_miniMsgContent" style=" margin-left:3px;  height: 140px;overflow: hidden;text-align:center; width: 280px;font-size: 9pt;  background-color:White;">
-        <div id="im2009" style="left: 0px; top: 0px; height: 140px; position:relative; width:280px;  background-color:#FEF9F5; overflow:hidden;">
-         <marquee scrollamount="3" direction="up" onmouseover="this.stop()" onmouseout="this.start()" width="275px" id="new_content" style="word-break:break-all;"></marquee>
-        </div>
-      </div>
-      <div style=" height:24px;"></div> 
-     </div> -->
 
 
-     <!-- <div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable" aria-describedby="dialog_win" aria-labelledby="ui-id-1" style="position: absolute; height: auto; width: 720px; top: 118px; left: 596px; display: block; z-index: 101;"><div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">信息</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"> </span>Close</button><a href="#" class="ui-dialog-titlebar-max ui-corner-all" role="button" style="display: none;"><span class="ui-icon ui-icon-newwin"></span></a></div><div id="dialog_win" style="margin: 0px; padding: 0px; width: auto; min-height: 0px; max-height: none; height: 245px;" class="ui-dialog-content ui-widget-content"><iframe src="" frameborder="0" height="100%" width="100%" id="f_msg_win" style="display: none;"></iframe><div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px"><div style="background-image: url(../images/tb_bg.jpg); line-height: 24px; font-weight:bold; color:#4a1a04; height:24px; width:680px; border:1px solid #e9a884; margin:2px auto 0px;"></div><div style="width:680px; border-color:#e9a884; border-style:solid; border-width:0px 1px 1px; height:210px; overflow:auto; margin:0px auto;"><div style="width:600px; margin:5px auto 0px; word-break:break-all; word-wrap:break-word; padding-left:20px;"><p style="text-indent:-20px; line-height:24px; color:#4a1a04;"><span style="display:inline-block; width:20px; text-align:center; color:#4a1a04;">1.</span>【★消息公告】本网推出EPS赛马,EPS赛马180,EPS赛马300,超级快5,超级快5_3min,超级快5_5min ,等新游戏!每2-5分钟一盘，会员可洽上级代理开放权限!</p></div></div></div></div></div>
-      -->
-    <!-- <div id="header">
-      <el-header height="216">
-        <div class="headerFather">
-          <div class="fenghuangimg"></div>
-          <div class="head-div">
-            <div class="centerDiv">
-              <div class="headImg">
-                <img :src="icons[imgUrl]">
-                <div class="preBocaiPeriods"><p class="qicip">-第 <span>{{preBocaiPeriods}}</span> 期-</p></div>
-              </div>
-              <div class="headLabel" :class="'headLabel'+preResult.length">
-                <div class="activeIndex"><h3>{{activeIndex}}</h3></div>
-                <div class="preResult">
-                  <ul class="result-list">
-                    <li v-for="(item,index) in preResult" :class="['loadanimot'+index,'sizeNum'+preResult.length]" class="bjpk-ran bjpk-ranNo-5 orangeShishiC"></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="history_num">
-                <div class="btn-group">
-                  <a id="show_history" class="active"><span>近期开奖</span></a>
-                </div>
-                <div class="history_run_num">
-                  <ul>
-                    <li v-for="item in resultList" :title="item.result">{{item.periods}}<span>{{item.result ? item.result : '暂未开奖'}}</span></li>
-                  </ul>
-                </div>                                 
-              </div>
-            </div>
-          </div>
-          <div class="rightMenu">
-            <ul>
-              <li @click="goRightMenu('instantorder')">即时注单</li>
-              <li @click="goRightMenu('bettingHistory')">下注历史</li>
-              <li @click="goRightMenu('personalinfo')">个人资讯</li>
-              <li v-if="userInfo.cashCredit == 0" @click="goRightMenu('caiwumanager')">财务管理</li>
-              <li @click="goRightMenu('lotteryResults')">开奖结果</li>
-              <li @click="goRightMenu('gameRule')">游戏规则</li>
-            </ul>
-          </div>
-        </div>
-      </el-header>
-      <el-menu
-          :default-active="activeIndex"
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelect"
-          background-color="#1e140d"
-          text-color="#ebcb80"
-          active-text-color="#f6e9c7">
-
-          <el-submenu key="submenu" index="submenu">
-            <template slot="title">{{submenu}}</template>
-            <el-menu-item v-for="(item,index) in bocaiTypeList" :key="index" :index="item.bocaiName"  @click="getOdds(item,index)">{{item.bocaiName}}</el-menu-item>
-          </el-submenu>
-          <el-menu-item index="2" @click="goRightMenu('personalinfo')">信用资料</el-menu-item>
-          <el-menu-item index="3" @click="goRightMenu('caiwumanager')" v-if="userInfo.cashCredit == 0">帐务查询</el-menu-item>
-          <el-menu-item index="4" @click="goRightMenu('instantorder')">下注明细</el-menu-item>
-          <el-menu-item index="5" @click="goRightMenu('bettingHistory')">结算报表</el-menu-item>
-          <el-menu-item index="6" @click="goRightMenu('lotteryResults')">历史开奖</el-menu-item>
-          <el-menu-item index="7" @click="goRightMenu('gameRule')">规则</el-menu-item>
-          <el-menu-item index="8" @click="$router.push({name:''})">修改密码</el-menu-item>
-          <el-menu-item index="9" @click="$router.push({name:''})">退出</el-menu-item>
-      </el-menu>
-    </div>
-    
-    <el-main>
-      <div id="content">
-      <left-panel></left-panel>
-      <div id="routerMain" v-if="bocaiTypeList.length != 0">
-        <router-view></router-view>
-      </div>
-      </div>
-    </el-main>
-
-    <el-footer height="97">
-      <div>
-        <p>
-          <a href="javascript:;">游戏规则</a>
-          <a href="javascript:;">关于我们</a>
-          <a href="javascript:;">联络我们</a>
-          <a href="javascript:;">合作伙伴</a>
-          <a href="javascript:;">存款帮助</a>
-          <a href="javascript:;">取款帮助</a>
-          <a href="javascript:;">常见问题</a>
-          <a href="javascript:;">责任博彩</a>
-        </p> 
-        <p class="golden">比特娱乐城所提供的产品和服务，是由澳门政府 Macau,China Special Economic Zone. 授权和监管</p>
-        <p class="golden">Copyright © 比特娱乐城 Reserved</p>
-      </div>
-    </el-footer>
-
-    <message-dialog></message-dialog> -->
-
-
-    <div tabindex="-1" role="dialog" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable" style="position: absolute; height: auto; width: 720px; top: 27.5px; left: 319px;z-index: 101;"  v-if="orderOddsVisible">
-      <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
-        <span id="ui-id-1" class="ui-dialog-title">信息</span>
-
-        <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close" @click="orderOddsVisible = false">
-          <span class="ui-button-icon ui-icon ui-icon-closethick"></span>
-          <span class="ui-button-icon-space"> </span>
-          Close
-        </button>
-
-        <a href="#" class="ui-dialog-titlebar-max ui-corner-all" role="button" style="display: none;">
-          <span class="ui-icon ui-icon-newwin"></span>
-        </a>
-      </div>
-      <div id="dialog_win" style="margin: 0px; padding: 0px; width: auto; min-height: 0px; max-height: none; height: 245px;" class="ui-dialog-content ui-widget-content">
-        <div id="div_msg_win" style="margin:0; padding: 10px 10px 0px 10px; text-align:left; color:#000;max-height:550px">
-          <div style="background-image: url(./static/img/tb_bg.jpg); line-height: 24px; font-weight:bold; color:#4a1a04; height:24px; width:680px; border:1px solid #e9a884; margin:2px auto 0px;">
-            
-          </div>
-          <div style="width:680px; border-color:#e9a884; border-style:solid; border-width:0px 1px 1px; height:210px; overflow:auto; margin:0px auto;">
-            <div style="width:600px; margin:5px auto 0px; word-break:break-all; word-wrap:break-word; padding-left:20px;">
-              <p style="text-indent:-20px; line-height:24px; color:#4a1a04;">
-                {{dialogMessage}}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="ui-widget-overlay ui-front" style="z-index: 100;" v-if="orderOddsVisible"></div>
 
   </div>
 </template>
@@ -284,7 +144,6 @@ export default {
   },
   data() {
     return {
-      orderOddsVisible: false,
       dialogMessage: '',
       min : 0, //生成的最小的数字，比如200
       max : 9, //生成的最大的数字，比如500
@@ -328,8 +187,6 @@ export default {
     this.getbocaoName();
 
     this.getcUserInfo();
-
-    this.getnotice();
 
   },
   computed: {
@@ -696,19 +553,6 @@ export default {
 
         store.commit('updatebocaiName',this.submenu);
         store.commit('updatebocaiTypeId',this.bocaiTypeId);
-
-    },
-    async getnotice() {
-
-      let res = await this.$get(`${window.url}/api/notice`);
-
-          if(res.code===200){
-
-            this.dialogMessage = res.data.content;
-            this.orderOddsVisible = true;
-
-          } else {
-          }
 
     },
     async getOddsCategory(item,index) {

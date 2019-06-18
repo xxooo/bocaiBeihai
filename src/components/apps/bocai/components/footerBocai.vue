@@ -1,107 +1,53 @@
 <template>
-  <div id="lotteryno" v-if="['两面盘'].findIndex((n) => n==showOdds)>-1">
+  <div id="lotteryno">
 
-            <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700" id="BallList">
-              <tbody>
-                <tr>
-                  <td id="sRB_1" class="td_caption_1 td_caption_2"><a>总和大小</a></td>
-                  <td id="sRB_2" class="td_caption_1"><a>总和单双</a></td>
-                  <td id="sRB_3" class="td_caption_1"><a>龙虎和</a></td>    
-                </tr>
-              <tr class="Ball_tr_H">
-                <td colspan="3">
-                  <table class="Ball_List" border="0" cellspacing="0" cellpadding="0" width="698">
-                    <tbody>
-                    <tr class="Ball_tr_H" valign="top" id="lotteryno_tr1" style="display: block; height: auto; min-height: 25px;">
-                      <td width="28"></td>
-                      <td width="28" class="Jut_caption_1">小</td>
-                      <td width="28">大</td>
-                      <td width="28" class="Jut_caption_1">小<br>小</td>
-                      <td width="28">大<br>大</td>
-                      <td width="28" class="Jut_caption_1">小<br>小</td>
-                      <td width="28">大<br>大</td>
-                      <td width="28" class="Jut_caption_1">小<br>小</td>
-                      <td width="28">大</td>                               
-                      <td width="28" class="Jut_caption_1">小</td>
-                      <td width="28">大<br>大</td>
-                      <td width="28" class="Jut_caption_1">小<br>小</td>
-                      <td width="28">大<br>大<br>大</td>
-                      <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
-                      <td width="28">大<br>大<br>大</td>
-                      <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
-                      <td width="28">大</td>
-                      <td width="28" class="Jut_caption_1">小</td>
-                      <td width="28">大<br>大</td>
-                      <td width="28" class="Jut_caption_1">小<br>小<br>小</td>
-                      <td width="28">大</td>
-                      <td width="28" class="Jut_caption_1">小</td>
-                      <td width="28">大<br>大</td>
-                      <td width="28" class="Jut_caption_1">小<br>小<br>小<br>小<br>小<br>小</td>
-                      <td width="28" style="min-height: 25px;">大<br>大<br>大</td>
-                    </tr>
+    <template v-if="['两面盘'].findIndex((n) => n==showOdds)>-1">
 
-                    <tr class="Ball_tr_H" valign="top" id="lotteryno_tr2" style=" display:none;height:auto;min-height:25px;">
-                      <td width="28">双</td>
-                      <td width="28" class="Jut_caption_1">单</td>
-                      <td width="28">双</td>
-                      <td width="28" class="Jut_caption_1">单</td>
-                      <td width="28">双<br>双<br>双<br>双</td>
-                      <td width="28" class="Jut_caption_1">单<br>单</td>
-                      <td width="28">双</td>
-                      <td width="28" class="Jut_caption_1">单</td>
-                      <td width="28">双</td>
-                      <td width="28" class="Jut_caption_1">单</td>
-                      <td width="28">双<br>双<br>双</td>
-                      <td width="28" class="Jut_caption_1">单</td>
-                      <td width="28">双<br>双</td>
-                      <td width="28" class="Jut_caption_1">单<br>单<br>单</td>
-                      <td width="28">双<br>双</td>
-                      <td width="28" class="Jut_caption_1">单<br>单</td>
-                      <td width="28">双<br>双</td>
-                      <td width="28" class="Jut_caption_1">单</td>
-                      <td width="28">双<br>双<br>双<br>双<br>双</td>
-                      <td width="28" class="Jut_caption_1">单</td>
-                      <td width="28">双<br>双</td>
-                      <td width="28" class="Jut_caption_1">单</td>
-                      <td width="28">双<br>双<br>双<br>双</td>
-                      <td width="28" class="Jut_caption_1">单</td>
-                      <td width="28" style="min-height: 25px;">双</td>
-                    </tr>
-                    <tr class="Ball_tr_H" valign="top" id="lotteryno_tr3" style=" display:none;height:auto;min-height:25px;">
-                      <td width="28">龙</td>
-                      <td width="28" class="Jut_caption_1">虎<br>虎</td>
-                      <td width="28">和</td>
-                      <td width="28" class="Jut_caption_1">龙</td>
-                      <td width="28">虎</td>
-                      <td width="28" class="Jut_caption_1">龙<br>龙<br>龙</td>
-                      <td width="28">虎</td>
-                      <td width="28" class="Jut_caption_1">龙</td>
-                      <td width="28">虎</td>
-                      <td width="28" class="Jut_caption_1">和</td>
-                      <td width="28">虎<br>虎<br>虎<br>虎<br>虎</td>
-                      <td width="28" class="Jut_caption_1">龙<br>龙</td>
-                      <td width="28">和</td>
-                      <td width="28" class="Jut_caption_1">虎<br>虎<br>虎<br>虎<br>虎<br>虎<br>虎</td>
-                      <td width="28">龙</td>
-                      <td width="28" class="Jut_caption_1">虎</td>
-                      <td width="28">龙</td>
-                      <td width="28" class="Jut_caption_1">虎<br>虎</td>
-                      <td width="28">龙<br>龙</td>
-                      <td width="28" class="Jut_caption_1">虎</td>
-                      <td width="28">龙</td>
-                      <td width="28" class="Jut_caption_1">虎<br>虎<br>虎<br>虎</td>
-                      <td width="28">和</td>
-                      <td width="28" class="Jut_caption_1">龙</td>
-                      <td width="28" style="min-height: 25px;">虎</td>
-                    </tr>   
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700" id="BallList">
+        <tbody>
+          <tr>
+            <td id="sRB_1" class="td_caption_1 td_caption_2 getsubtit1"  @click="getsubtit(1)"><a>总和大小</a></td>
+            <td id="sRB_2" class="td_caption_1 getsubtit2" @click="getsubtit(2)"><a>总和单双</a></td>
+            <td id="sRB_3" class="td_caption_1 getsubtit3" @click="getsubtit(3)"><a>龙虎和</a></td>    
+          </tr>
+          <tr class="Ball_tr_H">
+            <td colspan="3">
+              <table class="Ball_List" border="0" cellspacing="0" cellpadding="0" width="698">
+                <tbody>
+                  <tr v-if="subtit == 1" class="Ball_tr_H" valign="top" id="lotteryno_tr1" style="height: auto; min-height: 25px;">
+                    <td width="28" v-for="(item,index) in zonghedaxiaoList" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                      <template v-if="item != ''">
+                        <p v-for="itemsub in item.value">{{itemsub}}</p>
+                      </template>
+                    </td>
+                  </tr>
+
+                  <tr v-if="subtit == 2" class="Ball_tr_H" valign="top" id="lotteryno_tr2" style="height:auto;min-height:25px;">
+                    <td width="28" v-for="(item,index) in zonghedanshuangList" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                      <template v-if="item != ''">
+                        <p v-for="itemsub in item.value">{{itemsub}}</p>
+                      </template>
+                    </td>
+                  </tr>
+                  <tr v-if="subtit == 3" class="Ball_tr_H" valign="top" id="lotteryno_tr3" style="height:auto;min-height:25px;">
+                    <td width="28" v-for="(item,index) in longhuheList" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                      <template v-if="item != ''">
+                        <p v-for="itemsub in item.value">{{itemsub}}</p>
+                      </template>
+                    </td>
+                  </tr>   
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </template>
+
+    
        
-        </div>
+  </div>
 
 
 
@@ -784,6 +730,35 @@
                       console.log('guanyejunhedanshuang',this.guanyejunhedanshuang);
                     }
 
+                    this.longhuheList = this.longhuheList.slice(0,25);;
+
+                    let dxlhNum = this.longhuheList.length*1 - this.zonghedaxiaoList.length*1;
+                    let zhdslhNum = this.longhuheList.length*1 - this.zonghedanshuangList.length*1;
+                    let dxlhNumList = [];
+                    let zhdslhNumList = [];
+
+                    //console.log('zonghedaxiaoList',this.zonghedaxiaoList);
+
+
+                    for(let i = 0; i < dxlhNum; i++) {
+                       dxlhNumList.push('');
+                    }
+
+                    for(let i = 0; i < zhdslhNum; i++) {
+                       zhdslhNumList.push('');
+                    }
+
+                    for(let n in this.zonghedaxiaoList) {
+                      dxlhNumList.push(this.zonghedaxiaoList[n]);
+                    }
+                    for(let n in this.zonghedanshuangList) {
+                      zhdslhNumList.push(this.zonghedanshuangList[n]);
+                    }
+
+                    this.zonghedaxiaoList = dxlhNumList;
+                    this.zonghedanshuangList = zhdslhNumList;
+
+                    //console.log('zonghedaxiaoList',this.zonghedaxiaoList);
 
                 }
               })
@@ -791,7 +766,7 @@
       },
         getsubtit(num) {
           this.subtit = num;
-          $('.getsubtit'+num).addClass('active').siblings().removeClass('active');
+          $('.getsubtit'+num).addClass('td_caption_2').siblings().removeClass('td_caption_2');
         },
         getqiu(num,tit) {
           this.numMapListTemp = this.numMapList[num*1-1];
@@ -810,205 +785,10 @@
 </script>
 
 <style scoped>
-.betQuick {
-    text-align: center;
-    margin-bottom: 10px;
-    margin-top: 14px;
-    position: relative;
-    height: 67px;
-}
-
-.betQuick div {
-  display: inline-block;
-  float: left;
-}
-
-.betRTop div {
-  font-size: 16px;
-}
-
-.betRTop {
-  margin-left: 20px; 
-}
-
-.beishu {
-  width: 400px;
-  height: 67px;
-}
-
-.betRight {
-  width: 380px;
-  margin-left: 50px;
-}
-
-.betRBottom label {
-  color: #fff;
-  float: left;
-  padding: 5px 20px 0px 20px;
-}
-
-.betRBottom {
-  margin-top: 10px;
-}
-
-.beishuBtn {
-    width: 54px;
-    height: 52px;
-    margin: 0px 2px !important;
-    border-radius: 50px;
-    color: #1b1b1b;
-    font-family: Microsoft YaHei;
-    font-size: 10px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.beishuBtn a {
-  height: 52px;
-  line-height: 52px;
-  font-weight: bold;
-}
-
-.beishuBtn.beishuBtn10 {
-    background: url(../../../../../static/img/cm1.png) bottom no-repeat transparent;
-    background-size: contain;
-}
-.beishuBtn.beishuBtn50 {
-  background: url(../../../../../static/img/cm2.png) bottom no-repeat transparent;
-    background-size: contain;
-}
-.beishuBtn.beishuBtn100 {
-  background: url(../../../../../static/img/cm3.png) bottom no-repeat transparent;
-    background-size: contain;
-}
-.beishuBtn.beishuBtn500 {
-  background: url(../../../../../static/img/cm4.png) bottom no-repeat transparent;
-    background-size: contain;
-}
-.beishuBtn.beishuBtn1000 {
-  background: url(../../../../../static/img/cm5.png) bottom no-repeat transparent;
-    background-size: contain;
-}
-.beishuBtn.beishuBtn5000 {
-  background: url(../../../../../static/img/cm6.png) bottom no-repeat transparent;
-    background-size: contain;
-}
-
-.beishuBtn:hover {
-  color: #ff9800;
-}
-
-.popup-body {
-    overflow-y: auto;
-    margin-left: 0px !important;
-}
-
-.default-list {
-    padding: 8px 10px;
-    margin-left: 0px !important;
-}
-
-.default-list table {
-    margin-top: 5px;
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-.default-list table thead {
-    background-color: #fcefc2;
-    font-weight: 700;
-    color: #261238;
-}
-.default-list table td, .default-list table th {
-    text-align: center;
-    line-height: 30px;
-    border: 1px solid #dcdfe6;
-    padding: 0 6px;
-    position: relative;
-}
-.default-list table td p, .default-list table th p {
-    line-height: 18px;
-}
-.odds-font {
-    color: #d63e35;
-    font-weight: 700;
-}
-.betValue {
-    height: 16px;
-    width: 60px;
-    padding: 0 3px;
-    line-height: 16px;
-}
-button.btn-delete {
-    margin-left: 8px;
-    width: 50px;
-    height: 24px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: #fff;
-    outline: none;
-}
-button.btn-delete {
-    line-height: 16px;
-    background: #d63e35;
-}
-.default-list table tr.tab-footer {
-    background-color: #fcefc2;
-    font-weight: 700;
-    color: #261238;
-}
-
-.beishuBtn.addPayChouMa a{
-  color: #ff9800;
-  font-size: 18px;
-}
-
-
 
 </style>
 
 <style lang="less">
 
-.betQuick {
-  .el-input {
-    width: 120px;
-    margin-right: 20px;
-  }
-
-  .el-radio.is-bordered.is-checked {
-    background-color: #805933;
-  }
-
-  .betRTop.onlybet {
-    margin-top: 20px;
-  }
-
-  .el-dialog__header {
-    padding: 20px 20px 10px;
-    background-color: #80664b;
-    border-radius: 5px 5px 0 0;
-  }
-  .el-dialog.el-dialog--center {
-    width: 500px;
-    color: #450400 !important;
-    background-color: #fcfcfa;
-    box-shadow: 0 2px 8px rgba(0,0,0,.33);
-    font-family: Helvetica,Arial,sans-serif;
-    border-radius: 5px;
-  }
-  .el-dialog--center .el-dialog__body {
-    text-align: center;
-    padding: 0px;
-  }
-  .betRTop button {
-    height: 28px;
-  }
-
-  .el-button--primary.is-plain {
-    color: #805933;
-  }
-}
 
 </style>
