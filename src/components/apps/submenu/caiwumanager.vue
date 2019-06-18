@@ -1,63 +1,75 @@
 <template>
   <div id="caiwumanager" class="duboBodyClass">
-    <div>
-    <input type="hidden" name="__VIEWSTATE">
-    </div>
-
-    <div>
-
-      <input type="hidden" name="__VIEWSTATEGENERATOR" value="55743247">
-    </div> 
-    <!-- <table width="700" border="0" cellspacing="0" cellpadding="0">
-      <tbody><tr>
-        <td height="30" background="images/tab_05.gif">
+    <table width="700" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr>
+        <td height="30">
           <table width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:left;">
-            <tbody><tr> 
-              <td valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tbody><tr> 
+            <tbody>
+              <tr> 
+              <td valign="middle">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr> 
                   <td width="auto" class="F_bold">&nbsp;帐务查询</td>
                   <td align="right"> 
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" id="Table1" style="color:#000">
-                      <tbody><tr> 
+                      <tbody>
+                        <tr> 
                         <td width="518" height="20" class="font8" align="right">
                          <table border="0" cellpadding="0" cellspacing="0">
-                           <tbody><tr> 
+                           <tbody>
+                            <tr> 
                             <td>日期区间</td>
-                            <td><input type="text" value="2019-06-18" id="txtbegindate" class="Wdate" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'txtenddate\')||\'2020-10-01\'}'});" style="width:100px;"></td>
+                            <td>
+                              <!-- <input type="text" value="2019-06-18" id="txtbegindate" class="Wdate" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'txtenddate\')||\'2020-10-01\'}'});" style="width:100px;" placeholder="开始时间"> -->
+                              <input type="text" id="startTime" @keyup.enter="query" placeholder="开始时间" readonly="readonly">
+                            </td>
                             <td>至</td>
-                            <td><input value="2019-06-18" id="txtenddate" class="Wdate" type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'txtbegindate\')}',maxDate:'2020-10-01'})" style="width:100px;"></td>
+                            <td>
+                              <!-- <input value="2019-06-18" id="txtenddate" class="Wdate" type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'txtbegindate\')}',maxDate:'2020-10-01'})" style="width:100px;" placeholder="结束时间"> -->
+                              <input type="text" id="endTime" @keyup.enter="query" placeholder="结束时间" readonly="readonly">
+                            </td>
+
+                            
+
                           </tr>
-                        </tbody></table>
+                        </tbody>
+                      </table>
                       </td>
                       <td align="right">
                        <input type="button" value="查询" onclick="return SearchMembers();" style="cursor:pointer;margin-right:5px;">  
                      </td> 
                    </tr>
-                 </tbody></table> 
+                 </tbody>
+               </table> 
                </td>
              </tr>
-           </tbody></table></td> 
+           </tbody>
+         </table>
+         </td> 
          </tr>
-       </tbody></table>
+       </tbody>
+     </table>
      </td>
    </tr>
    <tr>
     <td>
      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tbody><tr> 
+      <tbody>
+        <tr> 
         <td> 
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tbody><tr>
+          <!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+              <tr>
               <td colspan="3">  
                 <div id="div_main" style="width: 100%; margin: 0px auto;">
                   <link href="../css/css.css" rel="stylesheet" type="text/css"> 
 
-
-
-
                   <div> 
                     <table width="100%" class="DTable" border="0" cellspacing="1" cellpadding="0" style="margin-top:0px;">
-                      <tbody><tr class="td_caption_1"> 
+                      <tbody>
+                        <tr class="td_caption_1"> 
                         <td height="25">交易序号</td>
                         <td>时间</td>
                         <td>交易类型</td>
@@ -66,42 +78,52 @@
                         <td>备注</td> 
                       </tr> 
 
-                    </tbody></table>
+                    </tbody>
+                  </table>
 
                     <table width="100%" class="tableH" cellspacing="0" cellpadding="0" border="1" bordercolor="#78B8DE" style="margin-top:10px; color:red; font-size:14px; line-height:30px; text-align:center;  background-color:White;" id="tdnone">
-                      <tbody><tr><td>此区间暂无数据</td></tr>
-                      </tbody></table> 
+                      <tbody>
+                        <tr>
+                          <td>此区间暂无数据</td>
+                        </tr>
+                      </tbody>
+                    </table> 
 
                     </div>
-
-
-
-
 
                   </div> 
                 </td>  
               </tr>
-            </tbody></table> 
+            </tbody>
+          </table> --> 
           </td> 
         </tr>
-      </tbody></table>
+      </tbody>
+    </table>
     </td> 
   </tr>
   <tr>
-    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tbody><tr> 
+    <td>
+      <!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr> 
         <td align="center">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tbody><tr>  <td id="tdpage" style=" line-height:20px; text-align:left; height: 12px;" colspan="43"> 
+            <tbody>
+              <tr>  
+                <td id="tdpage" style=" line-height:20px; text-align:left; height: 12px;" colspan="43"> 
             </td>
           </tr>      
-        </tbody></table>
+        </tbody>
+      </table>
       </td> 
     </tr>
-  </tbody></table></td>
+  </tbody>
+</table> -->
+</td>
 </tr>
 </tbody>
-</table> -->
+</table>
 
 </div>
 
