@@ -48,7 +48,12 @@
                                             <img alt="" src="../../static/img/TopMenu_2Left.jpg" width="19" height="36">
                                         </td>
                                         <td style="width:120px;">
-                                            <el-menu
+                                            <SideMenu :style="{width:width+'px'}"
+                                                    :data="menus"
+                                                    :collapsed="collapsed"
+                                                    @selectionChange="selection=$event">
+                                            </SideMenu>
+                                            <!-- <el-menu
                                               :default-active="activeIndex"
                                               class="el-menu-demo navOne-new clearfix"
                                               mode="horizontal"
@@ -59,7 +64,81 @@
                                                 <template slot="title">{{submenu}}</template>
                                                 <el-menu-item v-for="(item,index) in bocaiTypeList" :key="index" :index="item.bocaiName"  @click="getOdds(item,index)">{{item.bocaiName}}</el-menu-item>
                                               </el-submenu>
-                                            </el-menu>
+                                            </el-menu> -->
+
+      <!-- <div class="navOne-newDown">
+        <div id="bankLi-down" class="clearfix" style="top: 78px;left: 250px;overflow: hidden auto;max-height: 237px;display: block;">
+            <ul>
+                
+                <li id="div_gameno_6" onclick="ShowGame(6,false,3);showSelect(this,'重庆时时彩')" class="active" style="cursor: pointer;">
+                    <a target="mainFrame" id="hidg_6">重庆时时彩</a>
+                </li>
+                
+                <li id="div_gameno_8" onclick="ShowGame(8,false,4);showSelect(this,'广东快乐十分')" class="" style="cursor: pointer;">
+                    <a target="mainFrame" id="hidg_8">广东快乐十分</a>
+                </li>
+                
+                <li id="div_gameno_9" onclick="ShowGame(9,false,5);showSelect(this,'广西快乐十分')" class="" style="cursor: pointer;">
+                    <a target="mainFrame" id="hidg_9">广西快乐十分</a>
+                </li>
+                
+                <li id="div_gameno_11" onclick="ShowGame(11,false,6);showSelect(this,'北京赛车')" class="" style="cursor: pointer;">
+                    <a target="mainFrame" id="hidg_11">北京赛车</a>
+                </li>
+                
+                <li id="div_gameno_12" onclick="ShowGame(12,false,7);showSelect(this,'江苏快3')" class="">
+                    <a target="mainFrame" id="hidg_12">江苏快3</a>
+                </li>
+                
+                <li id="div_gameno_13" onclick="ShowGame(13,false,8);showSelect(this,'北京快乐8')" class="">
+                    <a target="mainFrame" id="hidg_13">北京快乐8</a>
+                </li>
+                
+                <li id="div_gameno_20" onclick="ShowGame(20,false,4);showSelect(this,'幸运农场')" class="">
+                    <a target="mainFrame" id="hidg_20">幸运农场</a>
+                </li>
+                
+                <li id="div_gameno_21" onclick="ShowGame(21,false,6);showSelect(this,'幸运飞艇')" class="">
+                    <a target="mainFrame" id="hidg_21">幸运飞艇</a>
+                </li>
+                
+                <li id="div_gameno_22" onclick="ShowGame(22,false,6);showSelect(this,'极速赛车')" class="">
+                    <a target="mainFrame" id="hidg_22">极速赛车</a>
+                </li>
+                
+                <li id="div_gameno_23" onclick="ShowGame(23,false,3);showSelect(this,'极速时时彩')" class="">
+                    <a target="mainFrame" id="hidg_23">极速时时彩</a>
+                </li>
+                
+                <li id="div_gameno_26" onclick="ShowGame(26,false,6);showSelect(this,'EPS赛马')" class="">
+                    <a target="mainFrame" id="hidg_26">EPS赛马</a>
+                </li>
+                
+                <li id="div_gameno_27" onclick="ShowGame(27,false,3);showSelect(this,'超级快5')" class="">
+                    <a target="mainFrame" id="hidg_27">超级快5</a>
+                </li>
+                
+                <li id="div_gameno_29" onclick="ShowGame(29,false,7);showSelect(this,'广西快3')" class="">
+                    <a target="mainFrame" id="hidg_29">广西快3</a>
+                </li>
+                
+                <li id="div_gameno_31" onclick="ShowGame(31,false,10);showSelect(this,'PC蛋蛋')" class="">
+                    <a target="mainFrame" id="hidg_31">PC蛋蛋</a>
+                </li>
+                
+                <li id="div_gameno_38" onclick="ShowGame(38,false,3);showSelect(this,'澳洲幸运5')" class="">
+                    <a target="mainFrame" id="hidg_38">澳洲幸运5</a>
+                </li>
+                
+                <li id="div_gameno_40" onclick="ShowGame(40,false,6);showSelect(this,'澳洲幸运10')" class="">
+                    <a target="mainFrame" id="hidg_40">澳洲幸运10</a>
+                </li>
+                
+            </ul>
+        </div>
+    </div> -->
+
+
                                         </td>
                                         <td> 
                                             <div id="div_title">
@@ -144,6 +223,28 @@ export default {
   },
   data() {
     return {
+      width: 200,
+      collapsed: false,
+      selection: null,
+      menus: [
+        {
+          text: "Item2",
+          iconCls: "icon-more",
+          children: [
+            {
+              text: "Option4"
+            },
+            {
+              text: "Option5"
+            },
+            {
+              text: "Option6"
+            }
+          ]
+        }
+      ],
+
+
       dialogMessage: '',
       min : 0, //生成的最小的数字，比如200
       max : 9, //生成的最大的数字，比如500

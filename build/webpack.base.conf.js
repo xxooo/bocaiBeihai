@@ -48,6 +48,9 @@ module.exports = {
       from: path.resolve(__dirname, '../bocai.ico'),
     }])
   ],
+  // externals: {
+  //   'datetimepicker': 'Datetimepicker'
+  // },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {

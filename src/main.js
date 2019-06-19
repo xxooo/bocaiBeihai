@@ -27,6 +27,20 @@ Vue.use(request);
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
+
+
+import 'vx-easyui/dist/themes/default/easyui.css';
+import 'vx-easyui/dist/themes/icon.css';
+import 'vx-easyui/dist/themes/vue.css';
+import locale from 'vx-easyui/dist/locale/easyui-lang-zh_CN'
+import EasyUI from 'vx-easyui';
+Vue.use(EasyUI, {
+    locale: locale
+});
+
+
+
+
 Vue.config.productionTip = false;
 
 window.router = router;

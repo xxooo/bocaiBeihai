@@ -1,5 +1,8 @@
 <template>
   <div id="caiwumanager" class="duboBodyClass">
+
+
+
     <table width="700" border="0" cellspacing="0" cellpadding="0">
       <tbody>
         <tr>
@@ -22,13 +25,12 @@
                             <tr> 
                             <td>日期区间</td>
                             <td>
-                              <!-- <input type="text" value="2019-06-18" id="txtbegindate" class="Wdate" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'txtenddate\')||\'2020-10-01\'}'});" style="width:100px;" placeholder="开始时间"> -->
-                              <input type="text" id="startTime" @keyup.enter="query" placeholder="开始时间" readonly="readonly">
+                              <DateBox v-model="value"></DateBox>
+
                             </td>
                             <td>至</td>
                             <td>
-                              <!-- <input value="2019-06-18" id="txtenddate" class="Wdate" type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'txtbegindate\')}',maxDate:'2020-10-01'})" style="width:100px;" placeholder="结束时间"> -->
-                              <input type="text" id="endTime" @keyup.enter="query" placeholder="结束时间" readonly="readonly">
+                            <DateBox v-model="value"></DateBox>
                             </td>
 
                             
@@ -38,7 +40,7 @@
                       </table>
                       </td>
                       <td align="right">
-                       <input type="button" value="查询" onclick="return SearchMembers();" style="cursor:pointer;margin-right:5px;">  
+                       <!-- <input type="button" value="查询" onclick="return SearchMembers();" style="cursor:pointer;margin-right:5px;">   -->
                      </td> 
                    </tr>
                  </tbody>
@@ -459,11 +461,113 @@
 
 <script>
 
+//import Datetimepicker from 'datetimepicker'
+
+// $(document).ready(function() {
+//   $("#date_input").datebox();
+// });
+
 export default {
+
   components: {
   },
   data() {
     return {
+      data: [
+                    {
+                        "code": "FI-SW-01",
+                        "name": "Koi",
+                        "unitcost": 10.00,
+                        "status": "P",
+                        "listprice": 36.50,
+                        "attr": "Large",
+                        "itemid": "EST-1"
+                    },
+                    {
+                        "code": "K9-DL-01",
+                        "name": "Dalmation",
+                        "unitcost": 12.00,
+                        "status": "P",
+                        "listprice": 18.50,
+                        "attr": "Spotted Adult Female",
+                        "itemid": "EST-10"
+                    },
+                    {
+                        "code": "RP-SN-01",
+                        "name": "Rattlesnake",
+                        "unitcost": 12.00,
+                        "status": "P",
+                        "listprice": 38.50,
+                        "attr": "Venomless",
+                        "itemid": "EST-11"
+                    },
+                    {
+                        "code": "RP-SN-01",
+                        "name": "Rattlesnake",
+                        "unitcost": 12.00,
+                        "status": "P",
+                        "listprice": 26.50,
+                        "attr": "Rattleless",
+                        "itemid": "EST-12"
+                    },
+                    {
+                        "code": "RP-LI-02",
+                        "name": "Iguana",
+                        "unitcost": 12.00,
+                        "status": "P",
+                        "listprice": 35.50,
+                        "attr": "Green Adult",
+                        "itemid": "EST-13"
+                    },
+                    {
+                        "code": "FL-DSH-01",
+                        "name": "Manx",
+                        "unitcost": 12.00,
+                        "status": "P",
+                        "listprice": 158.50,
+                        "attr": "Tailless",
+                        "itemid": "EST-14"
+                    },
+                    {
+                        "code": "FL-DSH-01",
+                        "name": "Manx",
+                        "unitcost": 12.00,
+                        "status": "P",
+                        "listprice": 83.50,
+                        "attr": "With tail",
+                        "itemid": "EST-15"
+                    },
+                    {
+                        "code": "FL-DLH-02",
+                        "name": "Persian",
+                        "unitcost": 12.00,
+                        "status": "P",
+                        "listprice": 23.50,
+                        "attr": "Adult Female",
+                        "itemid": "EST-16"
+                    },
+                    {
+                        "code": "FL-DLH-02",
+                        "name": "Persian",
+                        "unitcost": 12.00,
+                        "status": "P",
+                        "listprice": 89.50,
+                        "attr": "Adult Male",
+                        "itemid": "EST-17"
+                    },
+                    {
+                        "code": "AV-CB-01",
+                        "name": "Amazon Parrot",
+                        "unitcost": 92.00,
+                        "status": "P",
+                        "listprice": 63.50,
+                        "attr": "Adult Male",
+                        "itemid": "EST-18"
+                    }
+                ],
+
+      value:  new Date(),
+
       historyDataList: {},
       historyType: '2',
       histDate: [],
@@ -500,6 +604,8 @@ export default {
   },
   created() {
     this.bankInfo();
+
+    console.log('Datetimepicker',this.Datetimepicker);
   },
   computed: {
   },
