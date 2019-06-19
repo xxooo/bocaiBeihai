@@ -44,15 +44,16 @@
                                 <table border="0" cellpadding="0" cellspacing="0" width="1070">
                                     <tbody>
                                         <tr>
-                                        <td width="19" height="33">
+                                        <td width="19" height="36">
                                             <img alt="" src="../../static/img/TopMenu_2Left.jpg" width="19" height="36">
                                         </td>
-                                        <td style="width:120px;">
-                                            <SideMenu :style="{width:width+'px'}"
-                                                    :data="menus"
-                                                    :collapsed="collapsed"
-                                                    @selectionChange="selection=$event">
-                                            </SideMenu>
+                                        <td style="width:150px;">
+                                            <ul class="navOne-new clearfix">
+                                                <li id="bankLi" class="czBtn">
+                                                  <span id="currentType">北京赛车</span>
+                                                </li>
+                                            </ul>
+
                                             <!-- <el-menu
                                               :default-active="activeIndex"
                                               class="el-menu-demo navOne-new clearfix"
@@ -65,6 +66,17 @@
                                                 <el-menu-item v-for="(item,index) in bocaiTypeList" :key="index" :index="item.bocaiName"  @click="getOdds(item,index)">{{item.bocaiName}}</el-menu-item>
                                               </el-submenu>
                                             </el-menu> -->
+
+                                        </td>
+
+                                        <!-- <td style="width:120px;">
+                                            <SideMenu :style="{width:width+'px'}"
+                                                    :data="menus"
+                                                    :collapsed="collapsed"
+                                                    @selectionChange="selection=$event">
+                                            </SideMenu>
+                                        </td> -->
+                                            
 
       <!-- <div class="navOne-newDown">
         <div id="bankLi-down" class="clearfix" style="top: 78px;left: 250px;overflow: hidden auto;max-height: 237px;display: block;">
@@ -139,7 +151,7 @@
     </div> -->
 
 
-                                        </td>
+                                        
                                         <td> 
                                             <div id="div_title">
                                                 <center>
@@ -929,29 +941,31 @@ export default {
         overflow: hidden;
     }
 
-    .navOne-new .czBtnOn {
-        background: url(../../static/img/TopBg.png) no-repeat scroll 0 0;
-        color: #fff5d7;
-        cursor: pointer;
-        display: block;
-        float: left;
-        font-size: 14px;
-        font-weight: bold;
-        height: 33px;
-        line-height: 33px;
-        margin-right: 10px;
-        padding-right: 10px;
-        text-align: center;
-        text-decoration: none;
-        width: 130px;
+    
+
+    .navOne-new .czBtn, .navOne-new .czBtnOn {
+      background: url(../../static/img/TopBg.png) no-repeat scroll 0 0;
+      color: #fff5d7;
+      cursor: pointer;
+      display: block;
+      float: left;
+      font-size: 14px;
+      font-weight: bold;
+      height: 36px;
+      line-height: 36px;
+      margin-right: 10px !important;
+      padding-right: 10px !important;
+      text-align: center;
+      text-decoration: none;
+      width: 130px;
     }
 
-    .navOne-new {
-        border: 0px solid #FF9224;
-        background-image: url(../../static/img/But1.jpg);
-        height: 36px;
-        font-weight: bold;
-        width: 120px;
+    .navOne-new .czBtn {
+      background: url(../../static/img/TopBg1.png) repeat scroll 0 0;
+    }
+
+    .navOne-new .czBtn:hover {
+        background: url(../../static/img/TopBg1.png) repeat scroll 140px 0;
     }
 
     .navOne-new .czBtn, .navOne-new .czBtnOn {
@@ -1057,6 +1071,22 @@ body {
       color: #aaa;
       position: absolute;
   }
+
+
+  #maintop {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+  }
+  
+  .navOne-new.clearfix {
+    width: 150px;
+    margin-bottom: 3px !important;
+  }
+
+    
+
 }
 
 </style>
