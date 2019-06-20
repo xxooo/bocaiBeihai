@@ -48,9 +48,9 @@
                                             <img alt="" src="../../static/img/TopMenu_2Left.jpg" width="19" height="36">
                                         </td>
                                         <td style="width:150px;">
-                                            <ul class="navOne-new clearfix">
-                                                <li id="bankLi" class="czBtn">
-                                                  <span id="currentType">北京赛车</span>
+                                            <ul class="navOne-new clearfix" @mouseenter="overShow()" @mouseleave="outHide()">
+                                                <li id="bankLi" class="czBtn overShowLi">
+                                                  <span id="currentType">{{submenu}}</span>
                                                 </li>
                                             </ul>
 
@@ -69,89 +69,7 @@
 
                                         </td>
 
-                                        <!-- <td style="width:120px;">
-                                            <SideMenu :style="{width:width+'px'}"
-                                                    :data="menus"
-                                                    :collapsed="collapsed"
-                                                    @selectionChange="selection=$event">
-                                            </SideMenu>
-                                        </td> -->
                                             
-
-      <!-- <div class="navOne-newDown">
-        <div id="bankLi-down" class="clearfix" style="top: 78px;left: 250px;overflow: hidden auto;max-height: 237px;display: block;">
-            <ul>
-                
-                <li id="div_gameno_6" onclick="ShowGame(6,false,3);showSelect(this,'重庆时时彩')" class="active" style="cursor: pointer;">
-                    <a target="mainFrame" id="hidg_6">重庆时时彩</a>
-                </li>
-                
-                <li id="div_gameno_8" onclick="ShowGame(8,false,4);showSelect(this,'广东快乐十分')" class="" style="cursor: pointer;">
-                    <a target="mainFrame" id="hidg_8">广东快乐十分</a>
-                </li>
-                
-                <li id="div_gameno_9" onclick="ShowGame(9,false,5);showSelect(this,'广西快乐十分')" class="" style="cursor: pointer;">
-                    <a target="mainFrame" id="hidg_9">广西快乐十分</a>
-                </li>
-                
-                <li id="div_gameno_11" onclick="ShowGame(11,false,6);showSelect(this,'北京赛车')" class="" style="cursor: pointer;">
-                    <a target="mainFrame" id="hidg_11">北京赛车</a>
-                </li>
-                
-                <li id="div_gameno_12" onclick="ShowGame(12,false,7);showSelect(this,'江苏快3')" class="">
-                    <a target="mainFrame" id="hidg_12">江苏快3</a>
-                </li>
-                
-                <li id="div_gameno_13" onclick="ShowGame(13,false,8);showSelect(this,'北京快乐8')" class="">
-                    <a target="mainFrame" id="hidg_13">北京快乐8</a>
-                </li>
-                
-                <li id="div_gameno_20" onclick="ShowGame(20,false,4);showSelect(this,'幸运农场')" class="">
-                    <a target="mainFrame" id="hidg_20">幸运农场</a>
-                </li>
-                
-                <li id="div_gameno_21" onclick="ShowGame(21,false,6);showSelect(this,'幸运飞艇')" class="">
-                    <a target="mainFrame" id="hidg_21">幸运飞艇</a>
-                </li>
-                
-                <li id="div_gameno_22" onclick="ShowGame(22,false,6);showSelect(this,'极速赛车')" class="">
-                    <a target="mainFrame" id="hidg_22">极速赛车</a>
-                </li>
-                
-                <li id="div_gameno_23" onclick="ShowGame(23,false,3);showSelect(this,'极速时时彩')" class="">
-                    <a target="mainFrame" id="hidg_23">极速时时彩</a>
-                </li>
-                
-                <li id="div_gameno_26" onclick="ShowGame(26,false,6);showSelect(this,'EPS赛马')" class="">
-                    <a target="mainFrame" id="hidg_26">EPS赛马</a>
-                </li>
-                
-                <li id="div_gameno_27" onclick="ShowGame(27,false,3);showSelect(this,'超级快5')" class="">
-                    <a target="mainFrame" id="hidg_27">超级快5</a>
-                </li>
-                
-                <li id="div_gameno_29" onclick="ShowGame(29,false,7);showSelect(this,'广西快3')" class="">
-                    <a target="mainFrame" id="hidg_29">广西快3</a>
-                </li>
-                
-                <li id="div_gameno_31" onclick="ShowGame(31,false,10);showSelect(this,'PC蛋蛋')" class="">
-                    <a target="mainFrame" id="hidg_31">PC蛋蛋</a>
-                </li>
-                
-                <li id="div_gameno_38" onclick="ShowGame(38,false,3);showSelect(this,'澳洲幸运5')" class="">
-                    <a target="mainFrame" id="hidg_38">澳洲幸运5</a>
-                </li>
-                
-                <li id="div_gameno_40" onclick="ShowGame(40,false,6);showSelect(this,'澳洲幸运10')" class="">
-                    <a target="mainFrame" id="hidg_40">澳洲幸运10</a>
-                </li>
-                
-            </ul>
-        </div>
-    </div> -->
-
-
-                                        
                                         <td> 
                                             <div id="div_title">
                                                 <center>
@@ -204,17 +122,27 @@
 
     <div style=" width:100%;" id="footer">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tbody><tr>
-                <td width="100%" background="./static/img/Down_B.jpg" style="line-height: 26px;">
-                    <marquee style="position: relative; top: 1px;color:#5d5d5d; left: 0px;" id="showMynews" scrollamount="9" scrolldelay="160" onmouseover="this.stop()" onmouseout="this.start()" whdth="100%">
-                    尊敬的各级代理（会员）：本公司{{userInfo.notice}}</marquee> 
-                </td>
+          <tbody>
+            <tr>
+              <td width="100%" background="./static/img/Down_B.jpg" style="line-height: 26px;">
+                <marquee style="position: relative; top: 1px;color:#5d5d5d; left: 0px;" id="showMynews" scrollamount="9" scrolldelay="160" onmouseover="this.stop()" onmouseout="this.start()" whdth="100%">
+                  尊敬的各级代理（会员）：本公司{{userInfo.notice}}
+                </marquee> 
+              </td>
             </tr>
-        </tbody></table> 
+          </tbody>
+        </table> 
      </div>
 
-
-
+    <div class="navOne-newDown" v-show="showSubMenu" @mouseenter="overShow()" @mouseleave="outHide()">
+      <div id="bankLi-down" class="clearfix" style="top: 78px;left: 250px;overflow: hidden auto;display:block;">
+        <ul>
+          <li v-for="(item,index) in bocaiTypeList" :class="'div_gameno_'+item.bocaiId" style="cursor: pointer;"  @click="getOdds(item,index)">
+            <a>{{item.bocaiName}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -235,27 +163,7 @@ export default {
   },
   data() {
     return {
-      width: 200,
-      collapsed: false,
-      selection: null,
-      menus: [
-        {
-          text: "Item2",
-          iconCls: "icon-more",
-          children: [
-            {
-              text: "Option4"
-            },
-            {
-              text: "Option5"
-            },
-            {
-              text: "Option6"
-            }
-          ]
-        }
-      ],
-
+      showSubMenu: false,
 
       dialogMessage: '',
       min : 0, //生成的最小的数字，比如200
@@ -272,7 +180,7 @@ export default {
       hasResult: false,
       bocaiTypeId: '',
       bocaiTypeList: [],
-      submenu: '更多',
+      submenu: '',
       icons:[
             require('@/assets/img/chongqindubo.png'),
             require('@/assets/img/luckyairship.png'),
@@ -314,6 +222,17 @@ export default {
       this.clearTime();
   },
   methods: {
+    outHide() {
+      console.log('outHide');
+      $('.overShowLi').removeClass('active');
+      this.showSubMenu = false;
+    },
+    overShow() {
+      console.log('overShow');
+      $('.overShowLi').addClass('active');
+      this.showSubMenu = true;
+      $('.div_gameno_'+this.bocaiTypeId).addClass('active').siblings().removeClass('active');
+    },
     async exit() {
 
       let ret = await this.$get(`${window.url}/api/exitLogin`);
@@ -435,7 +354,7 @@ export default {
 
               //if("companyIsOpenSet": "",//该会员上级公司对该期博彩的封盘状态。状态：0删除，1封盘，2开盘。只有开盘才能投注。)
                //if("isOpenSet": "",//管理员对于当期博彩的开关设置) 
-               store.commit('updatebocaiInfoData',res.data);
+              store.commit('updatebocaiInfoData',res.data);
               bus.$emit('getbocaiInfoData', res.data);
 
               if(res.data.preResult == '') {
@@ -717,9 +636,6 @@ export default {
 
                 bus.$emit('getOddsInfo', result); 
 
-
-                console.log('ewfwefew');
-
                 $('.OddsCategory0').addClass('selected');
 
                 this.bocaiInfo();
@@ -736,8 +652,8 @@ export default {
       if(['重庆时时彩','幸运飞艇','北京PK拾','山东11选5','广东11选5','江西11选5','PC蛋蛋','江苏快3','北京快乐8','极速赛车','极速时时彩'].findIndex((n) => n==item.bocaiName)>-1) {
 
         this.activeIndex = item.bocaiName;
-
         this.submenu = item.bocaiName;
+        $('.div_gameno_'+item.bocaiId).addClass('active').siblings().removeClass('active');
 
         let path = '';
           switch (item.bocaiName) {
@@ -962,10 +878,12 @@ export default {
 
     .navOne-new .czBtn {
       background: url(../../static/img/TopBg1.png) repeat scroll 0 0;
+      width: 140px;
     }
 
-    .navOne-new .czBtn:hover {
+    .navOne-new .czBtn.active {
         background: url(../../static/img/TopBg1.png) repeat scroll 140px 0;
+        width: 140px;
     }
 
     .navOne-new .czBtn, .navOne-new .czBtnOn {
@@ -1085,7 +1003,90 @@ body {
     margin-bottom: 3px !important;
   }
 
+
+  .navOne-newDown {
+    left: 0;
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: #f1ad45;
+    font-weight: bold;
+  }
+
+  .active {
+    color: red;
+    cursor: inherit;
+    font-weight: bold;
+  }
     
+  .navOne-newDown #bankLi-down {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: rgb(255, 255, 255);
+    border-color: -moz-use-text-color #412500 #412500;
+    border-image: none;
+    border-radius: 0 0 4px 4px;
+    border-style: none solid solid;
+    border-width: medium 1px 1px;
+    box-shadow: 0 2px 8px #454545;
+    display: none;
+    position: absolute;
+    width: 138px;
+  }
+
+  .navOne-newDown ul {
+    float: left;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    width: 148px;
+  }
+
+  .navOne-newDown li {
+    border-bottom: 1px dashed #d1d1d1;
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    margin-top: 1px;
+    list-style: none;
+  }
+
+  a {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .navOne-newDown a {
+    background: url(../../static/img/TopBg.png) repeat scroll 5px -176px;
+    color: rgb(101, 101, 101);
+    display: block;
+    float: left;
+    font-size: 12px;
+    height: 27px;
+    line-height: 27px;
+    padding-left: 35px;
+    width: 148px;
+  }
+
+   a:hover {
+      color: white;
+      text-decoration: none;
+  }
+
+  .navOne-newDown a:hover {
+    background-color: #f7f0e1;
+    color: rgb(255, 99, 41);
+  }
+
+ 
 
 }
 

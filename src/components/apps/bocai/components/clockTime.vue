@@ -304,12 +304,6 @@
   margin-left: 20px;
 }
 
-.beishu {
-  width: 400px;
-  height: 67px;
-  background: url(./../../../../../static/img/casino-wt.png) bottom no-repeat transparent;
-}
-
 .betRight {
   width: 380px;
   margin-left: 50px;
@@ -325,34 +319,6 @@
   margin-top: 10px;
 }
 
-.beishuBtn {
-    width: 66.1px;
-    height: 67px;
-    margin: 0px !important;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
-.beishuBtn a {
-  height: 66px;
-  line-height: 66px;
-  font-weight: bold;
-  padding-left: 2px;
-}
-
-.beishuBtn:hover {
-  color: #ff9800;
-}
-
-.beishuBtn.selected {
-  color: #ff9800;
-  font-size: 16px;
-}
-
-.beishuBtn:last-child
-{ 
-  width: 68.8px;
-}
 
 .popup-body {
     overflow-y: auto;

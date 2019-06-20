@@ -43,10 +43,7 @@ module.exports = {
       ENV: process.env.NODE_ENV === 'production' ? "'pro'" : "'dev'",
       assetsPublicPath: "\"" + (process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath) + "\"",
       // currentVersion: process.env.NODE_ENV === 'production' ? new Date().getTime() : "''",//每次打包加入版本号
-    }),
-    new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, '../bocai.ico'),
-    }])
+    })
   ],
   // externals: {
   //   'datetimepicker': 'Datetimepicker'
