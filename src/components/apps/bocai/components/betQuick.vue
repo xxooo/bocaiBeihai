@@ -352,8 +352,9 @@
           store.commit('updatecurPeriods', this.bocaiInfoData.bocaiPeriods);  //每次点下注时，记录当时的菠菜期数
 
           console.log('this.orderDataListthis.orderDataList',this.orderDataList);
-
-          if(!this.kuaijiePay) {
+        if(this.userInfo.isFrozen == 1) {
+          bus.$emit('toleftShow',22,'该帐号或上级代理被禁用或暂停下注');
+        } else if(!this.kuaijiePay) {
             //console.log('正常');
             let minpay = true;
             let str1 = '';

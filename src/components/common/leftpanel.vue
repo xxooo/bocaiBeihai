@@ -240,13 +240,13 @@
                         <tr>
                             <td colspan="2" align="center" id="Current_XiaZhu">{{dialogMessage}}</td>
                         </tr>
-                        <tr>
+                        <!-- <tr>       
                             <td align="center">下注笔数</td>
                             <td align="left" style="padding-left:5px">4 笔</td>
                         </tr>
                         <tr>
                             <td align="center">合计注额</td><td align="left" style="padding-left:5px">￥ 8</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </td>
@@ -515,7 +515,7 @@
     <div tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons"  style="position: absolute; height: auto; width: 400px;  z-index: 101;" v-if="orderOddsVisible" id="ui-dialog">
       <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
         <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span>
-        <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close" @click="orderOddsVisible = false">
+        <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close" @click="cancelOdd()">
           <span class="ui-button-icon ui-icon ui-icon-closethick"></span>
           <span class="ui-button-icon-space"> </span>
           Close
@@ -538,11 +538,11 @@
         <div class="ui-dialog-buttonset">
 
           <template v-if="hasError">
-            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderOddsVisible = false">关闭</button>
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="cancelOdd()">关闭</button>
           </template>
           <template v-else>
             <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderSub()">确定</button>
-            <button type="button" class="ui-button ui-corner-all ui-widget" @click="orderOddsVisible = false">取消</button>
+            <button type="button" class="ui-button ui-corner-all ui-widget" @click="cancelOdd()">取消</button>
           </template>
         </div>
       </div>
@@ -733,6 +733,11 @@ export default {
           return false; 
 
        },
+
+    cancelOdd() {
+        this.orderOddsVisible = false;
+        store.commit('updateisOdding', false);
+      },
     async getnotice() {
 
       let res = await this.$get(`${window.url}/api/notice`);
@@ -754,6 +759,8 @@ export default {
     },
     orderOddsTo() {
 
+        console.log('userInfo',this.userInfo);
+
         let reg = /^[\u2E80-\u9FFF]+$/;
         if(reg.test(this.moneyOrder*1) || this.moneyOrder == ''){
           this.dialogMessage = '金额值必须是数值型数据';  
@@ -769,6 +776,10 @@ export default {
         } else if(!this.isOpenOdds) {
             this.showNumpage = 33;
             this.dialogMessage = '非交易时间,不允许下注!';  
+            this.orderOddsVisible = true;
+        } else if(this.userInfo.isFrozen == 1) {
+            this.showNumpage = 33;
+            this.dialogMessage = '该帐号或上级代理被禁用或暂停下注';  
             this.orderOddsVisible = true;
         } else {
             this.orderDataObj.normalMoney = this.moneyOrder*1;

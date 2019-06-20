@@ -40,7 +40,7 @@
                       </table>
                       </td>
                       <td align="right">
-                       <!-- <input type="button" value="查询" onclick="return SearchMembers();" style="cursor:pointer;margin-right:5px;">   -->
+                       <input type="button" value="查询" @click="searchMembers()" style="cursor:pointer;margin-right:5px;">  
                      </td> 
                    </tr>
                  </tbody>
@@ -61,13 +61,11 @@
       <tbody>
         <tr> 
         <td> 
-          <!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tbody>
               <tr>
               <td colspan="3">  
                 <div id="div_main" style="width: 100%; margin: 0px auto;">
-                  <link href="../css/css.css" rel="stylesheet" type="text/css"> 
-
                   <div> 
                     <table width="100%" class="DTable" border="0" cellspacing="1" cellpadding="0" style="margin-top:0px;">
                       <tbody>
@@ -79,7 +77,20 @@
                         <td>帐户余额</td>
                         <td>备注</td> 
                       </tr> 
-
+                      <tr style="height:20px; text-align:left;background-color:#ffffff">
+                        <td align="center">419147630</td>
+                        <td align="center">2019-06-20 22:40:03</td>
+                        <td align="center">转帐</td>
+                        <td align="right">100.0000</td>
+                        <td align="right">100.0000</td>
+                        <td align="center">上层代理</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" align="right">总计：</td>
+                        <td align="right">100.0000</td>
+                        <td align="center">--</td>
+                        <td align="center">--</td>
+                      </tr>
                     </tbody>
                   </table>
 
@@ -97,7 +108,7 @@
                 </td>  
               </tr>
             </tbody>
-          </table> --> 
+          </table> 
           </td> 
         </tr>
       </tbody>
@@ -106,25 +117,38 @@
   </tr>
   <tr>
     <td>
-      <!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tbody>
-        <tr> 
-        <td align="center">
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tbody>
-              <tr>  
-                <td id="tdpage" style=" line-height:20px; text-align:left; height: 12px;" colspan="43"> 
-            </td>
-          </tr>      
-        </tbody>
-      </table>
-      </td> 
-    </tr>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr> 
+          <td align="center">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>  
+                  <td id="tdpage" style=" line-height:20px; text-align:left; height: 12px;" colspan="43"> 
+                    <table height="22" cellspacing="0" cellpadding="0" width="100%" border="0">
+                      <tbody>
+                        <tr class="t_list_bottom">
+                          <td align="left">&nbsp;共&nbsp;1&nbsp;期记录</td>
+                          <td align="center">共&nbsp;1&nbsp;页</td>
+                          <td align="right">
+                            <span>前一页&nbsp;</span>『&nbsp;&nbsp;
+                            <span class="current">1</span>&nbsp;』
+                            <span> &nbsp;后一页 </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>      
+              </tbody>
+            </table>
+          </td> 
+        </tr>
+      </tbody>
+    </table>
+  </td>
+  </tr>
   </tbody>
-</table> -->
-</td>
-</tr>
-</tbody>
 </table>
 
 </div>
@@ -605,11 +629,13 @@ export default {
   created() {
     this.bankInfo();
 
-    console.log('Datetimepicker',this.Datetimepicker);
   },
   computed: {
   },
   methods: {
+    async searchMembers() {
+
+    },
     async gethistory(cur) {
 
       this.currentPage = cur;

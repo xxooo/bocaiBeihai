@@ -54,33 +54,20 @@
                                                 </li>
                                             </ul>
 
-                                            <!-- <el-menu
-                                              :default-active="activeIndex"
-                                              class="el-menu-demo navOne-new clearfix"
-                                              mode="horizontal"
-                                              @select="handleSelect"
-                                              >
-
-                                              <el-submenu key="submenu" id="bankLi" index="submenu" class="czBtn">
-                                                <template slot="title">{{submenu}}</template>
-                                                <el-menu-item v-for="(item,index) in bocaiTypeList" :key="index" :index="item.bocaiName"  @click="getOdds(item,index)">{{item.bocaiName}}</el-menu-item>
-                                              </el-submenu>
-                                            </el-menu> -->
-
                                         </td>
 
                                             
                                         <td> 
                                             <div id="div_title">
                                                 <center>
-                                                    <div id="div_title_xyzl" class="bST_1" @click="goRightMenu('personalinfo')">信用资料</div>
-                                                    <div id="div_title_zwcx" class="bST_1" @click="goRightMenu('caiwumanager')">帐务查询</div>
-                                                    <div id="div_title_xzmx" class="bST_1" @click="goRightMenu('instantorder')">下注明细</div>
-                                                    <div id="div_title_jsbb" class="bST_1" @click="goRightMenu('bettingHistory')">结算报表</div>
-                                                    <div id="div_title_kjls" class="bST_1" @click="goRightMenu('lotteryResults')">历史开奖</div>
-                                                    <div id="div_title_gz" class="bST_1" @click="goRightMenu('gameRule')">规则</div>
-                                                    <div id="div_title_xgma" class="bST_1" @click="goRightMenu('changePassword')">修改密码</div>
-                                                    <div id="div_title_tc" class="bST_1" @click="exit()">退出</div>
+                                                    <div id="div_title_personalinfo" class="bST_1" @click="goRightMenu('personalinfo')">信用资料</div>
+                                                    <div id="div_title_caiwumanager" class="bST_1" @click="goRightMenu('caiwumanager')">帐务查询</div>
+                                                    <div id="div_title_instantorder" class="bST_1" @click="goRightMenu('instantorder')">下注明细</div>
+                                                    <div id="div_title_bettingHistory" class="bST_1" @click="goRightMenu('bettingHistory')">结算报表</div>
+                                                    <div id="div_title_lotteryResults" class="bST_1" @click="goRightMenu('lotteryResults')">历史开奖</div>
+                                                    <div id="div_title_gameRule" class="bST_1" @click="goRightMenu('gameRule')">规则</div>
+                                                    <div id="div_title_changePassword" class="bST_1" @click="goRightMenu('changePassword')">修改密码</div>
+                                                    <div id="div_title_exit" class="bST_1" @click="exit()">退出</div>
                                                 </center>
                                             </div>
                                         </td>
@@ -94,7 +81,7 @@
                                 <div id="menuLv03">
                                     <div id="div_menu_group_1">  
                                         <template v-for="(item,index) in bocaiCategoryList">
-                                            <a class="OddsCategoryA" :class="'OddsCategory'+index" @click="getOddsCategory(item,index)">{{item.name}}</a>&nbsp;{{(index+1) == bocaiCategoryList.length*1 ? '' : '|&nbsp;'}}
+                                            <a class="OddsCategoryA" :class="['OddsCategory'+item.id,index == 0 ? 'selected':'']" @click="getOddsCategory(item,index)">{{item.name}}</a>&nbsp;{{(index+1) == bocaiCategoryList.length*1 ? '' : '|&nbsp;'}}
                                         </template>
                                     </div>
                                 </div>
@@ -252,6 +239,7 @@ export default {
       }
     },
     goRightMenu(path) {
+      $('#div_title_'+path).addClass('bST_1_s active').siblings().removeClass('bST_1_s active');
       this.$router.push({name: path});
     },
     async getRefreshTime() {
@@ -467,6 +455,12 @@ export default {
             this.bocaiTypeList = res.bocaiTypeList;
 
             this.getOddsInfo(res.bocaiTypeList[0]);
+
+
+            this.submenu = res.bocaiTypeList[0].bocaiName;
+
+            store.commit('updatebocaiName',res.bocaiTypeList[0].bocaiName);
+
             store.commit('updatebocaiTypeId', res.bocaiTypeList[0].bocaiId); 
 
           }
@@ -580,7 +574,7 @@ export default {
 
       store.commit('updatebocaiCategory',item);
 
-      $('.OddsCategory'+index).addClass('selected').siblings().removeClass('selected');
+      $('.OddsCategory'+item.id).addClass('selected').siblings().removeClass('selected');
 
       const loading = this.$loading({
                 lock: true,
@@ -619,11 +613,10 @@ export default {
                 that.bocaiCategoryList = result.bocaiCategoryList;
 
                 store.commit('updatebocaiCategory',result.bocaiCategoryList[0]);
+
                 store.commit('updateoddsList',result.oddsList);
 
                 bus.$emit('getOddsInfo', result); 
-
-                $('.OddsCategory0').addClass('selected');
 
                 this.bocaiInfo();
 
@@ -633,8 +626,6 @@ export default {
 
     },
     async getOdds(item,index) {
-
-      //console.log('item---index',index);    给active类
 
       if(['重庆时时彩','幸运飞艇','北京PK拾','山东11选5','广东11选5','江西11选5','PC蛋蛋','江苏快3','北京快乐8','极速赛车','极速时时彩'].findIndex((n) => n==item.bocaiName)>-1) {
 
@@ -729,6 +720,12 @@ export default {
 <style scoped lang="less">
 
 #main {
+  #maintop {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+  }
 
   body, div, span, p, b, textarea, input, select, form, table, tr, td {
         margin: 0;
@@ -817,8 +814,8 @@ export default {
         background-image: url(../../static/img/But1.jpg);
         width: 95px;
         height: 33px;
-        font-weight: bold;
-        margin-right: 5px;
+        font-weight: bold !important;
+        margin-right: 5px !important;
     }
 
     .bST_1 {
@@ -978,13 +975,6 @@ body {
   }
 
 
-  #maintop {
-    * {
-        margin: 0;
-        padding: 0;
-    }
-  }
-  
   .navOne-new.clearfix {
     width: 150px;
     margin-bottom: 3px !important;
@@ -1005,12 +995,6 @@ body {
     font-weight: bold;
   }
 
-  .active {
-    color: red;
-    cursor: inherit;
-    font-weight: bold;
-  }
-    
   .navOne-newDown #bankLi-down {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
@@ -1073,7 +1057,21 @@ body {
     color: rgb(255, 99, 41);
   }
 
- 
+  .ui-dialog-title {
+    font-size: 12px !important;
+    color: #511e02 !important;
+  }
+
+  .bST_1_s {
+    background-position: -120px !important;
+    color: #4f260d;
+  }
+
+  .active {
+    color: red !important;
+    cursor: inherit !important;
+    font-weight: bold;
+  }
 
 }
 
