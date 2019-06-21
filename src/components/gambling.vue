@@ -179,7 +179,7 @@ export default {
 
     this.openPrizeTime = this.$timestampToTimeRi(new Date());
 
-    //this.getbocaoName();
+    this.getbocaoName();
 
     this.getcUserInfo();
 
@@ -584,10 +584,8 @@ export default {
             break;
         }
 
-        // if() {
-        //   store.commit('updatebocaiName',this.submenu);
-        //   store.commit('updatebocaiTypeId',this.bocaiTypeId);
-        // }
+          store.commit('updatebocaiName',this.submenu);
+          store.commit('updatebocaiTypeId',this.bocaiTypeId);
 
         
 

@@ -1,5 +1,70 @@
 <template>
-  <div class="content-main">
+  <div id="instantorder" class="duboBodyClass" style="vertical-align:top;">
+    <table width="706px" class="DTable" cellpadding="0" cellspacing="1" border="0" id="tblist"> 
+      <tbody>
+        <tr class="td_caption_1">
+          <td style="width:125px;">注单号/时间</td>
+          <td style="width:125px;">下注类型</td>
+          <td style="width:240px;">注单明细</td>
+          <td style="width:90px;">下注金额</td>
+          <td style="width:120px;">可赢金额</td>
+        </tr> 
+        
+        <tr>
+          <td>1029333765#<br>06-21&nbsp;22:27:07&nbsp;五</td>
+          <td>重庆时时彩<br>
+            <span style="color:green;">20190621055 期</span>
+          </td>
+          <td>
+            <font color="blue">第二球大小&nbsp;小</font> @  <font color="red" style="font-weight: bold;">1.9878</font>
+          </td>
+          <td style="text-align: right;">3.00</td>
+          <td style="text-align: right;">2.96</td>
+        </tr>
+        <tr style="background-color: rgb(235, 215, 216);">
+          <td colspan="2" style="text-align: center;">总计</td>
+          <td>3笔</td>
+          <td style="text-align: right;">9.00</td>
+          <td style="text-align: right;">8.89</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <table width="706px" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top:0px;"> 
+      <tbody>
+        <tr> 
+          <td id="tdpage" style=" line-height:20px; text-align:left; height: 12px;" colspan="5">
+            <table height="22" cellspacing="0" cellpadding="0" width="100%" border="0">
+              <tbody>
+                <tr class="t_list_bottom">
+                  <td align="center">
+                    <span style="color:red">当前没有数据。。。</span>
+                  </td>
+                </tr>
+
+                <!-- <tr class="t_list_bottom">
+                  <td align="left">&nbsp;共&nbsp;3&nbsp;期记录</td>
+                  <td align="center">共&nbsp;1&nbsp;页</td>
+                  <td align="right">
+                    <span>前一页&nbsp;</span>『&nbsp;&nbsp;
+                    <span class="current">1</span>&nbsp;』
+                    <span> &nbsp;后一页 </span>
+                  </td>
+                </tr> -->
+
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+  <!-- <div class="content-main">
     <div class="right">
       <div id="submenuDiv">
         <div class="box">
@@ -69,7 +134,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+
 </template>
 
 <script>
@@ -109,6 +176,8 @@ export default {
     async getnowOrder() { 
       this.currentBetsMoney = 0;
       this.currentWinMoney = 0;
+
+      // api/hisOrderInfo?currentPage=1&pageSize=10&dayStr=2018-10-23
 
       let res = await this.$get(`${window.url}/api/nowOrder?currentPage=`+this.currentPage+`&pageSize=`+this.pageSize);
 

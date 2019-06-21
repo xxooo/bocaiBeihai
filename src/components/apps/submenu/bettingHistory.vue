@@ -1,6 +1,108 @@
 <template>
-  <div class="content-main">
-    <div class="right">
+  <div id="bettingHistory" class="duboBodyClass">
+
+    <table width="95%" align="left" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+      <tbody>
+        <tr>
+          <td>
+            &nbsp;&nbsp;
+            彩种：
+            <select id="ddlgame" @change="hisOrder"  v-model="bocaiTypeId">
+                <option value="" selected="selected">全部</option>
+                <option value="1">重庆时时彩</option>
+                <option value="8223">PC蛋蛋</option>
+                <option value="8266">北京快乐8</option>
+                <option value="8374">广东11选5</option>
+                <option value="8498">江苏快3</option>
+                <option value="8555">幸运飞艇</option>
+                <option value="8806">北京PK拾</option>
+                <option value="8808">六合彩</option>
+                <option value="8809">广东快乐十分</option>
+                <option value="8810">安徽快3</option>
+                <option value="8811">山东11选5</option>
+                <option value="8813">江西11选5</option>
+                <option value="8814">重庆幸运农场</option>
+                <option value="8815">天津时时彩</option>
+                <option value="9057">极速赛车</option>
+            </select>
+
+            &nbsp;
+            类型：
+            <select id="ddlstatus" @change="hisOrder" v-model="betHisType">
+                <option value="" selected="selected">已结算</option>
+                <option value="0">作废单</option>
+                <option value="1">未结算</option>
+                <option value="2">已结算-不中</option>
+                <option value="3">已结算-中奖</option>
+                <option value="4">已结算-和</option>
+            </select>
+          </td>
+        </tr>
+        <tr> 
+          <td id="tdlist" valign="top">
+            <table width="700px" class="DTable" cellpadding="0" cellspacing="1" border="0">
+              <tbody>
+                <tr align="center" class="td_caption_1">
+                  <td style="width:150px;">交易日期</td>
+                  <td style="width:82px;">注单笔数</td>
+                  <td style="width:130px;">下注金额</td>
+                  <td style="width:120px;">输赢结果</td> 
+                  <td style="width:90px;">退水</td>
+                  <td style="width:120px;">退水后结果</td>
+                </tr>
+                <tr height="20px" class="bethisTrclass">
+                  <td style="width: 150px;">06-10  星期一</td>
+                  <td style="width: 82px;">0</td>
+                  <td style="width: 130px; padding-right: 5px;" align="right">0</td>
+                  <td style="width: 120px; padding-right: 5px;" align="right">0.00</td>
+                  <td style="width: 90px; padding-right: 5px;" align="right">0.00</td>
+                  <td style="width: 120px; padding-right: 5px;" align="right">0.00</td>
+                </tr>
+                <tr class="t_list_bottom" style="font-weight:bold" height="20px">
+                  <td>上周</td>
+                  <td>0</td>
+                  <td align="right" style="padding-right:5px;">0</td>
+                  <td align="right" style="padding-right:5px;">0</td>
+                  <td align="right" style="padding-right:5px;">0</td>
+                  <td align="right" style="padding-right:5px;">0</td>
+                </tr>
+              </tbody>
+            </table>
+            <table width="700px" class="DTable" cellpadding="0" cellspacing="1" border="0">
+              <tbody>
+                <tr align="center" class="td_caption_1">
+                  <td style="width:150px;">交易日期</td>
+                  <td style="width:82px;">注单笔数</td>
+                  <td style="width:130px;">下注金额</td>
+                  <td style="width:120px;">输赢结果</td> 
+                  <td style="width:90px;">退水</td>
+                  <td style="width:120px;">退水后结果</td>
+                </tr>
+                <tr height="20px" class="bethisTrclass">
+                  <td style="width:150px;">06-17  星期一</td>
+                  <td style="width:82px;">0</td>
+                  <td style="width:130px;padding-right:5px;" align="right">0</td>
+                  <td style="width:120px;padding-right:5px;" align="right">0.00</td>
+                  <td style="width:90px;padding-right:5px;" align="right">0.00</td>
+                  <td style="width:120px;padding-right:5px;" align="right">0.00</td>
+                </tr>
+                <tr class="t_list_bottom" style="font-weight:bold" height="20px">
+                  <td>本周</td>
+                  <td>3</td>
+                  <td align="right" style="padding-right:5px;">9.00</td>
+                  <td align="right" style="padding-right:5px;">-5.02</td>
+                  <td align="right" style="padding-right:5px;">0.05</td>
+                  <td align="right" style="padding-right:5px;">-4.97</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <!-- <div class="right">
       <div id="submenuDiv">
         <div class="box">
 
@@ -39,7 +141,6 @@
                   </tr>
                   <tr v-else v-for="item in nowWeekPage">
                     <td style="line-height: 26px;"><a title="历史详情" class="link" @click="goBetInfo(item.createDateStr)">{{item.createDateStr}}</a></td>
-                    <!-- <td style="line-height: 26px;"><span>{{item.createDateStr}}</span></td> --> 
                     <td style="line-height: 26px;">{{item.betsMoneySum}}</td> 
                     <td style="line-height: 26px;">{{item.winnerMoneySum}}</td> 
                     <td style="line-height: 26px;">{{item.orderCount}}</td>
@@ -68,7 +169,6 @@
                     <td style="line-height: 26px;" colspan="4">{{"暂无数据"}}</td> 
                   </tr>
                   <tr v-else v-for="item in afterWeekPage">
-                    <!-- <td style="line-height: 26px;"><span>{{item.createDateStr}}</span></td>  -->
                     <td style="line-height: 26px;"><a title="历史详情" class="link" @click="getbetInfo(item.createDateStr)">{{item.createDateStr}}</a></td>
                     <td style="line-height: 26px;">{{item.betsMoneySum}}</td> 
                     <td style="line-height: 26px;">{{item.winnerMoneySum}}</td> 
@@ -144,7 +244,9 @@
 
         </div>
       </div>
-    </div>
+    </div> -->
+
+
   </div>
 </template>
 
@@ -155,6 +257,8 @@ export default {
   },
   data() {
     return {
+      betHisType: '',
+
       betInfo: {},
       currentPage: 1,
       dayStr: '',
@@ -176,12 +280,16 @@ export default {
     }
   },
   created() {
-    this.hisOrder(this.bocaiTypeId);
+    this.hisOrder();
     this.getBocai();
   },
   computed: {
   },
   methods: {
+    GetReportList() {
+
+    },
+
     handleCurrentChange(cpage) {
       this.currentPage = cpage;
       this.getbetInfo();
@@ -227,7 +335,7 @@ export default {
     changeboType(data) {
       this.hisOrder(data);
     },
-    async hisOrder(id) {
+    async hisOrder() {
 
       this.betsAllNow = '';
       this.winnerAllNow = '';
@@ -236,7 +344,7 @@ export default {
       this.winnerAllAfter = '';
       this.orderAllAfter = '';
 
-      let res = await this.$get(`${window.url}/api/hisOrder?bocaiTypeId=`+id);
+      let res = await this.$get(`${window.url}/api/hisOrder?bocaiTypeId=`+this.bocaiTypeId);
 
         if(res.code===200){
             this.nowWeekPage = res.page.nowWeekPage;
@@ -269,5 +377,9 @@ export default {
 <style scoped>
 </style>
 <style lang="less">
-  
+  #bettingHistory {
+    .bethisTrclass:hover td {
+      background-color: rgb(255,255,102);
+    }
+  }
 </style>
