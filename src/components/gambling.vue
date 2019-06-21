@@ -179,7 +179,7 @@ export default {
 
     this.openPrizeTime = this.$timestampToTimeRi(new Date());
 
-    this.getbocaoName();
+    //this.getbocaoName();
 
     this.getcUserInfo();
 
@@ -243,6 +243,9 @@ export default {
       this.$router.push({name: path});
     },
     async getRefreshTime() {
+
+      console.log('this.bocaiTypeId22222',this.bocaiTypeId);
+
       let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
       if(res.code===200){
@@ -281,7 +284,7 @@ export default {
     },
     async getRefreshTimeFast() {
 
-
+      console.log('this.bocaiTypeId33333',this.bocaiTypeId);
       let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
       if(res.code===200){
@@ -323,6 +326,9 @@ export default {
     async refreshTime() {
 
       if(!this.hasResult) {
+
+        console.log('this.bocaiTypeId4444444',this.bocaiTypeId);
+
         let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
             if(res.code===200){
@@ -367,6 +373,9 @@ export default {
       //bus.$emit('hasFast', true);
 
       if(!this.hasResult) {
+
+        console.log('this.bocaiTypeId5555',this.bocaiTypeId);
+
         let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
             if(res.code===200){
@@ -409,8 +418,12 @@ export default {
           this.t4 = setTimeout(this.refreshTimeFast, window.refreshTimeFast);
     },
     async bocaiInfo() {
+        console.log('this.bocaiTypeId666666',this.bocaiTypeId);
 
-        let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
+        if(this.bocaiTypeId == '') {
+          console.log('this.bocaiTypeId为空');
+        } else {
+          let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
             if(res.code===200){
 
@@ -443,6 +456,9 @@ export default {
               this.preBocaiPeriods = res.data.preBocaiPeriods;  //"preBocaiPeriods": "30763817",//上期博彩期数    
 
             }
+        }
+
+        
 
     },
     handleSelect(key, keyPath) {
@@ -459,6 +475,8 @@ export default {
 
             this.submenu = res.bocaiTypeList[0].bocaiName;
 
+            console.log('第一次刷新调取默认菠菜',res.bocaiTypeList[0]);
+
             store.commit('updatebocaiName',res.bocaiTypeList[0].bocaiName);
 
             store.commit('updatebocaiTypeId', res.bocaiTypeList[0].bocaiId); 
@@ -474,6 +492,8 @@ export default {
       //console.log('!!!!!this.hasResult',!this.hasResult);
 
       // if(!this.hasResult) {
+
+        console.log('this.bocaiTypeId1111',this.bocaiTypeId);
 
         let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
@@ -564,8 +584,12 @@ export default {
             break;
         }
 
-        store.commit('updatebocaiName',this.submenu);
-        store.commit('updatebocaiTypeId',this.bocaiTypeId);
+        // if() {
+        //   store.commit('updatebocaiName',this.submenu);
+        //   store.commit('updatebocaiTypeId',this.bocaiTypeId);
+        // }
+
+        
 
     },
     async getOddsCategory(item,index) {

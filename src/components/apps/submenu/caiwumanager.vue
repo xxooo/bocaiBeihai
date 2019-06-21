@@ -1,463 +1,101 @@
 <template>
   <div id="caiwumanager" class="duboBodyClass">
 
-
-
     <table width="700" border="0" cellspacing="0" cellpadding="0">
       <tbody>
         <tr>
-        <td height="30">
-          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:left;">
-            <tbody>
-              <tr> 
-              <td valign="middle">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tbody>
-                  <tr> 
-                  <td width="auto" class="F_bold">&nbsp;帐务查询</td>
-                  <td align="right"> 
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="Table1" style="color:#000">
-                      <tbody>
-                        <tr> 
-                        <td width="518" height="20" class="font8" align="right">
-                         <table border="0" cellpadding="0" cellspacing="0">
-                           <tbody>
-                            <tr> 
-                            <td>日期区间</td>
-                            <td>
-                              <DateBox v-model="value"></DateBox>
+          <td height="30">
 
-                            </td>
-                            <td>至</td>
-                            <td>
-                            <DateBox v-model="value"></DateBox>
-                            </td>
-
-                            
-
-                          </tr>
-                        </tbody>
-                      </table>
-                      </td>
-                      <td align="right">
-                       <input type="button" value="查询" @click="searchMembers()" style="cursor:pointer;margin-right:5px;">  
-                     </td> 
-                   </tr>
-                 </tbody>
-               </table> 
-               </td>
-             </tr>
-           </tbody>
-         </table>
-         </td> 
-         </tr>
-       </tbody>
-     </table>
-     </td>
-   </tr>
-   <tr>
-    <td>
-     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tbody>
-        <tr> 
-        <td> 
-          <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tbody>
-              <tr>
-              <td colspan="3">  
-                <div id="div_main" style="width: 100%; margin: 0px auto;">
-                  <div> 
-                    <table width="100%" class="DTable" border="0" cellspacing="1" cellpadding="0" style="margin-top:0px;">
-                      <tbody>
-                        <tr class="td_caption_1"> 
-                        <td height="25">交易序号</td>
-                        <td>时间</td>
-                        <td>交易类型</td>
-                        <td>交易金额</td>
-                        <td>帐户余额</td>
-                        <td>备注</td> 
-                      </tr> 
-                      <tr style="height:20px; text-align:left;background-color:#ffffff">
-                        <td align="center">419147630</td>
-                        <td align="center">2019-06-20 22:40:03</td>
-                        <td align="center">转帐</td>
-                        <td align="right">100.0000</td>
-                        <td align="right">100.0000</td>
-                        <td align="center">上层代理</td>
-                      </tr>
-                      <tr>
-                        <td colspan="3" align="right">总计：</td>
-                        <td align="right">100.0000</td>
-                        <td align="center">--</td>
-                        <td align="center">--</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                    <table width="100%" class="tableH" cellspacing="0" cellpadding="0" border="1" bordercolor="#78B8DE" style="margin-top:10px; color:red; font-size:14px; line-height:30px; text-align:center;  background-color:White;" id="tdnone">
-                      <tbody>
-                        <tr>
-                          <td>此区间暂无数据</td>
-                        </tr>
-                      </tbody>
-                    </table> 
-
-                    </div>
-
-                  </div> 
-                </td>  
-              </tr>
-            </tbody>
-          </table> 
-          </td> 
-        </tr>
-      </tbody>
-    </table>
-    </td> 
-  </tr>
-  <tr>
-    <td>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tbody>
-          <tr> 
-          <td align="center">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <table border="0" cellpadding="0" cellspacing="0">
               <tbody>
-                <tr>  
-                  <td id="tdpage" style=" line-height:20px; text-align:left; height: 12px;" colspan="43"> 
-                    <table height="22" cellspacing="0" cellpadding="0" width="100%" border="0">
-                      <tbody>
-                        <tr class="t_list_bottom">
-                          <td align="left">&nbsp;共&nbsp;1&nbsp;期记录</td>
-                          <td align="center">共&nbsp;1&nbsp;页</td>
-                          <td align="right">
-                            <span>前一页&nbsp;</span>『&nbsp;&nbsp;
-                            <span class="current">1</span>&nbsp;』
-                            <span> &nbsp;后一页 </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                <tr> 
+                  <td>日期区间</td>
+                  <td>
+                    <DateBox v-model="startTime" format="yyyy-MM-dd"></DateBox>
+
                   </td>
-                </tr>      
+                  <td>至</td>
+                  <td>
+                    <DateBox v-model="endTime" format="yyyy-MM-dd"></DateBox>
+                  </td>
+                  <td align="right">
+                   <input type="button" value="查询" @click="searchMembers()" style="cursor:pointer;margin-right:5px;">  
+                 </td>
+               </tr>
+             </tbody>
+           </table>
+
+         </td>
+       </tr>
+
+       <tr>
+        <td colspan="3">
+
+          <div id="div_main" style="width: 100%; margin: 0px auto;">
+            <table  width="100%" class="DTable" border="0" cellspacing="1" cellpadding="0" style="margin-top:0px;">
+              <tbody>
+                <tr class="td_caption_1"> 
+                  <td height="25">交易序号</td>
+                  <td>时间</td>
+                  <td>交易类型</td>
+                  <td>交易金额</td>
+                  <td>帐户余额</td>
+                  <td>备注</td> 
+                </tr> 
+                <tr class="caiwuListTr" v-for="(item,index) in historyDataList.list">
+                  <td align="center">{{item.id}}</td>
+                  <td align="center">{{$timestampToTime(item.createDate)}}</td>
+                  <td align="center">{{item.type =='1'?'充值' : '提现'}}</td>
+                  <td align="right">{{item.money}}</td>
+                  <td align="right">{{item.totalMoney}}</td>
+                  <td align="center">{{item.remark}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3" align="right">总计：</td>
+                  <td align="right">{{moneyAll}}</td>
+                  <td align="center">{{totalMoneyAll}}</td>
+                  <td align="center">--</td>
+                </tr>
               </tbody>
             </table>
-          </td> 
-        </tr>
-      </tbody>
-    </table>
-  </td>
-  </tr>
-  </tbody>
-</table>
+
+            <table width="100%" class="tableH" cellspacing="0" cellpadding="0" border="1" bordercolor="#78B8DE"  style="margin-top:10px; color:red; font-size:14px; line-height:30px; text-align:center;  background-color:White;">
+              <tbody>
+                <tr>
+                  <td>此区间暂无数据</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </td> 
+      </tr>
+      <tr>
+        <td id="tdpage" style=" line-height:20px; text-align:left; height: 12px;" colspan="43">
+
+          <table height="22" cellspacing="0" cellpadding="0" width="100%" border="0">
+            <tbody>
+              <tr class="t_list_bottom">
+                <td align="left">&nbsp;共&nbsp;1&nbsp;期记录</td>
+                <td align="center">共&nbsp;1&nbsp;页</td>
+                <td align="right">
+                  <span>前一页&nbsp;</span>『&nbsp;&nbsp;
+                  <span class="current">1</span>&nbsp;』
+                  <span> &nbsp;后一页 </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 </div>
 
-
-  <!-- <div class="content-main">
-    <div class="right">
-      <div id="submenuDiv">
-        <div class="box" id="caiwumanager">
-
-          <div class="header">
-            <p>财务管理</p>
-          </div> 
-
-          <div class="bank-info">
-            <ul class="tab">
-              <a class="active bankInfo" @click="bankInfo">银行信息</a> 
-              <a class="rechargeInfo" @click="rechargeInfo">充值</a> 
-              <a class="forwardInfo" @click="forwardInfo">申请提现</a> 
-              <a class="historyInfo" @click="historyInfo">历史记录</a>
-            </ul> 
-
-            <div class="table"  v-if="tabNum == '1'">
-              <table class="bank-table">
-                <tr>
-                  <th>银行名称：</th> 
-                  <td>
-                  <input type="text" v-model="bankInfoObj.bankName" placeholder="请输入银行名称"></td>
-                </tr> 
-                <tr>
-                  <th>银行卡号：</th> 
-                  <td>
-                  <input type="text" v-model="bankInfoObj.bankNum" placeholder="请输入银行卡号"></td>
-                </tr> 
-                <tr>
-                  <th>卡主姓名：</th> 
-                  <td>
-                  <input type="text" v-model="bankInfoObj.bankUserName" class="bankUserName" placeholder="请输入卡主姓名"> 
-                  <span class="red">（设置后不能修改）</span>
-                </td>
-                </tr> 
-                <tr>
-                  <th>手机号码：</th> 
-                  <td><input type="text" v-model="bankInfoObj.phone" placeholder="请输入手机号码"></td>
-                </tr> 
-                <tr>
-                  <th>微信支付账号：</th> 
-                  <td>
-                  <input type="text" v-model="bankInfoObj.weixin" class="weixin" placeholder="请输入微信账号"> <span class="red">（设置后不能修改）</span>
-                  </td>
-                </tr> 
-                <tr>
-                  <th>支付宝账号：</th> 
-                  <td>
-                  <input type="text" v-model="bankInfoObj.zhifubao" class="zhifubao" placeholder="请输入支付宝账号"> <span class="red">（设置后不能修改）</span>
-                  </td>
-                </tr> 
-                <tr>
-                  <th>提现密码：</th>
-                  <td v-if="bankInfoObj.putForwardPassword == ''">
-                    <p>
-                      <select v-model="newPass[0]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select>
-                      <select v-model="newPass[1]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select> 
-                      <select v-model="newPass[2]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select> 
-                      <select v-model="newPass[3]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select>  
-                    </p>
-                  </td>
-                  <td v-else-if="passType">
-                    <p>
-                      旧密码：
-                      <select v-model="oldPass[0]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select>
-                      <select v-model="oldPass[1]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select> 
-                      <select v-model="oldPass[2]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select> 
-                      <select v-model="oldPass[3]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select>  
-                    </p>
-                    <p>
-                      新密码：
-                      <select v-model="newPass[0]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select>
-                      <select v-model="newPass[1]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select> 
-                      <select v-model="newPass[2]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select> 
-                      <select v-model="newPass[3]">
-                        <option v-for="item in mima" :value="item">{{item}}</option>
-                      </select>  
-                    </p> 
-                  </td>
-                  <td v-else><a @click="chanPassType">修改密码</a></td>
-                </tr>
-              </table> 
-              <i class="icon-credit-card"></i> 
-            </div>
-
-            <div class="table" v-if="tabNum == '2'">
-              <div class="pay" v-if="!chongzhiHisOp">
-                <p class="contact">
-                  <a class="payRecord r" @click="toChongzhiHis('0',1,10)">
-                    <i class="icon-credit-card"></i> 
-                    充值记录
-                  </a>
-                </p> 
-                <table class="recharge-type">
-                  <tr>
-                    <th width="250">充值方式</th> 
-                    <th>收款人信息</th>
-                  </tr> 
-                  <tr>
-                    <td>
-                      <el-radio v-model="chongzhiType" label="1" @change="getchongzhiType"><img src="../../../../static/img/WXPAY.6f192a3.png" alt=""></el-radio>
-                      <el-radio v-model="chongzhiType" label="2" @change="getchongzhiType"><img src="../../../../static/img/alipay.8999215.jpg" alt=""></el-radio>
-                      <el-radio v-model="chongzhiType" label="3" @change="getchongzhiType"><img src="../../../../static/img/unionpay.a124865.jpg" alt=""></el-radio>
-
-                    </td> 
-                    <td v-if="chongzhiType == ''">
-                      <p>
-                        <a>如充值异常，请刷新二维码</a>
-                      </p> 
-                      <img src="../../../../static/img/onError.gif" alt="" width="120" height="120" title="点击图片刷新" style="cursor: pointer;">
-                    </td>
-                    <td v-else-if="chongzhiType == '3'">
-                      <div class="kahaoclass" v-for="item in caiwuYinhangzhuanzhangList">
-                        <el-row>
-                          <el-col :span="12"><h3 class="grid-content bg-purple-light">{{item.yinhangLeixing}}</h3></el-col>
-                        </el-row>
-                        <el-row>
-                          <el-col :span="16" class="labelStep">
-                            <span class="grid-content bg-purple">卡号:{{item.yinhangZhanghao}}</span>
-                          </el-col>
-                          <el-col :span="8"><span class="grid-content bg-purple-light">收款人:{{item.shoukuanXingming}}</span></el-col>
-                        </el-row>
-                      </div>
-                    </td>
-                    <td v-else>
-                      <img :src="chongzhiImgSrc" alt="" width="120" height="120" title="充值" >
-                    </td>
-                  </tr> 
-                  <tr>
-                    <td style="border-right: none;">
-                      <p>
-                        <span class="red">*</span>
-                        充值金额：
-                      </p> 
-                      <input type="text" v-model="paymoney" placeholder="请输入金额" style="height: 30px;">
-                    </td> 
-                    <td class="remark" style="border-left: none;">
-                      <span><i class="red">*</i>备注：</span> 
-                      <span style="color: rgb(157, 157, 157); font-size: 11px;">(付款账号,姓名等信息)</span>
-                      <br> 
-                      <textarea v-model="payremark" placeholder="格式如：账号 123，张三" cols="30"></textarea>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-
-              <div class="pay" v-else>
-                <p class="contact">
-                  <a class="r" @click="returnChistory"><i class="icon-reply"></i> 返回</a>
-                  <span>
-                    状态：
-                    <el-select v-model="rechargeHisType" size="mini" @change="changeRechHisType" placeholder="请选择">
-                      <el-option key="1" value="1" label="已处理"></el-option> 
-                      <el-option key="2" value="0" label="未处理"></el-option>
-                    </el-select>
-                  </span>
-                </p> 
-                <table v-if="rechargeObj.list" class="payRecord">
-                  <tr>
-                    <th>充值方式</th> 
-                    <th>充值金额</th> 
-                    <th>状态</th> 
-                    <th>申请时间</th>
-                  </tr> 
-                  <tr v-if="rechargeObj.list.length*1 == '0'">
-                    <td  colspan="5">暂无数据</td> 
-                  </tr>
-                  <tr v-else v-for="item in rechargeObj.list">
-                    <td><span>{{item.type=='1'?'微信' : item.type=='2'? '支付宝' : '银行转帐'}}</span></td> 
-                    <td>{{item.money}}</td> 
-                    <td>{{item.status=='1'?'已通过' : item.status=='2'? '已拒绝' : '未处理'}}</span></td>
-                    <td>{{$timestampToTime(item.createDate)}}</td>
-                  </tr>
-                </table>
-                <div class="block" v-if="rechargeObj.totalPage > 1">
-                  <el-pagination
-                    @current-change="handleCurrentChange"
-                    :current-page.sync="currentPage"
-                    :page-size="rechargeObj.pageSize"
-                    layout="total, prev, pager, next"
-                    :total="rechargeObj.totalCount*1">
-                  </el-pagination>
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="table" v-if="tabNum == '3'">
-              <div class="shqitixian">
-                <p class="grey">* 当前可取余额：<b style="color: green;">{{useMoney}}</b></p> 
-                <div>
-                  <div class="r">
-                    状态：
-                    <el-select v-model="forwardType" size="mini" @change="changeForwardType" placeholder="请选择">
-                      <el-option key="1" value="1" label="已处理"></el-option> 
-                      <el-option key="0" value="0" label="未处理"></el-option>
-                    </el-select>
-                  </div>
-                  提现金额： 
-                  <input type="text" v-model="forwardCash" placeholder="请输入金额" style="width: 80px;"> 
-                  <el-select v-model="forwardFaction" size="mini" placeholder="请选择">
-                    <el-option v-for="item in payType" :key="item.value" :value="item.value" :label="item.label"></el-option> 
-                  </el-select>
-                  <span style="margin-right: 5px;">
-                    提现密码：<input type="text" v-model="forwardPass" style="width: 50px;">
-                  </span> 
-                  <el-button type="primary" size="mini" @click="forwardSubmit">确定</el-button>
-                </div> 
-                <table v-if="forwardObj.list" class="ask-table">
-                  <tr>
-                    <th>提现方式</th> 
-                    <th>提现金额</th> 
-                    <th>状态</th> 
-                    <th>申请时间</th>
-                  </tr> 
-                  <tr v-if="forwardObj.list.length*1 == '0'">
-                    <td  colspan="5">暂无数据</td> 
-                  </tr>
-                  <tr v-else v-for="item in forwardObj.list">
-                    <td><span>{{item.type=='1'?'微信' : item.type=='2'? '支付宝' : '银行转帐'}}</span></td> 
-                    <td>{{item.money}}</td> 
-                    <td>{{item.status=='1'?'已通过' : item.status=='2'? '已拒绝' : '未处理'}}</span></td>
-                    <td>{{$timestampToTime(item.createDate)}}</td>
-                  </tr>
-                </table>
-                <div class="block" v-if="forwardObj.totalPage > 1">
-                  <el-pagination
-                    @current-change="handleCurrentChange"
-                    :current-page.sync="currentPage"
-                    :page-size="forwardObj.pageSize"
-                    layout="total, prev, pager, next"
-                    :total="forwardObj.totalCount*1">
-                  </el-pagination>
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="table" v-if="tabNum == '4'">
-              <div class="cash-history">
-                筛选:
-                <el-select class="duanSelect" v-model="historyType" size="mini" @change="changeHistoryType" placeholder="请选择">
-                  <el-option key="0" value="0" label="全部"></el-option>
-                  <el-option key="1" value="1" label="充值"></el-option> 
-                  <el-option key="2" value="2" label="提现"></el-option>
-                </el-select>
-                日期区间：
-                <el-date-picker
-                  value-format="yyyy-MM-dd"
-                  v-model="histDate"
-                  size="mini"
-                  type="daterange"
-                  range-separator="至"
-                  start-placeholder="开始日期"
-                  @change="getHisDate"
-                  end-placeholder="结束日期"
-                  >
-                </el-date-picker>
-                <el-button type="primary" size="mini" @click="gethistory(1)">查询</el-button>
-                <table class="ask-table" v-if="historyDataList.list">
-                  <tr>
-                    <th width="40">方式</th> 
-                    <th width="80">金额</th> 
-                    <th width="80">余额</th> 
-                    <th>备注</th> 
-                    <th width="120">时间</th>
-                  </tr> 
-                  <tr v-if="historyDataList.list.length*1 == '0'">
-                    <td  colspan="5">暂无数据</td> 
-                  </tr>
-                  <tr v-else v-for="item in historyDataList.list">
-                    <td><span>{{item.type=='1'?'充值' : '提现'}}</span></td> 
-                    <td>{{item.money}}</td> 
-                    <td>{{item.totalMoney}}</span></td>
-                    <td>{{item.remark}}</span></td>
-                    <td>{{$timestampToTime(item.createDate)}}</td>
-                  </tr>
-                </table>
-                <div class="block" v-if="historyDataList.totalPage > 1">
+<!-- <div class="block" v-if="historyDataList.totalPage > 1">
                   <el-pagination
                     @current-change="handleCurrentChange"
                     :current-page.sync="currentPage"
@@ -465,31 +103,12 @@
                     layout="total, prev, pager, next"
                     :total="historyDataList.totalCount*1">
                   </el-pagination>
-                </div>
-              </div> 
-
-           </div>
-
-          </div>
-          <p class="btn-box" v-if="tabNum == '1' || (tabNum == '2' && !chongzhiHisOp)">
-            <el-button type="primary" size="mini" @click="submit">确 定</el-button>
-            <el-button type="primary" size="mini" @click="cancel">取 消</el-button>
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div> -->
+                </div> -->
+ 
 
 </template>
 
 <script>
-
-//import Datetimepicker from 'datetimepicker'
-
-// $(document).ready(function() {
-//   $("#date_input").datebox();
-// });
 
 export default {
 
@@ -497,102 +116,18 @@ export default {
   },
   data() {
     return {
-      data: [
-                    {
-                        "code": "FI-SW-01",
-                        "name": "Koi",
-                        "unitcost": 10.00,
-                        "status": "P",
-                        "listprice": 36.50,
-                        "attr": "Large",
-                        "itemid": "EST-1"
-                    },
-                    {
-                        "code": "K9-DL-01",
-                        "name": "Dalmation",
-                        "unitcost": 12.00,
-                        "status": "P",
-                        "listprice": 18.50,
-                        "attr": "Spotted Adult Female",
-                        "itemid": "EST-10"
-                    },
-                    {
-                        "code": "RP-SN-01",
-                        "name": "Rattlesnake",
-                        "unitcost": 12.00,
-                        "status": "P",
-                        "listprice": 38.50,
-                        "attr": "Venomless",
-                        "itemid": "EST-11"
-                    },
-                    {
-                        "code": "RP-SN-01",
-                        "name": "Rattlesnake",
-                        "unitcost": 12.00,
-                        "status": "P",
-                        "listprice": 26.50,
-                        "attr": "Rattleless",
-                        "itemid": "EST-12"
-                    },
-                    {
-                        "code": "RP-LI-02",
-                        "name": "Iguana",
-                        "unitcost": 12.00,
-                        "status": "P",
-                        "listprice": 35.50,
-                        "attr": "Green Adult",
-                        "itemid": "EST-13"
-                    },
-                    {
-                        "code": "FL-DSH-01",
-                        "name": "Manx",
-                        "unitcost": 12.00,
-                        "status": "P",
-                        "listprice": 158.50,
-                        "attr": "Tailless",
-                        "itemid": "EST-14"
-                    },
-                    {
-                        "code": "FL-DSH-01",
-                        "name": "Manx",
-                        "unitcost": 12.00,
-                        "status": "P",
-                        "listprice": 83.50,
-                        "attr": "With tail",
-                        "itemid": "EST-15"
-                    },
-                    {
-                        "code": "FL-DLH-02",
-                        "name": "Persian",
-                        "unitcost": 12.00,
-                        "status": "P",
-                        "listprice": 23.50,
-                        "attr": "Adult Female",
-                        "itemid": "EST-16"
-                    },
-                    {
-                        "code": "FL-DLH-02",
-                        "name": "Persian",
-                        "unitcost": 12.00,
-                        "status": "P",
-                        "listprice": 89.50,
-                        "attr": "Adult Male",
-                        "itemid": "EST-17"
-                    },
-                    {
-                        "code": "AV-CB-01",
-                        "name": "Amazon Parrot",
-                        "unitcost": 92.00,
-                        "status": "P",
-                        "listprice": 63.50,
-                        "attr": "Adult Male",
-                        "itemid": "EST-18"
-                    }
-                ],
+      startTime: new Date(),
+      endTime: new Date(),
+      moneyAll: '',
+      totalMoneyAll: '',
 
-      value:  new Date(),
-
-      historyDataList: {},
+      historyDataList: {
+        currPage: 1,
+        list: [],
+        pageSize: 10,
+        totalCount: 0,
+        totalPage: 0,
+      },
       historyType: '2',
       histDate: [],
       forwardPass: '',
@@ -631,9 +166,41 @@ export default {
 
   },
   computed: {
+    hasDataList() {
+      this.historyDataList.list.length != 0 ? true : false;
+    }
   },
   methods: {
     async searchMembers() {
+
+      console.log('startTime',this.$timestampToTimeRi(this.startTime));
+
+      let sstime = this.$timestampToTimeRi(this.startTime);
+      let entime = this.$timestampToTimeRi(this.endTime);
+
+      this.moneyAll = '';
+      this.totalMoneyAll = '';
+
+      let that = this;
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });  
+      await that.$get(`${window.url}/api/hisRechargeForwardList?currentPage=1&pageSize=10&createDateStart=`+sstime+`&createDateEnd=`+entime+`&type=0`).then((res) => {
+        that.$handelResponse(res, (result) => {
+          loading.close();
+          if(result.code===200){
+            this.historyDataList = result.page;
+
+            for(let n in this.historyDataList) {
+              this.moneyAll += this.historyDataList[n].money*1;
+              this.totalMoneyAll += this.historyDataList[n].totalMoney*1;
+            }
+
+          }
+        })
+      });
 
     },
     async gethistory(cur) {
