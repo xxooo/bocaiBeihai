@@ -1,7 +1,7 @@
 <template>
   <div id="chongqindubo" class="content-main duboBodyClass">
 
-    <table class="table000">
+    <table class="table000" v-if="iskaipaning">
       <tbody>
         <tr>
           <td class="vertical-t">
@@ -148,7 +148,7 @@
 
                 <bet-quick :orderDataList="orderDataList" v-on:childByReset="childByReset"></bet-quick>
 
-                <footer-Bocai :curBocaiTypeId="curBocaiTypeId" :showOdds="showOdds"></footer-Bocai>
+                <footer-bocai :curBocaiTypeId="curBocaiTypeId" :showOdds="showOdds"></footer-bocai>
 
               </div>
 
@@ -156,12 +156,15 @@
           </td>
 
           <td valign="top">
-            <chang-Long :curBocaiTypeId="curBocaiTypeId"></chang-Long>
+            <chang-long :curBocaiTypeId="curBocaiTypeId"></chang-long>
           </td>
 
         </tr>
       </tbody>
     </table>
+
+
+    <no-game v-if="!iskaipaning"></no-game>
 
   </div>
 </template>
@@ -170,7 +173,8 @@
 import BetQuick from '@/components/apps/bocai/components/betQuick';
 import ClockTime from '@/components/apps/bocai/components/clockTime';
 import FooterBocai from '@/components/apps/bocai/components/footerBocai';
-import ChangLong from '@/components/apps/bocai/components/changlong';
+import ChangLong from '@/components/apps/bocai/components/changLong';
+import NoGame from '@/components/apps/bocai/components/noGame';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -178,10 +182,12 @@ export default {
     ClockTime,
     BetQuick,
     FooterBocai,
-    ChangLong
+    ChangLong,
+    NoGame
   },
   data () {
     return {
+      iskaipaning: false,
       curBocaiTypeId: '1',
       showOdds: '',
       isOpenOdds: true,
