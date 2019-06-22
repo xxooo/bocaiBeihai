@@ -28,6 +28,9 @@ const mutations = {
   },
   updateoddsList(state,v) {
     state.oddsList = v;
+  },
+  updatebocaiTypeList(state,v) {
+    state.bocaiTypeList = v;
   }
 }
 

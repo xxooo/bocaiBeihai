@@ -20,7 +20,7 @@
                       <div class="versionKJDiv" v-if="bocaiName == '重庆时时彩'">
                         <span class="floatL">&nbsp;</span>
                         <span class="floatL" v-for="(item,index) in preResult">
-                          <div class="CQNo_03 CQREDiv" :class="'CQNo_'+item"></div>
+                          <div class="CQREDiv" :class="'CQNo_'+item"></div>
                         </span>
                       </div>
                       <span class="versionKJSpan"><span id="span_roundno">{{bocaiInfoData.preBocaiPeriods}}</span>期开奖&nbsp;</span>

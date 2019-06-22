@@ -9,21 +9,7 @@
             彩种：
             <select id="ddlgame" @change="hisOrder"  v-model="bocaiTypeId">
                 <option value="" selected="selected">全部</option>
-                <option value="1">重庆时时彩</option>
-                <option value="8223">PC蛋蛋</option>
-                <option value="8266">北京快乐8</option>
-                <option value="8374">广东11选5</option>
-                <option value="8498">江苏快3</option>
-                <option value="8555">幸运飞艇</option>
-                <option value="8806">北京PK拾</option>
-                <option value="8808">六合彩</option>
-                <option value="8809">广东快乐十分</option>
-                <option value="8810">安徽快3</option>
-                <option value="8811">山东11选5</option>
-                <option value="8813">江西11选5</option>
-                <option value="8814">重庆幸运农场</option>
-                <option value="8815">天津时时彩</option>
-                <option value="9057">极速赛车</option>
+                <option v-for="(item,index) in bocaiTypeList" :value="item.bocaiId">{{item.bocaiName}}</option>
             </select>
 
             &nbsp;
@@ -251,6 +237,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -266,7 +253,6 @@ export default {
       totalbetsMoney: 0,
       totalwinMoney: 0,
       totalpaicai: 0,
-      bocaiTypeList: [],
       bocaiTypeId: '',
       afterWeekPage: [],
       sumData: {},
@@ -281,9 +267,11 @@ export default {
   },
   created() {
     this.hisOrder();
-    this.getBocai();
   },
   computed: {
+    ...mapGetters({
+      bocaiTypeList: 'getbocaiTypeList'
+    })
   },
   methods: {
     GetReportList() {
@@ -325,15 +313,8 @@ export default {
       this.ifshowBetInfo = true;
 
     },
-    async getBocai() {
-      let res = await this.$get(`${window.url}/api/getBocai`);
-
-          if(res.code===200){
-            this.bocaiTypeList = res.bocaiTypeList;
-          }
-    },
     changeboType(data) {
-      this.hisOrder(data);
+      this.hisOrder();
     },
     async hisOrder() {
 
@@ -344,28 +325,57 @@ export default {
       this.winnerAllAfter = '';
       this.orderAllAfter = '';
 
-      let res = await this.$get(`${window.url}/api/hisOrder?bocaiTypeId=`+this.bocaiTypeId);
 
-        if(res.code===200){
-            this.nowWeekPage = res.page.nowWeekPage;
+      let that = this;
 
-            for(let n in res.page.nowWeekPage) {
-              this.betsAllNow += res.page.nowWeekPage[n].betsMoneySum*1;
-              this.winnerAllNow += res.page.nowWeekPage[n].winnerMoneySum*1;
-              this.orderAllNow += res.page.nowWeekPage[n].orderCount*1;
+      let objdatas = {
+        bocaiTypeId: this.bocaiTypeId,
+        status: this.betHisType
+      }
+
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });  
+      await that.$post(`${window.url}/api/beihai/report`,objdatas).then((res) => {
+        that.$handelResponse(res, (result) => {
+          loading.close();
+          if(result.code===200){
+            this.historyDataList = result.page;
+
+            for(let n in this.historyDataList) {
+              this.moneyAll += this.historyDataList[n].money*1;
+              this.totalMoneyAll += this.historyDataList[n].totalMoney*1;
             }
 
-            this.afterWeekPage = res.page.afterWeekPage;
+          }
+        })
+      });
 
-            for(let n in res.page.afterWeekPage) {
-              this.betsAllAfter += res.page.afterWeekPage[n].betsMoneySum*1;
-              this.winnerAllAfter += res.page.afterWeekPage[n].winnerMoneySum*1;
-              this.orderAllAfter += res.page.afterWeekPage[n].orderCount*1;
-            }
 
-            console.log('afterWeekPage.length*1',this.afterWeekPage.length*1);
-            console.log('nowWeekPage.length*1',this.nowWeekPage.length*1);
-        } 
+      // let res = await this.$get(`${window.url}/api/hisOrder?bocaiTypeId=`+this.bocaiTypeId);
+
+      //   if(res.code===200){
+      //       this.nowWeekPage = res.page.nowWeekPage;
+
+      //       for(let n in res.page.nowWeekPage) {
+      //         this.betsAllNow += res.page.nowWeekPage[n].betsMoneySum*1;
+      //         this.winnerAllNow += res.page.nowWeekPage[n].winnerMoneySum*1;
+      //         this.orderAllNow += res.page.nowWeekPage[n].orderCount*1;
+      //       }
+
+      //       this.afterWeekPage = res.page.afterWeekPage;
+
+      //       for(let n in res.page.afterWeekPage) {
+      //         this.betsAllAfter += res.page.afterWeekPage[n].betsMoneySum*1;
+      //         this.winnerAllAfter += res.page.afterWeekPage[n].winnerMoneySum*1;
+      //         this.orderAllAfter += res.page.afterWeekPage[n].orderCount*1;
+      //       }
+
+      //       console.log('afterWeekPage.length*1',this.afterWeekPage.length*1);
+      //       console.log('nowWeekPage.length*1',this.nowWeekPage.length*1);
+      //   } 
     }
   },
   mounted() {

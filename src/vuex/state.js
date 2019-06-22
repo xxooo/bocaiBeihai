@@ -8,7 +8,8 @@ const state = {
   bocaiTypeId: '',
   curPeriods: '',
   isOdding: false,
-  oddsList: []
+  oddsList: [],
+  bocaiTypeList: []
 }
 
 export default state

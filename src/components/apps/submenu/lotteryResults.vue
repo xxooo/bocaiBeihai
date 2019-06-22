@@ -1,5 +1,76 @@
 <template>
-  <div class="content-main" id="lotteryResults">
+  <div class="duboBodyClass" id="lotteryResults">
+    彩种：
+    <select id="ddlgame" @change="getPrizeResult"  v-model="bocaiType">
+      <option v-for="(item,index) in bocaiTypeList" :value="item.bocaiId">{{item.bocaiName}}</option>
+    </select>
+
+    <span class="vis_date">结账日期：</span>
+
+    <DateBox  v-model="jizhangTime" format="yyyy-MM-dd" @selectionChange="selectionChange2"></DateBox>
+
+
+    <div id="tblist" style="width: 710px; text-align: center; height: 450px;">
+
+
+      <table v-if="[1,8815].findIndex((n) => n==bocaiType)>-1" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top:5px; text-align:center; width:100%;">
+        <tbody>
+          <tr class="td_caption_1">
+            <td style="width:100px;">期数</td>
+            <td style="width:104px;">开奖时间</td>
+            <td colspan="5" style="width:135px;">开出号码</td>
+            <td colspan="3" style="width:97px;">总和</td>
+            <td style="width:50px;">龙虎和</td>
+            <td style="width:35px;">前三</td>
+            <td style="width:35px;">中三</td>
+            <td style="width:35px;">后三</td>
+          </tr>
+          <tr v-for="item in resultList">
+            <td>{{item.periods}}</td>
+            <td>{{$timestampToTimeWeek(item.openPrizetime)}}</td>
+            <template v-if="!item.result || item.result == ''">
+              <td colspan="12" ><span>暂未开奖</span></td>
+            </template>
+            <template v-else>
+              <td align="center"><div class="CQREDiv" :class="'CQNo_'+item.num1"></div></td>
+              <td align="center"><div class="CQREDiv" :class="'CQNo_'+item.num2"></div></td>
+              <td align="center"><div class="CQREDiv" :class="'CQNo_'+item.num3"></div></td>
+              <td align="center"><div class="CQREDiv" :class="'CQNo_'+item.num4"></div></td>
+              <td align="center"><div class="CQREDiv" :class="'CQNo_'+item.num5"></div></td>
+              <td align="center">{{item.zonghe}}</td>
+              <td><span :class="item.zonghedanshuang == '双' ? 'red' : ''">{{item.zonghedanshuang}}</span></td>
+              <td><span :class="item.zonghedaxiao == '大' ? 'red' : ''">{{item.zonghedaxiao}}</span></td>
+              <td><span :class="item.longhu == '龙' ? 'red' : item.longhu == '虎' ? 'blue' : ''">{{item.longhu}}</span></td> 
+              <td><span>{{item.qiansan}}</span></td> 
+              <td><span>{{item.zhongsan}}</span></td> 
+              <td><span>{{item.housan}}</span></td>
+            </template>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+      <div id="tdpage" style=" line-height:22px; text-align:left; height: 22px; border:1px solid #e9a884;  border-top-width:0px;">
+        <table height="22" cellspacing="0" cellpadding="0" width="100%" border="0">
+          <tbody>
+            <tr class="t_list_bottom"><td align="left">&nbsp;共&nbsp;15&nbsp;期记录</td>
+              <td align="center">共&nbsp;1&nbsp;页</td>
+              <td align="right">
+                <span>前一页&nbsp;</span>『&nbsp;&nbsp;
+                <span class="current">1</span>&nbsp;』
+                <span> &nbsp;后一页 </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- <div class="content-main" id="lotteryResults">
     <div class="right">
       <div id="submenuDiv">
         <div class="box">
@@ -34,7 +105,6 @@
             </div> 
 
             <div>
-              <!-- 重庆时时彩 极速时时彩-->
               <table v-if="[1,8815].findIndex((n) => n==bocaiType)>-1">
                 <thead>
                   <tr>
@@ -75,7 +145,6 @@
                 </tbody>
               </table>
 
-              <!-- 山东11选5 -->
               <table v-if="bocaiType == '8811'">
                 <thead>
                   <tr>
@@ -123,7 +192,6 @@
                 </tbody>
               </table>
 
-              <!-- 江苏快三 -->
               <table v-if="bocaiType == '8498'">
                 <thead>
                   <tr>
@@ -155,7 +223,6 @@
               </table>
 
 
-              <!-- 北京PK10  幸运飞艇 急速赛车-->
               <table v-if="[8555,8806,9057].findIndex((n) => n==bocaiType)>-1">
                 <thead>
                   <tr>
@@ -200,7 +267,6 @@
               </table>
 
 
-              <!-- 北京快乐8 -->
               <table v-if="[8266].findIndex((n) => n==bocaiType)>-1">
                 <thead>
                   <tr>
@@ -243,58 +309,66 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex';
 export default {
   components: {
   },
   data() {
     return {
-      bocaiType: 1,
-      bocaiTypeList: [],
+      bocaiType: '',
       openPrizeTime: '',
       currentPage: 1,
-      resultList: []
+      resultList: [],
+
+      jizhangTime: new Date()
     }
   },
   created() {
-    this.getBocai();
-    this.openPrizeTime = this.$timestampToTimeRi(new Date());
     this.getPrizeResult();
+    console.log('this.bocaiTypeList',this.bocaiTypeList);
+
+    if(this.bocaiType == '') {
+      this.getBocai();
+    }
   },
   computed: {
+    ...mapGetters({
+      bocaiTypeList: 'getbocaiTypeList'
+    })
   },
   methods: {
-    changeboType(data) {
-      this.bocaiType = data;
-      this.getPrizeResult();
-    },
-    gettime(data) {
+    selectionChange2() {
       this.getPrizeResult();
     },
     async getBocai() {
       let res = await this.$get(`${window.url}/api/getBocai`);
 
           if(res.code===200){
-            this.bocaiTypeList = res.bocaiTypeList;
+            store.commit('updatebocaiTypeList',res.bocaiTypeList);
+            this.bocaiType = res.bocaiTypeList[0].bocaiId;
+            this.getPrizeResult();
           }
     },
     async getPrizeResult() { 
 
-      //console.log('openPrizeTime',this.openPrizeTime);
+      console.log('this.bocaiTypeList222',this.bocaiTypeList);
 
-      let res = await this.$get(`${window.url}/api/openPrizeResult?bocaiTypeId=`+this.bocaiType+`&currentPage=1&pageSize=100&dayStr=`+this.openPrizeTime);
+      let jizhangt = this.$timestampToTimeRi(this.jizhangTime);
+
+      
+
+
+      let res = await this.$get(`${window.url}/api/openPrizeResult?bocaiTypeId=`+this.bocaiType+`&currentPage=1&pageSize=100&dayStr=`+jizhangt);
           if(res.code===200){
-
-            
 
             if(this.bocaiType == '8266') {
               for(let n in res.list) {
-
-                
 
                 if(res.list[n].result) {
                   console.log('res.list[n].result',res.list[n].result);
@@ -305,19 +379,7 @@ export default {
             }
 
             this.resultList = res.list;
-
-            console.log('this.resultList',this.resultList);
-
             
-
-            // this.resultList = res.list.slice(0,5);
-            // for(let n in this.resultList) {
-            //   if(this.resultList[n].result) {
-            //     this.resultList[n].result = this.resultList[n].result.replace(/,/g,'');   
-            //   }
-            // }
-
-
           }
     }
 

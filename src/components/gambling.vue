@@ -26,14 +26,14 @@
                                 <td height="43">
                                     <div id="odds_marquee">
                                       <p id="oc_left" style="width: 1135px;">
-                                        <a href="javascript:void(0)" id="oddsshow" style="top: 0px;">
+                                        <a id="oddsshow" style="top: 0px;">
                                           <span class="oc_red">广东快乐十分：选三前组&nbsp;01</span>
                                           <span class="oc_blue">-20</span>|
                                           <span class="oc_red">广东快乐十分：选三前组&nbsp;01</span>
                                           <span class="oc_blue">-20</span></a>
                                       </p>
                                       <span id="oc_right">
-                                        <a href="javascript:void(0)" class="odds-c oc-up" title="點擊向上顯示最新變化的賠率" id="oddsup">&nbsp;</a>
+                                        <a class="odds-c oc-up" title="點擊向上顯示最新變化的賠率" id="oddsup">&nbsp;</a>
                                         <a  class="odds-c oc-down" title="點擊向下顯示最新變化的賠率" id="oddsdown">&nbsp;</a>
                                       </span>
                                     </div>
@@ -469,6 +469,8 @@ export default {
 
           if(res.code===200){
             this.bocaiTypeList = res.bocaiTypeList;
+
+            store.commit('updatebocaiTypeList',this.bocaiTypeList);
 
             this.getOddsInfo(res.bocaiTypeList[0]);
 
