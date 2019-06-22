@@ -80,8 +80,16 @@ export default {
             var Y = date.getFullYear() + '-';
             var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
             var D = date.getDate()*1 > 9 ? date.getDate() + ' ' : '0' + date.getDate() + ' ';
-            var ji = "日一二三四五六".charAt(date);
-            return M+ji+D;
+            var h = date.getHours()*1 > 9 ? date.getHours() + ':' : '0' + date.getHours() + ':';
+            var m = date.getMinutes()*1 > 9 ? date.getMinutes() + ':' : '0' + date.getMinutes() + ':';
+            var s = date.getSeconds()*1 > 9 ? date.getSeconds() : '0'+ date.getSeconds();
+            //var newDate = dateToStr(new Date());
+            //获取当天是星期几
+            //var ji = "日一二三四五六".charAt(new Date().getDay());
+
+
+            var ji = "日一二三四五六".charAt(date.getDay())+' ';
+            return M+D+ji+h+m+s;;
         };
 
 

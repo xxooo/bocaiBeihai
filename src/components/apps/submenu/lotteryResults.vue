@@ -17,9 +17,9 @@
         <tbody>
           <tr class="td_caption_1">
             <td style="width:100px;">期数</td>
-            <td style="width:104px;">开奖时间</td>
+            <td style="width:124px;">开奖时间</td>
             <td colspan="5" style="width:135px;">开出号码</td>
-            <td colspan="3" style="width:97px;">总和</td>
+            <td colspan="3" style="width:77px;">总和</td>
             <td style="width:50px;">龙虎和</td>
             <td style="width:35px;">前三</td>
             <td style="width:35px;">中三</td>
