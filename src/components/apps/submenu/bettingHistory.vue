@@ -333,14 +333,13 @@ export default {
         status: this.betHisType
       }
 
-      const loading = this.$loading({
-        lock: true,
-        text: 'Loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      });  
+      // const loading = this.$loading({
+      //   lock: true,
+      //   background: 'rgba(0, 0, 0, 0.7)'
+      // });  
       await that.$post(`${window.url}/api/beihai/report`,objdatas).then((res) => {
         that.$handelResponse(res, (result) => {
-          loading.close();
+          //loading.close();
           if(result.code===200){
             this.historyDataList = result.page;
 
