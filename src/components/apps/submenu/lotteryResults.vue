@@ -55,7 +55,6 @@
           <tbody>
             <tr class="t_list_bottom"><td align="left">&nbsp;共&nbsp;{{totalNum}}&nbsp;期记录</td>
               <td align="center">共&nbsp;{{totalPage}}&nbsp;页</td>
-
               <td align="right">
 
                 <template v-if="currentPage == 1">
@@ -82,29 +81,6 @@
                 </template>
                 
               </td>
-
-             <!--  <td v-if="totalPage > 1" align="right">
-
-
-                <template v-if="currentPage == 1">
-                  <span>前一页&nbsp;</span>『&nbsp;&nbsp;
-                  <span class="current">1</span>&nbsp;
-                  <a v-for="(item.index) in pageList.slice(1)" @click="ShowOtherpage(item.page)">{{item.page}}</a>&nbsp;
-                  <a @click="ShowOtherpage(+currentPage+1)">后一页</a>&nbsp;
-                </template>
-                <template else-if="currentPage != totalPage">
-                  <span>前一页&nbsp;</span>『&nbsp;&nbsp;
-                  <span class="current">1</span>&nbsp;
-                  <a v-for="(item.index) in pageList.slice(1)" @click="ShowOtherpage(item.page)">{{item.page}}</a>&nbsp;
-                  <a @click="ShowOtherpage(+currentPage+1)">后一页</a>&nbsp;
-                </template>
-              </td>
-
-              <td v-else align="right">
-                <span>前一页&nbsp;</span>『&nbsp;
-                <span class="current">1</span>&nbsp;』
-                <span> &nbsp;后一页 </span>
-              </td> -->
             </tr>
           </tbody>
         </table>

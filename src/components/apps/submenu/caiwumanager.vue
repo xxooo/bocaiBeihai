@@ -100,15 +100,6 @@
 
 </div>
 
-<!-- <div class="block" v-if="historyDataList.totalPage > 1">
-                  <el-pagination
-                    @current-change="handleCurrentChange"
-                    :current-page.sync="currentPage"
-                    :page-size="historyDataList.pageSize"
-                    layout="total, prev, pager, next"
-                    :total="historyDataList.totalCount*1">
-                  </el-pagination>
-                </div> -->
  
 
 </template>

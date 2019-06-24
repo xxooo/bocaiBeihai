@@ -337,20 +337,20 @@ export default {
       //   lock: true,
       //   background: 'rgba(0, 0, 0, 0.7)'
       // });  
-      await that.$post(`${window.url}/api/beihai/report`,objdatas).then((res) => {
-        that.$handelResponse(res, (result) => {
-          //loading.close();
-          if(result.code===200){
-            this.historyDataList = result.page;
+      // await that.$post(`${window.url}/api/beihai/report`,objdatas).then((res) => {
+      //   that.$handelResponse(res, (result) => {
+      //     //loading.close();
+      //     if(result.code===200){
+      //       this.historyDataList = result.page;
 
-            for(let n in this.historyDataList) {
-              this.moneyAll += this.historyDataList[n].money*1;
-              this.totalMoneyAll += this.historyDataList[n].totalMoney*1;
-            }
+      //       for(let n in this.historyDataList) {
+      //         this.moneyAll += this.historyDataList[n].money*1;
+      //         this.totalMoneyAll += this.historyDataList[n].totalMoney*1;
+      //       }
 
-          }
-        })
-      });
+      //     }
+      //   })
+      // });
 
 
       // let res = await this.$get(`${window.url}/api/hisOrder?bocaiTypeId=`+this.bocaiTypeId);
