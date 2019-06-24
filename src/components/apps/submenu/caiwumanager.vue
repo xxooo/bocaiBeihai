@@ -158,7 +158,6 @@ export default {
       let that = this;
       const loading = this.$loading({
         lock: true,
-        text: 'Loading',
         background: 'rgba(0, 0, 0, 0.7)'
       });  
       await that.$get(`${window.url}/api/hisRechargeForwardList?currentPage=1&pageSize=10&createDateStart=`+sstime+`&createDateEnd=`+entime+`&type=0`).then((res) => {
