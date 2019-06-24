@@ -9,7 +9,8 @@ const getters = {
   getcurPeriods: state => state.curPeriods,
   getisOdding: state => state.isOdding,
   getoddsList: state => state.oddsList,
-  getbocaiTypeList: state => state.bocaiTypeList
+  getbocaiTypeList: state => state.bocaiTypeList,
+  getorderDatasShow: state => state.orderDatasShow
 }
 
 export default getters

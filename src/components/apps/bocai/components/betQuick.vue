@@ -242,7 +242,7 @@
               betsMoney: +this.orderList[n].betsMoney,//10000,//一般模式下，选择的金额
               bocaiOdds: this.orderDataList[n].bocaiOdds,//1.90//赔率
               dewaterId: this.orderDataList[n].dewaterId, //退水ID
-              orderNum: timeNum+n+1
+              orderNum: timeNum+n
             }
             this.orderDatas.list.push(obj);
           }
@@ -262,6 +262,7 @@
             loading.close();
               if(result.code===200){
                 //更新用户信息
+                store.commit('updateorderDatasShow',that.orderDatas.list);
                 bus.$emit('getorderList', that.orderList,that.totalMoney); 
                 bus.$emit('getcUserInfo', ''); 
                 that.orderDatas.list = [];

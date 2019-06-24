@@ -9,7 +9,8 @@ const state = {
   curPeriods: '',
   isOdding: false,
   oddsList: [],
-  bocaiTypeList: []
+  bocaiTypeList: [],
+  orderDatasShow: []
 }
 
 export default state

@@ -31,6 +31,9 @@ const mutations = {
   },
   updatebocaiTypeList(state,v) {
     state.bocaiTypeList = v;
+  },
+  updateorderDatasShow(state,v) {
+    state.orderDatasShow = v;
   }
 }
 

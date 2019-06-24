@@ -172,7 +172,7 @@
                     </td>
                 </tr>
 
-                <tr v-for="(item,index) in orderList">
+                <tr v-for="(item,index) in orderDatasShow">
                     <td colspan="2">
                         <div align="left">
                             <span style="width:26%;height:16px;line-height:16px;">注单号：</span>&nbsp;
@@ -194,7 +194,7 @@
                 </tr>
                 <tr>
                     <td align="center">下注笔数</td>
-                    <td align="left" style="padding-left:5px">{{orderList.length}} 笔</td>
+                    <td align="left" style="padding-left:5px">{{orderDatas.list.length}} 笔</td>
                 </tr>
                 <tr>
                     <td align="center">合计注额</td>
@@ -683,7 +683,8 @@ export default {
         userInfo: 'getuserInfo',
         bocaiTypeId: 'getbocaiTypeId',
         curPeriods: 'getcurPeriods',
-        isOdding: 'getisOdding'
+        isOdding: 'getisOdding',
+        orderDatasShow: 'getorderDatasShow'
     }),
     keyongBalance() {
         return this.userInfo ? (this.userInfo.cashBalance*1 + this.userInfo.alreadyBalance*1).toFixed(3) : 0;
@@ -709,6 +710,8 @@ export default {
         this.orderTd(itemPa,item,ids);
       });
       bus.$on('getorderList', (orderList,totalMoney) => {
+
+        console.log('orderList',orderList);
         this.orderList = orderList;
         this.totalMoney = totalMoney;
         this.showNumpage = 2;
