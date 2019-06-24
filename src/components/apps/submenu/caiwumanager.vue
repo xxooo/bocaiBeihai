@@ -185,6 +185,9 @@ export default {
     margin-left: 86px;
   } 
 
- 
+  .f-field.datebox.textbox {
+    border-radius: 0px !important;
+  }
+
 }
 </style>

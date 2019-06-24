@@ -125,8 +125,7 @@ export default {
     }
   },
   created() {
-    this.cUserdewater(this.bocaiTypeId);
-    this.getBocai();
+    this.cUserdewater();
   },
   computed: {
   },
@@ -136,22 +135,14 @@ export default {
       this.cUserdewater(item.bocaiId);
       $('.bocai'+item.bocaiId).addClass('active').siblings().removeClass('active');
     },
-    async getBocai() {
-      let res = await this.$get(`${window.url}/api/getBocai`);
-
-          if(res.code===200){
-            this.bocaiTypeList = res.bocaiTypeList;
-          }
-    },
     changeboType(data) {
       this.cUserdewater(data);
     },
     async cUserdewater(id) {
 
-      let res = await this.$get(`${window.url}/api/cUserdewater?bocaiTypeId=`+id);
+      let res = await this.$get(`${window.url}/api/beihai/credit`);
 
         if(res.code===200){
-            this.cUserdeList = res.data;
 
         } 
     }

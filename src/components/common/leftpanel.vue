@@ -176,7 +176,7 @@
                     <td colspan="2">
                         <div align="left">
                             <span style="width:26%;height:16px;line-height:16px;">注单号：</span>&nbsp;
-                            <span style="height:16px;line-height:16px;">810725776#</span>
+                            <span style="height:16px;line-height:16px;">{{item.orderNum}}#</span>
                         </div>
                         <div style="height:16px;line-height:16px;" align="center">
                             <span style="color:blue;">{{item.bocaiCategory2Name}}  {{item.bocaiOddName}}</span>@&nbsp;

@@ -484,5 +484,11 @@ export default {
 <style scoped>
 </style>
 <style lang="less">
+
+#lotteryResults {
+  .f-field.datebox.textbox {
+    border-radius: 0px !important;
+  }
+}
   
 </style>

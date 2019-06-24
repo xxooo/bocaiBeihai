@@ -15,7 +15,7 @@
             &nbsp;
             类型：
             <select id="ddlstatus" @change="hisOrder" v-model="betHisType">
-                <option value="" selected="selected">已结算</option>
+                <option value="1" selected="selected">已结算</option>
                 <option value="0">作废单</option>
                 <option value="1">未结算</option>
                 <option value="2">已结算-不中</option>
@@ -244,7 +244,7 @@ export default {
   },
   data() {
     return {
-      betHisType: '',
+      betHisType: '1',
 
       betInfo: {},
       currentPage: 1,
@@ -333,24 +333,24 @@ export default {
         status: this.betHisType
       }
 
-      // const loading = this.$loading({
-      //   lock: true,
-      //   background: 'rgba(0, 0, 0, 0.7)'
-      // });  
-      // await that.$post(`${window.url}/api/beihai/report`,objdatas).then((res) => {
-      //   that.$handelResponse(res, (result) => {
-      //     //loading.close();
-      //     if(result.code===200){
-      //       this.historyDataList = result.page;
+      const loading = this.$loading({
+        lock: true,
+        background: 'rgba(0, 0, 0, 0.7)'
+      });  
+      await that.$post(`${window.url}/api/beihai/report`,objdatas).then((res) => {
+        that.$handelResponse(res, (result) => {
+          loading.close();
+          if(result.code===200){
+            this.historyDataList = result.page;
 
-      //       for(let n in this.historyDataList) {
-      //         this.moneyAll += this.historyDataList[n].money*1;
-      //         this.totalMoneyAll += this.historyDataList[n].totalMoney*1;
-      //       }
+            // for(let n in this.historyDataList) {
+            //   this.moneyAll += this.historyDataList[n].money*1;
+            //   this.totalMoneyAll += this.historyDataList[n].totalMoney*1;
+            // }
 
-      //     }
-      //   })
-      // });
+          }
+        })
+      });
 
 
       // let res = await this.$get(`${window.url}/api/hisOrder?bocaiTypeId=`+this.bocaiTypeId);

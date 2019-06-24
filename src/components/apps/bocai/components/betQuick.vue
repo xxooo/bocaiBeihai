@@ -144,6 +144,10 @@
           totalMoney += this.orderList[n].betsMoney*1;
         }
         return totalMoney;
+      },
+      differTime() {
+        let now = new Date();
+        return this.bocaiInfoData.nowTime ? now.getTime() - this.bocaiInfoData.nowTime*1000 : 0;
       }
     },
     mounted(){
@@ -223,6 +227,11 @@
           this.orderDatas.orderBetMoneySum = this.totalMoney;
           this.orderDatas.cuserId = this.userInfo.id;
 
+
+          let timeNum = this.$timestampToms(new Date().getTime() + this.differTime);
+
+          console.log('timeNum',timeNum);
+
           for(let n in this.orderList) {
             let obj = {
               bocaiCategory2Id: this.orderDataList[n].bocaiCategory2Id,//8225,//投注博彩分类2ID
@@ -232,7 +241,8 @@
               bocaiValue: this.orderDataList[n].bocaiValue,//投注内容,六合彩连肖/连尾
               betsMoney: +this.orderList[n].betsMoney,//10000,//一般模式下，选择的金额
               bocaiOdds: this.orderDataList[n].bocaiOdds,//1.90//赔率
-              dewaterId: this.orderDataList[n].dewaterId //退水ID
+              dewaterId: this.orderDataList[n].dewaterId, //退水ID
+              orderNum: timeNum+n+1
             }
             this.orderDatas.list.push(obj);
           }
@@ -344,6 +354,7 @@
       },
 
       orderOddsTo() {
+
 
           store.commit('updateisOdding',true);
           this.orderList = [];

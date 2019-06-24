@@ -655,7 +655,9 @@ export default {
 
         this.activeIndex = item.bocaiName;
         this.submenu = item.bocaiName;
+
         $('.div_gameno_'+item.bocaiId).addClass('active').siblings().removeClass('active');
+
 
         let path = '';
           switch (item.bocaiName) {
@@ -705,6 +707,9 @@ export default {
               break;
           }
         this.bocaiTypeId = item.bocaiId;
+
+        store.commit('updatebocaiTypeId',item.bocaiId);
+
         this.bocaiInfo();
 
         //this.clearTime();
