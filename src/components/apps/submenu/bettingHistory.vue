@@ -36,7 +36,7 @@
                   <td style="width:90px;">退水</td>
                   <td style="width:120px;">退水后结果</td>
                 </tr>
-                <tr height="20px" class="bethisTrclass">
+                <tr height="20px" class="hoverTrclass">
                   <td style="width: 150px;">06-10  星期一</td>
                   <td style="width: 82px;">0</td>
                   <td style="width: 130px; padding-right: 5px;" align="right">0</td>
@@ -64,7 +64,7 @@
                   <td style="width:90px;">退水</td>
                   <td style="width:120px;">退水后结果</td>
                 </tr>
-                <tr height="20px" class="bethisTrclass">
+                <tr height="20px" class="hoverTrclass">
                   <td style="width:150px;">06-17  星期一</td>
                   <td style="width:82px;">0</td>
                   <td style="width:130px;padding-right:5px;" align="right">0</td>
@@ -386,9 +386,5 @@ export default {
 <style scoped>
 </style>
 <style lang="less">
-  #bettingHistory {
-    .bethisTrclass:hover td {
-      background-color: rgb(255,255,102);
-    }
-  }
+  
 </style>

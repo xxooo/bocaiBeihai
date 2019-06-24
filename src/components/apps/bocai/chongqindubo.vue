@@ -187,7 +187,7 @@ export default {
   },
   data () {
     return {
-      iskaipaning: false,
+      iskaipaning: true,
       curBocaiTypeId: '1',
       showOdds: '',
       isOpenOdds: true,

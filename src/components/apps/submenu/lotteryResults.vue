@@ -25,7 +25,7 @@
             <td style="width:35px;">中三</td>
             <td style="width:35px;">后三</td>
           </tr>
-          <tr v-for="item in resultList">
+          <tr v-for="item in dataList" class="hoverTrclass">
             <td>{{item.periods}}</td>
             <td>{{$timestampToTimeWeek(item.openPrizetime)}}</td>
             <template v-if="!item.result || item.result == ''">
@@ -50,23 +50,67 @@
       </table>
 
 
-
       <div id="tdpage" style=" line-height:22px; text-align:left; height: 22px; border:1px solid #e9a884;  border-top-width:0px;">
         <table height="22" cellspacing="0" cellpadding="0" width="100%" border="0">
           <tbody>
-            <tr class="t_list_bottom"><td align="left">&nbsp;共&nbsp;15&nbsp;期记录</td>
-              <td align="center">共&nbsp;1&nbsp;页</td>
+            <tr class="t_list_bottom"><td align="left">&nbsp;共&nbsp;{{totalNum}}&nbsp;期记录</td>
+              <td align="center">共&nbsp;{{totalPage}}&nbsp;页</td>
+
               <td align="right">
-                <span>前一页&nbsp;</span>『&nbsp;&nbsp;
+
+                <template v-if="currentPage == 1">
+                  <span>前一页&nbsp;</span>『&nbsp;&nbsp; 
+                </template>
+                <template v-else>
+                  <a @click="firstOtherpage(+currentPage-1)">前一页</a>&nbsp;『&nbsp;&nbsp;
+                </template>
+                
+                <template v-for="(item,index) in pageList">
+                  <template v-if="currentPage == item.page">
+                    <span class="current">{{item.page}}</span>&nbsp;
+                  </template>
+                  <template v-else>
+                    <a @click="ShowOtherpage(item.page)">{{item.page}}</a>&nbsp;
+                  </template>
+                </template>
+
+                <template v-if="currentPage == totalPage">
+                  』<span>&nbsp;后一页</span>
+                </template>
+                <template v-else>
+                  』<a @click="endOtherpage(+currentPage+1)">后一页</a>&nbsp;
+                </template>
+                
+              </td>
+
+             <!--  <td v-if="totalPage > 1" align="right">
+
+
+                <template v-if="currentPage == 1">
+                  <span>前一页&nbsp;</span>『&nbsp;&nbsp;
+                  <span class="current">1</span>&nbsp;
+                  <a v-for="(item.index) in pageList.slice(1)" @click="ShowOtherpage(item.page)">{{item.page}}</a>&nbsp;
+                  <a @click="ShowOtherpage(+currentPage+1)">后一页</a>&nbsp;
+                </template>
+                <template else-if="currentPage != totalPage">
+                  <span>前一页&nbsp;</span>『&nbsp;&nbsp;
+                  <span class="current">1</span>&nbsp;
+                  <a v-for="(item.index) in pageList.slice(1)" @click="ShowOtherpage(item.page)">{{item.page}}</a>&nbsp;
+                  <a @click="ShowOtherpage(+currentPage+1)">后一页</a>&nbsp;
+                </template>
+              </td>
+
+              <td v-else align="right">
+                <span>前一页&nbsp;</span>『&nbsp;
                 <span class="current">1</span>&nbsp;』
                 <span> &nbsp;后一页 </span>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
 
+    </div>
 
   </div>
 
@@ -324,7 +368,11 @@ export default {
       bocaiType: '',
       openPrizeTime: '',
       currentPage: 1,
+      pageSize: 15,
       resultList: [],
+      maxPage: 10,
+      firstPage: 1,
+      endPage: 10,
 
       jizhangTime: new Date()
     }
@@ -340,9 +388,67 @@ export default {
   computed: {
     ...mapGetters({
       bocaiTypeList: 'getbocaiTypeList'
-    })
+    }),
+    totalNum: function() {
+      return this.resultList.length;
+    },
+    totalPage: function() {
+      return Math.ceil(this.totalNum / this.pageSize)
+    },
+    dataList: function() {
+      let that = this;
+      let data = that.resultList;
+
+
+      data = _.slice(data, (that.currentPage - 1) * that.pageSize, that.currentPage * that.pageSize);
+
+      return data;
+    },
+    pageList() {
+      let arry = [];
+
+      for(let i = 1; i <= this.totalPage ; i++) {
+        arry.push({page: i});
+      }
+
+      console.log('this.firstPage',this.firstPage);
+
+      if(this.totalPage > 10) {
+        return arry.slice(this.firstPage-1,this.endPage);
+      } else {
+        return arry;
+      }
+
+      
+    }
   },
   methods: {
+    endOtherpage(curp) {
+      console.log('this.pageList',this.pageList);
+
+      if(this.totalPage > 10) {
+        if(curp-1 == this.pageList[this.pageList.length-1].page) {
+          this.firstPage = curp;
+          this.endPage = curp+9;
+        }
+      }
+      
+      this.currentPage = curp;
+    },
+    firstOtherpage(curp) {
+
+      if(this.totalPage > 10) {
+        if(curp+1 == this.pageList[0].page) {
+          this.firstPage = curp-9;
+          this.endPage = curp;
+        }
+      }
+      
+      this.currentPage = curp;
+    },
+    ShowOtherpage(curp) {
+      this.currentPage = curp;
+    },
     selectionChange2() {
       this.getPrizeResult();
     },
@@ -356,31 +462,39 @@ export default {
           }
     },
     async getPrizeResult() { 
+      let that = this;
 
       console.log('this.bocaiTypeList222',this.bocaiTypeList);
 
       let jizhangt = this.$timestampToTimeRi(this.jizhangTime);
 
       
+      const loading = this.$loading({
+        lock: true,
+        background: 'rgba(0, 0, 0, 0.7)'
+      });  
+      await that.$get(`${window.url}/api/openPrizeResult?bocaiTypeId=`+this.bocaiType+`&currentPage=1&pageSize=1000&dayStr=`+jizhangt).then((res) => {
+        that.$handelResponse(res, (result) => {
+          loading.close();
+          if(result.code===200){
 
+            if(that.bocaiType == '8266') {
+              for(let n in result.list) {
 
-      let res = await this.$get(`${window.url}/api/openPrizeResult?bocaiTypeId=`+this.bocaiType+`&currentPage=1&pageSize=100&dayStr=`+jizhangt);
-          if(res.code===200){
-
-            if(this.bocaiType == '8266') {
-              for(let n in res.list) {
-
-                if(res.list[n].result) {
-                  console.log('res.list[n].result',res.list[n].result);
-
-                  res.list[n].result = res.list[n].result.split(','); 
+                if(result.list[n].result) {
+                  result.list[n].result = result.list[n].result.split(','); 
                 }
               }
             }
 
-            this.resultList = res.list;
+            that.resultList = result.list;
+
+            that.firstPage = 1;
+            that.endPage = 10;
             
           }
+        })
+      });
     }
 
 

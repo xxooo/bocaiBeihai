@@ -116,7 +116,7 @@ export default {
                 // password: 'aaa888'
 
                 username: 'a4m3huiyuan1',
-                password: 'a123'
+                password: 'a111111'
 
                 // username: 'a4m28dhy',
                 // password: 'a123'

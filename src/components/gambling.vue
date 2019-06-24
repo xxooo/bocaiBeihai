@@ -208,14 +208,14 @@ export default {
       $('.div_gameno_'+this.bocaiTypeId).addClass('active').siblings().removeClass('active');
     },
     async exit() {
-
-      let ret = await this.$get(`${window.url}/api/exitLogin`);
-              if(ret.code===200) {
-                    this.$success('退出登录!');
-                    
-                  } else {
-              }
       this.$router.push({name: 'login'});
+      
+      let ret = await this.$get(`${window.url}/api/exitLogin`);
+      if(ret.code===200) {
+        
+      } else {
+      }
+      
     },
     clearTime() {
       if (this.t1) {
