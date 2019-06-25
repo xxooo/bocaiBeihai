@@ -27,10 +27,11 @@
                                     <div id="odds_marquee">
                                       <p id="oc_left" style="width: 1135px;">
                                         <a id="oddsshow" style="top: 0px;">
-                                          <span class="oc_red">广东快乐十分：选三前组&nbsp;01</span>
+                                          <!-- <span class="oc_red">广东快乐十分：选三前组&nbsp;01</span>
                                           <span class="oc_blue">-20</span>|
                                           <span class="oc_red">广东快乐十分：选三前组&nbsp;01</span>
-                                          <span class="oc_blue">-20</span></a>
+                                          <span class="oc_blue">-20</span> -->
+                                        </a>
                                       </p>
                                       <span id="oc_right">
                                         <a class="odds-c oc-up" title="點擊向上顯示最新變化的賠率" id="oddsup">&nbsp;</a>

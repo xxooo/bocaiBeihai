@@ -49,6 +49,81 @@
         </tbody>
       </table>
 
+      <table v-if="[8555,8806,9057].findIndex((n) => n==bocaiType)>-1" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top:5px; text-align:center; width:100%;">
+        <tbody>
+          <tr class="td_caption_1">
+            <td rowspan="1" style="width:56px;">期数</td>
+            <td rowspan="1" style="width:124px;">开奖时间</td>
+            <td colspan="10" style="width:270px;">开出号码</td>
+            <td colspan="3" style="width:77px;">冠亚军和</td>
+            <td colspan="5" style="width:154px;">1~5 龙虎</td>
+          </tr>
+          <tr v-for="item in dataList" class="hoverTrclass">
+            <td>{{item.periods}}</td>
+            <td>{{$timestampToTimeWeek(item.openPrizetime)}}</td>
+            <template v-if="!item.result || item.result == ''">
+              <td colspan="18" ><span>暂未开奖</span></td>
+            </template>
+            <template v-else>
+              <td align="center"><div :class="'BJNo_'+item.num1" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'BJNo_'+item.num2" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'BJNo_'+item.num3" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'BJNo_'+item.num4" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'BJNo_'+item.num5" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'BJNo_'+item.num6" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'BJNo_'+item.num7" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'BJNo_'+item.num8" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'BJNo_'+item.num9" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'BJNo_'+item.num10" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><span>{{item.guanyajunhe}}</span></td>
+              <td align="center"><span :class="item.guanyajundaxiao == '大' ? 'red' : ''">{{item.guanyajundaxiao}}</span></td>
+              <td align="center"><span :class="item.guanyajundanshuang == '双' ? 'red' : ''">{{item.guanyajundanshuang}}</span></td>
+              <td align="center"><span :class="item.yilonghu == '龙' ? 'red' : item.yilonghu == '虎' ? 'blue' : ''">{{item.yilonghu}}</span></td>
+              <td align="center"><span :class="item.erlonghu == '龙' ? 'red' : item.erlonghu == '虎' ? 'blue' : ''">{{item.erlonghu}}</span></td>
+              <td align="center"><span :class="item.sanlonghu == '龙' ? 'red' : item.sanlonghu == '虎' ? 'blue' : ''">{{item.sanlonghu}}</span></td>
+              <td align="center"><span :class="item.silonghu == '龙' ? 'red' : item.silonghu == '虎' ? 'blue' : ''">{{item.silonghu}}</span></td>
+              <td align="center"><span :class="item.wulonghu == '龙' ? 'red' : item.wulonghu == '虎' ? 'blue' : ''">{{item.wulonghu}}</span></td>
+            </template>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <table v-if="[8809].findIndex((n) => n==bocaiType)>-1" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top:5px; text-align:center; width:100%;">
+        <tbody>
+          <tr class="td_caption_1">
+            <td rowspan="1" style="width:100px;">期数</td>
+            <td rowspan="1" style="width:124px;">开奖时间</td>
+            <td colspan="8" style="width:216px;">开出号码</td>
+            <td colspan="4" style="width:113px;">总和</td>
+            <td rowspan="1" style="width:30px;">龙虎</td>
+          </tr>
+          <tr v-for="item in dataList" class="hoverTrclass">
+            <td>{{item.periods}}</td>
+            <td>{{$timestampToTimeWeek(item.openPrizetime)}}</td>
+            <template v-if="!item.result || item.result == ''">
+              <td colspan="13" ><span>暂未开奖</span></td>
+            </template>
+            <template v-else>
+              <td align="center"><div :class="'No_'+item.num1" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'No_'+item.num2" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'No_'+item.num3" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'No_'+item.num4" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'No_'+item.num5" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'No_'+item.num6" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'No_'+item.num7" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'No_'+item.num8" style=" height:27px; width:27px;"></div></td>
+              <td align="center">{{item.zonghe}}</td>
+              <td align="center"><span :class="item.zonghedanshuang == '单' ? 'red' : ''">{{item.zonghedanshuang}}</span></td>
+              <td align="center"><span :class="item.zonghedaxiao == '大' ? 'red' : ''">{{item.zonghedaxiao}}</span></td>
+              <td align="center"><span :class="item.zongheweidaweixiao == '尾大' ? 'red' : ''">{{item.zongheweidaweixiao}}</span></td>
+              <td align="center"><span :class="item.onelonghu == '龙' ? 'red' : ''">{{item.onelonghu}}</span></td>
+            </template>
+          </tr>
+        </tbody>
+      </table>
+
+
       <div id="tdpage" style=" line-height:22px; text-align:left; height: 22px; border:1px solid #e9a884;  border-top-width:0px;">
         <pag-ination :resultList="resultList" v-on:getdataList="getdataList"></pag-ination>
       </div>
