@@ -14,7 +14,6 @@
 
       <span v-else style="color:red">下注中,请等待。。。</span>
       
-
     </div> 
 
 
@@ -207,10 +206,14 @@
         console.log('this.curPeriods',this.curPeriods);
         console.log('this.bocaiInfoData.bocaiPeriodsId',this.bocaiInfoData.bocaiPeriods);
 
+
+
         if(this.curPeriods != this.bocaiInfoData.bocaiPeriods) {
             bus.$emit('toleftShow',22,'指定期数为非交易状态!');
         } else if(!this.isOpenOdds) {
             bus.$emit('toleftShow',22,'非交易时间,不允许下注!');
+        } else if(this.userInfo.isFrozen == 1) {
+            bus.$emit('toleftShow',22,'该帐号或上级代理被禁用或暂停下注');
         } else {
 
           console.log('this.bocaiName',this.bocaiName);

@@ -4,5 +4,6 @@ export default {
   remove: _.remove,
   includes: _.includes,
   slice: _.slice,
-  sortBy: _.sortBy
+  sortBy: _.sortBy,
+  chunk: _.chunk
 }

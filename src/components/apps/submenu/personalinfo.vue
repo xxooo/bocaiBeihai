@@ -5,22 +5,23 @@
       <tbody>
         <tr>
           <td width="22%" align="right" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td>
-          <td width="78%" align="left"><span style="margin-left:5px;"">njnj0055(D盘)</span></td>
+          <td width="78%" align="left"><span style="margin-left:5px;">{{userInfo.username}}({{userInfo.handicap}}盘)</span></td>
         </tr>
         <tr style="height: 22px;" id="tr_cashremaining">
           <td align="right" class="t_td_caption_1">帐户余额 </td>
-          <td align="left"><span style="font-size: 13px; margin-left:5px;">103.078</span></td>
+          <td align="left"><span style="font-size: 13px; margin-left:5px;">{{keyongBalance}}</span></td>
         </tr> 
         <tr style="height: 22px;display:none;" id="tr_creditquota">
           <td align="right" class="t_td_caption_1">信用额度 </td>
-          <td align="left"><span id="con_creditquota" style="font-size: 13px; margin-left:5px;">103.078</span></td>
+          <td align="left"><span id="con_creditquota" style="font-size: 13px; margin-left:5px;">{{keyongBalance}}</span></td>
         </tr>
         <tr id="tr_allowcreditquota">
           <td align="right" class="t_td_caption_1">可用金额</td>
-          <td align="left"><span id="con_allowcreditquota" style="font-size: 13px;margin-left:5px;">103.08</span></td>
+          <td align="left"><span id="con_allowcreditquota" style="font-size: 13px;margin-left:5px;">{{userInfo.cashBalance}}</span></td>
         </tr> 
       </tbody>
     </table>
+
 
     <table width="700px" border="0" cellpadding="0" cellspacing="0" class="DTable">
       <tbody>
@@ -30,121 +31,110 @@
               <tbody class="biaoti_tbody">
                 <tr class="td_caption_1">
                   <td height="25" align="center">交易类型</td> 
-                  <td align="center">D盘退水</td>
+                  <td align="center">{{handicap}}盘退水</td>
                   <td align="center">最高单注限额</td>
                   <td align="center">单期限额</td>
-                  <td height="25" align="center">交易类型</td>
-                  <td align="center">D盘退水</td>
+                  <td height="25" align="center">交易类型</td>          
+                  <td align="center">{{handicap}}盘退水</td>
                   <td align="center">最高单注限额</td>
                   <td align="center">单期限额</td>
                 </tr> 
 
-                <tr id="zhangkai_tr">
-                  <td colspan="8"><span>正在加载，请稍后...</span><a id="jczk_a">+点此展开信用资料</a></td>
+                <tr id="zhangkai_tr" v-if="stateType != 3">
+                  <td colspan="8">
+                    <span v-if="stateType == 2">正在加载，请稍后...</span>
+                    <a v-if="stateType == 1" id="jczk_a" @click="cUserdewater">+点此展开信用资料</a>
+                  </td>
                 </tr>
                 <tr style="display:none"><td>禁止频繁请求数据,下单机器人开发商请直接联系本网,我们将协助提供安全的连接方案</td></tr>
 
-                <tr class="td_caption_1">
-                  <td align="center" colspan="8" class="gtitle_td">重庆时时彩</td>
-                </tr>
-                <tr height="22" align="center">
-                  <td align="center">1-5球 <span id="wid0" style="display:none;">205</span></td>
-                  <td align="center">100.00</td>
-                  <td align="right" style="padding-right:5px;">30000</td>
-                  <td align="right" style="padding-right:5px;">60000</td>
-                  <td align="center">总合双面 <span id="wid0" style="display:none;">229</span></td>
-                  <td align="center">100.00</td>
-                  <td align="right" style="padding-right:5px;">50000</td>
-                  <td align="right" style="padding-right:5px;">100000</td>
-                </tr>
-                <tr height="22" align="center"><td align="center">双面 <span id="wid1" style="display:none;">214</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">50000</td><td align="right" style="padding-right:5px;">100000</td><td align="center">龙虎和 <span id="wid1" style="display:none;">230</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">50000</td><td align="right" style="padding-right:5px;">100000</td></tr><tr height="22" align="center"><td align="center">豹子 <span id="wid2" style="display:none;">224</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">两球双面 <span id="wid2" style="display:none;">231</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">50000</td><td align="right" style="padding-right:5px;">100000</td></tr><tr height="22" align="center"><td align="center">顺子 <span id="wid3" style="display:none;">225</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">牛牛 <span id="wid3" style="display:none;">232</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td></tr><tr height="22" align="center"><td align="center">对子 <span id="wid4" style="display:none;">226</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">牛牛双面 <span id="wid4" style="display:none;">233</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">50000</td><td align="right" style="padding-right:5px;">100000</td></tr><tr height="22" align="center"><td align="center">半顺 <span id="wid5" style="display:none;">227</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">梭哈 <span id="wid5" style="display:none;">234</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td></tr><tr height="22" align="center"><td align="center">杂六 <span id="wid6" style="display:none;">228</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="10" class="gtitle_td">广东快乐十分</td></tr><tr height="22" align="center"><td align="center">第1-8球 <span id="wid0" style="display:none;">401</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">20000</td><td align="right" style="padding-right:5px;">40000</td><td align="center">任选二(组) <span id="wid0" style="display:none;">463</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr height="22" align="center"><td align="center">1-8双面 <span id="wid1" style="display:none;">409</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">30000</td><td align="right" style="padding-right:5px;">60000</td><td align="center">选二连直(组) <span id="wid1" style="display:none;">464</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr height="22" align="center"><td align="center">1-8方位 <span id="wid2" style="display:none;">441</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">选二连组(组) <span id="wid2" style="display:none;">465</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr height="22" align="center"><td align="center">1-8中发白 <span id="wid3" style="display:none;">449</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">任选三(组) <span id="wid3" style="display:none;">466</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr height="22" align="center"><td align="center">总合双面 <span id="wid4" style="display:none;">457</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">30000</td><td align="right" style="padding-right:5px;">60000</td><td align="center">选三前直(组) <span id="wid4" style="display:none;">467</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr height="22" align="center"><td align="center">龙虎 <span id="wid5" style="display:none;">460</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">30000</td><td align="right" style="padding-right:5px;">60000</td><td align="center">选三前组(组) <span id="wid5" style="display:none;">468</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr><td></td><td></td><td></td><td></td><td align="center">任选四(组) <span id="wid6" style="display:none;">469</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr><td></td><td></td><td></td><td></td><td align="center">任选五(组) <span id="wid7" style="display:none;">470</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr class="td_caption_1"><td align="center" colspan="12" class="gtitle_td">广西快乐十分</td></tr><tr height="22" align="center"><td align="center">第1-5球 <span id="wid0" style="display:none;">501</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">1-5色波 <span id="wid0" style="display:none;">531</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td></tr><tr height="22" align="center"><td align="center">1-5双面 <span id="wid1" style="display:none;">506</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td><td align="center">总合双面 <span id="wid1" style="display:none;">536</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td></tr><tr height="22" align="center"><td align="center">1-5四季 <span id="wid2" style="display:none;">526</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td><td align="center">龙虎 <span id="wid2" style="display:none;">548</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td></tr><tr class="td_caption_1"><td align="center" colspan="14" class="gtitle_td">北京赛车</td></tr><tr height="22" align="center"><td align="center">1-10名 <span id="wid0" style="display:none;">601</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">20000</td><td align="right" style="padding-right:5px;">40000</td><td align="center">冠亚和双面 <span id="wid0" style="display:none;">636</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">50000</td><td align="right" style="padding-right:5px;">100000</td></tr><tr height="22" align="center"><td align="center">1-10名双面 <span id="wid1" style="display:none;">611</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">50000</td><td align="right" style="padding-right:5px;">100000</td><td align="center">冠亚和 <span id="wid1" style="display:none;">638</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td></tr><tr height="22" align="center"><td align="center">1-5龙虎 <span id="wid2" style="display:none;">631</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">50000</td><td align="right" style="padding-right:5px;">100000</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="16" class="gtitle_td">江苏快3</td></tr><tr height="22" align="center"><td align="center">大小 <span id="wid0" style="display:none;">701</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">点数 <span id="wid0" style="display:none;">705</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td></tr><tr height="22" align="center"><td align="center">三军 <span id="wid1" style="display:none;">702</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td><td align="center">长牌 <span id="wid1" style="display:none;">706</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td></tr><tr height="22" align="center"><td align="center">围骰 <span id="wid2" style="display:none;">703</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td><td align="center">短牌 <span id="wid2" style="display:none;">707</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td></tr><tr height="22" align="center"><td align="center">全骰 <span id="wid3" style="display:none;">704</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="18" class="gtitle_td">北京快乐8</td></tr><tr height="22" align="center"><td align="center">正码 <span id="wid0" style="display:none;">801</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">前后和 <span id="wid0" style="display:none;">806</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td></tr><tr height="22" align="center"><td align="center">总和双面 <span id="wid1" style="display:none;">802</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td><td align="center">单双和 <span id="wid1" style="display:none;">807</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td></tr><tr height="22" align="center"><td align="center">总和810 <span id="wid2" style="display:none;">804</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td><td align="center">五行 <span id="wid2" style="display:none;">808</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td></tr><tr height="22" align="center"><td align="center">总和过关 <span id="wid3" style="display:none;">805</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="20" class="gtitle_td">幸运农场</td></tr><tr height="22" align="center"><td align="center">第1-8球 <span id="wid0" style="display:none;">401</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td><td align="center">任选二(组) <span id="wid0" style="display:none;">463</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr height="22" align="center"><td align="center">1-8双面 <span id="wid1" style="display:none;">409</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">30000</td><td align="right" style="padding-right:5px;">60000</td><td align="center">选二连直(组) <span id="wid1" style="display:none;">464</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr height="22" align="center"><td align="center">1-8方位 <span id="wid2" style="display:none;">441</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">选二连组(组) <span id="wid2" style="display:none;">465</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr height="22" align="center"><td align="center">1-8中发白 <span id="wid3" style="display:none;">449</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">任选三(组) <span id="wid3" style="display:none;">466</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr height="22" align="center"><td align="center">总合双面 <span id="wid4" style="display:none;">457</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">30000</td><td align="right" style="padding-right:5px;">60000</td><td align="center">选三前直(组) <span id="wid4" style="display:none;">467</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr height="22" align="center"><td align="center">龙虎 <span id="wid5" style="display:none;">460</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">30000</td><td align="right" style="padding-right:5px;">60000</td><td align="center">选三前组(组) <span id="wid5" style="display:none;">468</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr><td></td><td></td><td></td><td></td><td align="center">任选四(组) <span id="wid6" style="display:none;">469</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr><td></td><td></td><td></td><td></td><td align="center">任选五(组) <span id="wid7" style="display:none;">470</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr class="td_caption_1"><td align="center" colspan="22" class="gtitle_td">幸运飞艇</td></tr><tr height="22" align="center"><td align="center">1-10名 <span id="wid0" style="display:none;">601</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">10000</td><td align="right" style="padding-right:5px;">20000</td><td align="center">冠亚和双面 <span id="wid0" style="display:none;">636</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">20000</td><td align="right" style="padding-right:5px;">40000</td></tr><tr height="22" align="center"><td align="center">1-10名双面 <span id="wid1" style="display:none;">611</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">20000</td><td align="right" style="padding-right:5px;">40000</td><td align="center">冠亚和 <span id="wid1" style="display:none;">638</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td></tr><tr height="22" align="center"><td align="center">1-5龙虎 <span id="wid2" style="display:none;">631</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">20000</td><td align="right" style="padding-right:5px;">40000</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="24" class="gtitle_td">极速赛车</td></tr><tr height="22" align="center"><td align="center">1-10名 <span id="wid0" style="display:none;">601</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">冠亚和双面 <span id="wid0" style="display:none;">636</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td></tr><tr height="22" align="center"><td align="center">1-10名双面 <span id="wid1" style="display:none;">611</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td><td align="center">冠亚和 <span id="wid1" style="display:none;">638</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td></tr><tr height="22" align="center"><td align="center">1-5龙虎 <span id="wid2" style="display:none;">631</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="26" class="gtitle_td">极速时时彩</td></tr><tr height="22" align="center"><td align="center">1-5球 <span id="wid0" style="display:none;">205</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">总合双面 <span id="wid0" style="display:none;">229</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">10000</td><td align="right" style="padding-right:5px;">20000</td></tr><tr height="22" align="center"><td align="center">双面 <span id="wid1" style="display:none;">214</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">10000</td><td align="right" style="padding-right:5px;">20000</td><td align="center">龙虎和 <span id="wid1" style="display:none;">230</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">10000</td><td align="right" style="padding-right:5px;">20000</td></tr><tr height="22" align="center"><td align="center">豹子 <span id="wid2" style="display:none;">224</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">两球双面 <span id="wid2" style="display:none;">231</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">10000</td><td align="right" style="padding-right:5px;">20000</td></tr><tr height="22" align="center"><td align="center">顺子 <span id="wid3" style="display:none;">225</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">牛牛 <span id="wid3" style="display:none;">232</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td></tr><tr height="22" align="center"><td align="center">对子 <span id="wid4" style="display:none;">226</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">牛牛双面 <span id="wid4" style="display:none;">233</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td></tr><tr height="22" align="center"><td align="center">半顺 <span id="wid5" style="display:none;">227</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">梭哈 <span id="wid5" style="display:none;">234</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td></tr><tr height="22" align="center"><td align="center">杂六 <span id="wid6" style="display:none;">228</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="28" class="gtitle_td">EPS赛马</td></tr><tr height="22" align="center"><td align="center">1-10名 <span id="wid0" style="display:none;">601</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td><td align="center">冠亚和双面 <span id="wid0" style="display:none;">636</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td></tr><tr height="22" align="center"><td align="center">1-10名双面 <span id="wid1" style="display:none;">611</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td><td align="center">冠亚和 <span id="wid1" style="display:none;">638</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td></tr><tr height="22" align="center"><td align="center">1-5龙虎 <span id="wid2" style="display:none;">631</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="30" class="gtitle_td">超级快5</td></tr><tr height="22" align="center"><td align="center">1-5球 <span id="wid0" style="display:none;">205</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td><td align="center">总合双面 <span id="wid0" style="display:none;">229</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td></tr><tr height="22" align="center"><td align="center">双面 <span id="wid1" style="display:none;">214</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td><td align="center">龙虎和 <span id="wid1" style="display:none;">230</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td></tr><tr height="22" align="center"><td align="center">豹子 <span id="wid2" style="display:none;">224</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td><td align="center">两球双面 <span id="wid2" style="display:none;">231</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td></tr><tr height="22" align="center"><td align="center">顺子 <span id="wid3" style="display:none;">225</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td><td align="center">牛牛 <span id="wid3" style="display:none;">232</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td></tr><tr height="22" align="center"><td align="center">对子 <span id="wid4" style="display:none;">226</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td><td align="center">牛牛双面 <span id="wid4" style="display:none;">233</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td></tr><tr height="22" align="center"><td align="center">半顺 <span id="wid5" style="display:none;">227</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td><td align="center">梭哈 <span id="wid5" style="display:none;">234</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td></tr><tr height="22" align="center"><td align="center">杂六 <span id="wid6" style="display:none;">228</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">0</td><td align="right" style="padding-right:5px;">0</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="32" class="gtitle_td">广西快3</td></tr><tr height="22" align="center"><td align="center">大小 <span id="wid0" style="display:none;">701</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">点数 <span id="wid0" style="display:none;">705</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td></tr><tr height="22" align="center"><td align="center">三军 <span id="wid1" style="display:none;">702</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td><td align="center">长牌 <span id="wid1" style="display:none;">706</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td></tr><tr height="22" align="center"><td align="center">围骰 <span id="wid2" style="display:none;">703</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td><td align="center">短牌 <span id="wid2" style="display:none;">707</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td></tr><tr height="22" align="center"><td align="center">全骰 <span id="wid3" style="display:none;">704</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">500</td><td align="right" style="padding-right:5px;">1000</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="34" class="gtitle_td">PC蛋蛋</td></tr><tr height="22" align="center"><td align="center">双面 <span id="wid0" style="display:none;">10001</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">色波 <span id="wid0" style="display:none;">10006</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td></tr><tr height="22" align="center"><td align="center">极值大小 <span id="wid1" style="display:none;">10003</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">2000</td><td align="right" style="padding-right:5px;">4000</td><td align="center">豹子 <span id="wid1" style="display:none;">10007</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td></tr><tr height="22" align="center"><td align="center">大小单双 <span id="wid2" style="display:none;">10004</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td><td align="center">特码包三 <span id="wid2" style="display:none;">10008</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td></tr><tr height="22" align="center"><td align="center">和值 <span id="wid3" style="display:none;">10005</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">1000</td><td align="right" style="padding-right:5px;">2000</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="36" class="gtitle_td">澳洲幸运5</td></tr><tr height="22" align="center"><td align="center">1-5球 <span id="wid0" style="display:none;">205</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">总合双面 <span id="wid0" style="display:none;">229</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">10000</td><td align="right" style="padding-right:5px;">20000</td></tr><tr height="22" align="center"><td align="center">双面 <span id="wid1" style="display:none;">214</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">10000</td><td align="right" style="padding-right:5px;">20000</td><td align="center">龙虎和 <span id="wid1" style="display:none;">230</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">10000</td><td align="right" style="padding-right:5px;">20000</td></tr><tr height="22" align="center"><td align="center">豹子 <span id="wid2" style="display:none;">224</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">两球双面 <span id="wid2" style="display:none;">231</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">10000</td><td align="right" style="padding-right:5px;">20000</td></tr><tr height="22" align="center"><td align="center">顺子 <span id="wid3" style="display:none;">225</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">牛牛 <span id="wid3" style="display:none;">232</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td></tr><tr height="22" align="center"><td align="center">对子 <span id="wid4" style="display:none;">226</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">牛牛双面 <span id="wid4" style="display:none;">233</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">5000</td><td align="right" style="padding-right:5px;">10000</td></tr><tr height="22" align="center"><td align="center">半顺 <span id="wid5" style="display:none;">227</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">梭哈 <span id="wid5" style="display:none;">234</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td></tr><tr height="22" align="center"><td align="center">杂六 <span id="wid6" style="display:none;">228</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td></td><td></td><td></td><td></td></tr><tr class="td_caption_1"><td align="center" colspan="38" class="gtitle_td">澳洲幸运10</td></tr><tr height="22" align="center"><td align="center">1-10名 <span id="wid0" style="display:none;">601</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td><td align="center">冠亚和双面 <span id="wid0" style="display:none;">636</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">20000</td><td align="right" style="padding-right:5px;">40000</td></tr><tr height="22" align="center"><td align="center">1-10名双面 <span id="wid1" style="display:none;">611</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">10000</td><td align="right" style="padding-right:5px;">20000</td><td align="center">冠亚和 <span id="wid1" style="display:none;">638</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">3000</td><td align="right" style="padding-right:5px;">6000</td></tr><tr height="22" align="center"><td align="center">1-5龙虎 <span id="wid2" style="display:none;">631</span></td><td align="center">100.00</td><td align="right" style="padding-right:5px;">10000</td><td align="right" style="padding-right:5px;">20000</td><td></td><td></td><td></td><td></td></tr></tbody> 
+                <template v-if="stateType == 3">
+                  <template v-for="(itemPa,index) in infoList">
+                    <tr class="td_caption_1">
+                      <td align="center" colspan="8" class="gtitle_td">{{itemPa.bocaiTypeName}}</td>
+                    </tr>
+                    <tr height="22" align="center" v-for="(item,index) in itemPa.dewaterList">
+                      <td align="center">{{item[0].deWaterName}}</td>
+                      <td align="center">{{handicap=='a'?item[0].handicapaDewaterRate:handicap=='b'?item[0].handicapbDewaterRate:handicap=='c'?item[0].handicapcDewaterRate:item[0].handicapdDewaterRate}}</td>
+                      <td align="right" style="padding-right:5px;">{{item[0].danzhuXiane}}</td>
+                      <td align="right" style="padding-right:5px;">{{item[0].danqiXiane}}</td>
+                      <template v-if="item[1]">
+                        <td align="center">{{item[1].deWaterName}}</td>
+                        <td align="center">{{handicap=='a'?item[1].handicapaDewaterRate:handicap=='b'?item[1].handicapbDewaterRate:handicap=='c'?item[1].handicapcDewaterRate:item[1].handicapdDewaterRate}}</td>
+                        <td align="right" style="padding-right:5px;">{{item[1].danzhuXiane}}</td>
+                        <td align="right" style="padding-right:5px;">{{item[1].danqiXiane}}</td>
+                      </template>
+                      <template v-else>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </template>
+                    </tr>
+
+                  </template>
+                  
+                </template>
+                
+
+                </tbody> 
               </table>
             </td>
           </tr> 
         </tbody>
     </table>
 
-  <!-- <div class="content-main">
-    <div class="right">
-      <div id="submenuDiv">
-        <div class="box">
-
-          <div class="header">
-            <p>个人资讯</p>
-          </div> 
-
-          <div class="default-list">
-            <ul class="game-list">
-              <li v-for="item in bocaiTypeList" class="gameNav" :class="['bocai'+item.bocaiId,item.bocaiId == '1' ? 'active' : '']" @click="getcuserInfo(item)">{{item.bocaiName}}</li>
-            </ul> 
-
-            <div class="statement">
-              <table>
-                <thead>
-                  <tr>
-                    <th>{{cbocai}}</th> 
-                    <th>退水</th> 
-                    <th>单注限额</th> 
-                    <th>单期限额</th>
-                  </tr>
-                </thead> 
-                <tbody>
-                  <tr v-if="cUserdeList.length*1 == '0'">
-                    <td style="line-height: 26px;" colspan="4">{{"暂无数据"}}</td> 
-                  </tr>
-                  <tr v-for="item in cUserdeList">
-                    <td style="line-height: 24px;">{{item.deWaterName}}</td>
-                    <td style="line-height: 24px;">{{item.handicapDewaterRate}}</td> 
-                    <td style="line-height: 24px;">{{item.danzhuXiane}}</td> 
-                    <td style="line-height: 24px;">{{item.danqiXiane}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div> -->
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
   },
   data() {
     return {
-      bocaiTypeList: [],
-      bocaiTypeId: '1',
-      cbocai: '重庆时时彩',
-      cUserdeList: []
+      stateType: 1,
+      infoList: [],
+      handicap: ''
     }
   },
   created() {
-    this.cUserdewater();
   },
   computed: {
+    ...mapGetters({
+        userInfo: 'getuserInfo'
+    }),
+    keyongBalance() {
+        return this.userInfo ? (this.userInfo.cashBalance*1 + this.userInfo.alreadyBalance*1).toFixed(3) : 0;
+    }
   },
   methods: {
-    getcuserInfo(item) {
-      this.cbocai = item.bocaiName;
-      this.cUserdewater(item.bocaiId);
-      $('.bocai'+item.bocaiId).addClass('active').siblings().removeClass('active');
-    },
-    changeboType(data) {
-      this.cUserdewater(data);
-    },
     async cUserdewater(id) {
 
-      let res = await this.$get(`${window.url}/api/beihai/credit`);
+      let that = this;
 
-        if(res.code===200){
+      this.stateType = 2;
 
-        } 
+      await that.$get(`${window.url}/api/beihai/credit`).then((res) => {
+        that.$handelResponse(res, (result) => {
+          this.stateType = 3;
+          if(result.code===200){
+
+            this.infoList = result.data.data;
+            for(let n in this.infoList) {
+              this.infoList[n].dewaterList = _.chunk(this.infoList[n].dewaterList,2);
+            }
+            this.handicap = result.data.handicap;
+
+
+            console.log('this.infoList',this.infoList);
+          }
+        })
+      });
+
+
     }
   },
   mounted() {

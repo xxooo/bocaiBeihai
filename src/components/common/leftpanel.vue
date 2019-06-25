@@ -150,11 +150,11 @@
                 </tr>
                 <tr>
                     <td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td>
-                    <td align="left">njnj0055(D)盘</td>
+                    <td align="left">{{userInfo.username}}({{userInfo.handicap}})盘</td>
                 </tr>
                 <tr>
                     <td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">可用金额</td>
-                    <td align="left"><span name="allowprice">98</span></td>
+                    <td align="left"><span name="allowprice">{{userInfo.cashBalance}}</span></td>
                 </tr>
                 <tr id="tr_print">
                     <td colspan="2" style="height: 33px; text-align: center; background: url(./static/img/td_but.jpg);">
@@ -219,13 +219,11 @@
                         </tr>
                         <tr>
                             <td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td>
-                            <td align="left">njnj0055(D)盘</td>
+                            <td align="left">{{userInfo.username}}({{userInfo.handicap}})盘</td>
                         </tr>
                         <tr>
                             <td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">可用金额</td>
-                            <td align="left">
-                                <span name="allowprice">101</span>
-                            </td>
+                            <td align="left"><span name="allowprice">{{userInfo.cashBalance}}</span></td>
                         </tr>
                         <tr id="tr_print">
                             <td colspan="2" style="height: 33px; text-align: center; background: url(./static/img/td_but.jpg);">
@@ -234,32 +232,17 @@
                             </td>
                         </tr>
                         <tr style="height:20px;line-height:20px;">
-                            <td colspan="2" align="center" id="Current_Round" style="font-size: 14px;height:20px;line-height:20px; font-weight: bold;">31102928期
-                            </td>
+                            <td colspan="2" align="center" id="Current_Round" style="font-size: 14px;height:20px;line-height:20px; font-weight: bold;">{{curPeriods}}期</td>
                         </tr>
                         <tr>
                             <td colspan="2" align="center" id="Current_XiaZhu">{{dialogMessage}}</td>
                         </tr>
-                        <!-- <tr>       
-                            <td align="center">下注笔数</td>
-                            <td align="left" style="padding-left:5px">4 笔</td>
-                        </tr>
-                        <tr>
-                            <td align="center">合计注额</td><td align="left" style="padding-left:5px">￥ 8</td>
-                        </tr> -->
                     </tbody>
                 </table>
             </td>
             </tr>
         </tbody>
     </table>
-
-        <!-- 右下注，过期下单 -->
-        <!-- <table width="100%" cellpadding="0" cellspacing="0" id="tb_xd" style="display: table;">
-            <tbody><tr>
-                <td id="mtranlist"><table width="100%" cellpadding="0" cellspacing="1" class="DTable" align="center" id="tb_mtranlist" border="0" style="min-width:228px;margin-top: 0px; word-break: break-all; word-wrap: break-word"><tbody><tr style="height: 33px; text-align: left; background: url(./static/img/tb_bg.jpg); color: Black; font-size: 14px;"><td colspan="2" nowrap="" align="center" id="td_mtranList_title"><span style="font-size: 14px; font-weight: bold;">下注结果反馈</span></td></tr><tr><td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">会员帐号</td><td align="left">njnj0055(D)盘</td></tr><tr><td width="70px" align="center" style="line-height: 17px;" class="t_td_caption_1">可用金额</td><td align="left"><span name="allowprice">101</span></td></tr><tr id="tr_print"><td colspan="2" style="height: 33px; text-align: center; background: url(./static/img/td_but.jpg);"><input type="button" value="打 印" class="button_bg1" @click="OrderPrint()">&nbsp;<input type="button" value="返 回" class="button_bg1" @click="cancel_xd()"></td></tr><tr style="height:20px;line-height:20px;"><td colspan="2" align="center" id="Current_Round" style="font-size: 14px;height:20px;line-height:20px; font-weight: bold;">31102936期</td></tr><tr><td colspan="2" align="center" id="Current_XiaZhu">指定期数为非交易状态!</td></tr><tr><td align="center">下注笔数</td><td align="left" style="padding-left:5px">2 笔</td></tr><tr><td align="center">合计注额</td><td align="left" style="padding-left:5px">￥ 10</td></tr></tbody></table></td>
-            </tr>
-        </tbody></table> -->
 
 
         <table v-if="showNumpage == 3" width="100%" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top: 0px;" bgcolor="white">
@@ -343,7 +326,8 @@
             <!-- 左边下单封盘状态 过期状态一样 -->
             <tbody id="tbodd_N0Normal" style="">
                 <tr style="height:20px;line-height:20px;">
-                    <td colspan="2" align="center" style="font-size: 12px;height:20px;line-height:20px;color:red; font-weight: bold;">                  下注被返回,请再次确认！
+                    <td colspan="2" align="center" style="font-size: 12px;height:20px;line-height:20px;color:red; font-weight: bold;"> 
+                        下注被返回,请再次确认！
                     </td>
                 </tr>
                 <tr style="height:16px;line-height:16px;">
@@ -621,59 +605,9 @@ export default {
 
       showOpen: true,
       orderOddsVisible2: false,
-      orderOddsVisible: false,
-      ruleForm: {
-          oldPassWrod: '',
-          newPassWord: '',
-          newPassWordDb: ''
-        },
-        rules: {
-          oldPassWrod: [
-            { required: true, message: '请输入您的旧密码', trigger: 'blur' },
-            { min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur' }
-          ],
-          newPassWord: [
-            { required: true, message: '请输入您的新密码', trigger: 'blur' },
-            { min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur' },
-            {
-              validator:function(rule, value, callback){
-                let reg = /^[a-zA-Z]\w{5,15}$/;
-                if(!reg.test(value)){
-                  callback('密码以字母开头，长度在6~16之间，只能包含字母、数字和下划线');
-                }
-                callback();
-              },
-              trigger: 'blur'
-            }
-          ],
-          newPassWordDb: [
-            { required: true, message: '请再次输入新密码', trigger: 'blur' },
-            { min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur' },
-            {
-              validator:function(rule, value, callback){
-                let reg = /^[a-zA-Z]\w{5,15}$/;
-                if(!reg.test(value)){
-                  callback('密码以字母开头，长度在6~16之间，只能包含字母、数字和下划线');
-                }
-                callback();
-              },
-              trigger: 'blur'
-            },
-            {
-              validator:function(rule, value, callback){
+      orderOddsVisible: false
 
-                console.log('vm.ruleForm',vm.ruleForm);
-                if(value != vm.ruleForm.newPassWord){
-                  callback('新密码两次输入不一致!');
-                }
-                callback();
-              },
-              trigger: 'blur'
-            }
-          ]
-        }
-
-    };
+    }
   },
   computed: {
     ...mapGetters({
@@ -808,7 +742,15 @@ export default {
 
           //console.log('this.orderDataObj',this.orderDataObj);
 
-          if(!this.kuaijiePay) {
+        if(this.curPeriods != this.bocaiInfoData.bocaiPeriods) {
+            this.showNumpage = 33;
+            this.dialogMessage = '指定期数为非交易状态!';  
+            this.orderOddsVisible = true;
+        } else if(!this.isOpenOdds) {
+            this.showNumpage = 33;
+            this.dialogMessage = '非交易时间,不允许下注!';  
+            this.orderOddsVisible = true;
+        } else if(!this.kuaijiePay) {
 
                 let obj = {};
 
@@ -851,6 +793,11 @@ export default {
           console.log('this.bocaiInfoData',this.bocaiInfoData);
 
 
+          let timeNum = this.$timestampToms(new Date().getTime() + this.differTime);
+
+          console.log('timeNum',timeNum);
+
+
               this.orderDatas.list = [];
 
               this.orderDatas.periodsId = this.bocaiInfoData.bocaiPeriodsId;
@@ -870,7 +817,8 @@ export default {
                   bocaiValue: this.orderDataObj.bocaiValue,//投注内容,六合彩连肖/连尾
                   betsMoney: +this.orderList[n].betsMoney,//10000,//一般模式下，选择的金额
                   bocaiOdds: this.orderDataObj.bocaiOdds,//1.90//赔率
-                  dewaterId: this.orderDataObj.dewaterId //退水ID
+                  dewaterId: this.orderDataObj.dewaterId, //退水ID
+                  orderNum: timeNum+n
                 }
                 this.orderDatas.list.push(obj);
               }
@@ -889,6 +837,7 @@ export default {
                     loading.close();
                       if(result.code===200){
                         //更新用户信息
+                        store.commit('updateorderDatasShow',that.orderDatas.list);
                         bus.$emit('getcUserInfo', ''); 
                         this.totalMoney = this.moneyOrder;
                         this.showNumpage = 2;
