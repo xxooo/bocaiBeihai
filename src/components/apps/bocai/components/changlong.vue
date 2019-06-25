@@ -61,15 +61,6 @@
                 return -item.num;
               });
 
-              //console.log('this.openPrizeList',JSON.stringify(this.openPrizeList));
-
-              // for(let n in result.noOpenPrizeMap) {
-              //   let obj = {};
-              //   obj.content = n;
-              //   obj.num = result.noOpenPrizeMap[n];
-              //   this.noOpenPrizeList.push(obj);
-              // }
-
               }
           })
         });
