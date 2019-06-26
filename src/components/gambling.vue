@@ -51,7 +51,7 @@
                                         <td style="width:150px;">
                                             <ul class="navOne-new clearfix" @mouseenter="overShow()" @mouseleave="outHide()">
                                                 <li id="bankLi" class="czBtn overShowLi">
-                                                  <span id="currentType">{{bocaiName}}</span>
+                                                  <span id="currentType">{{bocaiName!=''?bocaiName:bocaiTypeList.length!=0?bocaiTypeList[0].bocaiName:''}}</span>
                                                 </li>
                                             </ul>
 

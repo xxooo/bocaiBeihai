@@ -39,7 +39,7 @@
                   <td style="width:120px;">退水后结果</td>
                 </tr>
                 <tr v-if="afterWeekPage.length != 0" height="20px" class="hoverTrclass" v-for="(item,index) in afterWeekPage">
-                  <td style="width: 150px;">{{item.createDateStr}}</td>     <!-- $timestampToTimeWeekJi(item.createDate) -->   
+                  <td style="width: 150px;">{{$timestampToTimeWeekJi(item.createDateStr)}}</td>     <!-- $timestampToTimeWeekJi(item.createDate) -->   
                   <td style="width: 82px;">{{item.orderCount}}</td>
                   <td style="width: 130px; padding-right: 5px;" align="right">{{item.betsMoneySum}}</td>
                   <td style="width: 120px; padding-right: 5px;" align="right">{{item.winnerMoneySum}}</td>
@@ -75,7 +75,7 @@
                   <td style="width:120px;">退水后结果</td>
                 </tr>
                 <tr v-if="nowWeekPage.length != 0" height="20px" class="hoverTrclass" v-for="(item,index) in nowWeekPage">
-                  <td style="width: 150px;">{{item.createDateStr}}</td>
+                  <td style="width: 150px;">{{$timestampToTimeWeekJi(item.createDateStr)}}</td>
                   <td style="width: 82px;">{{item.orderCount}}</td>
                   <td style="width: 130px; padding-right: 5px;" align="right">{{item.betsMoneySum}}</td>
                   <td style="width: 120px; padding-right: 5px;" align="right">{{item.winnerMoneySum}}</td>

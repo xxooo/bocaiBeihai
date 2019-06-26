@@ -109,7 +109,8 @@ export default {
             var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
             var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
             var D = date.getDate()*1 > 9 ? date.getDate() + ' ' : '0' + date.getDate() + ' ';
-            var ji = date.getDay();
+            var weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+            var ji = weekday[date.getDay()];
             return M+D+ji;
         };
 
