@@ -161,7 +161,6 @@ export default {
       t2: null, //轮询  开奖结果
       t3: null, //轮询  动画
       t4: null, //轮询  开奖结果 快速
-      activeIndex: '重庆时时彩',
       resultList: [],
       preBocaiPeriods: '',
       preResult: '',
@@ -176,15 +175,17 @@ export default {
   async created() {
 
     if(this.bocaiTypeList.length == 0) {
+      console.log('?????');
       this.getBocai();
     } else {
-      this.getbocaoName();
+      console.log('????2222?');
+      this.getOddsInfo(this.bocaiTypeList[0]);
     }
     
 
     this.openPrizeTime = this.$timestampToTimeRi(new Date());
 
-    //this.getbocaoName();
+    this.getbocaoName();
 
     this.getcUserInfo();
 
@@ -213,6 +214,9 @@ export default {
       console.log('overShow');
       $('.overShowLi').addClass('active');
       this.showSubMenu = true;
+
+      console.log('bocaiTypeId',this.bocaiTypeId);
+
       $('.div_gameno_'+this.bocaiTypeId).addClass('active').siblings().removeClass('active');
     },
     async exit() {
@@ -469,9 +473,6 @@ export default {
         
 
     },
-    handleSelect(key, keyPath) {
-      //this.activeIndex = key;
-    },
     async getBocai() {
       let res = await this.$get(`${window.url}/api/getBocai`);
 
@@ -479,11 +480,10 @@ export default {
             console.log('第一次刷新调取默认菠菜',res.bocaiTypeList[0]);
             this.getOddsInfo(res.bocaiTypeList[0]);
 
-            store.commit('updatebocaiName',res.bocaiTypeList[0].bocaiName);
-            store.commit('updatebocaiTypeId', res.bocaiTypeList[0].bocaiId); 
-            store.commit('updatebocaiTypeList',this.bocaiTypeList);
+            //store.commit('updatebocaiName',res.bocaiTypeList[0].bocaiName);
+            //store.commit('updatebocaiTypeId', res.bocaiTypeList[0].bocaiId); 
+            store.commit('updatebocaiTypeList',res.bocaiTypeList);
 
-            //this.getbocaoName();
           }
     },
     async getPrizeResult() { 
@@ -566,7 +566,12 @@ export default {
             break;
         }
 
-        store.commit('updatebocaiName', name);
+        console.log('name',name);
+
+        store.commit('updatebocaiName',name);
+
+        console.log('bocaiName',this.bocaiName);
+
         store.commit('updatebocaiTypeId', typeid);
 
     },
@@ -597,7 +602,7 @@ export default {
             })
           });
     },
-    //切换菠菜获取菠菜数据
+    //切换菠菜获取菠菜二级菜单并调数据接口
     async getOddsInfo(item) {
 
       let that = this;
@@ -617,10 +622,10 @@ export default {
 
                 store.commit('updatebocaiCategory',result.bocaiCategoryList[0]);
 
-                bus.$emit('getOddsInfo', result);     //这个要了干啥
-
+                //获取菠菜数据
                 this.getOddsCategory(result.bocaiCategoryList[0]);
 
+                //获取菠菜信息
                 this.bocaiInfo();
 
               }
@@ -631,8 +636,6 @@ export default {
     async getOdds(item,index) {
 
       if(['重庆时时彩','幸运飞艇','北京PK拾','山东11选5','广东11选5','江西11选5','PC蛋蛋','江苏快3','北京快乐8','极速赛车','极速时时彩'].findIndex((n) => n==item.bocaiName)>-1) {
-
-        this.activeIndex = item.bocaiName;
 
         $('.div_gameno_'+item.bocaiId).addClass('active').siblings().removeClass('active');
 

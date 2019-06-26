@@ -15,7 +15,7 @@
               <table class="Ball_List" border="0" cellspacing="0" cellpadding="0" width="698">
                 <tbody>
                   <tr v-if="subtit == 1" class="Ball_tr_H" valign="top" id="lotteryno_tr1" style="height: auto; min-height: 25px;">
-                    <td width="28" v-for="(item,index) in zonghedaxiaoList" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                    <td width="28" v-for="(item,index) in zonghedaxiaoList.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
                       <template v-if="item != ''">
                         <p v-for="itemsub in item.value">{{itemsub}}</p>
                       </template>
@@ -23,14 +23,14 @@
                   </tr>
 
                   <tr v-if="subtit == 2" class="Ball_tr_H" valign="top" id="lotteryno_tr2" style="height:auto;min-height:25px;">
-                    <td width="28" v-for="(item,index) in zonghedanshuangList" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                    <td width="28" v-for="(item,index) in zonghedanshuangList.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
                       <template v-if="item != ''">
                         <p v-for="itemsub in item.value">{{itemsub}}</p>
                       </template>
                     </td>
                   </tr>
                   <tr v-if="subtit == 3" class="Ball_tr_H" valign="top" id="lotteryno_tr3" style="height:auto;min-height:25px;">
-                    <td width="28" v-for="(item,index) in longhuheList" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                    <td width="28" v-for="(item,index) in longhuheList.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
                       <template v-if="item != ''">
                         <p v-for="itemsub in item.value">{{itemsub}}</p>
                       </template>

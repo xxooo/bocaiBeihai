@@ -67,8 +67,6 @@ export default {
 
           if(res.code===200){
 
-            store.commit('updatebocaiTypeList',res.bocaiTypeList);
-
             let path = '';
             switch (res.bocaiTypeList[0].bocaiName) {
               case '重庆时时彩':
@@ -109,6 +107,9 @@ export default {
               break;
             }
 
+            console.log('userAgreement');
+            
+            store.commit('updatebocaiTypeList',res.bocaiTypeList);
             store.commit('updatebocaiName',res.bocaiTypeList[0].bocaiName);
             store.commit('updatebocaiTypeId',res.bocaiTypeList[0].bocaiId);
 
