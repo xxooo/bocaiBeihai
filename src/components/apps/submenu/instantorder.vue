@@ -108,7 +108,7 @@ export default {
       this.dataList = data;
     },
     async getnowOrder() { 
-      let res = await this.$get(`${window.url}/api/nowOrder?currentPage=1&pageSize=1000`);
+      let res = await this.$get(`${window.url}/api/nowOrder?currentPage=1&pageSize=100000`);
 
       if(res.code===200){
         this.resultList = res.page.list;

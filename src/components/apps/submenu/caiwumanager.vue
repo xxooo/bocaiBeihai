@@ -47,15 +47,15 @@
                   <tr class="caiwuListTr" v-for="(item,index) in historyDataList.list">
                     <td align="center">{{item.id}}</td>
                     <td align="center">{{$timestampToTime(item.createDate)}}</td>
-                    <td align="center">{{item.type =='1'?'充值' : '提现'}}</td>
-                    <td align="right">{{item.money}}</td>
-                    <td align="right">{{item.totalMoney}}</td>
-                    <td align="center">{{item.remark}}</td>
+                    <td align="center">{{item.quotaType =='1'?'充值' : '提现'}}</td>
+                    <td align="right">{{item.quotaAmount}}</td>
+                    <td align="right">{{item.balance}}</td>
+                    <td align="center">{{item.quotaRemark}}</td>
                   </tr>
                   <tr>
                     <td colspan="3" align="right">总计：</td>
                     <td align="right">{{moneyAll}}</td>
-                    <td align="center">{{totalMoneyAll}}</td>
+                    <td align="center">--</td>
                     <td align="center">--</td>
                   </tr>
                 </template>
@@ -75,22 +75,11 @@
         </td> 
       </tr>
       
-      <tr v-if="hasDataList">
-        <td id="tdpage" style=" line-height:20px; text-align:left; height: 12px;" colspan="43">
 
-          <table height="22" cellspacing="0" cellpadding="0" width="100%" border="0">
-            <tbody>
-              <tr class="t_list_bottom">
-                <td align="left">&nbsp;共&nbsp;1&nbsp;期记录</td>
-                <td align="center">共&nbsp;1&nbsp;页</td>
-                <td align="right">
-                  <span>前一页&nbsp;</span>『&nbsp;&nbsp;
-                  <span class="current">1</span>&nbsp;』
-                  <span> &nbsp;后一页 </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <tr v-if="hasDataList">
+        <td id="tdpage" style=" line-height:20px; text-align:left; height: 12px;" colspan="5">
+
+           <pag-ination :resultList="resultList" v-on:getdataList="getdataList"></pag-ination>
 
         </td>
       </tr>
@@ -105,10 +94,11 @@
 </template>
 
 <script>
-
+import PagInation from '@/components/common/pagination';
 export default {
 
   components: {
+    PagInation
   },
   data() {
     return {
@@ -116,6 +106,8 @@ export default {
       endTime: new Date(),
       moneyAll: '',
       totalMoneyAll: '',
+      resultList: [],
+      dataList: [],
 
       historyDataList: {
         currPage: 1,
@@ -128,43 +120,62 @@ export default {
     }
   },
   created() {
-
+    this.searchMembers();
   },
   computed: {
     hasDataList() {
-      this.historyDataList.list.length != 0 ? true : false;
+      return this.historyDataList.list.length != 0 ? true : false;
     }
   },
   methods: {
+    getdataList(data) {
+      this.dataList = data;
+    },
     async searchMembers() {
+      let that = this;
 
-      console.log('startTime',this.$timestampToTimeRi(this.startTime));
 
       let sstime = this.$timestampToTimeRi(this.startTime);
       let entime = this.$timestampToTimeRi(this.endTime);
 
-      this.moneyAll = '';
-      this.totalMoneyAll = '';
 
-      let that = this;
+
+      this.moneyAll = '';
+
+      let objdata = {
+        startDate: sstime,
+        endDate: entime,
+        currentPage: 1,
+        pageSize: 100000
+      }
+
+      
       const loading = this.$loading({
         lock: true,
         background: 'rgba(0, 0, 0, 0.7)'
       });  
-      await that.$get(`${window.url}/api/hisRechargeForwardList?currentPage=1&pageSize=10&createDateStart=`+sstime+`&createDateEnd=`+entime+`&type=0`).then((res) => {
+      await that.$post(`${window.url}/api/financeRechargeRecord`,objdata).then((res) => {
         that.$handelResponse(res, (result) => {
           loading.close();
           if(result.code===200){
             this.historyDataList = result.page;
 
-            for(let n in this.historyDataList) {
-              this.moneyAll += this.historyDataList[n].money*1;
-              this.totalMoneyAll += this.historyDataList[n].totalMoney*1;
+            for(let n in this.historyDataList.list) {
+              this.moneyAll = this.moneyAll + this.historyDataList.list[n].quotaAmount*1;
             }
+
+
+            this.resultList = this.historyDataList.list;
+
+            this.$emit('resetValue','');
 
           }
         })
       });
+
+
+
+
 
     }
   },

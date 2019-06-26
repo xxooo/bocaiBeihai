@@ -10,7 +10,7 @@
     <DateBox  v-model="jizhangTime" format="yyyy-MM-dd" @selectionChange="selectionChange2"></DateBox>
 
 
-    <div id="tblist" style="width: 710px; text-align: center; height: 450px;">
+    <div id="tblist" style="width: 710px; text-align: center; height: 450px;" :class="bocaiType == 8266 ? 'width1000' : ''">
 
 
       <table v-if="[1,8815].findIndex((n) => n==bocaiType)>-1" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top:5px; text-align:center; width:100%;">
@@ -124,9 +124,66 @@
       </table>
 
 
+      <table v-if="[8498].findIndex((n) => n==bocaiType)>-1" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top:5px; text-align:center; width:100%;">
+        <tbody>
+          <tr class="td_caption_1">
+            <td rowspan="1" style="width:100px;">期数</td>
+            <td rowspan="1" style="width:124px;">开奖时间</td>
+            <td colspan="3" style="width:100px;">开出号码</td>
+            <td colspan="3" style="width:80px;">总和</td>
+          </tr>
+          <tr v-for="item in dataList" class="hoverTrclass">
+            <td>{{item.periods}}</td>
+            <td>{{$timestampToTimeWeek(item.openPrizetime)}}</td>
+            <template v-if="!item.result || item.result == ''">
+              <td colspan="5" ><span>暂未开奖</span></td>
+            </template>
+            <template v-else>
+              <td align="center"><div :class="'JSNo_'+item.num1" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'JSNo_'+item.num2"style=" height:27px; width:27px;"></div></td>
+              <td align="center"><div :class="'JSNo_'+item.num3" style=" height:27px; width:27px;"></div></td>
+              <td align="center"><span>{{item.zonghe}}</span></td>
+              <td align="center"><span :class="item.zonghedaxiao == '大' ? 'red' : ''">{{item.zonghedaxiao}}</span></td>
+            </template>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <table v-if="[8266].findIndex((n) => n==bocaiType)>-1" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top:5px; text-align:center; width:100%;">
+        <tbody>
+          <tr class="td_caption_1">
+            <td rowspan="1" style="width:80px;">期数</td>
+            <td rowspan="1" style="width:124px;">开奖时间</td>
+            <td colspan="21" style="width:100px;">开出号码</td>
+            <td colspan="4" style="width:100px;">总和</td>
+            <td colspan="2" style="width:100px;">比数量</td>
+          </tr>
+          <tr v-for="item in dataList" class="hoverTrclass">
+            <td>{{item.periods}}</td>
+            <td>{{$timestampToTimeWeek(item.openPrizetime)}}</td>
+            <template v-if="!item.result || item.result == ''">
+              <td colspan="27" ><span>暂未开奖</span></td>
+            </template>
+            <template v-else>
+              <td v-for="(itemsub,index) in item.result" align="center"><div :class="'dvNo'+itemsub"></div></td>
+              <td align="center"><span>{{item.zonghe}}</span></td>
+              <td align="center"><span :class="item.zonghedaxiao == '大' ? 'red' : ''">{{item.zonghedaxiao}}</span></td>
+              <td align="center"><span :class="item.zonghedanshuang == '双' ? 'red' : ''">{{item.zonghedanshuang}}</span></td>
+              <td align="center"><span>{{item.wuxing}}</span></td>
+              <td align="center"><span :class="item.bishulianghouqianhe == '前(多)' ? 'red' : ''">{{item.bishulianghouqianhe}}</span></td>
+              <td align="center"><span :class="item.bishuliangdanshuanghe == '双(多)' ? '' : item.bishuliangdanshuanghe == '单(多)' ? 'red' : 'green'">{{item.bishuliangdanshuanghe}}</span></td>
+            </template>
+          </tr>
+        </tbody>
+      </table>
+
+
+
       <div id="tdpage" style=" line-height:22px; text-align:left; height: 22px; border:1px solid #e9a884;  border-top-width:0px;">
         <pag-ination :resultList="resultList" v-on:getdataList="getdataList"></pag-ination>
       </div>
+
     </div>
 
   </div>
@@ -139,72 +196,8 @@
             <p>开奖结果</p>
           </div> 
 
-          <div class="default-list" style="min-height: 316px;">
-            <div class="">
-              游戏类型：
-              <el-select v-model="bocaiType" placeholder="请选择" size="mini" @change="changeboType">
-                    <el-option label="全部" :value="''"></el-option>
-                    <el-option
-                      v-for="item in bocaiTypeList"
-                      :key="item.value"
-                      :label="item.bocaiName"
-                      :value="item.bocaiId">
-                    </el-option>
-              </el-select> 
-
-              <span>
-                  日期：
-                  <el-date-picker
-                  size="mini"
-                  value-format="yyyy-MM-dd"
-                  @change="gettime"
-                  v-model="openPrizeTime"
-                  type="date"
-                  placeholder="选择日期">
-                </el-date-picker>
-              </span>
-            </div> 
 
             <div>
-              <table v-if="[1,8815].findIndex((n) => n==bocaiType)>-1">
-                <thead>
-                  <tr>
-                    <th>期数</th> 
-                    <th>开奖时间</th> 
-                    <th colspan="5">开出号码</th> 
-                    <th colspan="3">总和</th> 
-                    <th>龙虎</th> 
-                    <th>前三</th> 
-                    <th>中三</th> 
-                    <th>后三</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in resultList">
-                    <td>{{item.periods}}</td> 
-                    <td>{{$timestampToTime(item.openPrizetime)}}</td>
-                    <template v-if="!item.result || item.result == ''">
-                      <td colspan="12" >
-                        <span>暂未开奖</span>
-                      </td>
-                    </template>
-                    <template v-else>
-                      <td><div class="ball-icon">{{item.num1}}</div></td>
-                      <td><div class="ball-icon">{{item.num2}}</div></td>
-                      <td><div class="ball-icon">{{item.num3}}</div></td>
-                      <td><div class="ball-icon">{{item.num4}}</div></td>
-                      <td><div class="ball-icon">{{item.num5}}</div></td> 
-                      <td>{{item.zonghe}}</td> 
-                      <td><span :class="item.zonghedaxiao == '大' ? 'red' : ''">{{item.zonghedaxiao}}</span></td> 
-                      <td><span :class="item.zonghedanshuang == '双' ? 'red' : ''">{{item.zonghedanshuang}}</span></td> 
-                      <td><span :class="item.longhu == '龙' ? 'red' : item.longhu == '虎' ? 'blue' : ''">{{item.longhu}}</span></td> 
-                      <td><span>{{item.qiansan}}</span></td> 
-                      <td><span>{{item.zhongsan}}</span></td> 
-                      <td><span>{{item.housan}}</span></td>
-                    </template>
-                  </tr>
-                </tbody>
-              </table>
 
               <table v-if="bocaiType == '8811'">
                 <thead>
@@ -253,116 +246,9 @@
                 </tbody>
               </table>
 
-              <table v-if="bocaiType == '8498'">
-                <thead>
-                  <tr>
-                    <th>期数</th> 
-                    <th>开奖时间</th> 
-                    <th colspan="3">开出号码</th> 
-                    <th colspan="2">总和</th>
-                  </tr>
-                </thead> 
-                <tbody>
-                  <tr v-for="item in resultList">
-                    <td>{{item.periods}}</td> 
-                    <td>{{$timestampToTime(item.openPrizetime)}}</td>
-
-                    <template v-if="!item.result || item.result == ''">
-                      <td colspan="5">
-                        <span>暂未开奖</span>
-                      </td>
-                    </template>
-                    <template v-else>
-                      <td><i :class="'jsk3-icon-'+item.num1" style="margin-top: 6px;"></i></td>
-                      <td><i :class="'jsk3-icon-'+item.num2" style="margin-top: 6px;"></i></td>
-                      <td><i :class="'jsk3-icon-'+item.num3" style="margin-top: 6px;"></i></td>
-                      <td><span>{{item.zonghe}}</span></td> 
-                      <td><span class="red">{{item.zonghedaxiao}}</span></td>
-                    </template>
-                  </tr>
-                </tbody>
-              </table>
 
 
-              <table v-if="[8555,8806,9057].findIndex((n) => n==bocaiType)>-1">
-                <thead>
-                  <tr>
-                    <th>期数</th> 
-                    <th>开奖时间</th> 
-                    <th colspan="10">开出号码</th> 
-                    <th colspan="3">冠亚军和</th> 
-                    <th colspan="5">1~5龙虎</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in resultList">
-                    <td>{{item.periods}}</td> 
-                    <td>{{$timestampToTime(item.openPrizetime)}}</td>
-                    <template v-if="!item.result || item.result == ''">
-                      <td colspan="18">
-                        <span>暂未开奖</span>
-                      </td>
-                    </template>
-                    <template v-else>
-                      <td><div :class="'ball-fang ball-fang'+item.num1">{{item.num1}}</div></td> 
-                      <td><div :class="'ball-fang ball-fang'+item.num2">{{item.num2}}</div></td> 
-                      <td><div :class="'ball-fang ball-fang'+item.num3">{{item.num3}}</div></td> 
-                      <td><div :class="'ball-fang ball-fang'+item.num4">{{item.num4}}</div></td> 
-                      <td><div :class="'ball-fang ball-fang'+item.num5">{{item.num5}}</div></td> 
-                      <td><div :class="'ball-fang ball-fang'+item.num6">{{item.num6}}</div></td> 
-                      <td><div :class="'ball-fang ball-fang'+item.num7">{{item.num7}}</div></td> 
-                      <td><div :class="'ball-fang ball-fang'+item.num8">{{item.num8}}</div></td> 
-                      <td><div :class="'ball-fang ball-fang'+item.num9">{{item.num9}}</div></td> 
-                      <td><div :class="'ball-fang ball-fang'+item.num10">{{item.num10}}</div></td> 
-                      <td>{{item.guanyajunhe}}</td> 
-                      <td><span :class="item.guanyajundaxiao == '大' ? 'red' : ''">{{item.guanyajundaxiao}}</span></td> 
-                      <td><span :class="item.guanyajundanshuang == '双' ? 'red' : ''">{{item.guanyajundanshuang}}</span></td> 
-                      <td><span :class="item.yilonghu == '龙' ? 'red' : item.yilonghu == '虎' ? 'blue' : ''">{{item.yilonghu}}</span></td> 
-                      <td><span :class="item.erlonghu == '龙' ? 'red' : item.erlonghu == '虎' ? 'blue' : ''">{{item.erlonghu}}</span></td> 
-                      <td><span :class="item.sanlonghu == '龙' ? 'red' : item.sanlonghu == '虎' ? 'blue' : ''">{{item.sanlonghu}}</span></td> 
-                      <td><span :class="item.silonghu == '龙' ? 'red' : item.silonghu == '虎' ? 'blue' : ''">{{item.silonghu}}</span></td> 
-                      <td><span :class="item.wulonghu == '龙' ? 'red' : item.wulonghu == '虎' ? 'blue' : ''">{{item.wulonghu}}</span></td> 
-                    </template>
-                  </tr>
-                </tbody>
-              </table>
 
-
-              <table v-if="[8266].findIndex((n) => n==bocaiType)>-1">
-                <thead>
-                  <tr>
-                    <th>期数</th> 
-                    <th width="100px">开奖时间</th> 
-                    <th>开出号码</th> 
-                    <th colspan="4">总和</th> 
-                    <th colspan="2">比数量</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in resultList">
-                    <td>{{item.periods}}</td> 
-                    <td>{{$timestampToTime(item.openPrizetime)}}</td>
-                    <template v-if="!item.result || item.result == ''">
-                      <td colspan="7">
-                        <span>暂未开奖</span>
-                      </td>
-                    </template>
-                    <template v-else>
-                      <td width="360px">
-                        <div v-for="(itemsub,index) in item.result.slice(0,11)" :class="itemsub*1 > 40 ? 'ballda' : 'ballxiao'">{{itemsub}}</div>
-                        <br>
-                        <div v-for="(itemsub,index) in item.result.slice(11)" :class="itemsub*1 > 40 ? 'ballda' : 'ballxiao'">{{itemsub}}</div>
-                      </td> 
-                      <td>{{item.zonghe}}</td> 
-                      <td><span :class="item.zonghedaxiao == '大' ? 'red' : ''">{{item.zonghedaxiao}}</span></td> 
-                      <td><span :class="item.zonghedanshuang == '双' ? 'red' : ''">{{item.zonghedanshuang}}</span></td> 
-                      <td>{{item.wuxing}}</td>
-                      <td><span :class="item.bishulianghouqianhe == '前(多)' ? 'red' : item.bishulianghouqianhe == '后(多)' ? 'blue' : ''">{{item.bishulianghouqianhe}}</span></td>
-                      <td><span :class="item.bishuliangdanshuanghe == '双(多)' ? 'red' : item.bishuliangdanshuanghe == '单(多)' ? 'blue' : ''">{{item.bishuliangdanshuanghe}}</span></td>
-                    </template>
-                  </tr>
-                </tbody>
-              </table>
 
             </div>
           </div>
@@ -439,7 +325,7 @@ export default {
         lock: true,
         background: 'rgba(0, 0, 0, 0.7)'
       });  
-      await that.$get(`${window.url}/api/openPrizeResult?bocaiTypeId=`+this.bocaiType+`&currentPage=1&pageSize=1000&dayStr=`+jizhangt).then((res) => {
+      await that.$get(`${window.url}/api/openPrizeResult?bocaiTypeId=`+this.bocaiType+`&currentPage=1&pageSize=100000&dayStr=`+jizhangt).then((res) => {
         that.$handelResponse(res, (result) => {
           loading.close();
           if(result.code===200){
@@ -453,9 +339,12 @@ export default {
               }
             }
 
+
             bus.$emit('resetValue','');
 
             that.resultList = result.list;
+
+            console.log('that.resultList',that.resultList);
 
             that.firstPage = 1;
             that.endPage = 10;

@@ -105,6 +105,16 @@ export default {
         };
 
 
+        Vue.prototype.$timestampToTimeWeekJi = function(timestamp){
+            var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+            var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+            var D = date.getDate()*1 > 9 ? date.getDate() + ' ' : '0' + date.getDate() + ' ';
+            var ji = date.getDay();
+            return M+D+ji;
+        };
+
+
+
         Vue.prototype.$currUser = async function(){
             currUser = currUser || JSON.parse(cookie.get('currUser'));
             if(currUser) return currUser;
