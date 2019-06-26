@@ -109,7 +109,13 @@ export default {
               break;
             }
 
+            store.commit('updatebocaiName',res.bocaiTypeList[0].bocaiName);
+            store.commit('updatebocaiTypeId',res.bocaiTypeList[0].bocaiId);
+
+
             this.$router.push({name: path});
+
+
           }
       
     }

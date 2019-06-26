@@ -222,10 +222,10 @@ export default {
         this.shuaiXuanDatas(data);
       });
       //第一次登录要显示的菠菜
-      bus.$on('getOddsInfo', (data) => {
-        this.showOdds = data.bocaiCategoryList[0].name;
-        this.shuaiXuanDatas(this.oddsList);
-      });
+      // bus.$on('getOddsInfo', (data) => {
+      //   this.showOdds = data.bocaiCategoryList[0].name;
+      //   this.shuaiXuanDatas(this.oddsList);
+      // });
       //切换二级菜单更新菠菜,以及切快捷更新菠菜
       bus.$on('getresetOddsCategory', (data) => {
         this.showOdds = data;

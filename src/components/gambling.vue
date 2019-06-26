@@ -51,7 +51,7 @@
                                         <td style="width:150px;">
                                             <ul class="navOne-new clearfix" @mouseenter="overShow()" @mouseleave="outHide()">
                                                 <li id="bankLi" class="czBtn overShowLi">
-                                                  <span id="currentType">{{submenu}}</span>
+                                                  <span id="currentType">{{bocaiName}}</span>
                                                 </li>
                                             </ul>
 
@@ -82,7 +82,7 @@
                                 <div id="menuLv03">
                                     <div id="div_menu_group_1">  
                                         <template v-for="(item,index) in bocaiCategoryList">
-                                            <a class="OddsCategoryA" :class="['OddsCategory'+item.id,index == 0 ? 'selected':'']" @click="getOddsCategory(item,index)">{{item.name}}</a>&nbsp;{{(index+1) == bocaiCategoryList.length*1 ? '' : '|&nbsp;'}}
+                                            <a class="OddsCategoryA" :class="['OddsCategory'+item.id,index == 0 ? 'selected':'']" @click="getOddsCategory(item)">{{item.name}}</a>&nbsp;{{(index+1) == bocaiCategoryList.length*1 ? '' : '|&nbsp;'}}
                                         </template>
                                     </div>
                                 </div>
@@ -165,10 +165,8 @@ export default {
       resultList: [],
       preBocaiPeriods: '',
       preResult: '',
-      hasResult: false,
-      bocaiTypeId: '',
-      bocaiTypeList: [],
       submenu: '',
+      hasResult: false,
       messageinfo: '',
       centerDialogVisible: false,
       bocaiCategoryList: []
@@ -176,18 +174,27 @@ export default {
     }
   },
   async created() {
-    this.getBocai();
+
+    if(this.bocaiTypeList.length == 0) {
+      this.getBocai();
+    } else {
+      this.getbocaoName();
+    }
+    
 
     this.openPrizeTime = this.$timestampToTimeRi(new Date());
 
-    this.getbocaoName();
+    //this.getbocaoName();
 
     this.getcUserInfo();
 
   },
   computed: {
     ...mapGetters({
-      userInfo: 'getuserInfo'
+      userInfo: 'getuserInfo',
+      bocaiTypeList: 'getbocaiTypeList',
+      bocaiTypeId: 'getbocaiTypeId',
+      bocaiName: 'getbocaiName'
     }),
     bocaiPathName: function() {
       return this.$route.name
@@ -469,21 +476,14 @@ export default {
       let res = await this.$get(`${window.url}/api/getBocai`);
 
           if(res.code===200){
-            this.bocaiTypeList = res.bocaiTypeList;
-
-            store.commit('updatebocaiTypeList',this.bocaiTypeList);
-
+            console.log('第一次刷新调取默认菠菜',res.bocaiTypeList[0]);
             this.getOddsInfo(res.bocaiTypeList[0]);
 
-
-            this.submenu = res.bocaiTypeList[0].bocaiName;
-
-            console.log('第一次刷新调取默认菠菜',res.bocaiTypeList[0]);
-
             store.commit('updatebocaiName',res.bocaiTypeList[0].bocaiName);
-
             store.commit('updatebocaiTypeId', res.bocaiTypeList[0].bocaiId); 
+            store.commit('updatebocaiTypeList',this.bocaiTypeList);
 
+            //this.getbocaoName();
           }
     },
     async getPrizeResult() { 
@@ -502,7 +502,7 @@ export default {
 
             if(res.code===200){
 
-              //if("companyIsOpenSet": "",//该会员上级公司对该期博彩的封盘状态。状态：0删除，1封盘，2开盘。只有开盘才能投注。)
+              //if("companyIsOpenSet": "",//该会员上级公司对该期博彩的封盘状态。状态：0删除，1封盘，2开盘。只有开盘才能投注。)   未做
                //if("isOpenSet": "",//管理员对于当期博彩的开关设置) 
 
               bus.$emit('getbocaiInfoData', res.data);
@@ -510,90 +510,67 @@ export default {
               store.commit('updatebocaiInfoData',res.data);
             }
 
-
-       // console.log('!!!!!this.hasResult',!this.hasResult);
-        // let res = await this.$get(`${window.url}/api/openPrizeResult?bocaiTypeId=`+this.bocaiTypeId+`&currentPage=1&pageSize=5&dayStr=`+this.openPrizeTime);
-        //   if(res.code===200){
-        //     this.resultList = res.list.slice(0,5);
-        //     for(let n in this.resultList) {
-        //       if(this.resultList[n].result) {
-        //         this.resultList[n].result = this.resultList[n].result.replace(/,/g,'');   
-        //       }
-        //     }
-        //   }
-
       // }
 
         this.t2 = setTimeout(this.getPrizeResult, window.refreshTime);
     },
     getbocaoName() {
 
-      let path = '';
+      let typeid = '';
+      let name = '';
+
         switch (this.bocaiPathName) {
           case 'chongqindubo':
-            this.bocaiTypeId = '1';
-            this.imgUrl = 0;
-            this.submenu = '重庆时时彩';
+            typeid = '1';
+            name = '重庆时时彩';
             break;
           case 'luckyairship':
-            this.bocaiTypeId = '8555';
-            this.imgUrl = 1;
-            this.submenu = '幸运飞艇';
+            typeid = '8555';
+            name = '幸运飞艇';
             break;
           case 'beijingpk10':
-            this.bocaiTypeId = '8806';
-            this.imgUrl = 2;
-            this.submenu = '北京PK拾';
+            typeid = '8806';
+            name = '北京PK拾';
             break;
           case 'shandong11xuan5':
-            this.bocaiTypeId = '8811';
-            this.imgUrl = 3;
-            this.submenu = '山东11选5';
+            typeid = '8811';
+            name = '山东11选5';
             break;
           case 'guangdong11xuan5':
-            this.bocaiTypeId = '8374';
-            this.imgUrl = 4;
-            this.submenu = '广东11选5';
+            typeid = '8374';
+            name = '广东11选5';
             break;
           case 'jiangxi11xuan5':
-            this.bocaiTypeId = '8813';
-            this.imgUrl = 5;
-            this.submenu = '极速时时彩';
+            typeid = '8813';
+            name = '极速时时彩';
             break;
           case 'pcdandan':
-            this.bocaiTypeId = '8223';
-            this.imgUrl = 6;
-            this.submenu = 'PC蛋蛋';
+            typeid = '8223';
+            name = 'PC蛋蛋';
             break;
           case 'jiangsukuaisan':
-            this.bocaiTypeId = '8498';
-            this.imgUrl = 7;
-            this.submenu = '江苏快3';
+            typeid = '8498';
+            name = '江苏快3';
             break;
           case 'beijingkuaile8':
-            this.bocaiTypeId = '8266';
-            this.imgUrl = 8;
-            this.submenu = '北京快乐8';
+            typeid = '8266';
+            name = '北京快乐8';
             break;
           case 'jisusaiche':
-            this.bocaiTypeId = '9057';
-            this.imgUrl = 9;
-            this.submenu = '极速赛车';
+            typeid = '9057';
+            name = '极速赛车';
             break;
           case 'jisudubo':
-            this.bocaiTypeId = '8815';
-            this.imgUrl = 10;
-            this.submenu = '极速时时彩';
+            typeid = '8815';
+            name = '极速时时彩';
             break;
         }
 
-          store.commit('updatebocaiName',this.submenu);
-          store.commit('updatebocaiTypeId',this.bocaiTypeId);
-
-        
+        store.commit('updatebocaiName', name);
+        store.commit('updatebocaiTypeId', typeid);
 
     },
-    async getOddsCategory(item,index) {
+    async getOddsCategory(item) {
 
       let that = this;
 
@@ -620,6 +597,7 @@ export default {
             })
           });
     },
+    //切换菠菜获取菠菜数据
     async getOddsInfo(item) {
 
       let that = this;
@@ -639,9 +617,9 @@ export default {
 
                 store.commit('updatebocaiCategory',result.bocaiCategoryList[0]);
 
-                store.commit('updateoddsList',result.oddsList);
+                bus.$emit('getOddsInfo', result);     //这个要了干啥
 
-                bus.$emit('getOddsInfo', result); 
+                this.getOddsCategory(result.bocaiCategoryList[0]);
 
                 this.bocaiInfo();
 
@@ -655,7 +633,6 @@ export default {
       if(['重庆时时彩','幸运飞艇','北京PK拾','山东11选5','广东11选5','江西11选5','PC蛋蛋','江苏快3','北京快乐8','极速赛车','极速时时彩'].findIndex((n) => n==item.bocaiName)>-1) {
 
         this.activeIndex = item.bocaiName;
-        this.submenu = item.bocaiName;
 
         $('.div_gameno_'+item.bocaiId).addClass('active').siblings().removeClass('active');
 
@@ -707,7 +684,6 @@ export default {
               this.imgUrl = 10;
               break;
           }
-        this.bocaiTypeId = item.bocaiId;
 
         store.commit('updatebocaiTypeId',item.bocaiId);
 
@@ -721,7 +697,6 @@ export default {
 
         this.getOddsInfo(item);
 
-        bus.$emit('getcUserInfo', '');
 
       } else {
         this.$warning('此博彩还未完成,请耐心等待! 谢谢');
