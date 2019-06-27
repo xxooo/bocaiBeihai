@@ -634,7 +634,7 @@ export default {
     },
     async getOdds(item,index) {
 
-      if(['重庆时时彩','极速时时彩','广东快乐十分'].findIndex((n) => n==item.bocaiName)>-1) {
+      if(['重庆时时彩','极速时时彩','广东快乐十分','极速赛车','北京赛车'].findIndex((n) => n==item.bocaiName)>-1) {
 
         $('.div_gameno_'+item.bocaiId).addClass('active').siblings().removeClass('active');
 

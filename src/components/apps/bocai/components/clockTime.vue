@@ -19,7 +19,7 @@
 
                     <div class="head_f2" id="div_betno">
                     
-                      <div class="versionKJDiv" v-if="bocaiName == '重庆时时彩'">
+                      <div class="versionKJDiv" v-if="['重庆时时彩','极速时时彩'].findIndex((n) => n==bocaiName)>-1">
                         <span class="floatL">&nbsp;</span>
                         <span class="floatL" v-for="(item,index) in preResult">
                           <div class="CQREDiv" :class="'CQNo_'+item"></div>
