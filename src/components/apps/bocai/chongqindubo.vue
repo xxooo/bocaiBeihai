@@ -146,9 +146,45 @@
                   </table>
                 </template>
 
+
+                <table v-if="showOdds == '和数'" class="DTable kuaijie" cellpadding="0" cellspacing="1" border="0" width="700" id="tblNowBet00" style="margin-top:0px;">
+                  <thead>
+                      <tr class="td_caption_1">
+                          <td rowspan="2" style=" font-weight: bold;text-align:center;" align="center" class="td_caption_big">二码</td>
+                          <td class="sd_hs title_two" :colspan="kuaijiePay?2:4"  style=" font-weight: bold;text-align:center;" align="center">和数</td>
+                          <!-- <td class="sd_hs title_two" colspan="4" style=" font-weight: bold;text-align:center;" align="center">和数尾数</td> -->
+                      </tr>
+                      <tr class="td_caption_1">
+                          <td :colspan="kuaijiePay?1:2" class="sd_hs1 title_two" style=" font-weight: bold;text-align:center;" align="center">单</td>
+                          <td :colspan="kuaijiePay?1:2" class="sd_hs1 title_two" style=" font-weight: bold;text-align:center;" align="center">双</td>
+                          <!-- <td colspan="2" class="sd_hs1 title_two" style=" font-weight: bold;text-align:center;" align="center">大</td>
+                          <td colspan="2" class="sd_hs1 title_two" style=" font-weight: bold;text-align:center;" align="center">小</td> -->
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr class="Dbgco1" align="center" v-for="(itemPa,index) in oddsList">
+                          <td class="betnum" align="center" style="width:120px;">{{itemPa.name}}</td>
+
+                          <template v-for="(item,index) in itemPa.list">
+                            <td class="oddsTdMin" :class="['item_heshu'+item.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(itemPa,item,'item_heshu')">
+                              <a v-if="isOpenOdds" title="按此下注"  @click.stop="!kuaijiePay ? IntoMtran(itemPa,item,'item_heshu') : kuaijieInto(itemPa,item,'item_heshu')" class="betRateNum" :class="'item_heshu'+item.oddsId+'a'">
+                                <span class="betRateNum">{{item.odds}}</span>
+                              </a>
+                              <span v-else class="noOddSpan">&nbsp;-&nbsp;</span>
+                            </td>
+                            <td v-if="!kuaijiePay">
+                              <input v-if="isOpenOdds" v-model="item.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(itemPa,item,'item_heshu',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                              <span v-else style="width:60px;">封盘</span>
+                            </td>
+                          </template>
+
+                      </tr>
+                  </tbody>
+                </table>
+
                 <bet-quick :orderDataList="orderDataList" v-on:childByReset="childByReset"></bet-quick>
 
-                <footer-bocai :curBocaiTypeId="curBocaiTypeId" :showOdds="showOdds"></footer-bocai>
+                <footer-bocai :curBocaiTypeId="+bocaiTypeId" :showOdds="showOdds"></footer-bocai>
 
               </div>
 
@@ -156,7 +192,7 @@
           </td>
 
           <td valign="top">
-            <chang-long :curBocaiTypeId="curBocaiTypeId"></chang-long>
+            <chang-long :curBocaiTypeId="+bocaiTypeId"></chang-long>
           </td>
 
         </tr>
@@ -188,7 +224,6 @@ export default {
   data () {
     return {
       iskaipaning: true,
-      curBocaiTypeId: '1',
       showOdds: '',
       isOpenOdds: true,
       orderDataList: [],
@@ -205,7 +240,8 @@ export default {
   computed: {
     ...mapGetters({
         bocaiInfoData: 'getbocaiInfoData',
-        oddsList: 'getoddsList'
+        oddsList: 'getoddsList',
+        bocaiTypeId: 'getbocaiTypeId'
     }),
   },
   created() {

@@ -1,5 +1,5 @@
 <template>
-  <div id="lotteryno">
+  <div id="lotteryno" v-if="[1].findIndex((n) => n==curBocaiTypeId)>-1">
 
     <template v-if="['两面盘'].findIndex((n) => n==showOdds)>-1">
 
@@ -45,8 +45,6 @@
 
     </template>
 
-    
-       
   </div>
 
 
@@ -274,7 +272,7 @@
 	export default {
 		props: {
       curBocaiTypeId: {
-        type: String
+        type: Number 
       },
       showOdds: {
         type: String

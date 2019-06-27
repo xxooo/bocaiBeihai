@@ -179,7 +179,7 @@ export default {
       this.getBocai();
     } else {
       console.log('????2222?');
-      this.getOddsInfo(this.bocaiTypeList[0]);
+      this.getOddsInfo();
     }
     
 
@@ -264,7 +264,7 @@ export default {
 
               //if("companyIsOpenSet": "",//该会员上级公司对该期博彩的封盘状态。状态：0删除，1封盘，2开盘。只有开盘才能投注。)
                //if("isOpenSet": "",//管理员对于当期博彩的开关设置) 
-               store.commit('updatebocaiInfoData',res.data);
+              store.commit('updatebocaiInfoData',res.data);
               bus.$emit('getbocaiInfoData', res.data);
 
               if(res.data.preResult == '') {
@@ -478,11 +478,10 @@ export default {
 
           if(res.code===200){
             console.log('第一次刷新调取默认菠菜',res.bocaiTypeList[0]);
-            this.getOddsInfo(res.bocaiTypeList[0]);
-
             //store.commit('updatebocaiName',res.bocaiTypeList[0].bocaiName);
             //store.commit('updatebocaiTypeId', res.bocaiTypeList[0].bocaiId); 
             store.commit('updatebocaiTypeList',res.bocaiTypeList);
+            this.getOddsInfo();
 
           }
     },
@@ -564,13 +563,13 @@ export default {
             typeid = '8815';
             name = '极速时时彩';
             break;
+          case 'guangdongkuaile10':
+            typeid = '8809';
+            name = '广东快乐十分';
+            break;
         }
 
-        console.log('name',name);
-
         store.commit('updatebocaiName',name);
-
-        console.log('bocaiName',this.bocaiName);
 
         store.commit('updatebocaiTypeId', typeid);
 
@@ -603,7 +602,7 @@ export default {
           });
     },
     //切换菠菜获取菠菜二级菜单并调数据接口
-    async getOddsInfo(item) {
+    async getOddsInfo() {
 
       let that = this;
 
@@ -612,7 +611,7 @@ export default {
                 background: 'rgba(0, 0, 0, 0.7)'
               });
 
-          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+item.bocaiId).then((res) => {
+          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.bocaiTypeId).then((res) => {
             that.$handelResponse(res, (result) => {
 
               loading.close();
@@ -635,7 +634,7 @@ export default {
     },
     async getOdds(item,index) {
 
-      if(['重庆时时彩','幸运飞艇','北京PK拾','山东11选5','广东11选5','江西11选5','PC蛋蛋','江苏快3','北京快乐8','极速赛车','极速时时彩'].findIndex((n) => n==item.bocaiName)>-1) {
+      if(['重庆时时彩','极速时时彩','广东快乐十分'].findIndex((n) => n==item.bocaiName)>-1) {
 
         $('.div_gameno_'+item.bocaiId).addClass('active').siblings().removeClass('active');
 
@@ -644,47 +643,39 @@ export default {
           switch (item.bocaiName) {
             case '重庆时时彩':
               path = 'chongqindubo';
-              this.imgUrl = 0;
               break;
             case '幸运飞艇':
               path = 'luckyairship';
-              this.imgUrl = 1;
               break;
             case '北京PK拾':
               path = 'beijingpk10';
-              this.imgUrl = 2;
               break;
             case '山东11选5':
               path = 'shandong11xuan5';
-              this.imgUrl = 3;
               break;
             case '广东11选5':
               path = 'guangdong11xuan5';
-              this.imgUrl = 4;
               break;
             case '江西11选5':
               path = 'jiangxi11xuan5';
-              this.imgUrl = 5;
               break;
             case 'PC蛋蛋':
               path = 'pcdandan';
-              this.imgUrl = 6;
               break;
             case '江苏快3':
               path = 'jiangsukuaisan';
-              this.imgUrl = 7;
               break;
             case '北京快乐8':
               path = 'beijingkuaile8';
-              this.imgUrl = 8;
               break;
             case '极速赛车':
               path = 'jisusaiche';
-              this.imgUrl = 9;
               break;
             case '极速时时彩':
               path = 'jisudubo';
-              this.imgUrl = 10;
+              break;
+            case '广东快乐十分':
+              path = 'guangdongkuaile10';
               break;
           }
 
@@ -698,11 +689,11 @@ export default {
 
         this.$router.push({name: path});
 
-        this.getOddsInfo(item);
+        this.getOddsInfo();
 
 
       } else {
-        this.$warning('此博彩还未完成,请耐心等待! 谢谢');
+        bus.$emit('showleftMessage','此博彩还未完成,请耐心等待! 谢谢');
       }
 
       
@@ -1075,7 +1066,7 @@ body {
     color: #4f260d;
   }
 
-  .active {
+  li.active {
     color: red !important;
     cursor: inherit !important;
     font-weight: bold;

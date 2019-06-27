@@ -32,7 +32,7 @@ export default {
             } else if(res.data.code == 444) {
                 //消息为空，但不需要提示
             } else {
-                this.$error(res.data.msg);
+                console.log(res.data.msg);
                 
             } 
 
@@ -115,7 +115,7 @@ export default {
             if (res.data.code == 200) {
                 //this.$success(res.data.msg);
             } else {
-                this.$error(res.data.msg);
+                console.log(res.data.msg);
             } 
 
             return res.data; // {code: 0, result: {count: 0, rows: []}}

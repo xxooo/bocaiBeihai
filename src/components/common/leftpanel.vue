@@ -629,6 +629,10 @@ export default {
     this.getnotice();
   },
   mounted(){
+        bus.$on('showleftMessage', (str) => {
+        this.dialogMessage = str; 
+        this.orderOddsVisible = true;
+      });
       bus.$on('toleftShow', (num,str) => {
         this.showNumpage = num;
         this.dialogMessage = str; 

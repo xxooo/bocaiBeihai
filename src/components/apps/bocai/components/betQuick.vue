@@ -161,17 +161,8 @@
       });
     },
 		methods: {
-      QCheckShow_fu() {
-
-      },
-      IntoMtran() {
-
-      },
-      QCheckShow() {
-
-      },
       QCExplain() {
-
+        bus.$emit('showleftMessage','鼠标点击选中赔率下注，选好后输入金额来方便快速下注');
       },
       cancelOdd() {
         this.orderOddsVisible = false;
@@ -205,8 +196,6 @@
 
         console.log('this.curPeriods',this.curPeriods);
         console.log('this.bocaiInfoData.bocaiPeriodsId',this.bocaiInfoData.bocaiPeriods);
-
-
 
         if(this.curPeriods != this.bocaiInfoData.bocaiPeriods) {
             bus.$emit('toleftShow',22,'指定期数为非交易状态!');

@@ -16,15 +16,26 @@
               <tbody>
                 <tr>
                   <td class="height27">
+
                     <div class="head_f2" id="div_betno">
+                    
                       <div class="versionKJDiv" v-if="bocaiName == '重庆时时彩'">
                         <span class="floatL">&nbsp;</span>
                         <span class="floatL" v-for="(item,index) in preResult">
                           <div class="CQREDiv" :class="'CQNo_'+item"></div>
                         </span>
                       </div>
+
+                      <div style="float:right;width:229px;" v-if="bocaiName == '广东快乐十分'">
+                        <span style="float:left;">&nbsp;</span>
+                        <span style="float:left;" v-for="(item,index) in preResult">
+                          <div :class="'No_'+item" style=" height:27px; width:27px; margin-top:1px;"></div>
+                        </span>
+                      </div>
+
                       <span class="versionKJSpan"><span id="span_roundno">{{bocaiInfoData.preBocaiPeriods}}</span>期开奖&nbsp;</span>
                     </div>
+
                   </td>
                 </tr>
               </tbody>

@@ -21,7 +21,7 @@
   export default {
     props: {
       curBocaiTypeId: {
-        type: String
+        type: Number
       }
     },
     data() {
