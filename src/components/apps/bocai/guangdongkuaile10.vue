@@ -29,7 +29,7 @@
 
                     <tr class="Dbgco1" v-for="(itemPa,indexPa) in zongheData.list">
                       <template v-for="(item,index) in itemPa" v-if="item">
-                      <td class="betnum" style=" width:60px;max-width:60px;">{{item.oddsName}}</td>
+                        <td class="betnum" style=" width:60px;max-width:60px;">{{item.oddsName}}</td>
                         <td class="oddsTdMin" :class="['zongheData'+item.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(zongheData,item,'zongheData')">
                           <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(zongheData,item,'zongheData') : kuaijieInto(zongheData,item,'zongheData')" class="betRateNum" :class="'zongheData'+item.oddsId+'a'"> 
                             <span class="betRateNum">{{item.odds}}</span>

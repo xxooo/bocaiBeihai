@@ -29,7 +29,7 @@
                     </tr>
 
                     <tr class="Dbgco1" v-for="(itemPa,indexPa) in yidaosiqiu">
-                      <template v-for="(item,index) in itemPa.slice(0,4)">
+                      <template v-for="(item,index) in itemPa.slice(0,4)" v-if="item">
 
                         <td class="betnum">{{item.odd.oddsName}}</td>
                         <td class="oddsTdMin" :class="['yidaosiqiu'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'yidaosiqiu')">
@@ -58,7 +58,7 @@
 
                     <tr class="Dbgco1" v-for="(itemPa,indexPa) in sidaobaqiu">
 
-                      <template v-for="(item,index) in itemPa.slice(1,5)">
+                      <template v-for="(item,index) in itemPa.slice(1,5)" v-if="item">
 
                         <td class="betnum">{{item.odd.oddsName}}</td>
                         <td class="oddsTdMin" :class="['sidaobaqiu'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'sidaobaqiu')">

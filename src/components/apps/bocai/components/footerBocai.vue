@@ -1,20 +1,20 @@
 <template>
-  <div id="lotteryno" v-if="[1].findIndex((n) => n==curBocaiTypeId)>-1">
+  <div id="lotteryno" >
 
-    <template v-if="['两面盘'].findIndex((n) => n==showOdds)>-1">
+    <template v-if="[1,8815].findIndex((n) => n==curBocaiTypeId)>-1">
 
-      <table class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700" id="BallList">
+      <table v-if="['两面盘'].findIndex((n) => n==showOdds)>-1" class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700">
         <tbody>
           <tr>
-            <td id="sRB_1" class="td_caption_1 td_caption_2 getsubtit1"  @click="getsubtit(1)"><a>总和大小</a></td>
-            <td id="sRB_2" class="td_caption_1 getsubtit2" @click="getsubtit(2)"><a>总和单双</a></td>
-            <td id="sRB_3" class="td_caption_1 getsubtit3" @click="getsubtit(3)"><a>龙虎和</a></td>    
+            <td class="td_caption_1 td_caption_2 getsubtit1"  @click="getsubtit(1)"><a>总和大小</a></td>
+            <td class="td_caption_1 getsubtit2" @click="getsubtit(2)"><a>总和单双</a></td>
+            <td class="td_caption_1 getsubtit3" @click="getsubtit(3)"><a>龙虎和</a></td>    
           </tr>
           <tr class="Ball_tr_H">
             <td colspan="3">
               <table class="Ball_List" border="0" cellspacing="0" cellpadding="0" width="698">
                 <tbody>
-                  <tr v-if="subtit == 1" class="Ball_tr_H" valign="top" id="lotteryno_tr1" style="height: auto; min-height: 25px;">
+                  <tr v-if="subtit == 1" class="Ball_tr_H" valign="top" style="height: auto; min-height: 25px;">
                     <td width="28" v-for="(item,index) in zonghedaxiaoList.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
                       <template v-if="item != ''">
                         <p v-for="itemsub in item.value">{{itemsub}}</p>
@@ -22,14 +22,14 @@
                     </td>
                   </tr>
 
-                  <tr v-if="subtit == 2" class="Ball_tr_H" valign="top" id="lotteryno_tr2" style="height:auto;min-height:25px;">
+                  <tr v-if="subtit == 2" class="Ball_tr_H" valign="top" style="height:auto;min-height:25px;">
                     <td width="28" v-for="(item,index) in zonghedanshuangList.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
                       <template v-if="item != ''">
                         <p v-for="itemsub in item.value">{{itemsub}}</p>
                       </template>
                     </td>
                   </tr>
-                  <tr v-if="subtit == 3" class="Ball_tr_H" valign="top" id="lotteryno_tr3" style="height:auto;min-height:25px;">
+                  <tr v-if="subtit == 3" class="Ball_tr_H" valign="top" style="height:auto;min-height:25px;">
                     <td width="28" v-for="(item,index) in longhuheList.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
                       <template v-if="item != ''">
                         <p v-for="itemsub in item.value">{{itemsub}}</p>
@@ -44,6 +44,54 @@
       </table>
 
     </template>
+
+
+    <template v-if="[9057].findIndex((n) => n==curBocaiTypeId)>-1">
+
+      <table v-if="['两面盘'].findIndex((n) => n==showOdds)>-1" class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700">
+        <tbody>
+          <tr>
+            <td class="td_caption_1 td_caption_2 getsubtit1"  @click="getsubtit(9)"><a>冠、亚军和</a></td>
+            <td class="td_caption_1 getsubtit2" @click="getsubtit(10)"><a>冠、亚军和 大小</a></td>
+            <td class="td_caption_1 getsubtit3" @click="getsubtit(11)"><a>冠、亚军 单双</a></td>   
+          </tr>
+          <tr class="Ball_tr_H">
+            <td colspan="3">
+              <table class="Ball_List" border="0" cellspacing="0" cellpadding="0" width="698">
+                <tbody>
+                  <tr v-if="subtit == 9" class="Ball_tr_H" valign="top" style="height: auto; min-height: 25px;">
+                    <td width="28" v-for="(item,index) in guanyijunhe.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                      <template v-if="item != ''">
+                        <p v-for="itemsub in item.value">{{itemsub}}</p>
+                      </template>
+                    </td>
+                  </tr>
+
+                  <tr v-if="subtit == 10" class="Ball_tr_H" valign="top" style="height: auto; min-height: 25px;">
+                    <td width="28" v-for="(item,index) in guanyajunhedaxiao.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                      <template v-if="item != ''">
+                        <p v-for="itemsub in item.value">{{itemsub}}</p>
+                      </template>
+                    </td>
+                  </tr>
+
+                  <tr v-if="subtit == 11" class="Ball_tr_H" valign="top" style="height: auto; min-height: 25px;">
+                    <td width="28" v-for="(item,index) in guanyejunhedanshuang.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                      <template v-if="item != ''">
+                        <p v-for="itemsub in item.value">{{itemsub}}</p>
+                      </template>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </template>
+    
 
   </div>
 
@@ -728,7 +776,7 @@
                       console.log('guanyejunhedanshuang',this.guanyejunhedanshuang);
                     }
 
-                    this.longhuheList = this.longhuheList.slice(0,25);;
+                    this.longhuheList = this.longhuheList.slice(0,25);
 
                     let dxlhNum = this.longhuheList.length*1 - this.zonghedaxiaoList.length*1;
                     let zhdslhNum = this.longhuheList.length*1 - this.zonghedanshuangList.length*1;
@@ -761,6 +809,15 @@
                 }
               })
             });
+
+        if([1,8815].findIndex((n) => n==this.curBocaiTypeId)>-1) {
+          this.subtit = 1;
+        } else if([9057].findIndex((n) => n==this.curBocaiTypeId)>-1) {
+          this.subtit = 9;
+        }
+
+        console.log('this.subtit',this.subtit);
+
       },
         getsubtit(num) {
           this.subtit = num;
