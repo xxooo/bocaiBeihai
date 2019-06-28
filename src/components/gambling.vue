@@ -175,10 +175,10 @@ export default {
   async created() {
 
     if(this.bocaiTypeList.length == 0) {
-      console.log('?????');
+      //console.log('?????');
       this.getBocai();
     } else {
-      console.log('????2222?');
+      //console.log('????2222?');
       this.getOddsInfo();
     }
     
@@ -206,16 +206,16 @@ export default {
   },
   methods: {
     outHide() {
-      console.log('outHide');
+      //console.log('outHide');
       $('.overShowLi').removeClass('active');
       this.showSubMenu = false;
     },
     overShow() {
-      console.log('overShow');
+      //console.log('overShow');
       $('.overShowLi').addClass('active');
       this.showSubMenu = true;
 
-      console.log('bocaiTypeId',this.bocaiTypeId);
+      //console.log('bocaiTypeId',this.bocaiTypeId);
 
       $('.div_gameno_'+this.bocaiTypeId).addClass('active').siblings().removeClass('active');
     },
@@ -256,7 +256,7 @@ export default {
     },
     async getRefreshTime() {
 
-      console.log('this.bocaiTypeId22222',this.bocaiTypeId);
+      //console.log('this.bocaiTypeId22222',this.bocaiTypeId);
 
       let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
@@ -296,7 +296,7 @@ export default {
     },
     async getRefreshTimeFast() {
 
-      console.log('this.bocaiTypeId33333',this.bocaiTypeId);
+      //console.log('this.bocaiTypeId33333',this.bocaiTypeId);
       let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
       if(res.code===200){
@@ -339,7 +339,7 @@ export default {
 
       if(!this.hasResult) {
 
-        console.log('this.bocaiTypeId4444444',this.bocaiTypeId);
+        //console.log('this.bocaiTypeId4444444',this.bocaiTypeId);
 
         let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
@@ -386,7 +386,7 @@ export default {
 
       if(!this.hasResult) {
 
-        console.log('this.bocaiTypeId5555',this.bocaiTypeId);
+        //console.log('this.bocaiTypeId5555',this.bocaiTypeId);
 
         let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
@@ -430,10 +430,10 @@ export default {
           this.t4 = setTimeout(this.refreshTimeFast, window.refreshTimeFast);
     },
     async bocaiInfo() {
-        console.log('this.bocaiTypeId666666',this.bocaiTypeId);
+        //console.log('this.bocaiTypeId666666',this.bocaiTypeId);
 
         if(this.bocaiTypeId == '') {
-          console.log('this.bocaiTypeId为空');
+          //console.log('this.bocaiTypeId为空');
         } else {
           let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
@@ -477,7 +477,7 @@ export default {
       let res = await this.$get(`${window.url}/api/getBocai`);
 
           if(res.code===200){
-            console.log('第一次刷新调取默认菠菜',res.bocaiTypeList[0]);
+            //console.log('第一次刷新调取默认菠菜',res.bocaiTypeList[0]);
             //store.commit('updatebocaiName',res.bocaiTypeList[0].bocaiName);
             //store.commit('updatebocaiTypeId', res.bocaiTypeList[0].bocaiId); 
             store.commit('updatebocaiTypeList',res.bocaiTypeList);
@@ -495,7 +495,7 @@ export default {
 
       // if(!this.hasResult) {
 
-        console.log('this.bocaiTypeId1111',this.bocaiTypeId);
+        //console.log('this.bocaiTypeId1111',this.bocaiTypeId);
 
         let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 

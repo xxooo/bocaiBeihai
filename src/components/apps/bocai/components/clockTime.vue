@@ -26,12 +26,20 @@
                         </span>
                       </div>
 
-                      <div style="float:right;width:229px;" v-if="bocaiName == '广东快乐十分'">
+                      <div style="float:right;width:229px;" v-if="['广东快乐十分'].findIndex((n) => n==bocaiName)>-1">
                         <span style="float:left;">&nbsp;</span>
                         <span style="float:left;" v-for="(item,index) in preResult">
                           <div :class="'No_'+item" style=" height:27px; width:27px; margin-top:1px;"></div>
                         </span>
                       </div>
+
+                      <div style="float:right;width:285px;" v-if="['极速赛车'].findIndex((n) => n==bocaiName)>-1">
+                        <span style="float:left;">&nbsp;</span>
+                        <span style="float:left;" v-for="(item,index) in preResult">
+                          <div :class="'BJNo_'+item" style=" height:27px; width:27px; margin-top:1px;"></div>
+                        </span>
+                      </div>
+
 
                       <span class="versionKJSpan"><span id="span_roundno">{{bocaiInfoData.preBocaiPeriods}}</span>期开奖&nbsp;</span>
                     </div>
