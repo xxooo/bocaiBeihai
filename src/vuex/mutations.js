@@ -34,6 +34,9 @@ const mutations = {
   },
   updateorderDatasShow(state,v) {
     state.orderDatasShow = v;
+  },
+  updatepreResult(state,v) {
+    state.preResult = v;
   }
 }
 

@@ -229,7 +229,14 @@
 
           //bus.$emit('getRefreshTimeFast', '');
 
+          this.fengTimeM = '--';
+          this.fengTimeS = '--';
+          this.openPrizeTimeM = '--';
+          this.openPrizeTimeS = '--';
+
           bus.$emit('isOpenOdds', false);
+
+          store.commit('updatepreResult','');
 
           bus.$emit('getbocaiInfo', '');
         } 

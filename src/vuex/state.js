@@ -10,7 +10,8 @@ const state = {
   isOdding: false,
   oddsList: [],
   bocaiTypeList: [],
-  orderDatasShow: []
+  orderDatasShow: [],
+  preResult: ''
 }
 
 export default state

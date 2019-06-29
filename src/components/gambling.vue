@@ -167,7 +167,6 @@ export default {
       t4: null, //轮询  开奖结果 快速
       resultList: [],
       preBocaiPeriods: '',
-      preResult: '',
       submenu: '',
       hasResult: false,
       messageinfo: '',
@@ -199,7 +198,8 @@ export default {
       userInfo: 'getuserInfo',
       bocaiTypeList: 'getbocaiTypeList',
       bocaiTypeId: 'getbocaiTypeId',
-      bocaiName: 'getbocaiName'
+      bocaiName: 'getbocaiName',
+      preResultNew: 'getpreResult'
     }),
     bocaiPathName: function() {
       return this.$route.name
@@ -224,14 +224,13 @@ export default {
       $('.div_gameno_'+this.bocaiTypeId).addClass('active').siblings().removeClass('active');
     },
     async exit() {
-      bus.$emit('kaijianglaaa', '');
-      // this.$router.push({name: 'login'});
+      this.$router.push({name: 'login'});
       
-      // let ret = await this.$get(`${window.url}/api/exitLogin`);
-      // if(ret.code===200) {
+      let ret = await this.$get(`${window.url}/api/exitLogin`);
+      if(ret.code===200) {
         
-      // } else {
-      // }
+      } else {
+      }
       
     },
     clearTime() {
@@ -498,9 +497,9 @@ export default {
 
       //console.log('!!!!!this.hasResult',!this.hasResult);
 
-      // if(!this.hasResult) {
+       if(this.preResultNew == '') {
 
-        //console.log('this.bocaiTypeId1111',this.bocaiTypeId);
+        console.log('this.preResult',this.preResult);
 
         let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
@@ -513,16 +512,21 @@ export default {
 
               store.commit('updatebocaiInfoData',res.data);
 
+              store.commit('updatepreResult',res.data.preResult);
+
+              console.log('res.data.preResult != ',res.data.preResult != '');
+
               if(res.data.preResult != '') {
+
                 //开奖了
                 bus.$emit('kaijianglaaa', '');
               }
 
             }
 
-      // }
+       }
 
-        this.t2 = setTimeout(this.getPrizeResult, window.refreshTime);
+        this.t2 = setTimeout(this.getPrizeResult, window.refreshTimeFast);
     },
     getbocaoName() {
 
@@ -715,7 +719,7 @@ export default {
         this.getRefreshTimeFast();
     });
     bus.$on('getbocaiInfo', (data) => {
-        this.bocaiInfo();
+        this.getPrizeResult();
     });
     bus.$on('getcUserInfo', (data) => {
         this.getcUserInfo();
