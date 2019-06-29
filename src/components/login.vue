@@ -143,7 +143,7 @@ export default {
                 // password: 'aaa888'
 
                 username: 'abeihaixuyao1',
-                password: 'a123'
+                password: 'a111111'
                 
               };
 

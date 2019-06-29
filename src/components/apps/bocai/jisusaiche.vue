@@ -604,6 +604,9 @@ export default {
         this.showOdds = data;
         this.resetOddsCategoryfromgam();
       });
+      bus.$on('iskaipaning', (data) => {
+        this.iskaipaning = data;
+      });
   },
   methods: {
     IntoMtran(itemPa,item,oddEname) {
