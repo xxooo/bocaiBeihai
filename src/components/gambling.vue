@@ -132,11 +132,14 @@
       </div>
     </div>
 
+
+    <VueAudio />
+
   </div>
 </template>
 
 <script>
-
+import VueAudio from '@/components/common/VueAudio';
 import LeftPanel from '@/components/common/leftpanel';
 import PageFooter from '@/components/common/pagefooter';
 import MessageDialog from '@/components/common/messagedialog';
@@ -147,7 +150,8 @@ export default {
   components: {
     LeftPanel,
     PageFooter,
-    MessageDialog
+    MessageDialog,
+    VueAudio
   },
   data() {
     return {
@@ -220,13 +224,14 @@ export default {
       $('.div_gameno_'+this.bocaiTypeId).addClass('active').siblings().removeClass('active');
     },
     async exit() {
-      this.$router.push({name: 'login'});
+      bus.$emit('kaijianglaaa', '');
+      // this.$router.push({name: 'login'});
       
-      let ret = await this.$get(`${window.url}/api/exitLogin`);
-      if(ret.code===200) {
+      // let ret = await this.$get(`${window.url}/api/exitLogin`);
+      // if(ret.code===200) {
         
-      } else {
-      }
+      // } else {
+      // }
       
     },
     clearTime() {
@@ -507,6 +512,12 @@ export default {
               bus.$emit('getbocaiInfoData', res.data);
 
               store.commit('updatebocaiInfoData',res.data);
+
+              if(res.data.preResult != '') {
+                //开奖了
+                bus.$emit('kaijianglaaa', '');
+              }
+
             }
 
       // }

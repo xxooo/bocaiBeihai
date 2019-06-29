@@ -259,7 +259,6 @@ export default {
       });
       //切换二级菜单更新菠菜,以及切快捷更新菠菜
       bus.$on('getresetOddsCategory', (data) => {
-        console.log('切换二级菜单更新菠菜,以及切快捷更新菠菜getresetOddsCategory');
         this.showOdds = data;
         this.resetOddsCategoryfromgam();
       });

@@ -93,6 +93,8 @@ export default {
     }
   },
   created() {
+    let that = this;
+
     this.getyanzheng();
     
     if (window.ENV == 'dev') {
@@ -104,6 +106,15 @@ export default {
       //普通用户登录
        //this.$router.push({name: 'login'});
     }
+
+    
+      document.onkeydown = function (e) {
+        let key = window.event.keyCode;
+        if (key === 13){
+          that.login();   
+        }
+      }
+
   },
   methods: {
     async logindev() {

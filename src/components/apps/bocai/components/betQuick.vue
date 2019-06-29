@@ -97,6 +97,7 @@
 		},
 		data() {
 			return {
+        focusIndex: 1,
         hasErrorMessage: '',
         hasError: false,  //0为正常，1 为 超过可用额度，2 低于最小下注金额  超过您的额度,无法下注,请联系上级代理
         moneyOrder: '',
@@ -124,7 +125,18 @@
     components: {
 		},
 		created() {
-
+      let that = this;
+      document.onkeydown = function (e) {
+        let key = window.event.keyCode;
+        if (key === 13){
+          if(that.focusIndex == 1) {
+            that.orderOddsTo();
+          } else if(that.focusIndex == 2) {
+            that.orderSub();
+          }
+          
+        }
+      }
     },
     computed:{
       ...mapGetters({
@@ -185,6 +197,8 @@
         this.$emit('childByReset',this.kuaijiePay,this.oddsList);
 
         this.orderOdds2();
+
+        this.focusIndex = 1;
       },
       deleteOdd(index) {
         this.orderList.splice(index,1);
@@ -464,10 +478,13 @@
 
           }
 
+          this.focusIndex = 2;
+
       }
 		},
     watch: {
     }
+
 	}
 
 </script>
