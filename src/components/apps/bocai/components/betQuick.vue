@@ -259,6 +259,8 @@
                 bus.$emit('getcUserInfo', ''); 
                 that.orderDatas.list = [];
                 that.reset();
+              } else {
+                that.reset();
               }
             })
           });

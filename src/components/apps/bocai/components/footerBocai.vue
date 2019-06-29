@@ -60,7 +60,7 @@
               <table class="Ball_List" border="0" cellspacing="0" cellpadding="0" width="698">
                 <tbody>
                   <tr v-if="subtit == 9" class="Ball_tr_H" valign="top" style="height: auto; min-height: 25px;">
-                    <td width="28" v-for="(item,index) in guanyijunhe.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                    <td width="28" v-for="(item,index) in guanyajunhe.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
                       <template v-if="item != ''">
                         <p v-for="itemsub in item.value">{{itemsub}}</p>
                       </template>
@@ -76,7 +76,7 @@
                   </tr>
 
                   <tr v-if="subtit == 11" class="Ball_tr_H" valign="top" style="height: auto; min-height: 25px;">
-                    <td width="28" v-for="(item,index) in guanyejunhedanshuang.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                    <td width="28" v-for="(item,index) in guanyajunhedanshuang.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
                       <template v-if="item != ''">
                         <p v-for="itemsub in item.value">{{itemsub}}</p>
                       </template>
@@ -252,7 +252,7 @@
                 </tr>
 
                 <tr v-if="subtit == 9">
-                  <td width="4%" class="bead-list" v-for="(item,index) in guanyijunhe">
+                  <td width="4%" class="bead-list" v-for="(item,index) in guanyajunhe">
                     <p v-for="itemsub in item.value">{{itemsub}}</p>
                   </td>
                 </tr>
@@ -264,7 +264,7 @@
                 </tr>
 
                 <tr v-if="subtit == 11">
-                  <td width="4%" class="bead-list" v-for="(item,index) in guanyejunhedanshuang">
+                  <td width="4%" class="bead-list" v-for="(item,index) in guanyajunhedanshuang">
                     <p v-for="itemsub in item.value">{{itemsub}}</p>
                   </td>
                 </tr>
@@ -350,9 +350,9 @@
         qianhouhe: [],
         danshuanghe: [],
 
-        guanyijunhe: [],
+        guanyajunhe: [],
         guanyajunhedaxiao: [],
-        guanyejunhedanshuang: []
+        guanyajunhedanshuang: []
 
 			}
 		},
@@ -371,6 +371,8 @@
             await that.$get(`${window.url}/api/tongji?bocaiTypeId=`+bocaiId).then((res) => {
               that.$handelResponse(res, (result) => {
                 if(result.code===200){
+
+
 
                   if(result.data.counts) {
                     this.counts = result.data.counts;
@@ -695,9 +697,10 @@
                       console.log('danshuanghe',this.danshuanghe);
                     }
 
-                    if(result.data.guanyijunhe) {
 
-                      let data3 = result.data.guanyijunhe.split(","); 
+                    if(result.data.guanyajunhe) {
+
+                      let data3 = result.data.guanyajunhe.split(","); 
                       let temp3 = '';
                       let nn3 = 1;
                       for(let n in data3) {
@@ -706,12 +709,12 @@
                           obj.type = 1;
                           obj.value = [];
                           obj.value.push(data3[n]);
-                          this.guanyijunhe.push(obj);
+                          this.guanyajunhe.push(obj);
                         } else {
                           let kk = n*1-nn3;
-                          if(this.guanyijunhe[n*1-nn3]) {
-                            this.guanyijunhe[n*1-nn3].type = 2;
-                            this.guanyijunhe[n*1-nn3].value.push(data3[n]);
+                          if(this.guanyajunhe[n*1-nn3]) {
+                            this.guanyajunhe[n*1-nn3].type = 2;
+                            this.guanyajunhe[n*1-nn3].value.push(data3[n]);
                             nn3 = nn3*1+1;
                           }
                         }
@@ -719,7 +722,7 @@
                         temp3 = data3[n];
                       }
 
-                      console.log('guanyijunhe',this.guanyijunhe);
+                      console.log('guanyajunhe',this.guanyajunhe);
                     }
 
                     if(result.data.guanyajunhedaxiao) {
@@ -749,9 +752,9 @@
                       console.log('guanyajunhedaxiao',this.guanyajunhedaxiao);
                     }
 
-                    if(result.data.guanyejunhedanshuang) {
+                    if(result.data.guanyajunhedanshuang) {
 
-                      let data3 = result.data.guanyejunhedanshuang.split(","); 
+                      let data3 = result.data.guanyajunhedanshuang.split(","); 
                       let temp3 = '';
                       let nn3 = 1;
                       for(let n in data3) {
@@ -760,12 +763,12 @@
                           obj.type = 1;
                           obj.value = [];
                           obj.value.push(data3[n]);
-                          this.guanyejunhedanshuang.push(obj);
+                          this.guanyajunhedanshuang.push(obj);
                         } else {
                           let kk = n*1-nn3;
-                          if(this.guanyejunhedanshuang[n*1-nn3]) {
-                            this.guanyejunhedanshuang[n*1-nn3].type = 2;
-                            this.guanyejunhedanshuang[n*1-nn3].value.push(data3[n]);
+                          if(this.guanyajunhedanshuang[n*1-nn3]) {
+                            this.guanyajunhedanshuang[n*1-nn3].type = 2;
+                            this.guanyajunhedanshuang[n*1-nn3].value.push(data3[n]);
                             nn3 = nn3*1+1;
                           }
                         }
@@ -773,46 +776,57 @@
                         temp3 = data3[n];
                       }
 
-                      console.log('guanyejunhedanshuang',this.guanyejunhedanshuang);
+                      console.log('guanyajunhedanshuang',this.guanyajunhedanshuang);
                     }
 
-                    this.longhuheList = this.longhuheList.slice(0,25);
-
-                    let dxlhNum = this.longhuheList.length*1 - this.zonghedaxiaoList.length*1;
-                    let zhdslhNum = this.longhuheList.length*1 - this.zonghedanshuangList.length*1;
-                    let dxlhNumList = [];
-                    let zhdslhNumList = [];
-
-                    //console.log('zonghedaxiaoList',this.zonghedaxiaoList);
-
-
-                    for(let i = 0; i < dxlhNum; i++) {
-                       dxlhNumList.push('');
-                    }
-
-                    for(let i = 0; i < zhdslhNum; i++) {
-                       zhdslhNumList.push('');
-                    }
-
-                    for(let n in this.zonghedaxiaoList) {
-                      dxlhNumList.push(this.zonghedaxiaoList[n]);
-                    }
-                    for(let n in this.zonghedanshuangList) {
-                      zhdslhNumList.push(this.zonghedanshuangList[n]);
-                    }
-
-                    this.zonghedaxiaoList = dxlhNumList;
-                    this.zonghedanshuangList = zhdslhNumList;
-
-                    //console.log('zonghedaxiaoList',this.zonghedaxiaoList);
 
                 }
               })
             });
 
+        console.log('this.curBocaiTypeId',this.curBocaiTypeId);
+
         if([1,8815].findIndex((n) => n==this.curBocaiTypeId)>-1) {
+
+           //this.longhuheList = this.longhuheList.slice(0,25);
+
+           let dxlhNum = 25 - this.zonghedaxiaoList.length*1;
+           let zhdslhNum = 25 - this.zonghedanshuangList.length*1;
+           let longhuNum = 25 - this.longhuheList.length*1;
+           let dxlhNumList = [];
+           let zhdslhNumList = [];
+           let longhuNumList = [];
+
+           for(let i = 0; i < dxlhNum; i++) {
+             dxlhNumList.push('');
+           }
+
+           for(let i = 0; i < zhdslhNum; i++) {
+             zhdslhNumList.push('');
+           }
+
+           for(let i = 0; i < zhdslhNum; i++) {
+             longhuNumList.push('');
+           }
+
+          for(let n in this.zonghedaxiaoList) {
+            dxlhNumList.push(this.zonghedaxiaoList[n]);
+          }
+          for(let n in this.zonghedanshuangList) {
+            zhdslhNumList.push(this.zonghedanshuangList[n]);
+          }
+          for(let n in this.longhuheList) {
+            longhuNumList.push(this.longhuheList[n]);
+          }
+
+          this.zonghedaxiaoList = dxlhNumList;
+          this.zonghedanshuangList = zhdslhNumList;
+          this.longhuheList = longhuNumList;
+
           this.subtit = 1;
         } else if([9057].findIndex((n) => n==this.curBocaiTypeId)>-1) {
+
+
           this.subtit = 9;
         }
 

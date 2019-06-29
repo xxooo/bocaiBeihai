@@ -77,7 +77,7 @@
 
                     </tr>
 
-                    <tr class="Dbgco1">
+                    <tr class="Dbgco1" v-if="yidaosiqiu[4][4]">
 
                       <td class="betnum">{{yidaosiqiu[4][4].odd.oddsName}}</td>
                       <td class="oddsTdMin" :class="['yidaosiqiu'+yidaosiqiu[4][4].odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(yidaosiqiu[4][4],yidaosiqiu[4][4].odd,'yidaosiqiu')">
@@ -92,12 +92,12 @@
                         <span v-else style="width:60px;">封盘</span>
                       </td>
 
-                      <td align="center" class="td_caption_1 title_colspan" colspan="3" style=" font-weight: bold;">{{liangmianpan_lmp[9].name}}</td>
-                      <td align="center" class="td_caption_1 title_colspan" colspan="3" style=" font-weight: bold;">{{liangmianpan_lmp[10].name}}</td>
-                      <td colspan="3" class="td_caption_1 title_colspan" style=" font-weight: bold;" align="center">{{liangmianpan_lmp[0].name}}</td>
+                      <td :colspan="kuaijiePay?2:3" align="center" class="td_caption_1 title_colspan" style=" font-weight: bold;">{{liangmianpan_lmp[9].name}}</td>
+                      <td :colspan="kuaijiePay?2:3" align="center" class="td_caption_1 title_colspan" style=" font-weight: bold;">{{liangmianpan_lmp[10].name}}</td>
+                      <td :colspan="kuaijiePay?2:3" class="td_caption_1 title_colspan" style=" font-weight: bold;" align="center">{{liangmianpan_lmp[0].name}}</td>
                     </tr>
 
-                    <tr class="Dbgco1">
+                    <tr class="Dbgco1" v-if="yidaosiqiu[5][4]">
 
                       <td class="betnum">{{yidaosiqiu[5][4].odd.oddsName}}</td>
                       <td class="oddsTdMin" :class="['yidaosiqiu'+yidaosiqiu[5][4].odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(yidaosiqiu[5][4],yidaosiqiu[5][4].odd,'yidaosiqiu')">
@@ -151,13 +151,11 @@
                     </tr>
 
 
-                    <tr class="Dbgco1">
+                    <tr class="Dbgco1" v-if="sidaobaqiu[1][5]">
 
                       <td class="betnum"></td>
-                      <td class="oddsTdMin">
-                      </td>
-                      <td v-if="!kuaijiePay">
-                      </td>
+                      <td class="oddsTdMin"></td>
+                      <td v-if="!kuaijiePay"></td>
 
                       <td class="betnum">{{sidaobaqiu[1][5].odd.oddsName}}</td>
                       <td class="oddsTdMin" :class="['sidaobaqiu'+sidaobaqiu[1][5].odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(sidaobaqiu[1][5],sidaobaqiu[1][5].odd,'sidaobaqiu')">
@@ -197,13 +195,11 @@
 
                     </tr>
 
-                    <tr class="Dbgco1">
+                    <tr class="Dbgco1" v-if="sidaobaqiu[2][5]">
 
                       <td class="betnum"></td>
-                      <td class="oddsTdMin">
-                      </td>
-                      <td v-if="!kuaijiePay">
-                      </td>
+                      <td class="oddsTdMin"></td>
+                      <td v-if="!kuaijiePay"></td>
 
                       <td class="betnum">{{sidaobaqiu[2][5].odd.oddsName}}</td>
                       <td class="oddsTdMin" :class="['sidaobaqiu'+sidaobaqiu[2][5].odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(sidaobaqiu[2][5],sidaobaqiu[2][5].odd,'sidaobaqiu')">
@@ -243,13 +239,11 @@
 
                     </tr>
 
-                    <tr class="Dbgco1">
+                    <tr class="Dbgco1" v-if="sidaobaqiu[3][5]">
 
                       <td class="betnum"></td>
-                      <td class="oddsTdMin">
-                      </td>
-                      <td v-if="!kuaijiePay">
-                      </td>
+                      <td class="oddsTdMin"></td>
+                      <td v-if="!kuaijiePay"></td>
 
                       <td class="betnum">{{sidaobaqiu[3][5].odd.oddsName}}</td>
                       <td class="oddsTdMin" :class="['sidaobaqiu'+sidaobaqiu[3][5].odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(sidaobaqiu[3][5],sidaobaqiu[3][5].odd,'sidaobaqiu')">
@@ -305,7 +299,7 @@
                               <tr class="td_caption_1">
                                 <td>号</td>
                                 <td>赔率</td>
-                                <td class="title_jine">金额</td>
+                                <td class="title_jine" v-if="!kuaijiePay">金额</td>
                               </tr>
                             </tbody>
                             <tbody>
@@ -345,7 +339,7 @@
                               <tr class="td_caption_1">
                                 <td>号</td>
                                 <td>赔率</td>
-                                <td class="title_jine">金额</td>
+                                <td class="title_jine" v-if="!kuaijiePay">金额</td>
                               </tr>
                             </tbody>
                             <tbody>
@@ -385,7 +379,7 @@
                         <table style="text-align:center; font-size:12px; " class="DTable" cellpadding="0" cellspacing="1" width="700">
                           <thead>
                             <tr class="DtrTitle">
-                              <td colspan="12" class="td_caption_1" style=" font-weight: bold;">
+                              <td :colspan="kuaijiePay?8:12" class="td_caption_1" style=" font-weight: bold;">
                                 <span>{{guanyaZonghe.name}}</span>
                               </td>
                             </tr>
@@ -481,15 +475,17 @@
                                 </td>
 
                               </template>
+
+
                               <td>&nbsp;</td>
                               <td>&nbsp;</td>
-                              <td class="title_jine">&nbsp;</td>
+                              <td class="title_jine" v-if="!kuaijiePay">&nbsp;</td>
                               <td>&nbsp;</td>
                               <td>&nbsp;</td>
-                              <td class="title_jine">&nbsp;</td>
+                              <td class="title_jine" v-if="!kuaijiePay">&nbsp;</td>
                               <td>&nbsp;</td>
                               <td>&nbsp;</td>
-                              <td class="title_jine">&nbsp;</td>
+                              <td class="title_jine" v-if="!kuaijiePay">&nbsp;</td>
                             </tr>
 
                             <tr class="Dbgco1">
@@ -604,7 +600,7 @@ export default {
       });
       //切换二级菜单更新菠菜,以及切快捷更新菠菜
       bus.$on('getresetOddsCategory', (data) => {
-        console.log('切换二级菜单更新菠菜,以及切快捷更新菠菜getresetOddsCategory');
+        //console.log('切换二级菜单更新菠菜,以及切快捷更新菠菜getresetOddsCategory');
         this.showOdds = data;
         this.resetOddsCategoryfromgam();
       });
@@ -623,7 +619,7 @@ export default {
         if(this.kuaijiePay) {
           if($('.'+ids+item.oddsId).hasClass('selected')){
 
-            console.log('取消你','.'+ids+item.oddsId);
+           // console.log('取消你','.'+ids+item.oddsId);
 
               $('.'+ids+item.oddsId).removeClass('selected');
               _.remove(this.orderDataList, function(n) {
@@ -763,7 +759,7 @@ export default {
     shuaiXuanDatas(dataList) {
       if(this.showOdds == '两面盘') {
 
-        console.log('dataList',dataList);
+        //console.log('dataList',dataList);
 
         this.liangmianpan_lmp = dataList;
 
@@ -864,8 +860,8 @@ export default {
         this.sidaobaqiu.push(barry3);
         this.sidaobaqiu.push(barry4);
 
-        console.log('this.yidaosiqiu',this.yidaosiqiu);
-        console.log('this.sidaobaqiu',this.sidaobaqiu);
+       // console.log('this.yidaosiqiu',this.yidaosiqiu);
+       // console.log('this.sidaobaqiu',this.sidaobaqiu);
 
         
       }
