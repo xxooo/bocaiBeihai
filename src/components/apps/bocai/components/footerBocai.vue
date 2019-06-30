@@ -46,14 +46,14 @@
     </template>
 
 
-    <template v-if="[9057].findIndex((n) => n==curBocaiTypeId)>-1">
+    <template v-if="[9057,8806,8555].findIndex((n) => n==curBocaiTypeId)>-1">
 
       <table v-if="['两面盘'].findIndex((n) => n==showOdds)>-1" class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700">
         <tbody>
           <tr>
-            <td class="td_caption_1 td_caption_2 getsubtit1"  @click="getsubtit(9)"><a>冠、亚军和</a></td>
-            <td class="td_caption_1 getsubtit2" @click="getsubtit(10)"><a>冠、亚军和 大小</a></td>
-            <td class="td_caption_1 getsubtit3" @click="getsubtit(11)"><a>冠、亚军 单双</a></td>   
+            <td class="td_caption_1 td_caption_2 getsubtit9"  @click="getsubtit(9)"><a>冠、亚军和</a></td>
+            <td class="td_caption_1 getsubtit10" @click="getsubtit(10)"><a>冠、亚军和 大小</a></td>
+            <td class="td_caption_1 getsubtit11" @click="getsubtit(11)"><a>冠、亚军 单双</a></td>   
           </tr>
           <tr class="Ball_tr_H">
             <td colspan="3">
@@ -330,7 +330,7 @@
 			return {
         subtitLabel: '第一球',
         subtitLabel2: '冠军',
-        subtit: 1,
+        subtit: '',
         counts: [],
         countsList: [],
         numMapList: [],
@@ -824,8 +824,10 @@
           this.longhuheList = longhuNumList;
 
           this.subtit = 1;
-        } else if([9057].findIndex((n) => n==this.curBocaiTypeId)>-1) {
+        } else if([9057,8806,8555].findIndex((n) => n==this.curBocaiTypeId)>-1) {
 
+          this.subtit = 9;
+        } else if([8809].findIndex((n) => n==this.curBocaiTypeId)>-1) {
 
           this.subtit = 9;
         }
