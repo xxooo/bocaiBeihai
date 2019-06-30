@@ -76,7 +76,7 @@ export default {
                 case '幸运飞艇':
                 path = 'luckyairship';
                 break;
-                case '北京PK拾':
+                case '北京赛车':
                 path = 'beijingpk10';
                 break;
                 case '山东11选5':

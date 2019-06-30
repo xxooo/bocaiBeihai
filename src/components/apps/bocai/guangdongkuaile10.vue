@@ -53,7 +53,7 @@
                     </tr>
 
                     <tr class="Dbgco1" v-for="(itemPa,indexPa) in yidaosiqiu">
-                      <template v-for="(item,index) in itemPa">
+                      <template v-for="(item,index) in itemPa" v-if="item">
 
                         <td class="betnum" style=" width:60px;max-width:60px;">{{item.odd.oddsName}}</td>
                         <td class="oddsTdMin" :class="['yidaosiqiu'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'yidaosiqiu')">
@@ -79,7 +79,7 @@
                     </tr>
 
                     <tr class="Dbgco1" v-for="(itemPa,indexPa) in sidaobaqiu">
-                      <template v-for="(item,index) in itemPa">
+                      <template v-for="(item,index) in itemPa" v-if="item">
 
                         <td class="betnum" style=" width:60px;max-width:60px;">{{item.odd.oddsName}}</td>
                         <td class="oddsTdMin" :class="['sidaobaqiu'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'sidaobaqiu')">
@@ -100,6 +100,96 @@
                   </tbody>
                 </table>
 
+                <table v-if="['第一球','第二球','第三球','第四球','第五球','第六球','第七球','第八球'].findIndex((n) => n == showOdds)>-1" class="DTable kuaijie" cellpadding="0" cellspacing="1" border="0" width="700" style="margin-top:0px;">
+                  <thead>
+                    <tr class="td_caption_1">
+                      <td style=" font-weight: bold;text-align:center;" align="center">号</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center">赔率</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center" class="title_jine" v-if="!kuaijiePay">金额</td>
+                      <td style=" font-weight: bold;text-align:center;" align="center">号</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center">赔率</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center" class="title_jine" v-if="!kuaijiePay">金额</td>
+                      <td style=" font-weight: bold;text-align:center;" align="center">号</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center">赔率</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center" class="title_jine" v-if="!kuaijiePay">金额</td>
+                      <td style=" font-weight: bold;text-align:center;" align="center">号</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center">赔率</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center" class="title_jine" v-if="!kuaijiePay">金额</td>
+                    </tr> 
+                  </thead>
+                  <tbody>
+
+                    <tr class="Dbgco1" v-for="(itemPa,indexPa) in qidaobaqiuObjL.slice(0,5)">
+                      <template v-for="(item,index) in itemPa" v-if="item.odd">
+                        <td class="betnum" align="center">
+                          <div :class="'No_'+item.odd.oddsName" style=" height:27px; width:27px;"></div>
+                        </td>
+
+                        <td class="oddsTdMin" :class="['qidaobaqiuObjL'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'qidaobaqiuObjL')">
+                          <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item,item.odd,'qidaobaqiuObjL') : kuaijieInto(item,item.odd,'qidaobaqiuObjL')" class="betRateNum" :class="'qidaobaqiuObjL'+item.odd.oddsId+'a'"> 
+                            <span class="betRateNum">{{item.odd.odds}}</span>
+                          </a>
+                          <span v-else class="noOddSpan">&nbsp;-&nbsp;</span>
+                        </td>
+
+                        <td v-if="!kuaijiePay">
+                          <input v-if="isOpenOdds" v-model="item.odd.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(item,item.odd,'qidaobaqiuObjL',item.odd.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                          <span v-else style="width:60px;">封盘</span>
+                        </td>
+
+                      </template>
+
+
+                    </tr>
+
+                     <tr class="Dbgco1" v-for="(itemPa,indexPa) in qidaobaqiuObjL.slice(5,8)">
+
+                      <template v-for="(item,index) in itemPa" v-if="item.odd">
+
+                        <td class="betnum">{{item.odd.oddsName}}</td>
+
+                        <td class="oddsTdMin" :class="['qidaobaqiuObjL'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'qidaobaqiuObjL')">
+                          <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item,item.odd,'qidaobaqiuObjL') : kuaijieInto(item,item.odd,'qidaobaqiuObjL')" class="betRateNum" :class="'qidaobaqiuObjL'+item.odd.oddsId+'a'"> 
+                            <span class="betRateNum">{{item.odd.odds}}</span>
+                          </a>
+                          <span v-else class="noOddSpan">&nbsp;-&nbsp;</span>
+                        </td>
+
+                        <td v-if="!kuaijiePay">
+                          <input v-if="isOpenOdds" v-model="item.odd.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(item,item.odd,'qidaobaqiuObjL',item.odd.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                          <span v-else style="width:60px;">封盘</span>
+                        </td>
+
+                      </template>
+
+                    </tr>
+                    <tr class="Dbgco1" v-for="(itemPa,indexPa) in qidaobaqiuObjL.slice(8)">
+
+                      <template v-for="(item,index) in itemPa" v-if="item.odd">
+
+                        <td class="betnum">{{item.odd.oddsName}}</td>
+
+                        <td class="oddsTdMin" :class="['qidaobaqiuObjL'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'qidaobaqiuObjL')">
+                          <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item,item.odd,'qidaobaqiuObjL') : kuaijieInto(item,item.odd,'qidaobaqiuObjL')" class="betRateNum" :class="'qidaobaqiuObjL'+item.odd.oddsId+'a'"> 
+                            <span class="betRateNum">{{item.odd.odds}}</span>
+                          </a>
+                          <span v-else class="noOddSpan">&nbsp;-&nbsp;</span>
+                        </td>
+
+                        <td v-if="!kuaijiePay">
+                          <input v-if="isOpenOdds" v-model="item.odd.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(item,item.odd,'qidaobaqiuObjL',item.odd.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                          <span v-else style="width:60px;">封盘</span>
+                        </td>
+
+                      </template>
+
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td class="title_jine" v-if="!kuaijiePay">&nbsp;</td>
+
+                    </tr>
+                  </tbody>
+                </table>
 
                 <bet-quick :orderDataList="orderDataList" v-on:childByReset="childByReset"></bet-quick>
 
@@ -160,6 +250,7 @@ export default {
       zongheData: {},
       yidaosiqiu: [],
       sidaobaqiu: [],
+      qidaobaqiuObjL: []
     }
   },
   computed: {
@@ -187,6 +278,9 @@ export default {
         console.log('切换二级菜单更新菠菜,以及切快捷更新菠菜getresetOddsCategory');
         this.showOdds = data;
         this.resetOddsCategoryfromgam();
+      });
+      bus.$on('iskaipaning', (data) => {
+        this.iskaipaning = data;
       });
   },
   methods: {
@@ -341,14 +435,9 @@ export default {
         this.shuaiXuanDatas(data);
     },
     shuaiXuanDatas(dataList) {
+
+
       if(this.showOdds == '两面盘') {
-
-        console.log('dataList',dataList);
-
-        this.liangmianpan_lmp = dataList;
-
-        this.yidaosiqiu = [];
-        this.sidaobaqiu = [];
 
         let arry1 = [];
         let arry2 = [];
@@ -359,6 +448,8 @@ export default {
         let arry7 = [];
         let arry8 = [];
 
+        let arry9 = [];
+
         let barry1 = [];
         let barry2 = [];
         let barry3 = [];
@@ -367,6 +458,14 @@ export default {
         let barry6 = [];
         let barry7 = [];
         let barry8 = [];
+
+        console.log('dataList',dataList);
+
+        this.liangmianpan_lmp = dataList;
+
+        this.yidaosiqiu = [];
+        this.sidaobaqiu = [];
+
 
         for(let m in dataList) {
 
@@ -520,9 +619,124 @@ export default {
         
       }
 
+      if(['第一球','第二球','第三球','第四球','第五球','第六球','第七球','第八球'].findIndex((n) => n == this.oddsList[0].name)>-1) {
+
+        this.qidaobaqiuObjL = [];
+        
+        let arry1 = [];
+        let arry2 = [];
+        let arry3 = [];
+        let arry4 = [];
+        let arry5 = [];
+        let arry6 = [];
+        let arry7 = [];
+        let arry8 = [];
+
+        let arry9 = [];
+
+        let barry1 = [];
+        let barry2 = [];
+        let barry3 = [];
+        let barry4 = [];
+        let barry5 = [];
+        let barry6 = [];
+        let barry7 = [];
+        let barry8 = [];
+
+        let tempOddList = this.oddsList[0];
+
+        console.log('tempOddList',tempOddList);
+
+        let arrytemp1 = tempOddList.list.slice(0,20);
+        let arrytemp2 = tempOddList.list.slice(20,35);
+
+        arrytemp1 = _.chunk(arrytemp1,5);  
+        arrytemp2 = _.chunk(arrytemp2,4);  
+
+        console.log('arrytemp1',arrytemp1);
+        console.log('arrytemp2',arrytemp2);
+
+        for(let n in arrytemp1) {
+          let obj1 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp1[n][0]
+          }
+          arry1.push(obj1);
+          let obj2 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp1[n][1]
+          }
+          arry2.push(obj2);
+          let obj3 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp1[n][2]
+          }
+          arry3.push(obj3);
+          let obj4 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp1[n][3]
+          }
+          arry4.push(obj4);
+          let obj5 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp1[n][4]
+          }
+          arry5.push(obj5);
+        }
+
+        this.qidaobaqiuObjL.push(arry1);
+        this.qidaobaqiuObjL.push(arry2);
+        this.qidaobaqiuObjL.push(arry3);
+        this.qidaobaqiuObjL.push(arry4);
+        this.qidaobaqiuObjL.push(arry5);
+
+        for(let n in arrytemp2) {
+          let obj1 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp2[n][0]
+          }
+          barry1.push(obj1);
+          let obj2 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp2[n][1]
+          }
+          barry2.push(obj2);
+          let obj3 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp2[n][2]
+          }
+          barry3.push(obj3);
+          let obj4 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp2[n][3]
+          }
+          barry4.push(obj4);
+        }
+
+        this.qidaobaqiuObjL.push(barry1);
+        this.qidaobaqiuObjL.push(barry2);
+        this.qidaobaqiuObjL.push(barry3);
+        this.qidaobaqiuObjL.push(barry4);
+
+        console.log('this.qidaobaqiuObjL',this.qidaobaqiuObjL);
+        
+      }
+
+
+
 
 
     }
+
 
 
 

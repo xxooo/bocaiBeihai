@@ -11,7 +11,9 @@ const state = {
   oddsList: [],
   bocaiTypeList: [],
   orderDatasShow: [],
-  preResult: ''
+  preResult: '',
+  focusIndex: 1,
+  orderList: []
 }
 
 export default state

@@ -128,6 +128,11 @@
           <li v-for="(item,index) in bocaiTypeList" :class="'div_gameno_'+item.bocaiId" style="cursor: pointer;"  @click="getOdds(item,index)">
             <a>{{item.bocaiName}}</a>
           </li>
+          <li class="div_gameno_10001" style="cursor: pointer;"  @click="getOdds({bocaiName:'幸运农场'},101)"><a>{{'幸运农场'}}</a></li>
+          <li class="div_gameno_10002" style="cursor: pointer;"  @click="getOdds({bocaiName:'EPS赛马'},102)"><a>{{'EPS赛马'}}</a></li>
+          <li class="div_gameno_10003" style="cursor: pointer;"  @click="getOdds({bocaiName:'超级快5'},103)"><a>{{'超级快5'}}</a></li>
+          <li class="div_gameno_10004" style="cursor: pointer;"  @click="getOdds({bocaiName:'澳洲幸运5'},104)"><a>{{'澳洲幸运5'}}</a></li>
+          <li class="div_gameno_10005" style="cursor: pointer;"  @click="getOdds({bocaiName:'澳洲幸运10'},105)"><a>{{'澳洲幸运10'}}</a></li>
         </ul>
       </div>
     </div>
@@ -178,10 +183,10 @@ export default {
   async created() {
 
     if(this.bocaiTypeList.length == 0) {
-      //console.log('?????');
+      console.log('????111111?');
       this.getBocai();
     } else {
-      //console.log('????2222?');
+      console.log('????2222?');
       this.getOddsInfo();
     }
     
@@ -314,7 +319,7 @@ export default {
           }
     },
     async getBocaiInfo5sOnce() { 
-      console.log('5秒调一次','this.preResult',this.preResult,'this.iskaipaning',this.iskaipaning);
+      //console.log('5秒调一次','this.preResult',this.preResult,'this.iskaipaning',this.iskaipaning);
 
        if(this.preResult == '' || !this.iskaipaning) {
 
@@ -372,7 +377,7 @@ export default {
             break;
           case 'beijingpk10':
             typeid = '8806';
-            name = '北京PK拾';
+            name = '北京赛车';
             break;
           case 'shandong11xuan5':
             typeid = '8811';
@@ -479,7 +484,7 @@ export default {
 
       $('.bST_1').siblings().removeClass('bST_1_s active');
 
-      if(['重庆时时彩','极速时时彩','广东快乐十分','极速赛车','北京赛车'].findIndex((n) => n==item.bocaiName)>-1) {
+      if(['重庆时时彩','极速时时彩','广东快乐十分','极速赛车','幸运飞艇','北京赛车'].findIndex((n) => n==item.bocaiName)>-1) {
 
         $('.div_gameno_'+item.bocaiId).addClass('active').siblings().removeClass('active');
 
@@ -492,7 +497,7 @@ export default {
             case '幸运飞艇':
               path = 'luckyairship';
               break;
-            case '北京PK拾':
+            case '北京赛车':
               path = 'beijingpk10';
               break;
             case '山东11选5':
@@ -538,7 +543,10 @@ export default {
 
 
       } else {
-        bus.$emit('showleftMessage','此博彩还未完成,请耐心等待! 谢谢');
+        bus.$emit('iskaipaning', false);
+        store.commit('updatebocaiTypeId','');
+        store.commit('updatebocaiName',item.bocaiName);
+        this.$router.push({name: 'testbocai'});
       }
 
       

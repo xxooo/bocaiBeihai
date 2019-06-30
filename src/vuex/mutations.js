@@ -37,6 +37,12 @@ const mutations = {
   },
   updatepreResult(state,v) {
     state.preResult = v;
+  },
+  updatefocusIndex(state,v) {
+    state.focusIndex = v;
+  },
+  updateorderList(state,v) {
+    state.orderList = v;
   }
 }
 

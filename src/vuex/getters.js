@@ -11,7 +11,9 @@ const getters = {
   getoddsList: state => state.oddsList,
   getbocaiTypeList: state => state.bocaiTypeList,
   getorderDatasShow: state => state.orderDatasShow,
-  getpreResult: state => state.preResult
+  getpreResult: state => state.preResult,
+  getfocusIndex: state => state.focusIndex,
+  getorderList: state => state.orderList
 }
 
 export default getters

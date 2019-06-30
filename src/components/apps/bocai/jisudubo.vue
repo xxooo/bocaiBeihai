@@ -121,7 +121,7 @@
                             <tbody>
                               <tr class="Dbgco1" align="center" v-for="(item,index) in itemPa.list" v-if="['0','1','2','3','4','5','6','7','8','9'].findIndex((n) => n==item.oddsName)>-1">
                                 <td class="betnum1" align="center">
-                                  <div :class="'CQNo_'+index" style=" height:27px; width:27px;"></div>
+                                  <div :class="'CQNo_'+item.oddsName" style=" height:27px; width:27px;"></div>
                                 </td>
                                 <td class="oddsTdMin" :class="['item_yiwu'+item.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(itemPa,item,'item_yiwu')">
                                   <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(itemPa,item,'item_yiwu') : kuaijieInto(itemPa,item,'item_yiwu')" class="betRateNum" :class="'item_yiwu'+item.oddsId+'a'">

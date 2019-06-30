@@ -17,7 +17,7 @@
     </div> 
 
 
-    <div tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons"  style="position: absolute; height: auto; width: 400px;  z-index: 101;" v-if="orderOddsVisible" id="ui-dialog">
+    <div tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons"  style="position: absolute; height: auto; width: 400px;  z-index: 101;" v-show="orderOddsVisible" id="ui-dialog">
       <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
         <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span>
         <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close" @click="cancelOdd()">
@@ -97,13 +97,11 @@
 		},
 		data() {
 			return {
-        focusIndex: 1,
         hasErrorMessage: '',
         hasError: false,  //0为正常，1 为 超过可用额度，2 低于最小下注金额  超过您的额度,无法下注,请联系上级代理
         moneyOrder: '',
         radio10: '1',
         orderOddsVisible: false,
-        orderList: [],
         hahahaid: '',
         kuaijiePay: false,
         isOpenOdds: true,
@@ -129,6 +127,9 @@
       document.onkeydown = function (e) {
         let key = window.event.keyCode;
         if (key === 13){
+
+          console.log('that.focusIndex13313',that.focusIndex);
+
           if(that.focusIndex == 1) {
             that.orderOddsTo();
           } else if(that.focusIndex == 2) {
@@ -147,7 +148,9 @@
         bocaiTypeId: 'getbocaiTypeId',
         curPeriods: 'getcurPeriods',
         isOdding: 'getisOdding',
-        oddsList: 'getoddsList'
+        oddsList: 'getoddsList',
+        focusIndex: 'getfocusIndex',
+        orderList: 'getorderList'
       }),
       totalMoney() {
         let totalMoney = 0;
@@ -198,18 +201,13 @@
 
         this.orderOdds2();
 
-        this.focusIndex = 1;
-      },
-      deleteOdd(index) {
-        this.orderList.splice(index,1);
-        if(this.orderList.length == 0) {
-          this.orderOddsVisible = false;
-        }
+        store.commit('updatefocusIndex',1);
+
       },
       async orderSub() {
 
-        console.log('this.curPeriods',this.curPeriods);
-        console.log('this.bocaiInfoData.bocaiPeriodsId',this.bocaiInfoData.bocaiPeriods);
+        console.log('this.curPeriods3333333333',this.curPeriods,'this.orderList',this.orderList);
+        //console.log('this.bocaiInfoData.bocaiPeriodsId',this.bocaiInfoData.bocaiPeriods);
 
         if(this.curPeriods != this.bocaiInfoData.bocaiPeriods) {
             bus.$emit('toleftShow',22,'指定期数为非交易状态!');
@@ -219,9 +217,9 @@
             bus.$emit('toleftShow',22,'该帐号或上级代理被禁用或暂停下注');
         } else {
 
-          console.log('this.bocaiName',this.bocaiName);
+          //console.log('this.bocaiName',this.bocaiName);
 
-          console.log('this.bocaiInfoData',this.bocaiInfoData);
+          //console.log('this.bocaiInfoData',this.bocaiInfoData);
 
           this.orderDatas.list = [];
 
@@ -236,7 +234,7 @@
 
           let timeNum = this.$timestampToms(new Date().getTime() + this.differTime);
 
-          console.log('timeNum',timeNum);
+         // console.log('timeNum',timeNum);
 
           for(let n in this.orderList) {
             let obj = {
@@ -253,9 +251,11 @@
             this.orderDatas.list.push(obj);
           }
 
-          console.log('this.orderDatas',this.orderDatas);
+         // console.log('this.orderDatas',this.orderDatas);
 
           this.orderOddsVisible = false;
+
+          console.log('this.orderOddsVisible',this.orderOddsVisible);
           
           let that = this;
           const loading = this.$loading({
@@ -366,7 +366,7 @@
 
 
           store.commit('updateisOdding',true);
-          this.orderList = [];
+          store.commit('updateorderList',[]);
 
 
           store.commit('updatecurPeriods', this.bocaiInfoData.bocaiPeriods);  //每次点下注时，记录当时的菠菜期数
@@ -379,6 +379,8 @@
             let minpay = true;
             let str1 = '';
             let str2 = '';
+            let orderListTemp = [];
+
             for(let n in this.orderDataList) {
               if(+this.orderDataList[n].normalMoney < 2) {
                 console.log('+this.orderDataList[n].normalMoney < 2',+this.orderDataList[n].normalMoney,+this.orderDataList[n].normalMoney < 2);
@@ -406,9 +408,12 @@
                     obj.betsMoney = this.orderDataList[n].normalMoney
                 }
 
-                this.orderList.push(obj);
+                orderListTemp.push(obj);
               }
             }
+
+            store.commit('updateorderList',orderListTemp);
+
             if(!minpay) {
               //有超过最小金额的
               this.hasError = true;
@@ -431,6 +436,8 @@
           } else {
             //console.log('快捷');
 
+            let orderListTemp = [];
+
             for(let n in this.orderDataList) {
                 let obj = {};
 
@@ -450,8 +457,11 @@
                     obj.betsMoney = this.moneyOrder
                 }
 
-                this.orderList.push(obj);
+                orderListTemp.push(obj);
             }
+
+            store.commit('updateorderList',orderListTemp);
+
             if(+this.moneyOrder < 2) {
               //有超过最小金额的
               this.hasError = true;
@@ -478,8 +488,9 @@
 
           }
 
-          this.focusIndex = 2;
+          store.commit('updatefocusIndex',2);
 
+          console.log('this.focusIndex',this.focusIndex,'this.orderList',this.orderList);
       }
 		},
     watch: {
