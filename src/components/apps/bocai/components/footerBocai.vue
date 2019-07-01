@@ -647,6 +647,30 @@
                       }
                     }
 
+                    if(result.data.longhuMap.longhu) {
+                      let data3 = result.data.longhuMap.longhu.split(","); 
+                      let temp3 = '';
+                      let nn3 = 1;
+                      for(let n in data3) {
+                        let obj = {};
+                        if(temp3 != data3[n]) {  
+                          obj.type = 1;
+                          obj.value = [];
+                          obj.value.push(data3[n]);
+                          this.longhuList.push(obj);
+                        } else {
+                          let kk = n*1-nn3;
+                          if(this.longhuList[n*1-nn3]) {
+                            this.longhuList[n*1-nn3].type = 2;
+                            this.longhuList[n*1-nn3].value.push(data3[n]);
+                            nn3 = nn3*1+1;
+                          }
+                        }
+
+                        temp3 = data3[n];
+                      }
+                    }
+
 
                     if(result.data.zhongheshu) {
 
@@ -951,7 +975,7 @@
 
 
           for(let n in this.zonghedaxiaoList) {
-            longhuListNumList.push(this.zonghedaxiaoList[n]);
+            dxlhNumList.push(this.zonghedaxiaoList[n]);
           }
           for(let n in this.zonghedanshuangList) {
             zhdslhNumList.push(this.zonghedanshuangList[n]);
@@ -972,6 +996,8 @@
         }
 
         console.log('this.subtit',this.subtit);
+
+        console.log('this.zonghedaxiaoList',this.zonghedaxiaoList);
 
       },
         getsubtit(num) {
