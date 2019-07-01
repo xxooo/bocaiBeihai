@@ -54,7 +54,7 @@
 
                     <tr class="Dbgco1" v-for="(itemPa,indexPa) in yidaosiqiu">
                       <template v-for="(item,index) in itemPa" v-if="item">
-
+                        
                         <td class="betnum" style=" width:60px;max-width:60px;">{{item.odd.oddsName}}</td>
                         <td class="oddsTdMin" :class="['yidaosiqiu'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'yidaosiqiu')">
                           <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item,item.odd,'yidaosiqiu') : kuaijieInto(item,item.odd,'yidaosiqiu')" class="betRateNum" :class="'yidaosiqiu'+item.odd.oddsId+'a'"> 

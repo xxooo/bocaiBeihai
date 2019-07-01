@@ -13,7 +13,11 @@ const state = {
   orderDatasShow: [],
   preResult: '',
   focusIndex: 1,
-  orderList: []
+  orderList: [],
+  orderOddsVisible: false,
+  moneyOrder: '',
+  hasError: false,
+  hasErrorMessage: ''
 }
 
 export default state

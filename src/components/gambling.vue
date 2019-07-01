@@ -467,6 +467,32 @@ export default {
 
                 that.bocaiCategoryList = result.bocaiCategoryList;
 
+                if([1,8815].findIndex((n) => n==this.bocaiTypeId)>-1) {
+                  that.bocaiCategoryList.push({
+                    id: 100001,
+                    name: "牛牛、梭哈"
+                  },{
+                    id: 100002,
+                    name: "整合"
+                  });
+                } else if([9057,8806,8555].findIndex((n) => n==this.bocaiTypeId)>-1) {
+                  that.bocaiCategoryList.push({
+                    id: 100001,
+                    name: "三、四、五、六名"
+                  },{
+                    id: 100002,
+                    name: "七、八、九、十名"
+                  });
+                } else if([8809].findIndex((n) => n==this.bocaiTypeId)>-1) {
+                  that.bocaiCategoryList.push({
+                    id: 100001,
+                    name: "单球1~8"
+                  },{
+                    id: 100002,
+                    name: "总和、龙虎"
+                  });
+                }
+
                 store.commit('updatebocaiCategory',result.bocaiCategoryList[0]);
 
                 //获取菠菜数据
@@ -923,6 +949,11 @@ body {
     color: red !important;
     cursor: inherit !important;
     font-weight: bold;
+  }
+
+  .bST_1.active {
+    color: red !important;
+    cursor: inherit !important;
   }
 
 }

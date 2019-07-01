@@ -286,7 +286,7 @@
                   </tbody>
                 </table>
 
-                <table v-if="showOdds == '1~10'" class="DTable_t kuaijie" cellpadding="0" cellspacing="0" width="700">
+                <table v-if="showOdds == '排名1~10'" class="DTable_t kuaijie" cellpadding="0" cellspacing="0" width="700">
                   <tbody>
                     <tr class="DtrTitle">
                       <td v-for="(item_yishi,index_yishi) in oddsList.slice(0,5)" class="td_caption_1">{{item_yishi.name}}</td>
@@ -372,7 +372,7 @@
                 </table>
 
 
-                <table v-if="showOdds == '冠亚组合'" class="DTable kuaijie" cellpadding="0" cellspacing="0" border="0" width="700" style=" margin-top:2px;">
+                <table v-if="showOdds == '冠、亚军 组合'" class="DTable kuaijie" cellpadding="0" cellspacing="0" border="0" width="700" style=" margin-top:2px;">
                   <tbody>
                     <tr>
                       <td>
@@ -869,7 +869,7 @@ export default {
         
       }
 
-      if(this.showOdds == '冠亚组合') {
+      if(this.showOdds == '冠、亚军 组合') {
         this.guanyaZonghe = this.oddsList[0];
       }
 

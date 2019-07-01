@@ -13,7 +13,11 @@ const getters = {
   getorderDatasShow: state => state.orderDatasShow,
   getpreResult: state => state.preResult,
   getfocusIndex: state => state.focusIndex,
-  getorderList: state => state.orderList
+  getorderList: state => state.orderList,
+  getorderOddsVisible: state => state.orderOddsVisible,
+  getmoneyOrder: state => state.moneyOrder,
+  gethasError: state => state.hasError,
+  gethasErrorMessage: state => state.hasErrorMessage
 }
 
 export default getters

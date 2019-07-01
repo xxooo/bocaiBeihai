@@ -97,7 +97,7 @@
 
                 </template>
 
-                <template v-if="showOdds == '1~5'">
+                <template v-if="showOdds == '单球1~5'">
 
                   <table class="DTable_t kuaijie" cellpadding="0" cellspacing="0" width="700" id="Table1">
 
@@ -147,7 +147,7 @@
                 </template>
 
 
-                <table v-if="showOdds == '和数'" class="DTable kuaijie" cellpadding="0" cellspacing="1" border="0" width="700" id="tblNowBet00" style="margin-top:0px;">
+                <table v-if="showOdds == '合數雙面'" class="DTable kuaijie" cellpadding="0" cellspacing="1" border="0" width="700" id="tblNowBet00" style="margin-top:0px;">
                   <thead>
                       <tr class="td_caption_1">
                           <td rowspan="2" style=" font-weight: bold;text-align:center;" align="center" class="td_caption_big">二码</td>

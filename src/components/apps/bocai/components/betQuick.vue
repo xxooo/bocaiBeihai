@@ -5,7 +5,7 @@
         <input id="chk_qcstake" type="checkbox" v-model="kuaijiePay" @click="reset2()">
         <span class="kuaijieSpan">快捷下注</span>
         <span id="sp_qcstake" class="yibanSpan" v-if="kuaijiePay">金额：
-          <input id="txtqcstake" type="text" class="wid60" v-model.number="moneyOrder" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+          <input id="txtqcstake" type="text" class="wid60" v-model.number="moneyOrderTemp" v-on:input ="inputFuncOrder(moneyOrderTemp)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
           <span @click="QCExplain()" class="shuomiSpan">说明</span>
         </span>
         <input type="reset" value="重 填" class="button_bg1" @click="reset()"> 
@@ -17,7 +17,7 @@
     </div> 
 
 
-    <div tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons"  style="position: absolute; height: auto; width: 400px;  z-index: 101;" v-show="orderOddsVisible" id="ui-dialog">
+    <div tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-draggable ui-dialog-buttons"  style="position: absolute; height: auto; width: 400px;  z-index: 101;" v-if="orderOddsVisible" id="ui-dialog">
       <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle">
         <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span>
         <button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close" @click="cancelOdd()">
@@ -89,20 +89,17 @@
   import { mapGetters } from 'vuex';
 
 
-	export default {
-		props: {
+  export default {
+    props: {
       orderDataList: {
         type: Array
       }
-		},
-		data() {
-			return {
-        hasErrorMessage: '',
-        hasError: false,  //0为正常，1 为 超过可用额度，2 低于最小下注金额  超过您的额度,无法下注,请联系上级代理
-        moneyOrder: '',
+    },
+    data() {
+      return {
         radio10: '1',
-        orderOddsVisible: false,
         hahahaid: '',
+        moneyOrderTemp: '',
         kuaijiePay: false,
         isOpenOdds: true,
         disableBtn: true,
@@ -118,11 +115,11 @@
           list:[]
         },
         oddIng: false
-			}
-		},
+      }
+    },
     components: {
-		},
-		created() {
+    },
+    created() {
       let that = this;
       document.onkeydown = function (e) {
         let key = window.event.keyCode;
@@ -150,7 +147,11 @@
         isOdding: 'getisOdding',
         oddsList: 'getoddsList',
         focusIndex: 'getfocusIndex',
-        orderList: 'getorderList'
+        orderList: 'getorderList',
+        orderOddsVisible: 'getorderOddsVisible',
+        moneyOrder: 'getmoneyOrder',
+        hasError: 'gethasError',
+        hasErrorMessage: 'gethasErrorMessage'
       }),
       totalMoney() {
         let totalMoney = 0;
@@ -175,18 +176,23 @@
         this.reset();
       });
     },
-		methods: {
+    methods: {
+      inputFuncOrder(moneyOrderTemp) {
+        console.log('moneyOrderTemp',moneyOrderTemp);
+        store.commit('updatemoneyOrder',moneyOrderTemp);
+      },
       QCExplain() {
         bus.$emit('showleftMessage','鼠标点击选中赔率下注，选好后输入金额来方便快速下注');
       },
       cancelOdd() {
-        this.orderOddsVisible = false;
+        store.commit('updateorderOddsVisible',false);
         store.commit('updateisOdding', false);
       },
       reset2() {
         console.log('this.kuaijiePay--reset',this.kuaijiePay)
         store.commit('updateisOdding',false);
-        this.moneyOrder = '';
+
+        store.commit('updatemoneyOrder','');
 
         this.$emit('childByReset',!this.kuaijiePay,this.oddsList);
 
@@ -195,7 +201,8 @@
       reset() {
         console.log('this.kuaijiePay--reset',this.kuaijiePay)
         store.commit('updateisOdding',false);
-        this.moneyOrder = '';
+
+        store.commit('updatemoneyOrder','');
 
         this.$emit('childByReset',this.kuaijiePay,this.oddsList);
 
@@ -211,10 +218,13 @@
 
         if(this.curPeriods != this.bocaiInfoData.bocaiPeriods) {
             bus.$emit('toleftShow',22,'指定期数为非交易状态!');
+            store.commit('updateorderOddsVisible',false);
         } else if(!this.isOpenOdds) {
             bus.$emit('toleftShow',22,'非交易时间,不允许下注!');
+            store.commit('updateorderOddsVisible',false);
         } else if(this.userInfo.isFrozen == 1) {
             bus.$emit('toleftShow',22,'该帐号或上级代理被禁用或暂停下注');
+            store.commit('updateorderOddsVisible',false);
         } else {
 
           //console.log('this.bocaiName',this.bocaiName);
@@ -253,7 +263,8 @@
 
          // console.log('this.orderDatas',this.orderDatas);
 
-          this.orderOddsVisible = false;
+
+          store.commit('updateorderOddsVisible',false);
 
           console.log('this.orderOddsVisible',this.orderOddsVisible);
           
@@ -416,20 +427,20 @@
 
             if(!minpay) {
               //有超过最小金额的
-              this.hasError = true;
-              this.hasErrorMessage = '【'+str1+'】'+str2 + '&nbsp;&nbsp;' +'最低单注金额2元';
-              this.orderOddsVisible = true;
+              store.commit('updatehasError',true);
+              store.commit('updatehasErrorMessage','【'+str1+'】'+str2 + '--' +'最低单注金额2元');
+              store.commit('updateorderOddsVisible',true);
             } else if(this.totalMoney > this.userInfo.cashBalance) {
-              this.hasError = true;
-              this.hasErrorMessage = '超过您的额度,无法下注,请联系上级代理';
-              this.orderOddsVisible = true;
+              store.commit('updatehasError',true);
+              store.commit('updatehasErrorMessage','超过您的额度,无法下注,请联系上级代理');
+              store.commit('updateorderOddsVisible',true);
             } else if(this.orderList.length == '0') {
-              this.hasError = true;
-              this.hasErrorMessage = '请填写下注金额!!!';
-              this.orderOddsVisible = true;
+              store.commit('updatehasError',true);
+              store.commit('updatehasErrorMessage','请填写下注金额!!!');
+              store.commit('updateorderOddsVisible',true);
             } else {
-              this.hasError = false;
-              this.orderOddsVisible = true;
+              store.commit('updatehasError',true);
+              store.commit('updateorderOddsVisible',true);
             }
 
 
@@ -462,29 +473,28 @@
 
             store.commit('updateorderList',orderListTemp);
 
+             console.log('this.orderList.length == 0',this.orderList.length == 0);
+
             if(+this.moneyOrder < 2) {
               //有超过最小金额的
-              this.hasError = true;
-              this.hasErrorMessage = '最低单注金额2元';
-              this.orderOddsVisible = true;
+              store.commit('updatehasError',true);
+              store.commit('updatehasErrorMessage','最低单注金额2元');
+              store.commit('updateorderOddsVisible',true);
             } else if(this.totalMoney > this.userInfo.cashBalance) {
-              this.hasError = true;
-              this.hasErrorMessage = '超过您的额度,无法下注,请联系上级代理';
-              this.orderOddsVisible = true;
-            } else if(this.orderList.length == '0') {
-              this.hasError = true;
-              this.hasErrorMessage = '请填写下注金额!!!';
-              this.orderOddsVisible = true;
+              store.commit('updatehasError',true);
+              store.commit('updatehasErrorMessage','超过您的额度,无法下注,请联系上级代理');
+              store.commit('updateorderOddsVisible',true);
+            } else if(this.orderList.length == 0) {
+              store.commit('updatehasError',true);
+              store.commit('updatehasErrorMessage','请填写下注金额!!!');
+              store.commit('updateorderOddsVisible',true);
             } else {
-              this.hasError = false;
-              this.orderOddsVisible = true;
+              store.commit('updatehasError',false);
+              store.commit('updateorderOddsVisible',true);
             }
 
               
-              //console.log('this.this.orderList',this.orderList);
-              this.orderOddsVisible = true;
-
-            //console.log('this.orderList',this.orderList);
+              store.commit('updateorderOddsVisible',true);
 
           }
 
@@ -492,11 +502,11 @@
 
           console.log('this.focusIndex',this.focusIndex,'this.orderList',this.orderList);
       }
-		},
+    },
     watch: {
     }
 
-	}
+  }
 
 </script>
 

@@ -91,7 +91,66 @@
       </table>
 
     </template>
-    
+
+
+    <template v-if="[8809].findIndex((n) => n==curBocaiTypeId)>-1">
+
+      <table v-if="['两面盘'].findIndex((n) => n==showOdds)>-1" class="Ball_List" border="0" cellspacing="1" cellpadding="0" width="700">
+
+        <tbody>
+          <tr>
+            <td class="td_caption_1 td_caption_2 getsubtit1"  @click="getsubtit(1)"><a>总和大小</a></td>
+            <td class="td_caption_1 getsubtit2" @click="getsubtit(2)"><a>总和单双</a></td>
+            <td class="td_caption_1 getsubtit7" @click="getsubtit(7)"><a>总和尾数大小</a></td>
+            <td class="td_caption_1 getsubtit8" @click="getsubtit(8)"><a>龙虎</a></td>
+
+          </tr>
+          <tr class="Ball_tr_H">
+            <td colspan="4">
+              <table class="Ball_List" border="0" cellspacing="0" cellpadding="0" width="698">
+                <tbody>
+                  <tr v-if="subtit == 1" class="Ball_tr_H" valign="top" style="height: auto; min-height: 25px;">
+                    <td width="28" v-for="(item,index) in zonghedaxiaoList.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                      <template v-if="item != ''">
+                        <p v-for="itemsub in item.value">{{itemsub}}</p>
+                      </template>
+                    </td>
+                  </tr>
+
+                  <tr v-if="subtit == 2" class="Ball_tr_H" valign="top" style="height:auto;min-height:25px;">
+                    <td width="28" v-for="(item,index) in zonghedanshuangList.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                      <template v-if="item != ''">
+                        <p v-for="itemsub in item.value">{{itemsub}}</p>
+                      </template>
+                    </td>
+                  </tr>
+
+                  <tr v-if="subtit == 7" class="Ball_tr_H" valign="top" style="height: auto; min-height: 25px;">
+                    <td width="28" v-for="(item,index) in zongheweishudaxiaoList.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                      <template v-if="item != ''">
+                        <p v-for="itemsub in item.value">{{itemsub}}</p>
+                      </template>
+                    </td>
+                  </tr>
+
+                  <tr v-if="subtit == 8" class="Ball_tr_H" valign="top" style="height:auto;min-height:25px;">
+                    <td width="28" v-for="(item,index) in longhuList.slice(0,25)" :class="(+index+1)%2 == 0 ? 'Jut_caption_1' : ''">
+                      <template v-if="item != ''">
+                        <p v-for="itemsub in item.value">{{itemsub}}</p>
+                      </template>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </template>
+
+
 
   </div>
 
@@ -805,7 +864,7 @@
              zhdslhNumList.push('');
            }
 
-           for(let i = 0; i < zhdslhNum; i++) {
+           for(let i = 0; i < longhuNum; i++) {
              longhuNumList.push('');
            }
 
@@ -826,10 +885,90 @@
           this.subtit = 1;
         } else if([9057,8806,8555].findIndex((n) => n==this.curBocaiTypeId)>-1) {
 
+          let dxlhNum = 25 - this.guanyajunhe.length*1;
+          let zhdslhNum = 25 - this.guanyajunhedaxiao.length*1;
+          let longhuNum = 25 - this.guanyajunhedanshuang.length*1;
+          let dxlhNumList = [];
+          let zhdslhNumList = [];
+          let longhuNumList = [];
+
+          for(let i = 0; i < dxlhNum; i++) {
+             dxlhNumList.push('');
+           }
+
+           for(let i = 0; i < zhdslhNum; i++) {
+             zhdslhNumList.push('');
+           }
+
+           for(let i = 0; i < longhuNum; i++) {
+             longhuNumList.push('');
+           }
+
+           for(let n in this.guanyajunhe) {
+            dxlhNumList.push(this.guanyajunhe[n]);
+          }
+          for(let n in this.guanyajunhedaxiao) {
+            zhdslhNumList.push(this.guanyajunhedaxiao[n]);
+          }
+          for(let n in this.guanyajunhedanshuang) {
+            longhuNumList.push(this.guanyajunhedanshuang[n]);
+          }
+
+          this.guanyajunhe = dxlhNumList;
+          this.guanyajunhedaxiao = zhdslhNumList;
+          this.guanyajunhedanshuang = longhuNumList;
+
+
           this.subtit = 9;
         } else if([8809].findIndex((n) => n==this.curBocaiTypeId)>-1) {
 
-          this.subtit = 9;
+
+           let dxlhNum = 25 - this.zonghedaxiaoList.length*1;
+           let zhdslhNum = 25 - this.zonghedanshuangList.length*1;
+           let longhuNum = 25 - this.zongheweishudaxiaoList.length*1;
+           let longhuListNum = 25 - this.longhuList.length*1;
+
+           let dxlhNumList = [];
+           let zhdslhNumList = [];
+           let longhuNumList = [];
+           let longhuListNumList = [];
+
+           for(let i = 0; i < dxlhNum; i++) {
+             dxlhNumList.push('');
+           }
+
+           for(let i = 0; i < zhdslhNum; i++) {
+             zhdslhNumList.push('');
+           }
+
+           for(let i = 0; i < longhuNum; i++) {
+             longhuNumList.push('');
+           }
+
+           for(let i = 0; i < longhuListNum; i++) {
+             longhuListNumList.push('');
+           }
+
+
+          for(let n in this.zonghedaxiaoList) {
+            longhuListNumList.push(this.zonghedaxiaoList[n]);
+          }
+          for(let n in this.zonghedanshuangList) {
+            zhdslhNumList.push(this.zonghedanshuangList[n]);
+          }
+          for(let n in this.zongheweishudaxiaoList) {
+            longhuNumList.push(this.zongheweishudaxiaoList[n]);
+          }
+          for(let n in this.longhuList) {
+            longhuListNumList.push(this.longhuList[n]);
+          }
+
+          this.zonghedaxiaoList = dxlhNumList;
+          this.zonghedanshuangList = zhdslhNumList;
+          this.zongheweishudaxiaoList = longhuNumList;
+          this.longhuList = longhuListNumList;
+
+          this.subtit = 1;
         }
 
         console.log('this.subtit',this.subtit);

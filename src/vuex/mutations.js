@@ -43,6 +43,18 @@ const mutations = {
   },
   updateorderList(state,v) {
     state.orderList = v;
+  },
+  updateorderOddsVisible(state,v) {
+    state.orderOddsVisible = v;
+  },
+  updatemoneyOrder(state,v) {
+    state.moneyOrder = v;
+  },
+  updatehasError(state,v) {
+    state.hasError = v;
+  },
+  updatehasErrorMessage(state,v) {
+    state.hasErrorMessage = v;
   }
 }
 
