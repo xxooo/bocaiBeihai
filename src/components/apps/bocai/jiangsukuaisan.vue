@@ -1,306 +1,216 @@
 <template>
-  <div id="shaizibocai" class="content-main duboBodyClass">
-    
-    <div class="right">
-      <div>
-        <div>
-          <div id="submenu">
-            <el-menu
-              :default-active="activeIndex"
-              class="el-menu-subnav"
-              mode="horizontal"
-              @select="handleSelect"
-              text-color="#ebcb80"
-              active-text-color="#f6e9c7">
-              <el-menu-item v-for="(item,index) in bocaiCategoryList" :key="index" :index="item.name" @click="getOddsCategory(item,index)" v-if="index*1 < 11">{{item.name}}</el-menu-item>
-              <el-submenu v-if="bocaiCategoryList.length*1 > 11" key="submenu" index="submenu">
-                <template slot="title">{{submenu}}</template>
-                <el-menu-item v-for="(item,index) in bocaiCategoryList" :key="index" :index="item.name" @click="getOddsCategory(item,index)" v-if="index*1 > 10">{{item.name}}</el-menu-item>
-              </el-submenu>
-            </el-menu>
-          </div>
-          
-          <clock-time></clock-time>
-        </div>
-        <div class="bet_box">
-          <div class="orders oodsBodyDiv">
-            <div class="order-info">
-              <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" :bocaiCategory="bocaiCategory" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
-            </div>
+  <div id="chongqindubo" class="content-main duboBodyClass">
 
-            <div icontype="true">
-              <div class="order-table">
-                <table v-if="sanjundaxiao.list">
-                  <tr>
-                      <th colspan="8">{{sanjundaxiao.name}}</th>
-                  </tr>
-                  <tr>
-                      <template v-for="(item,index) in sanjundaxiao.list.slice(0,3)">
-                              <td class="tdLeft ordersTdOver" width="8%" :class="'sanjundaxiao'+item.oddsId" @click="orderTd(sanjundaxiao,item,'sanjundaxiao')" @mouseenter="overShow(item,'sanjundaxiao')" @mouseleave="outHide(item,'sanjundaxiao')">
-                                <i :class="'jsk3-icon-'+item.oddsName"></i>
-                              </td>
-                              <td class="tdRight" :class="'sanjundaxiao'+item.oddsId" @click="orderTd(sanjundaxiao,item,'sanjundaxiao')" @mouseenter="overShow(item,'sanjundaxiao')" @mouseleave="outHide(item,'sanjundaxiao')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(sanjundaxiao,item,'sanjundaxiao',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                      </template>
-                              <td class="tdLeft ordersTdOver" width="8%" :class="'sanjundaxiao'+sanjundaxiao.list[6].oddsId" @click="orderTd(sanjundaxiao,sanjundaxiao.list[6],'sanjundaxiao')" @mouseenter="overShow(sanjundaxiao.list[6],'sanjundaxiao')" @mouseleave="outHide(sanjundaxiao.list[6],'sanjundaxiao')">{{sanjundaxiao.list[6].oddsName}}
-                              </td>
-                              <td class="tdRight" :class="'sanjundaxiao'+sanjundaxiao.list[6].oddsId" @click="orderTd(sanjundaxiao,sanjundaxiao.list[6],'sanjundaxiao')" @mouseenter="overShow(sanjundaxiao.list[6],'sanjundaxiao')" @mouseleave="outHide(sanjundaxiao.list[6],'sanjundaxiao')">
-                                <ul>
-                                  <li ><span class="odds-font">{{sanjundaxiao.list[6].odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="sanjundaxiao.list[6].normalMoney" v-on:input ="inputFunc(sanjundaxiao,sanjundaxiao.list[6],'sanjundaxiao',sanjundaxiao.list[6].normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                  </tr>
-                  <tr>
-                      <template v-for="(item,index) in sanjundaxiao.list.slice(3,6)">
-                              <td class="tdLeft ordersTdOver" width="8%" :class="'sanjundaxiao'+item.oddsId" @click="orderTd(sanjundaxiao,item,'sanjundaxiao')" @mouseenter="overShow(item,'sanjundaxiao')" @mouseleave="outHide(item,'sanjundaxiao')">
-                                <i :class="'jsk3-icon-'+item.oddsName"></i>
-                              </td>
-                              <td class="tdRight" :class="'sanjundaxiao'+item.oddsId" @click="orderTd(sanjundaxiao,item,'sanjundaxiao')" @mouseenter="overShow(item,'sanjundaxiao')" @mouseleave="outHide(item,'sanjundaxiao')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(sanjundaxiao,item,'sanjundaxiao',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                      </template>
-                              <td class="tdLeft ordersTdOver" width="8%" :class="'sanjundaxiao'+sanjundaxiao.list[7].oddsId" @click="orderTd(sanjundaxiao,sanjundaxiao.list[7],'sanjundaxiao')" @mouseenter="overShow(sanjundaxiao.list[7],'sanjundaxiao')" @mouseleave="outHide(sanjundaxiao.list[7],'sanjundaxiao')">{{sanjundaxiao.list[7].oddsName}}
-                              </td>
-                              <td class="tdRight" :class="'sanjundaxiao'+sanjundaxiao.list[7].oddsId" @click="orderTd(sanjundaxiao,sanjundaxiao.list[7],'sanjundaxiao')" @mouseenter="overShow(sanjundaxiao.list[7],'sanjundaxiao')" @mouseleave="outHide(sanjundaxiao.list[7],'sanjundaxiao')">
-                                <ul>
-                                  <li ><span class="odds-font">{{sanjundaxiao.list[7].odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="sanjundaxiao.list[7].normalMoney" v-on:input ="inputFunc(sanjundaxiao,sanjundaxiao.list[7],'sanjundaxiao',sanjundaxiao.list[7].normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                  </tr>
-                </table>
+    <table class="table000" v-if="iskaipaning">
+      <tbody>
+        <tr>
+          <td class="vertical-t">
+            <div class="margin-r10 bet_box">
+              <div id="round_content">
 
+                <clock-time></clock-time>
 
-                <table class="weiq" v-if="weishaiquanshai.list">
-                  <tr>
-                      <th colspan="8">{{weishaiquanshai.name}}</th>
-                  </tr>
-                  <tr>
-                      <template v-for="(item,index) in weishaiquanshai.list.slice(0,3)">
-                              <td class="tdLeft ordersTdOver sanshai" :class="'weishaiquanshai'+item.oddsId" @click="orderTd(weishaiquanshai,item,'weishaiquanshai')" @mouseenter="overShow(item,'weishaiquanshai')" @mouseleave="outHide(item,'weishaiquanshai')">
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(0,1)"></i>
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(2,3)"></i>
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(4,5)"></i>
-                              </td>
-                              <td class="tdRight w" :class="'weishaiquanshai'+item.oddsId" @click="orderTd(weishaiquanshai,item,'weishaiquanshai')" @mouseenter="overShow(item,'weishaiquanshai')" @mouseleave="outHide(item,'weishaiquanshai')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(weishaiquanshai,item,'weishaiquanshai',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                      </template>
-                  </tr>
-                  <tr>
-                      <template v-for="(item,index) in weishaiquanshai.list.slice(3,6)">
-                              <td class="tdLeft ordersTdOver sanshai" :class="'weishaiquanshai'+item.oddsId" @click="orderTd(weishaiquanshai,item,'weishaiquanshai')" @mouseenter="overShow(item,'weishaiquanshai')" @mouseleave="outHide(item,'weishaiquanshai')">
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(0,1)"></i>
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(2,3)"></i>
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(4,5)"></i>
-                              </td>
-                              <td class="tdRight w" :class="'weishaiquanshai'+item.oddsId" @click="orderTd(weishaiquanshai,item,'weishaiquanshai')" @mouseenter="overShow(item,'weishaiquanshai')" @mouseleave="outHide(item,'weishaiquanshai')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(weishaiquanshai,item,'weishaiquanshai',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                      </template>
-                  </tr>
-                  <tr>
-                      <td class="tdLeft ordersTdOver sanshai" :class="'weishaiquanshai'+weishaiquanshai.list[6].oddsId" @click="orderTd(weishaiquanshai,weishaiquanshai.list[6],'weishaiquanshai')" @mouseenter="overShow(weishaiquanshai.list[6],'weishaiquanshai')" @mouseleave="outHide(weishaiquanshai.list[6],'weishaiquanshai')">{{weishaiquanshai.list[6].oddsName}}
-                              </td>
-                              <td class="tdRight" :class="'weishaiquanshai'+weishaiquanshai.list[6].oddsId" @click="orderTd(weishaiquanshai,weishaiquanshai.list[6],'weishaiquanshai')" @mouseenter="overShow(weishaiquanshai.list[6],'weishaiquanshai')" @mouseleave="outHide(weishaiquanshai.list[6],'weishaiquanshai')">
-                                <ul>
-                                  <li ><span class="odds-font">{{weishaiquanshai.list[6].odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="weishaiquanshai.list[6].normalMoney" v-on:input ="inputFunc(weishaiquanshai,weishaiquanshai.list[6],'weishaiquanshai',weishaiquanshai.list[6].normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                      </td>
-                      <td colspan="4">&nbsp;</td>
-                  </tr>
-                </table>
+                <bet-quick :orderDataList="orderDataList" v-on:childByReset="childByReset"></bet-quick>
 
-                <table v-if="dianshu.list">
-                        <tr>
-                          <th colspan="8">{{dianshu.name}}</th>
-                        </tr>
-                        <tr>
-                            <template v-for="(item,index) in dianshu.list.slice(0,4)">
-                              <td class="tdLeft ordersTdOver" width="8%" :class="'dianshu'+item.oddsId" @click="orderTd(dianshu,item,'dianshu')" @mouseenter="overShow(item,'dianshu')" @mouseleave="outHide(item,'dianshu')">{{item.oddsName}}</td>
-                              <td class="tdRight" :class="'dianshu'+item.oddsId" @click="orderTd(dianshu,item,'dianshu')" @mouseenter="overShow(item,'dianshu')" @mouseleave="outHide(item,'dianshu')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(dianshu,item,'dianshu',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                            </template>
-                        </tr>
-                        <tr>
-                            <template v-for="(item,index) in dianshu.list.slice(4,8)">
-                              <td class="tdLeft ordersTdOver" width="8%" :class="'dianshu'+item.oddsId" @click="orderTd(dianshu,item,'dianshu')" @mouseenter="overShow(item,'dianshu')" @mouseleave="outHide(item,'dianshu')">{{item.oddsName}}</td>
-                              <td class="tdRight" :class="'dianshu'+item.oddsId" @click="orderTd(dianshu,item,'dianshu')" @mouseenter="overShow(item,'dianshu')" @mouseleave="outHide(item,'dianshu')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(dianshu,item,'dianshu',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                            </template>
-                        </tr>
-                        <tr>
-                            <template v-for="(item,index) in dianshu.list.slice(8,12)">
-                              <td class="tdLeft ordersTdOver" width="8%" :class="'dianshu'+item.oddsId" @click="orderTd(dianshu,item,'dianshu')" @mouseenter="overShow(item,'dianshu')" @mouseleave="outHide(item,'dianshu')">{{item.oddsName}}</td>
-                              <td class="tdRight" :class="'dianshu'+item.oddsId" @click="orderTd(dianshu,item,'dianshu')" @mouseenter="overShow(item,'dianshu')" @mouseleave="outHide(item,'dianshu')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(dianshu,item,'dianshu',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                            </template>
-                        </tr>
-                        <tr>
-                            <template v-for="(item,index) in dianshu.list.slice(12,14)">
-                              <td class="tdLeft ordersTdOver" width="8%" :class="'dianshu'+item.oddsId" @click="orderTd(dianshu,item,'dianshu')" @mouseenter="overShow(item,'dianshu')" @mouseleave="outHide(item,'dianshu')">{{item.oddsName}}</td>
-                              <td class="tdRight" :class="'dianshu'+item.oddsId" @click="orderTd(dianshu,item,'dianshu')" @mouseenter="overShow(item,'dianshu')" @mouseleave="outHide(item,'dianshu')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(dianshu,item,'dianshu',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                            </template>
-                            <td colspan="4">&nbsp;</td>
-                        </tr>
-
-                </table>
-
-                <table v-if="changpai.list">
-                        <tr>
-                          <th colspan="8">{{changpai.name}}</th>
-                        </tr>
-                        <tr>
-                            <template v-for="(item,index) in changpai.list.slice(0,3)">
-                              <td class="tdLeft ordersTdOver" width="16%" :class="'changpai'+item.oddsId" @click="orderTd(changpai,item,'changpai')" @mouseenter="overShow(item,'changpai')" @mouseleave="outHide(item,'changpai')">
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(0,1)"></i>
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(2,3)"></i>
-                              </td>
-                              <td class="tdRight" :class="'changpai'+item.oddsId" @click="orderTd(changpai,item,'changpai')" @mouseenter="overShow(item,'changpai')" @mouseleave="outHide(item,'changpai')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(changpai,item,'changpai',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                            </template>
-                        </tr>
-                        <tr>
-                            <template v-for="(item,index) in changpai.list.slice(3,6)">
-                              <td class="tdLeft ordersTdOver" width="16%" :class="'changpai'+item.oddsId" @click="orderTd(changpai,item,'changpai')" @mouseenter="overShow(item,'changpai')" @mouseleave="outHide(item,'changpai')">
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(0,1)"></i>
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(2,3)"></i>
-                              </td>
-                              <td class="tdRight" :class="'changpai'+item.oddsId" @click="orderTd(changpai,item,'changpai')" @mouseenter="overShow(item,'changpai')" @mouseleave="outHide(item,'changpai')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(changpai,item,'changpai',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                            </template>
-                        </tr>
-                        <tr>
-                            <template v-for="(item,index) in changpai.list.slice(6,9)">
-                              <td class="tdLeft ordersTdOver" width="16%" :class="'changpai'+item.oddsId" @click="orderTd(changpai,item,'changpai')" @mouseenter="overShow(item,'changpai')" @mouseleave="outHide(item,'changpai')">
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(0,1)"></i>
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(2,3)"></i>
-                              </td>
-                              <td class="tdRight" :class="'changpai'+item.oddsId" @click="orderTd(changpai,item,'changpai')" @mouseenter="overShow(item,'changpai')" @mouseleave="outHide(item,'changpai')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(changpai,item,'changpai',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                            </template>
-                        </tr>
-                        <tr>
-                            <template v-for="(item,index) in changpai.list.slice(9,12)">
-                              <td class="tdLeft ordersTdOver" width="16%" :class="'changpai'+item.oddsId" @click="orderTd(changpai,item,'changpai')" @mouseenter="overShow(item,'changpai')" @mouseleave="outHide(item,'changpai')">
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(0,1)"></i>
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(2,3)"></i>
-                              </td>
-                              <td class="tdRight" :class="'changpai'+item.oddsId" @click="orderTd(changpai,item,'changpai')" @mouseenter="overShow(item,'changpai')" @mouseleave="outHide(item,'changpai')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(changpai,item,'changpai',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                            </template>
-                        </tr>
-                        <tr>
-                            <template v-for="(item,index) in changpai.list.slice(12,15)">
-                              <td class="tdLeft ordersTdOver" width="16%" :class="'changpai'+item.oddsId" @click="orderTd(changpai,item,'changpai')" @mouseenter="overShow(item,'changpai')" @mouseleave="outHide(item,'changpai')">
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(0,1)"></i>
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(2,3)"></i>
-                              </td>
-                              <td class="tdRight" :class="'changpai'+item.oddsId" @click="orderTd(changpai,item,'changpai')" @mouseenter="overShow(item,'changpai')" @mouseleave="outHide(item,'changpai')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(changpai,item,'changpai',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                            </template>
-                        </tr>
-                </table>
-
-                <table v-if="duanpai.list">
-                        <tr>
-                          <th colspan="8">{{duanpai.name}}</th>
-                        </tr>
-                        <tr>
-                            <template v-for="(item,index) in duanpai.list.slice(0,3)">
-                              <td class="tdLeft ordersTdOver" width="16%" :class="'duanpai'+item.oddsId" @click="orderTd(duanpai,item,'duanpai')" @mouseenter="overShow(item,'duanpai')" @mouseleave="outHide(item,'duanpai')">
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(0,1)"></i>
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(2,3)"></i>
-                              </td>
-                              <td class="tdRight" :class="'duanpai'+item.oddsId" @click="orderTd(duanpai,item,'duanpai')" @mouseenter="overShow(item,'duanpai')" @mouseleave="outHide(item,'duanpai')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(duanpai,item,'duanpai',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                            </template>
-                        </tr>
-                        <tr>
-                            <template v-for="(item,index) in duanpai.list.slice(3,6)">
-                             <td class="tdLeft ordersTdOver" width="16%" :class="'duanpai'+item.oddsId" @click="orderTd(duanpai,item,'duanpai')" @mouseenter="overShow(item,'duanpai')" @mouseleave="outHide(item,'duanpai')">
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(0,1)"></i>
-                                <i :class="'jsk3-icon-'+item.oddsName.slice(2,3)"></i>
-                              </td>
-                              <td class="tdRight" :class="'duanpai'+item.oddsId" @click="orderTd(duanpai,item,'duanpai')" @mouseenter="overShow(item,'duanpai')" @mouseleave="outHide(item,'duanpai')">
-                                <ul>
-                                  <li ><span class="odds-font">{{item.odds}}</span></li>
-                                  <li v-if="normalPay"><input type="text" v-model="item.normalMoney" v-on:input ="inputFunc(duanpai,item,'duanpai',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"></li>
-                                </ul>
-                              </td>
-                            </template>
-                        </tr>
-                </table>
               </div>
+
+              <div id="errormsg" style=" display:none;"></div>
+
+              <div id="mainPageData" class="orders">
+
+                <table v-if="showOdds == '两面盘'" class="DTable kuaijie" cellpadding="0" cellspacing="1" border="0" width="700" style="margin-top:0px;">
+                  
+                  <thead>
+                    <tr class="DtrTitle">
+                      <td :colspan="kuaijiePay?9:12" class="td_caption_1" style=" font-weight: bold;">{{zongheData.name}}</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr class="Dbgco1" v-for="(itemPa,indexPa) in zongheData.list">
+                      <template v-for="(item,index) in itemPa" v-if="item">
+                        <td class="betnum" style=" width:60px;max-width:60px;">{{item.oddsName}}</td>
+                        <td class="oddsTdMin" :class="['zongheData'+item.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(zongheData,item,'zongheData')">
+                          <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(zongheData,item,'zongheData') : kuaijieInto(zongheData,item,'zongheData')" class="betRateNum" :class="'zongheData'+item.oddsId+'a'"> 
+                            <span class="betRateNum">{{item.odds}}</span>
+                          </a>
+                          <span v-else class="noOddSpan">&nbsp;-&nbsp;</span>
+                        </td>
+
+                        <td v-if="!kuaijiePay">
+                          <input v-if="isOpenOdds" v-model="item.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(zongheData,item,'zongheData',item.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                          <span v-else style="width:60px;">封盘</span>
+                        </td>
+                      </template>
+                      <td :colspan="kuaijiePay?2:3"></td>
+                    </tr>
+
+                    <tr class="td_caption_1">
+                      <td :colspan="kuaijiePay?2:3" style=" font-weight: bold;" class="title_colspan">{{liangmianpan_lmp[1].name}}</td>
+                      <td :colspan="kuaijiePay?2:3" style=" font-weight: bold;" class="title_colspan">{{liangmianpan_lmp[2].name}}</td>
+                      <td :colspan="kuaijiePay?2:3" style=" font-weight: bold;" class="title_colspan">{{liangmianpan_lmp[3].name}}</td>
+                      <td :colspan="kuaijiePay?2:3" style=" font-weight: bold;" class="title_colspan">{{liangmianpan_lmp[4].name}}</td>
+                    </tr>
+
+                    <tr class="Dbgco1" v-for="(itemPa,indexPa) in yidaosiqiu">
+                      <template v-for="(item,index) in itemPa" v-if="item">
+                        
+                        <td class="betnum" style=" width:60px;max-width:60px;">{{item.odd.oddsName}}</td>
+                        <td class="oddsTdMin" :class="['yidaosiqiu'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'yidaosiqiu')">
+                          <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item,item.odd,'yidaosiqiu') : kuaijieInto(item,item.odd,'yidaosiqiu')" class="betRateNum" :class="'yidaosiqiu'+item.odd.oddsId+'a'"> 
+                            <span class="betRateNum">{{item.odd.odds}}</span>
+                          </a>
+                          <span v-else class="noOddSpan">&nbsp;-&nbsp;</span>
+                        </td>
+
+                        <td v-if="!kuaijiePay">
+                          <input v-if="isOpenOdds" v-model="item.odd.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(item,item.odd,'yidaosiqiu',item.odd.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                          <span v-else style="width:60px;">封盘</span>
+                        </td>
+
+                      </template>
+                    </tr>
+
+                    <tr class="td_caption_1">
+                      <td :colspan="kuaijiePay?2:3" style=" font-weight: bold;" class="title_colspan">{{liangmianpan_lmp[5].name}}</td>
+                      <td :colspan="kuaijiePay?2:3" style=" font-weight: bold;" class="title_colspan">{{liangmianpan_lmp[6].name}}</td>
+                      <td :colspan="kuaijiePay?2:3" style=" font-weight: bold;" class="title_colspan">{{liangmianpan_lmp[7].name}}</td>
+                      <td :colspan="kuaijiePay?2:3" style=" font-weight: bold;" class="title_colspan">{{liangmianpan_lmp[8].name}}</td>
+                    </tr>
+
+                    <tr class="Dbgco1" v-for="(itemPa,indexPa) in sidaobaqiu">
+                      <template v-for="(item,index) in itemPa" v-if="item">
+
+                        <td class="betnum" style=" width:60px;max-width:60px;">{{item.odd.oddsName}}</td>
+                        <td class="oddsTdMin" :class="['sidaobaqiu'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'sidaobaqiu')">
+                          <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item,item.odd,'sidaobaqiu') : kuaijieInto(item,item.odd,'sidaobaqiu')" class="betRateNum" :class="'sidaobaqiu'+item.odd.oddsId+'a'"> 
+                            <span class="betRateNum">{{item.odd.odds}}</span>
+                          </a>
+                          <span v-else class="noOddSpan">&nbsp;-&nbsp;</span>
+                        </td>
+
+                        <td v-if="!kuaijiePay">
+                          <input v-if="isOpenOdds" v-model="item.odd.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(item,item.odd,'sidaobaqiu',item.odd.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                          <span v-else style="width:60px;">封盘</span>
+                        </td>
+
+                      </template>
+                    </tr>
+
+                  </tbody>
+                </table>
+
+                <table v-if="['第一球','第二球','第三球','第四球','第五球','第六球','第七球','第八球'].findIndex((n) => n == showOdds)>-1" class="DTable kuaijie" cellpadding="0" cellspacing="1" border="0" width="700" style="margin-top:0px;">
+                  <thead>
+                    <tr class="td_caption_1">
+                      <td style=" font-weight: bold;text-align:center;" align="center">号</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center">赔率</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center" class="title_jine" v-if="!kuaijiePay">金额</td>
+                      <td style=" font-weight: bold;text-align:center;" align="center">号</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center">赔率</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center" class="title_jine" v-if="!kuaijiePay">金额</td>
+                      <td style=" font-weight: bold;text-align:center;" align="center">号</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center">赔率</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center" class="title_jine" v-if="!kuaijiePay">金额</td>
+                      <td style=" font-weight: bold;text-align:center;" align="center">号</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center">赔率</td>
+                      <td style=" font-weight: bold;text-align:center;min-width:41px;" align="center" class="title_jine" v-if="!kuaijiePay">金额</td>
+                    </tr> 
+                  </thead>
+                  <tbody>
+
+                    <tr class="Dbgco1" v-for="(itemPa,indexPa) in qidaobaqiuObjL.slice(0,5)">
+                      <template v-for="(item,index) in itemPa" v-if="item.odd">
+                        <td class="betnum" align="center">
+                          <div :class="'No_'+item.odd.oddsName" style=" height:27px; width:27px;"></div>
+                        </td>
+
+                        <td class="oddsTdMin" :class="['qidaobaqiuObjL'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'qidaobaqiuObjL')">
+                          <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item,item.odd,'qidaobaqiuObjL') : kuaijieInto(item,item.odd,'qidaobaqiuObjL')" class="betRateNum" :class="'qidaobaqiuObjL'+item.odd.oddsId+'a'"> 
+                            <span class="betRateNum">{{item.odd.odds}}</span>
+                          </a>
+                          <span v-else class="noOddSpan">&nbsp;-&nbsp;</span>
+                        </td>
+
+                        <td v-if="!kuaijiePay">
+                          <input v-if="isOpenOdds" v-model="item.odd.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(item,item.odd,'qidaobaqiuObjL',item.odd.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                          <span v-else style="width:60px;">封盘</span>
+                        </td>
+
+                      </template>
+
+
+                    </tr>
+
+                     <tr class="Dbgco1" v-for="(itemPa,indexPa) in qidaobaqiuObjL.slice(5,8)">
+
+                      <template v-for="(item,index) in itemPa" v-if="item.odd">
+
+                        <td class="betnum">{{item.odd.oddsName}}</td>
+
+                        <td class="oddsTdMin" :class="['qidaobaqiuObjL'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'qidaobaqiuObjL')">
+                          <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item,item.odd,'qidaobaqiuObjL') : kuaijieInto(item,item.odd,'qidaobaqiuObjL')" class="betRateNum" :class="'qidaobaqiuObjL'+item.odd.oddsId+'a'"> 
+                            <span class="betRateNum">{{item.odd.odds}}</span>
+                          </a>
+                          <span v-else class="noOddSpan">&nbsp;-&nbsp;</span>
+                        </td>
+
+                        <td v-if="!kuaijiePay">
+                          <input v-if="isOpenOdds" v-model="item.odd.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(item,item.odd,'qidaobaqiuObjL',item.odd.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                          <span v-else style="width:60px;">封盘</span>
+                        </td>
+
+                      </template>
+
+                    </tr>
+                    <tr class="Dbgco1" v-for="(itemPa,indexPa) in qidaobaqiuObjL.slice(8)">
+
+                      <template v-for="(item,index) in itemPa" v-if="item.odd">
+
+                        <td class="betnum">{{item.odd.oddsName}}</td>
+
+                        <td class="oddsTdMin" :class="['qidaobaqiuObjL'+item.odd.oddsId,kuaijiePay?'cursorP' : '']" @click.stop="!kuaijiePay ? '' : kuaijieInto(item,item.odd,'qidaobaqiuObjL')">
+                          <a v-if="isOpenOdds" title="按此下注" @click.stop="!kuaijiePay ? IntoMtran(item,item.odd,'qidaobaqiuObjL') : kuaijieInto(item,item.odd,'qidaobaqiuObjL')" class="betRateNum" :class="'qidaobaqiuObjL'+item.odd.oddsId+'a'"> 
+                            <span class="betRateNum">{{item.odd.odds}}</span>
+                          </a>
+                          <span v-else class="noOddSpan">&nbsp;-&nbsp;</span>
+                        </td>
+
+                        <td v-if="!kuaijiePay">
+                          <input v-if="isOpenOdds" v-model="item.odd.normalMoney" type="text" size="3" class="inp1" v-on:input ="inputFunc(item,item.odd,'qidaobaqiuObjL',item.odd.normalMoney)" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
+                          <span v-else style="width:60px;">封盘</span>
+                        </td>
+
+                      </template>
+
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td class="title_jine" v-if="!kuaijiePay">&nbsp;</td>
+
+                    </tr>
+                  </tbody>
+                </table>
+
+                <bet-quick :orderDataList="orderDataList" v-on:childByReset="childByReset"></bet-quick>
+
+                <footer-bocai :curBocaiTypeId="+bocaiTypeId" :showOdds="showOdds"></footer-bocai>
+
+              </div>
+
             </div>
+          </td>
+
+          <td valign="top">
+            <chang-long :curBocaiTypeId="+bocaiTypeId"></chang-long>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
 
 
-            <div class="order-info">
-              <bet-quick :orderDataList="orderDataList" :canOrder="canOrder" :bocaiCategory="bocaiCategory" v-on:childByReset="childByReset" v-on:childByChangePay="childByChangePay"></bet-quick>
-            </div>
+    <no-game v-if="!iskaipaning"></no-game>
 
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <p style="clear: both;"></p>
   </div>
 </template>
 
@@ -308,64 +218,113 @@
 import BetQuick from '@/components/apps/bocai/components/betQuick';
 import ClockTime from '@/components/apps/bocai/components/clockTime';
 import FooterBocai from '@/components/apps/bocai/components/footerBocai';
+import ChangLong from '@/components/apps/bocai/components/changLong';
+import NoGame from '@/components/apps/bocai/components/noGame';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
     ClockTime,
     BetQuick,
-    FooterBocai
+    FooterBocai,
+    ChangLong,
+    NoGame
   },
   data () {
     return {
-      curBocaiTypeId: '8498',
-      curactiveIndex: '江苏快3',
-      bocaiCategoryList: [],
-      oddsList: [],
-      activeIndex: '',
+      iskaipaning: true,
       showOdds: '',
-      submenu: '更多',
       isOpenOdds: true,
-      longhuhe_lmp: {},
-      qianhousan_lmp: [],
       orderDataList: [],
-      normalPay: false,
-      bocaiCategory: {},
-      kuaixuanList: ['0','1','2','3','4','5','6','7','8','9'],
       shishiZiDatas: {},
       shishiZiDatasList: [],
-      kuaixuanTouList:[],
-      kuaixuanWeiList:[],
-      tempList:[],
-      selectedZiTd:[],
-      canOrder: true,
+      kuaijiePay: false,
 
-      guanyajunhe: {},
-      yidaoshi: {},
-      guanyaZonghe: {},
+      longhuhe_lmp: {},
+      yiwuqiu_lmp: [],
+      yizhiwu_lmp: {},
+      qianhousan_lmp: [],
 
-      sanjundaxiao: {},
-      weishaiquanshai: {},
-      dianshu: {},
-      changpai: {},
-      duanpai: {}
+      liangmianpan_lmp: [],
+
+      zongheData: {},
+      yidaosiqiu: [],
+      sidaobaqiu: [],
+      qidaobaqiuObjL: []
     }
   },
   computed: {
+    ...mapGetters({
+        bocaiInfoData: 'getbocaiInfoData',
+        oddsList: 'getoddsList',
+        bocaiTypeId: 'getbocaiTypeId'
+    }),
   },
   created() {
-    this.getOdds(this.curBocaiTypeId);
   },
   mounted(){
+      bus.$on('getkuaijiePay', (data) => {
+        this.kuaijiePay = data;
+      });
       bus.$on('isOpenOdds', (data) => {
         this.isOpenOdds = data;
       });
       bus.$on('setNewOddsList', (data) => {
-        this.normalPay = false;
-        this.oddsList = data;
+        //this.kuaijiePay = false;
         this.shuaiXuanDatas(data);
+      });
+      //切换二级菜单更新菠菜,以及切快捷更新菠菜
+      bus.$on('getresetOddsCategory', (data) => {
+        console.log('切换二级菜单更新菠菜,以及切快捷更新菠菜getresetOddsCategory');
+        this.showOdds = data;
+        this.resetOddsCategoryfromgam();
+      });
+      bus.$on('iskaipaning', (data) => {
+        this.iskaipaning = data;
       });
   },
   methods: {
+    IntoMtran(itemPa,item,oddEname) {
+
+      store.commit('updatecurPeriods', this.bocaiInfoData.bocaiPeriods);
+      bus.$emit('gettoLeftOdd', itemPa,item,oddEname); 
+
+    },
+    kuaijieInto(oddsObj,item,ids) {
+
+      if(this.isOpenOdds) {
+
+        if(this.kuaijiePay) {
+          if($('.'+ids+item.oddsId).hasClass('selected')){
+
+            console.log('取消你','.'+ids+item.oddsId);
+
+              $('.'+ids+item.oddsId).removeClass('selected');
+              _.remove(this.orderDataList, function(n) {
+                return n.bocaiOddId == item.oddsId;
+              });
+
+          } else {
+            $('.'+ids+item.oddsId).addClass('selected');
+
+            let obj = {
+              bocaiCategory2Id: oddsObj.id,//8225,//投注博彩分类2ID
+              bocaiCategory2Name: oddsObj.name,//"混合",//投注博彩分类2名称
+              bocaiOddId: item.oddsId,//5543,//投注博彩赔率ID
+              bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
+              bocaiValue:"",//投注内容,六合彩连肖/连尾
+              normalMoney: item.normalMoney,//10000,//一般模式下，选择的金额
+              orderNormal: !this.kuaijiePay,   //是快捷，还是一般投注
+              bocaiOdds: item.odds,//1.90//赔率
+              dewaterId: item.dewaterId
+            };
+
+            this.orderDataList.push(obj);
+          }
+        }
+        
+      }
+    },
     qingkong() {
       $('.bet_box .orders td').removeClass('selected');
       this.orderDataList = [];
@@ -374,42 +333,41 @@ export default {
       $('.bet_box .orders td').removeClass('selected');
       this.orderDataList = [];
       $('.kuaixuanTable td').removeClass('active');
-      this.kuaixuanTouList = [];
-      this.kuaixuanWeiList = [];
     },
-    childByChangePay(data) {
-      if(this.normalPay != data) {
-        this.orderDataList = [];
-        $('.bet_box .orders td').removeClass('selected');
-        this.allQingkong();
+    shishiZiGet(item,index) {
+      this.allQingkong();
+      $('.yiziThAct').removeClass('active');
+      $('.shishiZi'+index).addClass('active');
+      this.shishiZiDatas = item;
+
+      if(['二字','一字','三字','二定位','三定位','组选三','组选六','跨度'].findIndex((n) => n == this.showOdds)>-1) {
+        this.shishiZiDatasList = [];
+        for(var i=0;i<item.list.length;i=i+5){
+          this.shishiZiDatasList.push(item.list.slice(i,i+5));
+        }
       }
-      this.normalPay = data;
+
     },
-    childByReset(data) {
-      this.resetOddsCategory(this.bocaiCategory);
+    childByReset(boon,data) {
+      this.resetOddsCategory(boon,data);
       this.allQingkong();
     },
-    outHide(item,ids) {
-      $('.'+ids+item.oddsId).removeClass('overTd');
-    },
-    overShow(item,ids) {
-      $('.'+ids+item.oddsId).addClass('overTd');
+    inputFuncYiZi(item,ids,pay) {
+      let oddsObj = this.shishiZiDatas;
+
+      this.inputFunc(oddsObj,item,ids,pay);
     },
     inputFunc(oddsObj,item,ids,pay) {
 
-      let reg = /^[\u2E80-\u9FFF]+$/;
-      if(reg.test(this.moneyOrder)){
-        this.$alertMessage('请确认注单!', '温馨提示');
-      } else {
-        if(this.normalPay) {
+        if(!this.kuaijiePay) {
           if(pay == '') {
-            $('.'+ids+item.oddsId).removeClass('selected');
+            $('.'+ids+item.oddsId).removeClass('active');
             _.remove(this.orderDataList, function(n) {
-                    return n.bocaiOddName == item.oddsName;
+              return n.bocaiOddId == item.oddsId;
                   });
           } else {
 
-            $('.'+ids+item.oddsId).addClass('selected');
+            $('.'+ids+item.oddsId).addClass('active');
                 let ifHas = false;
                 for(let n in this.orderDataList) {
                   if(this.orderDataList[n].bocaiOddId == item.oddsId) {
@@ -421,12 +379,13 @@ export default {
                       bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
                       bocaiValue:"",//投注内容,六合彩连肖/连尾
                       normalMoney: item.normalMoney,//10000,//一般模式下，选择的金额
-                      orderNormal: this.normalPay,   //是快捷，还是一般投注
-                      bocaiOdds: item.odds,//1.90//赔率
+                      orderNormal: !this.kuaijiePay,   //是快捷，还是一般投注
+                      bocaiOdds: item.odds, //1.90//赔率
                       dewaterId: item.dewaterId
                     };
 
                     this.orderDataList[n] = obj;
+
                   }
                 }
 
@@ -438,166 +397,348 @@ export default {
                     bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
                     bocaiValue:"",//投注内容,六合彩连肖/连尾
                     normalMoney: item.normalMoney,//10000,//一般模式下，选择的金额
-                    orderNormal: this.normalPay,   //是快捷，还是一般投注
-                    bocaiOdds: item.odds,//1.90//赔率
+                    orderNormal: !this.kuaijiePay,   //是快捷，还是一般投注
+                    bocaiOdds: item.odds, //1.90//赔率
                     dewaterId: item.dewaterId
                   };
 
                   this.orderDataList.push(obj);
+
                 }
           }
         }
-      }
-
-    },
-    orderTd(oddsObj,item,ids) {
-
-      console.log('点了吗1');
-
-      console.log('this.isOpenOdds',this.isOpenOdds);
-
-      if(this.isOpenOdds) {
-
-        if(!this.normalPay) {
-          
-
-          if($('.'+ids+item.oddsId).hasClass('selected')){
-
-              $('.'+ids+item.oddsId).removeClass('selected');
-              _.remove(this.orderDataList, function(n) {
-                return n.bocaiOddName == item.oddsName;
-              });
-
-          } else {
-            console.log('点了吗3');
-
-            $('.'+ids+item.oddsId).addClass('selected');
-
-            let obj = {
-              bocaiCategory2Id: oddsObj.id,//8225,//投注博彩分类2ID
-              bocaiCategory2Name: oddsObj.name,//"混合",//投注博彩分类2名称
-              bocaiOddId: item.oddsId,//5543,//投注博彩赔率ID
-              bocaiOddName: item.oddsName,//"大",//投注博彩赔率名称
-              bocaiValue:"",//投注内容,六合彩连肖/连尾
-              normalMoney: item.normalMoney,//10000,//一般模式下，选择的金额
-              orderNormal: this.normalPay,   //是快捷，还是一般投注
-              bocaiOdds: item.odds,//1.90//赔率
-              dewaterId: item.dewaterId
-            };
-
-            this.orderDataList.push(obj);
-          }
-        }
-        
-      }
+      
       
     },
-    handleSelect(key, keyPath) {
-        //console.log(key, keyPath);
+    orderTdYiZi(item,ids) {
+      let oddsObj = this.shishiZiDatas;
+
+      this.orderTd(oddsObj,item,ids);
     },
-    async resetOddsCategory(item) {
+    //更新菠菜默认非快捷
+    async resetOddsCategoryfromgam() {
+        this.orderDataList = [];
+        this.kuaijiePay = false;
 
-      let that = this;
+        bus.$emit('getkuaijiePay', false); 
 
-          const loading = this.$loading({
-                lock: true,
-                text: 'Loading',
-                background: 'rgba(0, 0, 0, 0.7)'
-              });
-          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.curBocaiTypeId+`&bocaiCategoryId=`+item.id).then((res) => {
-            that.$handelResponse(res, (result) => {
-            loading.close();
-              that.showOdds = item.name;
-              that.bocaiCategory = item;
-              if(result.code===200){
-                that.oddsList = result.oddsList;
-                
-                that.orderDataList = [];
-                that.normalPay = false;
-                bus.$emit('getnormalPay', false); 
-
-                that.shuaiXuanDatas(result.oddsList);
-
-              }
-            })
-          });
+        this.shuaiXuanDatas(this.oddsList);
     },
-    async getnotice() {
-      let res = await this.$get(`${window.url}/api/notice`);
+    //切换快捷更新菠菜
+    async resetOddsCategory(boon,data) {
 
-          if(res.code===200){
+        this.orderDataList = [];
+        this.kuaijiePay = boon;
 
-            bus.$emit('getmessage', res.data);
-          } else {
-          }
+        bus.$emit('getkuaijiePay', boon); 
 
-    },
-    async getOddsCategory(item,index) {
-
-      bus.$emit('getbocaiCategoryId', item.id);
-
-      this.getnotice();
-
-      if(index*1 > 9) {
-        this.submenu = item.name;
-      } else {
-        this.submenu = '更多';
-      }
-
-      this.resetOddsCategory(item);
-
-    },
-    async getOdds(id) {
-
-      let that = this;
-          const loading = this.$loading({
-                lock: true,
-                text: 'Loading',
-                background: 'rgba(0, 0, 0, 0.7)'
-              });
-          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+id).then((res) => {
-            that.$handelResponse(res, (result) => {
-            loading.close();
-              if(result.code===200){
-                bus.$emit('curactiveIndex', this.curactiveIndex);
-                that.bocaiCategoryList = result.bocaiCategoryList;
-                that.oddsList = result.oddsList;
-                that.showOdds = result.bocaiCategoryList[0].name;
-                that.bocaiCategory = result.bocaiCategoryList[0];
-
-                bus.$emit('getbocaiCategoryId', result.bocaiCategoryList[0].id);
-                that.activeIndex = that.bocaiCategoryList[0].name;
-                that.shuaiXuanDatas(result.oddsList);
-
-                bus.$emit('getbocaiTypeId', that.curBocaiTypeId); 
-                bus.$emit('getbocaiTypeName', that.curactiveIndex); 
-
-              }
-            })
-          });
-
+        this.shuaiXuanDatas(data);
     },
     shuaiXuanDatas(dataList) {
 
-      for(let m in dataList) {
-        if(dataList[m].name == '三军、大小') {
-            this.sanjundaxiao = dataList[m];
+
+      if(this.showOdds == '两面盘') {
+
+        let arry1 = [];
+        let arry2 = [];
+        let arry3 = [];
+        let arry4 = [];
+        let arry5 = [];
+        let arry6 = [];
+        let arry7 = [];
+        let arry8 = [];
+
+        let arry9 = [];
+
+        let barry1 = [];
+        let barry2 = [];
+        let barry3 = [];
+        let barry4 = [];
+        let barry5 = [];
+        let barry6 = [];
+        let barry7 = [];
+        let barry8 = [];
+
+        console.log('dataList',dataList);
+
+        this.liangmianpan_lmp = dataList;
+
+        this.yidaosiqiu = [];
+        this.sidaobaqiu = [];
+
+
+        for(let m in dataList) {
+
+          if(dataList[m].name == '总和') {
+
+            dataList[m].list = _.chunk(dataList[m].list,2);
+            let arr1 = [];
+            let arr2 = [];
+
+            for(let n in dataList[m].list) {
+              arr1.push(dataList[m].list[n][0]);
+              arr2.push(dataList[m].list[n][1]);
+            }
+
+            this.zongheData.id = dataList[m].id;
+            this.zongheData.name = dataList[m].name;
+            this.zongheData.list = [];
+            this.zongheData.list.push(arr1);
+            this.zongheData.list.push(arr2);
+          }
+
+          if(['第一球','第二球','第三球','第四球'].findIndex((n) => n == dataList[m].name)>-1) {
+            let obj1 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[0]
+            }
+            arry1.push(obj1);
+            let obj2 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[1]
+            }
+            arry2.push(obj2);
+            let obj3 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[2]
+            }
+            arry3.push(obj3);
+            let obj4 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[3]
+            }
+            arry4.push(obj4);
+            let obj5 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[4]
+            }
+            arry5.push(obj5);
+            let obj6 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[5]
+            }
+            arry6.push(obj6);
+            let obj7 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[6]
+            }
+            arry7.push(obj7);
+            let obj8 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[7]
+            }
+            arry8.push(obj8);
+          }
+
+          if(['第五球','第六球','第七球','第八球'].findIndex((n) => n == dataList[m].name)>-1) {
+            let obj1 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[0]
+            }
+            barry1.push(obj1);
+            let obj2 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[1]
+            }
+            barry2.push(obj2);
+            let obj3 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[2]
+            }
+            barry3.push(obj3);
+            let obj4 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[3]
+            }
+            barry4.push(obj4);
+            let obj5 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[4]
+            }
+            barry5.push(obj5);
+            let obj6 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[5]
+            }
+            barry6.push(obj6);
+            let obj7 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[6]
+            }
+            barry7.push(obj7);
+            let obj8 = {
+              id: dataList[m].id,
+              name: dataList[m].name,
+              odd: dataList[m].list[7]
+            }
+            barry8.push(obj8);
+          }
+
+
+
         }
-        if(dataList[m].name == '围骰、全骰') {
-            this.weishaiquanshai = dataList[m];
-        }
-        if(dataList[m].name == '点数') {
-            this.dianshu = dataList[m];
-        }
-        if(dataList[m].name == '长牌') {
-            this.changpai = dataList[m];
-        }
-        if(dataList[m].name == '短牌') {
-            this.duanpai = dataList[m];
-        }
+
+        this.yidaosiqiu.push(arry1);
+        this.yidaosiqiu.push(arry2);
+        this.yidaosiqiu.push(arry3);
+        this.yidaosiqiu.push(arry4);
+        this.yidaosiqiu.push(arry5);
+        this.yidaosiqiu.push(arry6);
+        this.yidaosiqiu.push(arry7);
+        this.yidaosiqiu.push(arry8);
+
+        this.sidaobaqiu.push(barry1);
+        this.sidaobaqiu.push(barry2);
+        this.sidaobaqiu.push(barry3);
+        this.sidaobaqiu.push(barry4);
+        this.sidaobaqiu.push(barry5);
+        this.sidaobaqiu.push(barry6);
+        this.sidaobaqiu.push(barry7);
+        this.sidaobaqiu.push(barry8);
+
+
+        //console.log('this.yidaosiqiu',this.yidaosiqiu);
+        //console.log('this.sidaobaqiu',this.sidaobaqiu);
+
+        console.log('zongheData',this.zongheData);
+        
       }
 
+      if(['第一球','第二球','第三球','第四球','第五球','第六球','第七球','第八球'].findIndex((n) => n == this.oddsList[0].name)>-1) {
+
+        this.qidaobaqiuObjL = [];
+        
+        let arry1 = [];
+        let arry2 = [];
+        let arry3 = [];
+        let arry4 = [];
+        let arry5 = [];
+        let arry6 = [];
+        let arry7 = [];
+        let arry8 = [];
+
+        let arry9 = [];
+
+        let barry1 = [];
+        let barry2 = [];
+        let barry3 = [];
+        let barry4 = [];
+        let barry5 = [];
+        let barry6 = [];
+        let barry7 = [];
+        let barry8 = [];
+
+        let tempOddList = this.oddsList[0];
+
+        console.log('tempOddList',tempOddList);
+
+        let arrytemp1 = tempOddList.list.slice(0,20);
+        let arrytemp2 = tempOddList.list.slice(20,35);
+
+        arrytemp1 = _.chunk(arrytemp1,5);  
+        arrytemp2 = _.chunk(arrytemp2,4);  
+
+        console.log('arrytemp1',arrytemp1);
+        console.log('arrytemp2',arrytemp2);
+
+        for(let n in arrytemp1) {
+          let obj1 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp1[n][0]
+          }
+          arry1.push(obj1);
+          let obj2 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp1[n][1]
+          }
+          arry2.push(obj2);
+          let obj3 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp1[n][2]
+          }
+          arry3.push(obj3);
+          let obj4 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp1[n][3]
+          }
+          arry4.push(obj4);
+          let obj5 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp1[n][4]
+          }
+          arry5.push(obj5);
+        }
+
+        this.qidaobaqiuObjL.push(arry1);
+        this.qidaobaqiuObjL.push(arry2);
+        this.qidaobaqiuObjL.push(arry3);
+        this.qidaobaqiuObjL.push(arry4);
+        this.qidaobaqiuObjL.push(arry5);
+
+        for(let n in arrytemp2) {
+          let obj1 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp2[n][0]
+          }
+          barry1.push(obj1);
+          let obj2 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp2[n][1]
+          }
+          barry2.push(obj2);
+          let obj3 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp2[n][2]
+          }
+          barry3.push(obj3);
+          let obj4 = {
+            id: tempOddList.id,
+            name: tempOddList.name,
+            odd: arrytemp2[n][3]
+          }
+          barry4.push(obj4);
+        }
+
+        this.qidaobaqiuObjL.push(barry1);
+        this.qidaobaqiuObjL.push(barry2);
+        this.qidaobaqiuObjL.push(barry3);
+        this.qidaobaqiuObjL.push(barry4);
+
+        console.log('this.qidaobaqiuObjL',this.qidaobaqiuObjL);
+        
+      }
+
+
+
+
+
     }
+
+
+
 
   }
 }
