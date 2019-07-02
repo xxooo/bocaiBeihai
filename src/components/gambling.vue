@@ -510,7 +510,7 @@ export default {
 
       $('.bST_1').siblings().removeClass('bST_1_s active');
 
-      if(['重庆时时彩','极速时时彩','广东快乐十分','极速赛车','幸运飞艇','北京赛车'].findIndex((n) => n==item.bocaiName)>-1) {
+      if(['重庆时时彩','极速时时彩','广东快乐十分','极速赛车','幸运飞艇','北京赛车','江苏快3'].findIndex((n) => n==item.bocaiName)>-1) {
 
         $('.div_gameno_'+item.bocaiId).addClass('active').siblings().removeClass('active');
 

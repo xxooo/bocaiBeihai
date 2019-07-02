@@ -193,6 +193,8 @@
         store.commit('updateisOdding',false);
 
         store.commit('updatemoneyOrder','');
+        this.moneyOrderTemp = '';
+        store.commit('updatefocusIndex',1);
 
         this.$emit('childByReset',!this.kuaijiePay,this.oddsList);
 
@@ -203,6 +205,8 @@
         store.commit('updateisOdding',false);
 
         store.commit('updatemoneyOrder','');
+        this.moneyOrderTemp = '';
+        store.commit('updatefocusIndex',1);
 
         this.$emit('childByReset',this.kuaijiePay,this.oddsList);
 
@@ -439,13 +443,20 @@
               store.commit('updatehasErrorMessage','请填写下注金额!!!');
               store.commit('updateorderOddsVisible',true);
             } else {
-              store.commit('updatehasError',true);
+              store.commit('updatehasError',false);
               store.commit('updateorderOddsVisible',true);
             }
 
 
           } else {
             //console.log('快捷');
+            let nukk = $('#txtqcstake').val() || '';
+
+            if(nukk != '') {
+              store.commit('updatemoneyOrder',nukk);
+            }
+
+            //console.log('nukk',nukk);
 
             let orderListTemp = [];
 

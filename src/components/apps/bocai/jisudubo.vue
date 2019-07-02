@@ -53,7 +53,7 @@
 
 
                   <!-- 总和龙虎 -->
-                  <table class="DTable kuaijie" cellpadding="0" cellspacing="1" border="0" width="700" style="margin-top: 2px;">
+                  <table v-if="longhuhe_lmp.list" class="DTable kuaijie" cellpadding="0" cellspacing="1" border="0" width="700" style="margin-top: 2px;">
                     <tbody>
                       <tr class="Dbgco1">
                         <template v-for="(item,index) in longhuhe_lmp.list" v-if="index*1 < 4">

@@ -432,13 +432,13 @@
                 if(result.code===200){
 
 
+                  if(result.data) {
 
-                  if(result.data.counts) {
-                    this.counts = result.data.counts;
+                    if(result.data.counts) {
+                      this.counts = result.data.counts;
 
-                    this.countsList = this.counts[0];
-                  }
-                  
+                      this.countsList = this.counts[0];
+                    }
 
                   for(let x in result.data.numMap) {
                     let data = result.data.numMap[x].split(","); 
@@ -623,8 +623,10 @@
                       }
                     }
 
-                    if(result.data.longhu) {
-                      let data3 = result.data.longhu.split(","); 
+                    console.log('result.data',result.data);
+
+                    if(result.data.longhuhe) {
+                      let data3 = result.data.longhuhe.split(","); 
                       let temp3 = '';
                       let nn3 = 1;
                       for(let n in data3) {
@@ -647,27 +649,29 @@
                       }
                     }
 
-                    if(result.data.longhuMap.longhu) {
-                      let data3 = result.data.longhuMap.longhu.split(","); 
-                      let temp3 = '';
-                      let nn3 = 1;
-                      for(let n in data3) {
-                        let obj = {};
-                        if(temp3 != data3[n]) {  
-                          obj.type = 1;
-                          obj.value = [];
-                          obj.value.push(data3[n]);
-                          this.longhuList.push(obj);
-                        } else {
-                          let kk = n*1-nn3;
-                          if(this.longhuList[n*1-nn3]) {
-                            this.longhuList[n*1-nn3].type = 2;
-                            this.longhuList[n*1-nn3].value.push(data3[n]);
-                            nn3 = nn3*1+1;
+                    if(result.data.longhuMap) {
+                      if(result.data.longhuMap.longhu) {
+                        let data3 = result.data.longhuMap.longhu.split(","); 
+                        let temp3 = '';
+                        let nn3 = 1;
+                        for(let n in data3) {
+                          let obj = {};
+                          if(temp3 != data3[n]) {  
+                            obj.type = 1;
+                            obj.value = [];
+                            obj.value.push(data3[n]);
+                            this.longhuList.push(obj);
+                          } else {
+                            let kk = n*1-nn3;
+                            if(this.longhuList[n*1-nn3]) {
+                              this.longhuList[n*1-nn3].type = 2;
+                              this.longhuList[n*1-nn3].value.push(data3[n]);
+                              nn3 = nn3*1+1;
+                            }
                           }
-                        }
 
-                        temp3 = data3[n];
+                          temp3 = data3[n];
+                        }
                       }
                     }
 
@@ -861,6 +865,9 @@
 
                       console.log('guanyajunhedanshuang',this.guanyajunhedanshuang);
                     }
+
+
+                  }
 
 
                 }
