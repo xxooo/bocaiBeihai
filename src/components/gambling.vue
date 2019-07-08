@@ -445,6 +445,10 @@ export default {
 
                 bus.$emit('getresetOddsCategory', item.name);
 
+              } else {
+                store.commit('updatehasError',true);
+                store.commit('updatehasErrorMessage',result.msg);
+                store.commit('updateorderOddsVisible',true);
               }
             })
           });

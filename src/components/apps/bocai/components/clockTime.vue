@@ -27,7 +27,7 @@
                       <span class="versionKJSpan"><span id="span_roundno">{{bocaiInfoData.preBocaiPeriods}}</span>期开奖&nbsp;</span>
                     </div>
 
-                    <div class="head_f2" id="div_betno" v-if="['广东快乐十分'].findIndex((n) => n==bocaiName)>-1">
+                    <div class="head_f2" v-if="['广东快乐十分'].findIndex((n) => n==bocaiName)>-1">
                       <div style="float:right;width:229px;">
                         <span style="float:left;">&nbsp;</span>
                         <span style="float:left;" v-for="(item,index) in preResult">
@@ -37,7 +37,7 @@
                       <span class="versionKJSpan"><span id="span_roundno">{{bocaiInfoData.preBocaiPeriods}}</span>期开奖&nbsp;</span>
                     </div>
 
-                    <div class="head_f2" id="div_betno" style="width: 428px;" v-if="['极速赛车','幸运飞艇','北京赛车'].findIndex((n) => n==bocaiName)>-1">
+                    <div class="head_f2" style="width: 428px;" v-if="['极速赛车','幸运飞艇','北京赛车'].findIndex((n) => n==bocaiName)>-1">
                       
                       <div style="float:right;width:285px;">
                         <span style="float:left;">&nbsp;</span>
@@ -48,6 +48,15 @@
                       <span class="versionKJSpan"><span id="span_roundno">{{bocaiInfoData.preBocaiPeriods}}</span>期开奖&nbsp;</span>
                     </div>
 
+                    <div class="head_f2" v-if="['江苏快3'].findIndex((n) => n==bocaiName)>-1">
+                      <div class="versionKJDiv">
+                        <span class="floatL">&nbsp;</span>
+                        <span class="floatL" v-for="(item,index) in preResult">
+                          <div class="CQREDiv" :class="'JSNo_'+item"></div>
+                        </span>
+                      </div>
+                      <span class="versionKJSpan"><span id="span_roundno">{{bocaiInfoData.preBocaiPeriods}}</span>期开奖&nbsp;</span>
+                    </div>
 
                   </td>
                 </tr>

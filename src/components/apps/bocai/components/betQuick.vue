@@ -341,18 +341,12 @@
 
         let that = this;
 
-          const loading = this.$loading({
-                lock: true,
-                background: 'rgba(0, 0, 0, 0.7)'
-              });
           await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.bocaiTypeId+`&bocaiCategoryId=`+this.bocaiCategory.id).then((res) => {
             that.$handelResponse(res, (result) => {
-            loading.close();
 
               if(result.code===200){
 
                 bus.$emit('setNewOddsList', result.oddsList); //要不要下注时，更新最新赔率 
-
 
                 // for(let n in this.orderDataList) {
                 //   for(let m in result.oddsList) {
@@ -371,6 +365,10 @@
 
                 //bus.$emit('getkuaijiePay', false); 
 
+              } else {
+                store.commit('updatehasError',true);
+                store.commit('updatehasErrorMessage',result.msg);
+                store.commit('updateorderOddsVisible',true);
               }
             })
           });

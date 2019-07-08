@@ -454,7 +454,7 @@ export default {
         bocaiInfoData: 'getbocaiInfoData',
         oddsList: 'getoddsList',
         bocaiTypeId: 'getbocaiTypeId'
-    }),
+    })
   },
   created() {
   },
