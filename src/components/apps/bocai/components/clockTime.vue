@@ -49,10 +49,10 @@
                     </div>
 
                     <div class="head_f2" v-if="['江苏快3'].findIndex((n) => n==bocaiName)>-1">
-                      <div class="versionKJDiv">
+                      <div style="float:right;width:89px;">
                         <span class="floatL">&nbsp;</span>
                         <span class="floatL" v-for="(item,index) in preResult">
-                          <div class="CQREDiv" :class="'JSNo_'+item"></div>
+                          <div style="height:27px; width:27px; margin-top:1px;" :class="'JSNo_'+item"></div>
                         </span>
                       </div>
                       <span class="versionKJSpan"><span id="span_roundno">{{bocaiInfoData.preBocaiPeriods}}</span>期开奖&nbsp;</span>
