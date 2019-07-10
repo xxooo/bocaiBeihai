@@ -1,7 +1,7 @@
 <template>
   <div id="bettingHistory" class="duboBodyClass">
 
-    <table width="95%" align="left" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+    <table v-if="ifshowBetInfo" width="95%" align="left" cellspacing="0" cellpadding="0" style="margin-top:10px;">
       <tbody>
         <tr>
           <td>
@@ -39,12 +39,12 @@
                   <td style="width:120px;">退水后结果</td>
                 </tr>
                 <tr v-if="afterWeekPage.length != 0" height="20px" class="hoverTrclass" v-for="(item,index) in afterWeekPage">
-                  <td style="width: 150px;">{{$timestampToTimeWeekJi(item.createDateStr)}}</td>     <!-- $timestampToTimeWeekJi(item.createDate) -->   
+                  <td :class="item.createDateStr != ''? 'hasBule':''" style="width: 150px;">{{$timestampToTimeWeekJi(item.createDateStr)}}</td>
                   <td style="width: 82px;">{{item.orderCount}}</td>
                   <td style="width: 130px; padding-right: 5px;" align="right">{{item.betsMoneySum}}</td>
                   <td style="width: 120px; padding-right: 5px;" align="right">{{item.winnerMoneySum}}</td>
                   <td style="width: 90px; padding-right: 5px;" align="right">{{item.dewater}}</td>
-                  <td style="width: 120px; padding-right: 5px;" align="right">{{item.dewaterMoney}}</td>
+                  <td :class="item.dewaterMoney != ''? 'hasRed':''" style="width: 120px; padding-right: 5px;" align="right" @click="getbetInfo(item.createDateStr)">{{item.dewaterMoney}}</td>
                 </tr>
                 <tr v-if="afterWeekPage.length == 0" height="20px">
                   <td style="width: 150px;"></td>
@@ -57,10 +57,10 @@
                 <tr class="t_list_bottom" style="font-weight:bold" height="20px">
                   <td>上周</td>
                   <td>{{orderAllAfter}}</td>
-                  <td align="right" style="padding-right:5px;">{{betsAllAfter}}</td>
-                  <td align="right" style="padding-right:5px;">{{winnerAllAfter}}</td>
-                  <td align="right" style="padding-right:5px;">{{tuishuiAllAfter}}</td>
-                  <td align="right" style="padding-right:5px;">{{tuisRuseltAllAfter}}</td>
+                  <td align="right" style="padding-right:5px;">{{betsAllAfter==''?0.00:betsAllAfter.toFixed(2)}}</td>
+                  <td align="right" style="padding-right:5px;">{{winnerAllAfter==''?0.00:winnerAllAfter.toFixed(2)}}</td>
+                  <td align="right" style="padding-right:5px;">{{tuishuiAllAfter==''?0.00:tuishuiAllAfter.toFixed(2)}}</td>
+                  <td align="right" style="padding-right:5px;">{{tuisRuseltAllAfter==''?0.00:tuisRuseltAllAfter.toFixed(2)}}</td>
                 </tr>
               </tbody>
             </table>
@@ -75,16 +75,14 @@
                   <td style="width:120px;">退水后结果</td>
                 </tr>
                 <tr v-if="nowWeekPage.length != 0" height="20px" class="hoverTrclass" v-for="(item,index) in nowWeekPage">
-                  <td style="width: 150px;">{{$timestampToTimeWeekJi(item.createDateStr)}}</td>
+                  <td :class="item.createDateStr != ''? 'hasBule':''" style="width: 150px;">{{$timestampToTimeWeekJi(item.createDateStr)}}</td>
                   <td style="width: 82px;">{{item.orderCount}}</td>
                   <td style="width: 130px; padding-right: 5px;" align="right">{{item.betsMoneySum}}</td>
                   <td style="width: 120px; padding-right: 5px;" align="right">{{item.winnerMoneySum}}</td>
                   <td style="width: 90px; padding-right: 5px;" align="right">{{item.dewater}}</td>
-                  <td style="width: 120px; padding-right: 5px;" align="right">{{item.dewaterMoney}}</td>
+                  <td :class="item.dewaterMoney != ''? 'hasRed':''" style="width: 120px; padding-right: 5px;" align="right" @click="getbetInfo(item.createDateStr)">{{item.dewaterMoney}}</td>
                 </tr>
 
-                <!-- <tr height="20px" onmouseover="ModColor(this,'#FFFF66')" onmouseout="MoveColor(this)"><td style="width: 150px;">07-09  星期二</td><td style="width: 82px;">0</td><td style="width: 130px; padding-right: 5px;" align="right">0</td><td style="width: 120px; padding-right: 5px;" align="right">0.00</td><td style="width: 90px; padding-right: 5px;" align="right">0.00</td><td style="width: 120px; padding-right: 5px;" align="right">0.00</td></tr> -->
-                
                 <tr v-if="nowWeekPage.length == 0" height="20px">
                   <td style="width: 150px;"></td>
                   <td style="width: 82px;"></td>
@@ -96,10 +94,10 @@
                 <tr class="t_list_bottom" style="font-weight:bold" height="20px">
                   <td>本周</td>
                   <td>{{orderAllNow}}</td>
-                  <td align="right" style="padding-right:5px;">{{betsAllNow}}</td>
-                  <td align="right" style="padding-right:5px;">{{winnerAllNow}}</td>
-                  <td align="right" style="padding-right:5px;">{{tuishuiAllNow}}</td>
-                  <td align="right" style="padding-right:5px;">{{tuisRuseltAllNow}}</td>
+                  <td align="right" style="padding-right:5px;">{{betsAllNow==''?0.00:betsAllNow.toFixed(2)}}</td>
+                  <td align="right" style="padding-right:5px;">{{winnerAllNow==''?0.00:winnerAllNow.toFixed(2)}}</td>
+                  <td align="right" style="padding-right:5px;">{{tuishuiAllNow==''?0.00:tuishuiAllNow.toFixed(2)}}</td>
+                  <td align="right" style="padding-right:5px;">{{tuisRuseltAllNow==''?0.00:tuisRuseltAllNow.toFixed(2)}}</td>
                 </tr>
               </tbody>
             </table>
@@ -108,25 +106,39 @@
       </tbody>
     </table>
 
-    <table width="706px" class="DTable" cellpadding="0" cellspacing="1" border="0" id="tblist">
+
+    <table v-else width="706px" class="DTable" cellpadding="0" cellspacing="1" border="0" id="tblist">
       <tbody>
         <tr>
             <td colspan="5" align="right">
-              <input type="button" value="返回" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="backGo()">
+              <input type="button" value="返回" class="button_bg1" @click="backGo()">
             </td>
         </tr> 
-        <tr>
-          <td>28055134#<br>&nbsp;07-10 17:06:16&nbsp;三</td>
-          <td>极速时时彩<br><span style="color:green;">11101814 期</span></td>
-          <td><font color="blue">第二球大小&nbsp;大</font> @  <font color="red" style="font-weight: bold;">1.9876</font></td>
-          <td>3.00</td>
-          <td>0.02</td>
+        <tr v-if="dataList.length != 0" v-for="(item,index) in dataList">
+          <td>{{item.orderNum}}#<br>&nbsp;{{$timestampToTimeWeek(item.createDateStr)}}</td>
+          <td>{{item.bocaiTypeName}}<br><span style="color:green;">{{item.periods}} 期</span></td>
+          <td><font color="blue">{{item.bocaiCategory2Name}}&nbsp;{{item.bocaiOddName}}</font> @  <font color="red" style="font-weight: bold;">{{item.bocaiOdds}}</font></td>
+          <td>{{item.betsMoney}}</td>
+          <td :class="item.winnerStatus == 0? 'red' : ''">{{item.winnerStatus == 0 ? -item.betsMoney*1 : +item.betsMoney*item.bocaiOdds*1 - item.betsMoney*1}}</td>
         </tr>
+
         <tr style="background-color: rgb(235, 215, 216);">
           <td colspan="2">合计:</td>
-          <td style="text-align: right;">共 1笔</td>
-          <td style="text-align: right;">3.00</td>
-          <td style="text-align: right;">0.02</td>
+          <td style="text-align: right;">共 {{betInfo.totalCount}}笔</td>
+          <td style="text-align: right;">{{sumData.betsMoneySum}}</td>
+          <td style="text-align: right;">{{sumData.winnerMoneyResultSum}}</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <table width="706px" class="DTable" cellpadding="0" cellspacing="1" border="0" style="margin-top:0px;"> 
+      <tbody>
+        <tr v-if="resultList.length > 0"> 
+          <td id="tdpage" style=" line-height:20px; text-align:left; height: 12px;" colspan="5">
+            <pag-ination :resultList="resultList" v-on:getdataList="getdataList"></pag-ination>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -136,14 +148,16 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import PagInation from '@/components/common/pagination';
 
 export default {
   components: {
+    PagInation
   },
   data() {
     return {
       betHisType: '1',
-
+      sumData: {},
       betInfo: {},
       currentPage: 1,
       dayStr: '',
@@ -153,7 +167,6 @@ export default {
       totalpaicai: 0,
       bocaiTypeId: '',
       afterWeekPage: [],
-      sumData: {},
       nowWeekPage: [],
       betsAllNow: '',
       winnerAllNow: '',
@@ -165,7 +178,9 @@ export default {
       orderAllAfter: '',
       tuishuiAllAfter: '',
       tuisRuseltAllAfter: '',
-
+      resultList: [],
+      ifshowBetInfo: true,
+      dataList: []
 
     }
   },
@@ -175,9 +190,47 @@ export default {
   computed: {
     ...mapGetters({
       bocaiTypeList: 'getbocaiTypeList'
-    })
+    }),
+    totalNum() {
+      return this.resultList.length != 0 ? this.resultList.length : 0; 
+    },
+    orderTotal() {
+      let total = 0;
+      for(let n in this.resultList) {
+        total = total + this.resultList[n].betsMoney*1;
+      }
+      return this.resultList.length != 0 ? total : 0; 
+    },
+    canWinTotal() {
+      let total = 0;
+      for(let n in this.resultList) {
+        total = total + this.resultList[n].betsMoney*this.resultList[n].odds*1-this.resultList[n].betsMoney*1;
+      }
+      return this.resultList.length != 0 ? total : 0; 
+    }
   },
   methods: {
+    getdataList(data) {
+      this.dataList = data;
+    },
+    backGo() {
+      this.hisOrder();
+      this.ifshowBetInfo = true;
+    },
+    async getbetInfo(daytime) {
+
+      let res = await this.$get(`${window.url}/api/hisOrderInfo?currentPage=1&pageSize=100000&dayStr=`+daytime);
+      if(res.code===200){
+        this.betInfo = res.page;
+        this.resultList = res.page.list;
+        this.sumData = res.sumData[0];
+
+
+      }
+
+      this.ifshowBetInfo = false;
+
+    },
     async hisOrder() {
 
       this.betsAllNow = '';

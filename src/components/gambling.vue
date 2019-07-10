@@ -271,7 +271,8 @@ export default {
 
         //console.log('this.preResult',this.preResult);
 
-        let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
+        if(this.bocaiTypeId != '') {
+          let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
             if(res.code===200){
 
@@ -303,6 +304,9 @@ export default {
               }
 
             }
+        }
+
+        
         
 
     },
@@ -323,7 +327,8 @@ export default {
 
        if(this.preResult == '' || !this.iskaipaning) {
 
-        let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
+        if(this.bocaiTypeId != '') {
+          let res = await this.$get(`${window.url}/api/bocaiInfo?bocaiTypeId=`+this.bocaiTypeId);
 
             if(res.code===200){
 
@@ -356,6 +361,9 @@ export default {
               }
 
             }
+        }
+
+        
 
        }
 
@@ -463,7 +471,8 @@ export default {
           //       background: 'rgba(0, 0, 0, 0.7)'
           //     });
 
-          await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.bocaiTypeId).then((res) => {
+          if(this.bocaiTypeId!='') {
+            await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.bocaiTypeId).then((res) => {
             that.$handelResponse(res, (result) => {
 
               // loading.close();
@@ -508,6 +517,9 @@ export default {
               }
             })
           });
+          }
+
+          
 
     },
     async getOdds(item,index) {

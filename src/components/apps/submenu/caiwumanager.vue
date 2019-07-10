@@ -44,7 +44,7 @@
                   <td>备注</td> 
                 </tr> 
                 <template v-if="hasDataList">
-                  <tr class="caiwuListTr" v-for="(item,index) in historyDataList.list">
+                  <tr class="caiwuListTr" v-for="(item,index) in dataList">
                     <td align="center">{{item.id}}</td>
                     <td align="center">{{$timestampToTime(item.createDate)}}</td>
                     <td align="center">{{item.quotaType =='1'?'充值' : '提现'}}</td>
