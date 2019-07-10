@@ -194,7 +194,7 @@
                 </tr>
                 <tr>
                     <td align="center">下注笔数</td>
-                    <td align="left" style="padding-left:5px">{{orderDatas.list.length}} 笔</td>
+                    <td align="left" style="padding-left:5px">{{orderDatasShow.length}} 笔</td>
                 </tr>
                 <tr>
                     <td align="center">合计注额</td>

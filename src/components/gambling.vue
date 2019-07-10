@@ -430,14 +430,14 @@ export default {
 
       $('.OddsCategory'+item.id).addClass('selected').siblings().removeClass('selected');
 
-      const loading = this.$loading({
-                lock: true,
-                background: 'rgba(0, 0, 0, 0.7)'
-              });
+      // const loading = this.$loading({
+      //           lock: true,
+      //           background: 'rgba(0, 0, 0, 0.7)'
+      //         });
 
           await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.bocaiTypeId+`&bocaiCategoryId=`+item.id).then((res) => {
             that.$handelResponse(res, (result) => {
-              loading.close();
+              // loading.close();
 
               if(result.code===200){
 
@@ -458,15 +458,15 @@ export default {
 
       let that = this;
 
-          const loading = this.$loading({
-                lock: true,
-                background: 'rgba(0, 0, 0, 0.7)'
-              });
+          // const loading = this.$loading({
+          //       lock: true,
+          //       background: 'rgba(0, 0, 0, 0.7)'
+          //     });
 
           await that.$get(`${window.url}/api/getOdds?bocaiTypeId=`+this.bocaiTypeId).then((res) => {
             that.$handelResponse(res, (result) => {
 
-              loading.close();
+              // loading.close();
               if(result.code===200){
 
                 that.bocaiCategoryList = result.bocaiCategoryList;

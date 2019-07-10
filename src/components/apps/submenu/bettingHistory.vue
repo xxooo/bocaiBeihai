@@ -82,6 +82,9 @@
                   <td style="width: 90px; padding-right: 5px;" align="right">{{item.dewater}}</td>
                   <td style="width: 120px; padding-right: 5px;" align="right">{{item.dewaterMoney}}</td>
                 </tr>
+
+                <!-- <tr height="20px" onmouseover="ModColor(this,'#FFFF66')" onmouseout="MoveColor(this)"><td style="width: 150px;">07-09  星期二</td><td style="width: 82px;">0</td><td style="width: 130px; padding-right: 5px;" align="right">0</td><td style="width: 120px; padding-right: 5px;" align="right">0.00</td><td style="width: 90px; padding-right: 5px;" align="right">0.00</td><td style="width: 120px; padding-right: 5px;" align="right">0.00</td></tr> -->
+                
                 <tr v-if="nowWeekPage.length == 0" height="20px">
                   <td style="width: 150px;"></td>
                   <td style="width: 82px;"></td>
@@ -101,6 +104,29 @@
               </tbody>
             </table>
           </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table width="706px" class="DTable" cellpadding="0" cellspacing="1" border="0" id="tblist">
+      <tbody>
+        <tr>
+            <td colspan="5" align="right">
+              <input type="button" value="返回" onmouseover="this.className='button_bg2'" onmouseout="this.className='button_bg1'" class="button_bg1" onclick="backGo()">
+            </td>
+        </tr> 
+        <tr>
+          <td>28055134#<br>&nbsp;07-10 17:06:16&nbsp;三</td>
+          <td>极速时时彩<br><span style="color:green;">11101814 期</span></td>
+          <td><font color="blue">第二球大小&nbsp;大</font> @  <font color="red" style="font-weight: bold;">1.9876</font></td>
+          <td>3.00</td>
+          <td>0.02</td>
+        </tr>
+        <tr style="background-color: rgb(235, 215, 216);">
+          <td colspan="2">合计:</td>
+          <td style="text-align: right;">共 1笔</td>
+          <td style="text-align: right;">3.00</td>
+          <td style="text-align: right;">0.02</td>
         </tr>
       </tbody>
     </table>
