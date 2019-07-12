@@ -183,10 +183,10 @@ export default {
   async created() {
 
     if(this.bocaiTypeList.length == 0) {
-      console.log('????111111?');
+      //console.log('????111111?');
       this.getBocai();
     } else {
-      console.log('????2222?');
+      //console.log('????2222?');
       this.getOddsInfo();
     }
     
