@@ -50,10 +50,13 @@
           that.$handelResponse(res, (result) => {
             if(result.code===200){
 
-              for(let n in result.openPrizeMap) {
+              result.data = JSON.parse(result.data);
+
+
+              for(let n in result.data.openPrizeMap) {
                 let obj = {};
                 obj.content = n;
-                obj.num = result.openPrizeMap[n];
+                obj.num = result.data.openPrizeMap[n];
                 this.openPrizeList.push(obj);
               }
 

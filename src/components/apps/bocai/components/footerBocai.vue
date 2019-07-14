@@ -436,7 +436,7 @@
 
                     console.log('result.data',result.data);
 
-                    result.data = JSON.parse('{"daxiaoMap":{},"danshuangMap":{},"numMap":{"1":"3","2":"6","3":"5","4":"1","5":"9"}}');
+                    result.data = JSON.parse(result.data);
 
                     console.log('result.data',result.data);
 
