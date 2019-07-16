@@ -112,7 +112,6 @@
         closeTimeSet: 0,
         //hasFast: false,
         temdata: {},
-        noneResult: false,
         juliFengOrKai: true,
         ifcloseOdds: false
 			}
@@ -128,13 +127,6 @@
         bocaiName: 'getbocaiName',
         bocaiCategory: 'getbocaiCategory'
       }),
-      totalMoney() {
-        let totalMoney = 0;
-        for(let n in this.orderList) {
-          totalMoney += this.orderList[n].betsMoney*1;
-        }
-        return totalMoney;
-      },
       preResult() {
         return this.bocaiInfoData.preResult ? this.bocaiInfoData.preResult.split(',') : [];
       },
@@ -186,9 +178,6 @@
 
     },
     mounted(){
-      bus.$on('hasFast', (data) => {
-        this.noneResult = data;
-      });
     },
     beforeDestroy: function() {
       if (this.t) {
